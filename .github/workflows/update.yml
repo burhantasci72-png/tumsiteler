@@ -24,15 +24,10 @@ jobs:
       - name: Botu Calistir
         run: python main.py
 
-      - name: Dosya Kontrol ve Yukle
+      - name: Kaydet ve Yukle
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Action"
-          if [ -f Canli_Spor_Hepsi.m3u ]; then
-            git add Canli_Spor_Hepsi.m3u
-            git commit -m "Tum Siteler Guncellendi: $(date)" || exit 0
-            git push
-          else
-            echo "HATA: Canli_Spor_Hepsi.m3u dosyasi olusturulamadi! Python kodunu kontrol et."
-            exit 1
-          fi
+          git add Canli_Spor_Hepsi.m3u
+          git commit -m "Tum Siteler Guncellendi: $(date)" || exit 0
+          git push
