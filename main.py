@@ -30,7 +30,7 @@ def fetch_atom_spor():
         ("Bein Sports 3", "bein-sports-3"),
         ("Bein Sports 4", "bein-sports-4"),
         ("Bein Sports 5", "bein-sports-5"),
-        ("S Sport 1", "s-sport"),           # Düzeltilmiş ID
+        ("S Sport 1", "s-sport"),
         ("S Sport 2", "s-sport-2"),
         ("S Sport Plus", "ssport-plus"),
         ("Tivibu Spor 1", "tivibu-spor-1"),
@@ -48,7 +48,7 @@ def fetch_atom_spor():
             "url": full_url,
             "group": "ATOM SPOR (VIP)",
             "logo": atom_logo,
-            "ref": "https://atomsportv485.top/" # Referer başlığı gerekirse diye
+            "ref": "https://atomsportv485.top/"
         })
         
     return results
@@ -97,32 +97,58 @@ def fetch_netspor():
     except: pass
     return results
 
-# --- 4. TRGOALS SİSTEMİ (TAM LİSTE) ---
+# --- 4. TRGOALS SİSTEMİ (YENİ GÜNCEL LİNK YAPISI) ---
 def fetch_trgoals():
-    print("[*] Trgoals taranıyor...")
+    print("[*] Trgoals kanalları ekleniyor (Güncel)...")
     results = []
-    domain = None
-    for i in range(1485, 2150):
-        test = f"https://trgoals{i}.xyz"
-        try:
-            if requests.head(test, timeout=1).status_code == 200:
-                domain = test; break
-        except: continue
-    if domain:
-        trg_channels = {
-            "yayin1":"BEIN SPORTS 1 HD", "yayinb2":"BEIN SPORTS 2 HD", "yayinb3":"BEIN SPORTS 3 HD",
-            "yayinb4":"BEIN SPORTS 4 HD", "yayinb5":"BEIN SPORTS 5 HD", "yayinbm1":"BEIN SPORTS MAX 1",
-            "yayinbm2":"BEIN SPORTS MAX 2", "yayinss":"S SPORT 1", "yayinss2":"S SPORT 2",
-            "yayint1":"TIVIBU SPOR 1", "yayint2":"TIVIBU SPOR 2", "yayint3":"TIVIBU SPOR 3", "yayint4":"TIVIBU SPOR 4",
-            "yayinsmarts":"SMART SPOR 1", "yayinsms2":"SMART SPOR 2", "yayintrtspor":"TRT SPOR",
-            "yayinas":"A SPOR", "yayintv85":"TV8.5 HD", "yayinex1":"TABII 1", "yayinex2":"TABII 2", "yayinex3":"TABII 3"
-        }
-        for cid, name in trg_channels.items():
-            try:
-                r = requests.get(f"{domain}/channel.html?id={cid}", headers=HEADERS, timeout=5)
-                m = re.search(r'const baseurl = "(.*?)"', r.text)
-                if m: results.append({"name": f"TRG - {name}", "url": f"{m.group(1)}{cid}.m3u8", "group": "TRGOALS TV", "ref": f"{domain}/", "logo": "https://i.ibb.co/gFyFDdDN/trgoals.jpg"})
-            except: continue
+    
+    # Kullanıcının verdiği yeni base domain
+    base_url = "https://lc4.d72577a9dd0ec8.sbs/"
+    
+    # ID -> Kanal Adı Eşleşmesi
+    # Kullanıcının verdiği örnek: yayin1 -> Bein 1, yayinb2 -> Bein 2 vb.
+    trg_channels = {
+        "yayin1": "BEIN SPORTS 1 HD",
+        "yayinb2": "BEIN SPORTS 2 HD",
+        "yayinb3": "BEIN SPORTS 3 HD",
+        "yayinb4": "BEIN SPORTS 4 HD",
+        "yayinb5": "BEIN SPORTS 5 HD",
+        "yayinbm1": "BEIN SPORTS MAX 1",
+        "yayinbm2": "BEIN SPORTS MAX 2",
+        "yayinss": "S SPORT 1",
+        "yayinss2": "S SPORT 2",
+        "yayint1": "TIVIBU SPOR 1",
+        "yayint2": "TIVIBU SPOR 2",
+        "yayint3": "TIVIBU SPOR 3",
+        "yayint4": "TIVIBU SPOR 4",
+        "yayinsmarts": "SMART SPOR 1",
+        "yayinsms2": "SMART SPOR 2",
+        "yayintrtspor": "TRT SPOR",
+        "yayinas": "A SPOR",
+        "yayintv85": "TV8.5 HD",
+        "yayinex1": "EXXEN 1",
+        "yayinex2": "EXXEN 2",
+        "yayinex3": "EXXEN 3",
+        "yayinex4": "EXXEN 4"
+    }
+    
+    logo_url = "https://i.ibb.co/gFyFDdDN/trgoals.jpg"
+    
+    # Trgoals genelde referer olarak kendi ana domainini ister, güncel bir domain veriyoruz
+    referer_url = "https://trgoals1490.xyz/"
+
+    for cid, name in trg_channels.items():
+        # URL oluşturma: base + id + .m3u8
+        full_url = f"{base_url}{cid}.m3u8"
+        
+        results.append({
+            "name": f"TRG - {name}",
+            "url": full_url,
+            "group": "TRGOALS TV (YENI)",
+            "ref": referer_url,
+            "logo": logo_url
+        })
+            
     return results
 
 # --- 5. SELÇUKSPOR SİSTEMİ (TAM LİSTE) ---
@@ -192,13 +218,11 @@ def fetch_andro_nodes():
         try:
             h = HEADERS.copy()
             if ref: h['Referer'] = ref
-            # Proxy üzerinden istek atıyoruz
             r = requests.get(PROXY + u, headers=h, verify=False, timeout=20)
             return r.text if r.status_code == 200 else None
         except: return None
 
     try:
-        # 1. Ana sayfayı çek
         h1 = get_src(START)
         if not h1: return results
 
@@ -207,7 +231,6 @@ def fetch_andro_nodes():
         if not lnk: return results
         amp = lnk.get('href')
 
-        # 2. AMP sayfasını çek
         h2 = get_src(amp)
         if not h2: return results
 
@@ -215,7 +238,6 @@ def fetch_andro_nodes():
         if not m: return results
         ifr = m.group(1)
 
-        # 3. İframe çek ve sunucuları bul
         h3 = get_src(ifr, ref=amp)
         if not h3: return results
 
@@ -224,25 +246,22 @@ def fetch_andro_nodes():
 
         cl = bm.group(1).replace('"', '').replace("'", "").replace("\n", "").replace("\r", "")
         srvs = [x.strip() for x in cl.split(',') if x.strip().startswith("http")]
-        srvs = list(set(srvs)) # Benzersiz yap
+        srvs = list(set(srvs)) 
 
         active_servers = []
         tid = "androstreamlivebs1" 
         
-        # 4. Sunucuları test et
         for sv in srvs:
             sv = sv.rstrip('/')
             turl = f"{sv}/{tid}.m3u8" if "checklist" in sv else f"{sv}/checklist/{tid}.m3u8"
             turl = turl.replace("checklist//", "checklist/")
             
             try:
-                # Test ederken proxy kullanıyoruz
                 tr = requests.get(PROXY + turl, headers=HEADERS, verify=False, timeout=5)
                 if tr.status_code == 200:
                     active_servers.append(sv)
             except: pass
 
-        # 5. Çalışan sunucular için linkleri oluştur
         for srv in active_servers:
             for cid, cname in channels:
                 furl = f"{srv}/{cid}.m3u8" if "checklist" in srv else f"{srv}/checklist/{cid}.m3u8"
@@ -268,13 +287,13 @@ def main():
     
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
-    # 1. ATOM SPOR (En başa ekliyoruz, çünkü en kalitelisi bu)
+    # 1. ATOM SPOR
     all_streams.extend(fetch_atom_spor())
     
     # 2. Diğer kaynakları topla
     all_streams.extend(fetch_vavoo())
     all_streams.extend(fetch_netspor())
-    all_streams.extend(fetch_trgoals())
+    all_streams.extend(fetch_trgoals()) # Güncellenmiş fonksiyon çağrısı
     all_streams.extend(fetch_selcuk_sporcafe())
     all_streams.extend(fetch_andro_nodes())
     
@@ -285,15 +304,12 @@ def main():
     content = "#EXTM3U\n"
     content += f"# Son Guncelleme: {datetime.datetime.now().strftime('%d.%m.%Y %H:%M:%S')}\n"
     for s in all_streams:
-        # Logo varsa ekle, yoksa boş bırak
         logo_attr = f' tvg-logo="{s["logo"]}"' if s.get("logo") else ""
         content += f'#EXTINF:-1 group-title="{s["group"]}"{logo_attr},{s["name"]}\n'
         
-        # Referer ve User-Agent varsa VLC option olarak ekle
         if s.get("ref"): 
             content += f'#EXTVLCOPT:http-referrer={s["ref"]}\n'
         
-        # Tüm linkler için User-Agent standart olsun
         content += f'#EXTVLCOPT:http-user-agent={HEADERS["User-Agent"]}\n'
         content += f'#EXTHTTP:{"User-Agent"}:{HEADERS["User-Agent"]}\n'
         
