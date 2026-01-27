@@ -9,21 +9,16 @@ OUTPUT_FILE = "Canli_Spor_Hepsi.m3u"
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 WORKING_BS1_URL = "https://andro.adece12.sbs/checklist/receptestt.m3u8"
 
-# SSL Uyarılarını gizle (Andro taraması için)
+# SSL Uyarılarını gizle
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # --- 1. ATOM SPOR (VIP KESİN LİNK) ---
 def fetch_atom_spor():
     print("[*] AtomSpor (VIP) kanalları ekleniyor...")
     results = []
-    
-    # Tespit edilen sabit base url
     base_url = "https://hlssssss.volepartigo.workers.dev/https://corestream.ronaldovurdu.help//hls/"
-    
-    # Kullanıcının istediği logo
     atom_logo = "https://hizliresim.com/gm50rk9b"
     
-    # Kesin çalıştığı doğrulanan ID listesi
     channels = [
         ("Bein Sports 1", "bein-sports-1"),
         ("Bein Sports 2", "bein-sports-2"),
@@ -50,7 +45,6 @@ def fetch_atom_spor():
             "logo": atom_logo,
             "ref": "https://atomsportv485.top/"
         })
-        
     return results
 
 # --- 2. VAVOO SİSTEMİ (STABİL KAYNAK) ---
@@ -91,23 +85,23 @@ def fetch_netspor():
             if group == "Günün Maçları":
                 alt = div.find('div', class_='match-alt')
                 if alt: title = f"{title} ({alt.get_text(' | ', strip=True)})"
-            # bs1 Link Onarımı
             final_url = WORKING_BS1_URL if sid == "androstreamlivebs1" else f"{stream_base}{sid}.m3u8"
             results.append({"name": f"NET - {title}", "url": final_url, "group": f"NETSPOR {group.upper()}", "ref": source_url, "logo": ""})
     except: pass
     return results
 
-# --- 4. TRGOALS SİSTEMİ (YENİ GÜNCEL LİNK YAPISI) ---
+# --- 4. TRGOALS SİSTEMİ (WORKER + YENİ DOMAIN) ---
 def fetch_trgoals():
-    print("[*] Trgoals kanalları ekleniyor (Güncel)...")
+    print("[*] Trgoals kanalları ekleniyor (CF Worker)...")
     results = []
     
-    # Kullanıcının verdiği yeni base domain
-    base_url = "https://lc4.d72577a9dd0ec8.sbs/"
+    # KULLANICININ VERDİĞİ WORKER VE BASE URL
+    worker_url = "https://muddy-morning-480c.burhantasci72.workers.dev/?url="
+    target_domain = "https://pq4.d72577a9dd0ec4.sbs/"
     
-    # ID -> Kanal Adı Eşleşmesi
-    # Kullanıcının verdiği örnek: yayin1 -> Bein 1, yayinb2 -> Bein 2 vb.
+    # ID -> Kanal Adı Eşleşmesi (Kullanıcının verdiği 'yayinzirve' eklendi)
     trg_channels = {
+        "yayinzirve": "TRGOALS CANLI YAYIN (ZIRVE)",
         "yayin1": "BEIN SPORTS 1 HD",
         "yayinb2": "BEIN SPORTS 2 HD",
         "yayinb3": "BEIN SPORTS 3 HD",
@@ -133,25 +127,24 @@ def fetch_trgoals():
     }
     
     logo_url = "https://i.ibb.co/gFyFDdDN/trgoals.jpg"
-    
-    # Trgoals genelde referer olarak kendi ana domainini ister, güncel bir domain veriyoruz
     referer_url = "https://trgoals1490.xyz/"
 
     for cid, name in trg_channels.items():
-        # URL oluşturma: base + id + .m3u8
-        full_url = f"{base_url}{cid}.m3u8"
+        # Yapı: Worker + (TargetDomain + ID + .m3u8)
+        target_stream = f"{target_domain}{cid}.m3u8"
+        full_url = f"{worker_url}{target_stream}"
         
         results.append({
             "name": f"TRG - {name}",
             "url": full_url,
-            "group": "TRGOALS TV (YENI)",
+            "group": "TRGOALS TV (WORKER)",
             "ref": referer_url,
             "logo": logo_url
         })
             
     return results
 
-# --- 5. SELÇUKSPOR SİSTEMİ (TAM LİSTE) ---
+# --- 5. SELÇUKSPOR SİSTEMİ ---
 def fetch_selcuk_sporcafe():
     print("[*] Selçukspor taranıyor...")
     results = []
@@ -183,12 +176,10 @@ def fetch_selcuk_sporcafe():
                 except: continue
     return results
 
-# --- 6. ANDRO PANEL SİSTEMİ (YENİ EKLENDİ) ---
+# --- 6. ANDRO PANEL SİSTEMİ ---
 def fetch_andro_nodes():
     print("[*] Andro-Panel (Taraftarium) taranıyor...")
     results = []
-    
-    # Tarama için gerekli değişkenler
     PROXY = "https://proxy.freecdn.workers.dev/?url="
     START = "https://taraftariumizle.org"
     
@@ -204,14 +195,7 @@ def fetch_andro_nodes():
         ("androstreamlivesm2", 'TR:Smart Sport 2 HD'), ("androstreamlivees1", 'TR:Euro Sport 1 HD'),
         ("androstreamlivees2", 'TR:Euro Sport 2 HD'), ("androstreamlivetb", 'TR:Tabii HD'),
         ("androstreamlivetb1", 'TR:Tabii 1 HD'), ("androstreamlivetb2", 'TR:Tabii 2 HD'),
-        ("androstreamlivetb3", 'TR:Tabii 3 HD'), ("androstreamlivetb4", 'TR:Tabii 4 HD'),
-        ("androstreamlivetb5", 'TR:Tabii 5 HD'), ("androstreamlivetb6", 'TR:Tabii 6 HD'),
-        ("androstreamlivetb7", 'TR:Tabii 7 HD'), ("androstreamlivetb8", 'TR:Tabii 8 HD'),
         ("androstreamliveexn", 'TR:Exxen HD'), ("androstreamliveexn1", 'TR:Exxen 1 HD'),
-        ("androstreamliveexn2", 'TR:Exxen 2 HD'), ("androstreamliveexn3", 'TR:Exxen 3 HD'),
-        ("androstreamliveexn4", 'TR:Exxen 4 HD'), ("androstreamliveexn5", 'TR:Exxen 5 HD'),
-        ("androstreamliveexn6", 'TR:Exxen 6 HD'), ("androstreamliveexn7", 'TR:Exxen 7 HD'),
-        ("androstreamliveexn8", 'TR:Exxen 8 HD'),
     ]
 
     def get_src(u, ref=None):
@@ -225,75 +209,53 @@ def fetch_andro_nodes():
     try:
         h1 = get_src(START)
         if not h1: return results
-
         s = BeautifulSoup(h1, 'html.parser')
         lnk = s.find('link', rel='amphtml')
         if not lnk: return results
         amp = lnk.get('href')
-
         h2 = get_src(amp)
         if not h2: return results
-
         m = re.search(r'\[src\]="appState\.currentIframe".*?src="(https?://[^"]+)"', h2, re.DOTALL)
         if not m: return results
         ifr = m.group(1)
-
         h3 = get_src(ifr, ref=amp)
         if not h3: return results
-
         bm = re.search(r'baseUrls\s*=\s*\[(.*?)\]', h3, re.DOTALL)
         if not bm: return results
-
         cl = bm.group(1).replace('"', '').replace("'", "").replace("\n", "").replace("\r", "")
         srvs = [x.strip() for x in cl.split(',') if x.strip().startswith("http")]
         srvs = list(set(srvs)) 
 
         active_servers = []
         tid = "androstreamlivebs1" 
-        
         for sv in srvs:
             sv = sv.rstrip('/')
             turl = f"{sv}/{tid}.m3u8" if "checklist" in sv else f"{sv}/checklist/{tid}.m3u8"
             turl = turl.replace("checklist//", "checklist/")
-            
             try:
                 tr = requests.get(PROXY + turl, headers=HEADERS, verify=False, timeout=5)
-                if tr.status_code == 200:
-                    active_servers.append(sv)
+                if tr.status_code == 200: active_servers.append(sv)
             except: pass
 
         for srv in active_servers:
             for cid, cname in channels:
                 furl = f"{srv}/{cid}.m3u8" if "checklist" in srv else f"{srv}/checklist/{cid}.m3u8"
                 furl = furl.replace("checklist//", "checklist/")
-                
-                results.append({
-                    "name": f"ANDRO - {cname}",
-                    "url": furl,
-                    "group": "ANDRO SPOR (YENI)",
-                    "logo": "https://hizliresim.com/gm50rk9",
-                    "ref": ifr
-                })
+                results.append({"name": f"ANDRO - {cname}", "url": furl, "group": "ANDRO SPOR (YENI)", "logo": "https://hizliresim.com/gm50rk9", "ref": ifr})
         print(f"[OK] Andro-Panel: {len(active_servers)} sunucu aktif bulundu.")
-
     except Exception as e:
         print(f"[!] Andro-Panel hatasi: {e}")
-
     return results
 
 # --- ANA ÇALIŞTIRICI ---
 def main():
     all_streams = []
-    
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
-    # 1. ATOM SPOR
     all_streams.extend(fetch_atom_spor())
-    
-    # 2. Diğer kaynakları topla
     all_streams.extend(fetch_vavoo())
     all_streams.extend(fetch_netspor())
-    all_streams.extend(fetch_trgoals()) # Güncellenmiş fonksiyon çağrısı
+    all_streams.extend(fetch_trgoals()) 
     all_streams.extend(fetch_selcuk_sporcafe())
     all_streams.extend(fetch_andro_nodes())
     
@@ -306,13 +268,10 @@ def main():
     for s in all_streams:
         logo_attr = f' tvg-logo="{s["logo"]}"' if s.get("logo") else ""
         content += f'#EXTINF:-1 group-title="{s["group"]}"{logo_attr},{s["name"]}\n'
-        
         if s.get("ref"): 
             content += f'#EXTVLCOPT:http-referrer={s["ref"]}\n'
-        
         content += f'#EXTVLCOPT:http-user-agent={HEADERS["User-Agent"]}\n'
         content += f'#EXTHTTP:{"User-Agent"}:{HEADERS["User-Agent"]}\n'
-        
         content += f'{s["url"]}\n'
 
     with open(OUTPUT_FILE, "w", encoding="utf-8-sig") as f:
