@@ -66,7 +66,7 @@ def fetch_vavoo():
         results.append({"name": f"VAVOO - {ch['n']}", "url": f"{proxy_base}{ch['id']}", "group": "VAVOO SPOR (STABIL)", "logo": ch['img'], "ref": ""})
     return results
 
-# --- 3. NETSPOR SİSTEMİ (BS1 FIXLİ) ---
+# --- 3. NETSPOR SİSTEMİ ---
 def fetch_netspor():
     print("[*] Netspor taranıyor...")
     results = []
@@ -94,12 +94,9 @@ def fetch_netspor():
 def fetch_trgoals():
     print("[*] Trgoals kanalları ekleniyor (CF Worker)...")
     results = []
-    
-    # KULLANICININ VERDİĞİ WORKER VE BASE URL
     worker_url = "https://muddy-morning-480c.burhantasci72.workers.dev/?url="
     target_domain = "https://pq4.d72577a9dd0ec4.sbs/"
     
-    # ID -> Kanal Adı Eşleşmesi (Kullanıcının verdiği 'yayinzirve' eklendi)
     trg_channels = {
         "yayinzirve": "TRGOALS CANLI YAYIN (ZIRVE)",
         "yayin1": "BEIN SPORTS 1 HD",
@@ -130,21 +127,48 @@ def fetch_trgoals():
     referer_url = "https://trgoals1490.xyz/"
 
     for cid, name in trg_channels.items():
-        # Yapı: Worker + (TargetDomain + ID + .m3u8)
         target_stream = f"{target_domain}{cid}.m3u8"
         full_url = f"{worker_url}{target_stream}"
-        
-        results.append({
-            "name": f"TRG - {name}",
-            "url": full_url,
-            "group": "TRGOALS TV (WORKER)",
-            "ref": referer_url,
-            "logo": logo_url
-        })
-            
+        results.append({"name": f"TRG - {name}", "url": full_url, "group": "TRGOALS TV (WORKER)", "ref": referer_url, "logo": logo_url})
     return results
 
-# --- 5. SELÇUKSPOR SİSTEMİ ---
+# --- 5. ALAM TV (YENİ EKLENDİ) ---
+def fetch_alam_tv():
+    print("[*] AlamTV kanalları ekleniyor...")
+    results = []
+    
+    # Base URL (Worker)
+    base_worker = "https://misty-sunset-1f65.burhantasci72.workers.dev/"
+    
+    # ID -> İsim Haritası
+    channels = [
+        ("701", "ALAM - beIN SPORTS 1"),
+        ("702", "ALAM - beIN SPORTS 2"),
+        ("703", "ALAM - beIN SPORTS 3"),
+        ("704", "ALAM - beIN SPORTS 4"),
+        ("705", "ALAM - S SPORT 1"),
+        ("730", "ALAM - S SPORT 2"),
+        ("706", "ALAM - TIVIBU SPOR 1"),
+        ("711", "ALAM - TIVIBU SPOR 2"),
+        ("712", "ALAM - TIVIBU SPOR 3"),
+        ("713", "ALAM - TIVIBU SPOR 4"),
+    ]
+    
+    for cid, cname in channels:
+        # Worker URL oluşturma
+        full_url = f"{base_worker}{cid}"
+        
+        results.append({
+            "name": cname,
+            "url": full_url,
+            "group": "ALAM TV (WORKER)",
+            "logo": "", # İstenirse logo eklenebilir
+            "ref": ""
+        })
+        
+    return results
+
+# --- 6. SELÇUKSPOR SİSTEMİ ---
 def fetch_selcuk_sporcafe():
     print("[*] Selçukspor taranıyor...")
     results = []
@@ -176,7 +200,7 @@ def fetch_selcuk_sporcafe():
                 except: continue
     return results
 
-# --- 6. ANDRO PANEL SİSTEMİ ---
+# --- 7. ANDRO PANEL SİSTEMİ ---
 def fetch_andro_nodes():
     print("[*] Andro-Panel (Taraftarium) taranıyor...")
     results = []
@@ -252,10 +276,12 @@ def main():
     all_streams = []
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
+    # Sırayla tüm kaynakları çalıştır
     all_streams.extend(fetch_atom_spor())
     all_streams.extend(fetch_vavoo())
     all_streams.extend(fetch_netspor())
     all_streams.extend(fetch_trgoals()) 
+    all_streams.extend(fetch_alam_tv()) # Yeni eklenen AlamTV
     all_streams.extend(fetch_selcuk_sporcafe())
     all_streams.extend(fetch_andro_nodes())
     
