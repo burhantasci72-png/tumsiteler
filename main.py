@@ -124,15 +124,22 @@ def fetch_trgoals():
     }
     
     logo_url = "https://i.ibb.co/gFyFDdDN/trgoals.jpg"
-    referer_url = "https://trgoals1490.xyz/"
+    # Referer URL'i koddan kaldırıldı, worker hallediyor.
 
     for cid, name in trg_channels.items():
         target_stream = f"{target_domain}{cid}.m3u8"
         full_url = f"{worker_url}{target_stream}"
-        results.append({"name": f"TRG - {name}", "url": full_url, "group": "TRGOALS TV (WORKER)", "ref": referer_url, "logo": logo_url})
+        
+        results.append({
+            "name": f"TRG - {name}",
+            "url": full_url,
+            "group": "TRGOALS TV (WORKER)",
+            "ref": "", # Referer boş bırakıldı
+            "logo": logo_url
+        })
     return results
 
-# --- 5. INAT TV (YENİ BURHANTASCI WORKER) ---
+# --- 5. INAT TV (WORKER) ---
 def fetch_inat_tv():
     print("[*] INAT TV (Worker) kanalları ekleniyor...")
     results = []
