@@ -5,7 +5,7 @@ import urllib3
 from bs4 import BeautifulSoup
 
 # --- AYARLAR ---
-OUTPUT_FILE = "Canli_Spor_Hepsi.m3u"
+OUTPUT_FILE = "/storage/emulated/0/Download/Canli_Spor_Hepsi.m3u"  # Android İndirilenler klasörü
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 WORKING_BS1_URL = "https://andro.adece12.sbs/checklist/receptestt.m3u8"
 
@@ -124,7 +124,6 @@ def fetch_trgoals():
     }
     
     logo_url = "https://i.ibb.co/gFyFDdDN/trgoals.jpg"
-    # Referer URL'i koddan kaldırıldı, worker hallediyor.
 
     for cid, name in trg_channels.items():
         target_stream = f"{target_domain}{cid}.m3u8"
@@ -134,7 +133,7 @@ def fetch_trgoals():
             "name": f"TRG - {name}",
             "url": full_url,
             "group": "TRGOALS TV (WORKER)",
-            "ref": "", # Referer boş bırakıldı
+            "ref": "",
             "logo": logo_url
         })
     return results
@@ -143,36 +142,17 @@ def fetch_trgoals():
 def fetch_inat_tv():
     print("[*] INAT TV (Worker) kanalları ekleniyor...")
     results = []
-    
-    # SENİN VERDİĞİN YENİ WORKER ADRESİ
     base_worker = "https://rough-inadinatv.burhantasci72.workers.dev"
-    
-    # ID -> İsim Haritası
     channels = [
-        ("701", "INAT - beIN SPORTS 1"),
-        ("702", "INAT - beIN SPORTS 2"),
-        ("703", "INAT - beIN SPORTS 3"),
-        ("704", "INAT - beIN SPORTS 4"),
-        ("705", "INAT - S SPORT 1"),
-        ("730", "INAT - S SPORT 2"),
-        ("706", "INAT - TIVIBU SPOR 1"),
-        ("711", "INAT - TIVIBU SPOR 2"),
-        ("712", "INAT - TIVIBU SPOR 3"),
-        ("713", "INAT - TIVIBU SPOR 4"),
+        ("701", "INAT - beIN SPORTS 1"), ("702", "INAT - beIN SPORTS 2"),
+        ("703", "INAT - beIN SPORTS 3"), ("704", "INAT - beIN SPORTS 4"),
+        ("705", "INAT - S SPORT 1"), ("730", "INAT - S SPORT 2"),
+        ("706", "INAT - TIVIBU SPOR 1"), ("711", "INAT - TIVIBU SPOR 2"),
+        ("712", "INAT - TIVIBU SPOR 3"), ("713", "INAT - TIVIBU SPOR 4"),
     ]
-    
     for cid, cname in channels:
-        # Link yapısı: base_worker/701.m3u8
         full_url = f"{base_worker}/{cid}.m3u8"
-        
-        results.append({
-            "name": cname,
-            "url": full_url,
-            "group": "INAT TV (WORKER)",
-            "logo": "https://hizliresim.com/gm50rk9", # Genel bir logo
-            "ref": ""
-        })
-        
+        results.append({"name": cname, "url": full_url, "group": "INAT TV (WORKER)", "logo": "https://hizliresim.com/gm50rk9", "ref": ""})
     return results
 
 # --- 6. SELÇUKSPOR SİSTEMİ ---
@@ -278,6 +258,56 @@ def fetch_andro_nodes():
         print(f"[!] Andro-Panel hatasi: {e}")
     return results
 
+# --- 8. YENİ TARAFTARIUM (WORKER) SİSTEMİ ---
+# Sizin istediğiniz manuel link yapısını tarayan fonksiyon
+def fetch_taraftarium_extra():
+    print("[*] Taraftarium (Worker/Live) taranıyor...")
+    results = []
+    
+    # Hedef Site
+    base_url = "https://taraftarium24bet.net"
+    
+    # Sizin verdiğiniz şablon
+    stream_template = "https://hls.freepalastne.workers.dev/https://corestream.ronaldovurdu.help//hls/{slug}.m3u8"
+    
+    try:
+        response = requests.get(base_url, headers=HEADERS, timeout=10)
+        if response.status_code != 200:
+            print("Taraftarium sitesine erişilemedi.")
+            return results
+
+        soup = BeautifulSoup(response.content, "html.parser")
+        links = soup.find_all("a", href=True)
+        found_channels = set()
+
+        for link in links:
+            href = link['href']
+            # Sadece '/izle/' içeren linkleri alıyoruz
+            if "/izle/" in href:
+                slug = href.split("/izle/")[-1].strip("/")
+                
+                # Tekrarları engelle
+                if slug and slug not in found_channels:
+                    found_channels.add(slug)
+                    
+                    # İsim formatlama
+                    channel_name = slug.replace("-", " ").upper()
+                    
+                    # Link oluşturma
+                    final_url = stream_template.format(slug=slug)
+                    
+                    results.append({
+                        "name": f"TRF - {channel_name}",
+                        "url": final_url,
+                        "group": "TARAFTARIUM (WORKER)",
+                        "logo": "",
+                        "ref": ""
+                    })
+    except Exception as e:
+        print(f"Taraftarium hatası: {e}")
+        
+    return results
+
 # --- ANA ÇALIŞTIRICI ---
 def main():
     all_streams = []
@@ -297,6 +327,8 @@ def main():
     all_streams.extend(fetch_selcuk_sporcafe())
     # 7. ANDRO PANEL
     all_streams.extend(fetch_andro_nodes())
+    # 8. TARAFTARIUM (YENİ EKLENEN)
+    all_streams.extend(fetch_taraftarium_extra())
     
     if not all_streams: 
         print("Hicbir kanal bulunamadi!")
@@ -313,9 +345,15 @@ def main():
         content += f'#EXTHTTP:{"User-Agent"}:{HEADERS["User-Agent"]}\n'
         content += f'{s["url"]}\n'
 
-    with open(OUTPUT_FILE, "w", encoding="utf-8-sig") as f:
-        f.write(content)
-    print(f"\n[OK] Tum siteler ve kanallar eksiksiz olarak birlestirildi -> {OUTPUT_FILE}")
+    # Dosya kaydetme (Android yolu)
+    try:
+        with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"\n[OK] Tum siteler ve kanallar birlestirildi -> {OUTPUT_FILE}")
+    except PermissionError:
+        print(f"\n[!] HATA: Yazma izni yok. Lutfen 'termux-setup-storage' yapin.")
+    except Exception as e:
+        print(f"\n[!] Kayit hatasi: {e}")
 
 if __name__ == "__main__":
     main()
