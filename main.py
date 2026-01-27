@@ -90,7 +90,7 @@ def fetch_netspor():
     except: pass
     return results
 
-# --- 4. TRGOALS SİSTEMİ (WORKER + YENİ DOMAIN) ---
+# --- 4. TRGOALS SİSTEMİ ---
 def fetch_trgoals():
     print("[*] Trgoals kanalları ekleniyor (CF Worker)...")
     results = []
@@ -132,37 +132,37 @@ def fetch_trgoals():
         results.append({"name": f"TRG - {name}", "url": full_url, "group": "TRGOALS TV (WORKER)", "ref": referer_url, "logo": logo_url})
     return results
 
-# --- 5. ALAM TV (YENİ EKLENDİ) ---
-def fetch_alam_tv():
-    print("[*] AlamTV kanalları ekleniyor...")
+# --- 5. INAT TV (YENİ BURHANTASCI WORKER) ---
+def fetch_inat_tv():
+    print("[*] INAT TV (Worker) kanalları ekleniyor...")
     results = []
     
-    # Base URL (Worker)
-    base_worker = "https://misty-sunset-1f65.burhantasci72.workers.dev/"
+    # SENİN VERDİĞİN YENİ WORKER ADRESİ
+    base_worker = "https://rough-inadinatv.burhantasci72.workers.dev"
     
     # ID -> İsim Haritası
     channels = [
-        ("701", "ALAM - beIN SPORTS 1"),
-        ("702", "ALAM - beIN SPORTS 2"),
-        ("703", "ALAM - beIN SPORTS 3"),
-        ("704", "ALAM - beIN SPORTS 4"),
-        ("705", "ALAM - S SPORT 1"),
-        ("730", "ALAM - S SPORT 2"),
-        ("706", "ALAM - TIVIBU SPOR 1"),
-        ("711", "ALAM - TIVIBU SPOR 2"),
-        ("712", "ALAM - TIVIBU SPOR 3"),
-        ("713", "ALAM - TIVIBU SPOR 4"),
+        ("701", "INAT - beIN SPORTS 1"),
+        ("702", "INAT - beIN SPORTS 2"),
+        ("703", "INAT - beIN SPORTS 3"),
+        ("704", "INAT - beIN SPORTS 4"),
+        ("705", "INAT - S SPORT 1"),
+        ("730", "INAT - S SPORT 2"),
+        ("706", "INAT - TIVIBU SPOR 1"),
+        ("711", "INAT - TIVIBU SPOR 2"),
+        ("712", "INAT - TIVIBU SPOR 3"),
+        ("713", "INAT - TIVIBU SPOR 4"),
     ]
     
     for cid, cname in channels:
-        # Worker URL oluşturma
-        full_url = f"{base_worker}{cid}"
+        # Link yapısı: base_worker/701.m3u8
+        full_url = f"{base_worker}/{cid}.m3u8"
         
         results.append({
             "name": cname,
             "url": full_url,
-            "group": "ALAM TV (WORKER)",
-            "logo": "", # İstenirse logo eklenebilir
+            "group": "INAT TV (WORKER)",
+            "logo": "https://hizliresim.com/gm50rk9", # Genel bir logo
             "ref": ""
         })
         
@@ -276,13 +276,19 @@ def main():
     all_streams = []
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
-    # Sırayla tüm kaynakları çalıştır
+    # 1. ATOM
     all_streams.extend(fetch_atom_spor())
+    # 2. VAVOO
     all_streams.extend(fetch_vavoo())
+    # 3. NETSPOR
     all_streams.extend(fetch_netspor())
+    # 4. TRGOALS
     all_streams.extend(fetch_trgoals()) 
-    all_streams.extend(fetch_alam_tv()) # Yeni eklenen AlamTV
+    # 5. INAT TV (Worker)
+    all_streams.extend(fetch_inat_tv())
+    # 6. SELÇUKSPOR
     all_streams.extend(fetch_selcuk_sporcafe())
+    # 7. ANDRO PANEL
     all_streams.extend(fetch_andro_nodes())
     
     if not all_streams: 
