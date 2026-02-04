@@ -3,11 +3,11 @@ import re
 import datetime
 import urllib3
 import json
+import concurrent.futures
 from bs4 import BeautifulSoup
 
 # --- AYARLAR ---
 M3U_OUTPUT_FILE = "Canli_Spor_Hepsi.m3u"
-HTML_OUTPUT_FILE = "index.html"
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 WORKING_BS1_URL = "https://andro.adece12.sbs/checklist/receptestt.m3u8"
 
@@ -88,14 +88,12 @@ def fetch_netspor():
     except: pass
     return results
 
-# --- 4. TRGOALS (GÜNCELLENDİ: REFERER EKLENDİ) ---
+# --- 4. TRGOALS ---
 def fetch_trgoals():
     print("[*] Trgoals kanalları ekleniyor...")
     results = []
     worker_url = "https://muddy-morning-480c.burhantasci72.workers.dev/?url="
     target_domain = "https://pq4.d72577a9dd0ec4.sbs/"
-    
-    # İSTENEN REFERER ADRESİ
     trg_referer = "https://trgoals1517.xyz/"
     
     trg_channels = {
@@ -130,7 +128,7 @@ def fetch_trgoals():
             "name": f"TRG - {name}",
             "url": full_url,
             "group": "TRGOALS TV (WORKER)",
-            "ref": trg_referer, # ARTIK REFERER VAR
+            "ref": trg_referer,
             "logo": logo_url
         })
     return results
@@ -288,299 +286,79 @@ def fetch_andro_nodes():
     except Exception as e: print(f"[!] Andro-Panel hatasi: {e}")
     return results
 
-# ==========================================
-#      2. BÖLÜM: HTML OLUŞTURUCU (YENİ)
-# ==========================================
-
-def generate_html_player(streams):
-    print("[*] TV Box Uyumlu HTML Arayüz oluşturuluyor...")
+# --- 9. XSPORTV (DEATHLESS) ---
+def fetch_xsport():
+    print("[*] XSport (Deathless) taranıyor...")
+    results = []
+    base_pattern = "https://www.xsportv{}.xyz/"
+    logo = "https://i.hizliresim.com/b6xqz10.jpg"
     
-    # Veriyi JSON formatına çevir (HTML içine gömmek için)
-    streams_json = json.dumps(streams)
+    channel_ids = [
+        "xbeinsports-1", "xbeinsports-2", "xbeinsports-3", "xbeinsports-4", "xbeinsports-5",
+        "xbeinsportsmax-1", "xbeinsportsmax-2", "xtivibuspor-1", "xtivibuspor-2",
+        "xtivibuspor-3", "xtivibuspor-4", "xssport", "xssport2", "xtabiispor1",
+        "xtabiispor2", "xtabiispor3", "xtabiispor4", "xtabiispor5", "xtabiispor6", "xtabiispor7"
+    ]
+
+    def check_domain(index):
+        url = base_pattern.format(index)
+        try:
+            response = requests.get(url, headers=HEADERS, timeout=5)
+            if response.status_code == 200:
+                return url
+        except:
+            return None
+
+    def find_active_domain():
+        with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+            futures = [executor.submit(check_domain, i) for i in range(56, 1000)]
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                if result:
+                    return result
+        return None
+
+    active_domain = find_active_domain()
     
-    html_content = f"""
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Canlı Spor TV - Web Player</title>
-    <!-- HLS.js Player -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <style>
-        :root {{ --bg: #121212; --card-bg: #1e1e1e; --accent: #e50914; --focus: #ffffff; --text: #eee; }}
-        body {{ margin: 0; padding: 0; background-color: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }}
-        
-        /* Layout */
-        #app {{ display: flex; flex-direction: column; height: 100vh; }}
-        
-        /* Top Navigation (Categories) */
-        #nav-container {{ padding: 10px 0; background: #000; box-shadow: 0 2px 10px rgba(0,0,0,0.5); z-index: 10; }}
-        #categories {{ display: flex; overflow-x: auto; gap: 10px; padding: 0 20px; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }}
-        #categories::-webkit-scrollbar {{ display: none; }}
-        .cat-btn {{ 
-            background: #333; color: #aaa; border: none; padding: 10px 20px; border-radius: 20px; white-space: nowrap; cursor: pointer; font-size: 14px; transition: all 0.2s; flex-shrink: 0;
-        }}
-        .cat-btn.active {{ background: var(--accent); color: white; font-weight: bold; transform: scale(1.05); }}
-        .cat-btn:focus {{ outline: 3px solid var(--focus); box-shadow: 0 0 10px var(--focus); }}
-
-        /* Main Content */
-        #main-content {{ flex: 1; position: relative; overflow: hidden; }}
-        #channels-container {{ height: 100%; overflow-y: auto; padding: 20px; box-sizing: border-box; }}
-        
-        .channel-grid {{ 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; padding-bottom: 50px;
-        }}
-
-        /* Channel Card */
-        .card {{ 
-            background: var(--card-bg); border-radius: 8px; padding: 10px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; align-items: center; text-align: center; height: 140px; position: relative;
-        }}
-        .card img {{ width: 50px; height: 50px; object-fit: contain; margin-bottom: 10px; }}
-        .card .title {{ font-size: 13px; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }}
-        .card:hover {{ background: #2a2a2a; }}
-        /* TV Focus State */
-        .card:focus {{ 
-            outline: 4px solid var(--focus); transform: scale(1.05); z-index: 2; background: #333; box-shadow: 0 0 15px rgba(255,255,255,0.3);
-        }}
-
-        /* Player Modal */
-        #player-modal {{ 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 100; display: none; flex-direction: column; justify-content: center; align-items: center; 
-        }}
-        video {{ width: 100%; height: 100%; max-height: 100vh; }}
-        #close-btn {{ 
-            position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.7); color: white; border: 2px solid white; padding: 10px 20px; cursor: pointer; z-index: 101; font-weight: bold; border-radius: 5px; 
-        }}
-        #close-btn:focus {{ background: var(--accent); outline: 3px solid white; }}
-
-        /* Info Message */
-        .info {{ position: absolute; bottom: 10px; left: 0; width: 100%; text-align: center; color: #555; font-size: 12px; pointer-events: none; }}
-
-    </style>
-</head>
-<body>
-
-    <div id="app">
-        <!-- Categories -->
-        <div id="nav-container">
-            <div id="categories">
-                <button class="cat-btn active" onclick="filterChannels('ALL')" data-cat="ALL">Tümü</button>
-            </div>
-        </div>
-
-        <!-- Channel List -->
-        <div id="main-content">
-            <div id="channels-container">
-                <div id="grid" class="channel-grid"></div>
-            </div>
-            <div class="info">TV Box: Kumanda OK tuşu ile açın. Mobilde: Sağa/Sola kaydırarak kategori değiştirin.</div>
-        </div>
-    </div>
-
-    <!-- Video Player Overlay -->
-    <div id="player-modal">
-        <button id="close-btn" onclick="closePlayer()">KAPAT (BACK)</button>
-        <video id="video" controls autoplay></video>
-    </div>
-
-    <script>
-        // Python'dan gelen veri
-        const allStreams = {streams_json};
-        
-        // Grupları (Kategorileri) çıkar
-        const groups = [...new Set(allStreams.map(s => s.group))].sort();
-        const categoriesDiv = document.getElementById('categories');
-        const gridDiv = document.getElementById('grid');
-        let currentCategory = 'ALL';
-        let currentStreams = [];
-
-        // Kategorileri oluştur
-        groups.forEach(g => {{
-            const btn = document.createElement('button');
-            btn.className = 'cat-btn';
-            btn.innerText = g;
-            btn.onclick = () => filterChannels(g);
-            btn.dataset.cat = g;
-            categoriesDiv.appendChild(btn);
-        }});
-
-        // Kanal Filtreleme
-        function filterChannels(category) {{
-            currentCategory = category;
-            
-            // Buton aktifliği
-            document.querySelectorAll('.cat-btn').forEach(b => {{
-                b.classList.toggle('active', b.dataset.cat === category);
-            }});
-
-            // Grid temizle
-            gridDiv.innerHTML = '';
-            
-            // Veriyi filtrele
-            currentStreams = category === 'ALL' ? allStreams : allStreams.filter(s => s.group === category);
-            
-            // Kartları oluştur
-            currentStreams.forEach((s, index) => {{
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.tabIndex = 0; // Odaklanabilir yap (TV için)
-                card.onclick = () => playStream(s.url);
-                card.dataset.index = index; // Navigasyon için
+    if active_domain:
+        print(f"    [+] Aktif Domain bulundu: {active_domain}")
+        try:
+            response = requests.get(active_domain, headers=HEADERS)
+            for cid in channel_ids:
+                pattern = rf'data-url="(.*?id={cid}.*?)"'
+                match = re.search(pattern, response.text)
                 
-                // Logo varsa kullan yoksa varsayılan
-                const logo = s.logo || 'https://cdn-icons-png.flaticon.com/512/3503/3503683.png';
-                
-                card.innerHTML = `
-                    <img src="${{logo}}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3503/3503683.png'">
-                    <div class="title">${{s.name}}</div>
-                `;
-                
-                // Enter tuşu ile oynat (TV Box)
-                card.addEventListener('keydown', (e) => {{
-                    if (e.key === 'Enter') playStream(s.url);
-                }});
-
-                gridDiv.appendChild(card);
-            }});
-            
-            // Scrollu başa al
-            document.getElementById('channels-container').scrollTop = 0;
-        }}
-
-        // İlk yükleme
-        filterChannels('ALL');
-
-        // --- PLAYER FONKSİYONLARI ---
-        const modal = document.getElementById('player-modal');
-        const video = document.getElementById('video');
-        let hls = null;
-
-        function playStream(url) {{
-            modal.style.display = 'flex';
-            document.getElementById('close-btn').focus(); // Focus'u kapat butonuna ver
-
-            if (Hls.isSupported()) {{
-                if (hls) hls.destroy();
-                hls = new Hls();
-                hls.loadSource(url);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
-            }} else if (video.canPlayType('application/vnd.apple.mpegurl')) {{
-                video.src = url;
-                video.addEventListener('loadedmetadata', () => video.play());
-            }}
-        }}
-
-        function closePlayer() {{
-            modal.style.display = 'none';
-            video.pause();
-            if(hls) hls.destroy();
-            // Focus'u son aktif karta döndür (İsteğe bağlı, şimdilik grid'e dön)
-            const firstCard = document.querySelector('.card');
-            if(firstCard) firstCard.focus();
-        }}
-
-        // --- TV BOX NAVİGASYON (SPATIAL NAVIGATION) ---
-        // Yön tuşları ile odak yönetimi
-        document.addEventListener('keydown', function(e) {{
-            // Back tuşları (Tizen, WebOS, Standart)
-            if (e.key === 'Backspace' || e.key === 'Escape' || e.keyCode === 10009 || e.keyCode === 461) {{
-                if(modal.style.display === 'flex') {{
-                    closePlayer();
-                }}
-            }}
-
-            const focusable = Array.from(document.querySelectorAll('.cat-btn, .card, #close-btn'));
-            const current = document.activeElement;
-            const currentIndex = focusable.indexOf(current);
-
-            // Eğer hiç odak yoksa ilkine odakla
-            if (currentIndex === -1 && focusable.length > 0) {{
-                focusable[0].focus();
-                return;
-            }}
-            
-            // Basit yukarı/aşağı/sağ/sol mantığı (Grid ve Liste arası geçiş için)
-            // Not: Tarayıcı varsayılan olarak yön tuşlarını yönetir ama bazen manuel müdahale gerekir.
-            // Bu basit scriptte varsayılan tarayıcı davranışı (tabindex) çoğunlukla yeterlidir.
-            // Ancak Kategoriden Gride geçişi kolaylaştıralım:
-            
-            if (e.key === 'ArrowDown' && current.classList.contains('cat-btn')) {{
-                e.preventDefault();
-                const firstCard = document.querySelector('.card');
-                if (firstCard) firstCard.focus();
-            }}
-            
-            if (e.key === 'ArrowUp' && current.classList.contains('card')) {{
-                // Eğer en üst sıradaysa kategoriye çık
-                const gridRect = gridDiv.getBoundingClientRect();
-                const cardRect = current.getBoundingClientRect();
-                if (cardRect.top - gridRect.top < 100) {{
-                     e.preventDefault();
-                     document.querySelector('.cat-btn.active').focus();
-                }}
-            }}
-        }});
-
-        // --- MOBİL İÇİN SWIPE (SAĞA/SOLA KAYDIRARAK KATEGORİ DEĞİŞTİRME) ---
-        let touchStartX = 0;
-        let touchEndX = 0;
-        const contentDiv = document.getElementById('main-content');
-
-        contentDiv.addEventListener('touchstart', e => {{
-            touchStartX = e.changedTouches[0].screenX;
-        }});
-
-        contentDiv.addEventListener('touchend', e => {{
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }});
-
-        function handleSwipe() {{
-            const threshold = 100; // Algılama hassasiyeti
-            if (touchEndX < touchStartX - threshold) {{
-                // Sola Kaydır -> Sonraki Kategori
-                changeCategory(1);
-            }}
-            if (touchEndX > touchStartX + threshold) {{
-                // Sağa Kaydır -> Önceki Kategori
-                changeCategory(-1);
-            }}
-        }}
-
-        function changeCategory(direction) {{
-            const cats = ['ALL', ...groups];
-            let idx = cats.indexOf(currentCategory);
-            
-            if (idx === -1) idx = 0;
-            let newIdx = idx + direction;
-            
-            if (newIdx < 0) newIdx = cats.length - 1;
-            if (newIdx >= cats.length) newIdx = 0;
-            
-            const newCat = cats[newIdx];
-            filterChannels(newCat);
-            
-            // Kategori butonunu görünür yap (Scroll et)
-            const activeBtn = document.querySelector(`.cat-btn[data-cat="${{newCat}}"]`);
-            if(activeBtn) {{
-                activeBtn.scrollIntoView({{ behavior: 'smooth', block: 'nearest', inline: 'center' }});
-            }}
-        }}
-
-    </script>
-</body>
-</html>
-    """
-    
-    with open(HTML_OUTPUT_FILE, "w", encoding="utf-8") as f:
-        f.write(html_content)
-    print(f"[OK] HTML Player oluşturuldu: {HTML_OUTPUT_FILE}")
-
+                if match:
+                    player_link = match.group(1)
+                    # Player linkten akış adresini al
+                    try:
+                        res = requests.get(player_link, headers=HEADERS, timeout=5)
+                        base_match = re.search(r"this\.baseStreamUrl\s*=\s*'(.*?)'", res.text)
+                        if base_match:
+                            base = base_match.group(1)
+                            final_url = f"{base}{cid}/playlist.m3u8"
+                            
+                            # İsim formatlama
+                            name = cid.replace("x", "").replace("-", " ").upper()
+                            if "BEIN" in name: name = name.replace("BEIN", "BEIN SPORTS")
+                            
+                            results.append({
+                                "name": f"XSP - {name}",
+                                "url": final_url,
+                                "group": "XSPORTV (DEATHLESS)",
+                                "logo": logo,
+                                "ref": active_domain
+                            })
+                    except: pass
+        except Exception as e:
+            print(f"[!] XSport hatası: {e}")
+    else:
+        print("    [!] XSport aktif domain bulunamadı.")
+        
+    return results
 
 # ==========================================
-#      3. BÖLÜM: ANA ÇALIŞTIRICI
+#      2. BÖLÜM: ANA ÇALIŞTIRICI
 # ==========================================
 
 def main():
@@ -596,12 +374,13 @@ def main():
     all_streams.extend(fetch_taraftarium())
     all_streams.extend(fetch_selcuk_sporcafe())
     all_streams.extend(fetch_andro_nodes())
+    all_streams.extend(fetch_xsport()) # YENİ EKLENDİ
     
     if not all_streams: 
         print("Hicbir kanal bulunamadi!")
         return
 
-    # 1. M3U Dosyasını Oluştur
+    # M3U Dosyasını Oluştur
     content = "#EXTM3U\n"
     content += f"# Son Guncelleme: {datetime.datetime.now().strftime('%d.%m.%Y %H:%M:%S')}\n"
     for s in all_streams:
@@ -616,9 +395,6 @@ def main():
     with open(M3U_OUTPUT_FILE, "w", encoding="utf-8-sig") as f:
         f.write(content)
     print(f"\n[OK] M3U listesi olusturuldu -> {M3U_OUTPUT_FILE}")
-
-    # 2. HTML Player Dosyasını Oluştur
-    generate_html_player(all_streams)
 
 if __name__ == "__main__":
     main()
