@@ -45,23 +45,35 @@ def fetch_atom_spor():
         })
     return results
 
-# --- 2. VAVOO ---
-def fetch_vavoo():
-    print("[*] Vavoo kanalları ekleniyor...")
+# --- 2. ARDASPOR (VAVOO YERİNE EKLENDİ) ---
+def fetch_ardaspor():
+    print("[*] ArdaSpor kanalları ekleniyor...")
     results = []
-    proxy_base = "https://yildiziptv-turktv.hf.space/proxy/hls/manifest.m3u8?d=https://vavoo.to/vavoo-iptv/play/"
-    vavoo_channels = [
-        {"n": "beIN SPORTS Haber", "id": "398999553310ffc0558467", "img": "https://www.digiturkburada.com.tr/kanal3/bein-sports-haber-hd.png"},
-        {"n": "beIN SPORTS 1 HD", "id": "257621689779b8fed9899e", "img": "https://www.digiturkburada.com.tr/kanal3/bein-sports-hd-1-1.png"},
-        {"n": "beIN SPORTS 2 FHD", "id": "3694662475b76c08f52108", "img": "https://www.digiturkburada.com.tr/kanal3/bein-sports-hd-2-1.png"},
-        {"n": "beIN SPORTS 3 FHD", "id": "34101675603c7aea8fa6b1", "img": "https://www.digiturkburada.com.tr/kanal3/bein-sports-hd-3-1.png"},
-        {"n": "beIN SPORTS 4 FHD", "id": "293826835381972adead05", "img": "https://www.digiturkburada.com.tr/kanal3/bein-sports-hd-4.png"},
-        {"n": "beIN SPORTS 5 FHD", "id": "400031560107e5581e3624", "img": "https://www.digiturkburada.com.tr/kanal3/bein-sports-hd-5.png"},
-        {"n": "beIN SPORTS MAX 1", "id": "2832430535849b88f81e2d", "img": "https://www.digiturkburada.com.tr/kanal3/bein-sports-max-1-hd.png"},
-        {"n": "beIN SPORTS MAX 2", "id": "34079362426e8ca1ffedf7", "img": "https://www.digiturkburada.com.tr/kanal3/bein-sports-max-2-hd.png"}
+    base_url = "https://black-snow-b418.hlsforeveer.workers.dev/https://corestream.ronaldovurdu.help//hls/"
+    ardaspor_logo = "https://i.hizliresim.com/b6xqz10.jpg" # Varsayılan logo
+    referer = "https://ardaspor10.site/"
+    
+    channels = [
+        ("Bein Sports 1 HD", "bein-sports-1"), ("Bein Sports 2 HD", "bein-sports-2"),
+        ("Bein Sports 3 HD", "bein-sports-3"), ("Bein Sports 4 HD", "bein-sports-4"),
+        ("Bein Sports 5 HD", "bein-sports-5"), ("S Sport 1 HD", "s-sport"),
+        ("S Sport 2 HD", "s-sport-2"), ("S Sport Plus", "ssport-plus"),
+        ("Tivibu Spor 1", "tivibu-spor-1"), ("Tivibu Spor 2", "tivibu-spor-2"),
+        ("Tivibu Spor 3", "tivibu-spor-3"), ("Tivibu Spor 4", "tivibu-spor-4"),
+        ("Smart Spor", "smart-spor"), ("TV 8.5", "tv-8-5"),
+        ("A Spor", "a-spor"), ("TRT Spor", "trt-spor"),
+        ("Eurosport 1", "eurosport-1"), ("Eurosport 2", "eurosport-2"),
+        ("Exxen Spor 1", "exxen-1"), ("Exxen Spor 2", "exxen-2")
     ]
-    for ch in vavoo_channels:
-        results.append({"name": f"VAVOO - {ch['n']}", "url": f"{proxy_base}{ch['id']}", "group": "VAVOO SPOR (STABIL)", "logo": ch['img'], "ref": ""})
+    
+    for name, cid in channels:
+        results.append({
+            "name": f"ARDA - {name}",
+            "url": f"{base_url}{cid}.m3u8",
+            "group": "ARDASPOR TV",
+            "logo": ardaspor_logo,
+            "ref": referer
+        })
     return results
 
 # --- 3. NETSPOR ---
@@ -367,14 +379,14 @@ def main():
     
     # Tüm kaynakları çek
     all_streams.extend(fetch_atom_spor())
-    all_streams.extend(fetch_vavoo())
+    all_streams.extend(fetch_ardaspor()) # VAVOO YERİNE BURAYA EKLENDİ
     all_streams.extend(fetch_netspor())
     all_streams.extend(fetch_trgoals()) 
     all_streams.extend(fetch_inadina_tv())
     all_streams.extend(fetch_taraftarium())
     all_streams.extend(fetch_selcuk_sporcafe())
     all_streams.extend(fetch_andro_nodes())
-    all_streams.extend(fetch_xsport()) # YENİ EKLENDİ
+    all_streams.extend(fetch_xsport())
     
     if not all_streams: 
         print("Hicbir kanal bulunamadi!")
