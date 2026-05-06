@@ -3,7 +3,6 @@ import re
 import datetime
 import urllib3
 import json
-import base64
 import concurrent.futures
 from bs4 import BeautifulSoup
 
@@ -178,11 +177,11 @@ def fetch_netspor():
     except: pass
     return results
 
-# --- 4. ATOM SPOR (GÜNCEL AKILLI TARAYICI) ---
+# --- 4. ATOM SPOR ---
 def fetch_atom_spor():
-    print("[*] AtomSpor taranıyor (Sayfaların içine sızılarak güncel m3u8 çekiliyor)...")
+    print("[*] AtomSpor (VIP) kanalları ekleniyor...")
     results =[]
-    base_domain = "https://atomsportv501.top"
+    base_url = "https://hlssssss.volepartigo.workers.dev/https://corestream.ronaldovurdu.help//hls/"
     atom_logo = "https://hizliresim.com/gm50rk9b"
     
     channels =[
@@ -194,71 +193,21 @@ def fetch_atom_spor():
         ("Tivibu Spor 3", "tivibu-spor-3"), ("Smart Spor", "smart-spor"),
         ("TV 8.5", "tv-8-5"), ("Bein Sports Haber", "bein-sports-haber")
     ]
-
-    def extract_m3u8_from_page(url):
-        try:
-            res = requests.get(url, headers=HEADERS, timeout=10)
-            
-            # 1. Öncelikle iframe'in (player) içine girmeye çalışalım
-            iframe_m = re.search(r'<iframe[^>]+src=["\'](https?://[^"\']+)["\']', res.text)
-            if iframe_m:
-                iframe_src = iframe_m.group(1)
-                r2 = requests.get(iframe_src, headers={**HEADERS, "Referer": url}, timeout=10)
-                
-                # Player HTML'inde direkt m3u8 uzantısı ara
-                m2 = re.search(r'(https?://[^\s\'">]+\.m3u8[^\s\'">]*)', r2.text)
-                if m2: return m2.group(1)
-                
-                # Kriptolanmış veya atob (Base64) ile gizlenmiş linkleri çöz
-                base64_m = re.findall(r'atob\([\'"]([A-Za-z0-9+/=]+)[\'"]\)', r2.text)
-                for b64 in base64_m:
-                    try:
-                        decoded = base64.b64decode(b64).decode('utf-8')
-                        m_dec = re.search(r'(https?://[^\s\'">]+\.m3u8[^\s\'">]*)', decoded)
-                        if m_dec: return m_dec.group(1)
-                    except: pass
-            
-            # 2. Eğer iframe yoksa, direkt sitenin kendi kodlarında m3u8 ara
-            m = re.search(r'(https?://[^\s\'">]+\.m3u8[^\s\'">]*)', res.text)
-            if m: return m.group(1)
-            
-        except Exception:
-            pass
-        return None
-
-    def fetch_single(item):
-        name, cid = item
-        # Kanalın asıl web sayfasına istek atıyoruz
-        m3u8 = extract_m3u8_from_page(f"{base_domain}/kanal/{cid}")
-        
-        # Eğer m3u8 bulamazsak, AtomSpor'un bilinen son yedek worker API yapısını ekliyoruz
-        if not m3u8: 
-            m3u8 = f"https://tv.atomspor.workers.dev/?ID={cid}"
-            
-        return {
+    
+    for name, cid in channels:
+        results.append({
             "name": f"ATOM - {name}",
-            "url": m3u8,
+            "url": f"{base_url}{cid}.m3u8",
             "group": "ATOM SPOR (VIP)",
             "logo": atom_logo,
-            "ref": base_domain
-        }
-        
-    # Tüm kanalların sayfalarına aynı anda hızlıca girip m3u8 linklerini kopartıyoruz (Çoklu İşlem)
-    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-        futures =[executor.submit(fetch_single, ch) for ch in channels]
-        for future in concurrent.futures.as_completed(futures):
-            results.append(future.result())
-            
-    # Kanalların karışmaması için baştaki listeye göre sıralama yapıyoruz
-    order_map = {f"ATOM - {ch[0]}": i for i, ch in enumerate(channels)}
-    results.sort(key=lambda x: order_map.get(x["name"], 999))
-
+            "ref": "https://atomsportv485.top/"
+        })
     return results
 
 # --- 5. TARAFTARIUM (ESKİ ARDASPOR YERİNE) ---
 def fetch_taraftarium_ozel():
     print("[*] Taraftarium kanalları ekleniyor...")
-    results =[]
+    results = []
     
     # Ana Liste (Mevcut Linkleriniz)
     channels =[
@@ -280,7 +229,7 @@ def fetch_taraftarium_ozel():
         ("Eurosport 1", "https://deathless.pantonum1.workers.dev/eu1.m3u8"),
         ("Eurosport 2", "https://deathless.pantonum1.workers.dev/eu2.m3u8"),
         
-        # Yedek Liste
+        # İkinci Mesajınızda Gönderdiğiniz Yedek Liste
         ("B1 ydk", "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MVTMCC4UTAZVDT/6817/index.m3u8"),
         ("B2 ydk", "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MVTMCC4UTAZVDT/6818/index.m3u8"),
         ("B3 ydk", "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MVTMCC4UTAZVDT/6821/index.m3u8"),
@@ -398,8 +347,8 @@ def main():
     all_streams.extend(fetch_netspor())
     
     # Kalan kaynaklar
-    all_streams.extend(fetch_atom_spor())         # <-- Yeniden yazılan Akıllı AtomSpor
-    all_streams.extend(fetch_taraftarium_ozel())  
+    all_streams.extend(fetch_atom_spor())
+    all_streams.extend(fetch_taraftarium_ozel())  # <-- ArdaSpor yerine eklendi
     all_streams.extend(fetch_inadina_tv())
     all_streams.extend(fetch_taraftarium())
     all_streams.extend(fetch_selcuk_sporcafe())
