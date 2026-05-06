@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 M3U_OUTPUT_FILE = "Canli_Spor_Hepsi.m3u"
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 
-# NETSPOR YENİ GÜNCEL SUNUCU ADRESİ
+# NETSPOR & ANDRO YENİ GÜNCEL SUNUCU ADRESİ
 WORKING_BS1_URL = "https://andro.evrenesoglu59.lat/checklist/receptestt.m3u8"
 
 # SSL Uyarılarını gizle
@@ -141,7 +141,7 @@ def fetch_andro_nodes():
                                     for cid, cname in channels:
                                         furl = f"{srv}/{cid}.m3u8" if "checklist" in srv else f"{srv}/checklist/{cid}.m3u8"
                                         furl = furl.replace("checklist//", "checklist/")
-                                        results.append({"name": f"ANDRO - {cname}", "url": furl, "group": "ANDRO SPOR (YENI)", "logo": "https://hizliresim.com/gm50rk9", "ref": "https://taraftariumizle.org/"})
+                                        results.append({"name": f"ANDRO - {cname}", "url": furl, "group": "ANDRO SPOR", "logo": "https://hizliresim.com/gm50rk9", "ref": "https://taraftariumizle.org/"})
         print(f"[OK] Andro-Panel: {len(results)} kanal eklendi.")
     except Exception as e: print(f"[!] Andro-Panel hatasi: {e}")
     return results
@@ -234,7 +234,7 @@ def fetch_netspor():
                 href = a['href']
                 if any(skip in href.lower() for skip in['whatsapp', 't.me', 'twitter', 'instagram', '#', 'apk']): continue
                 title = a.get_text(strip=True)
-                if title and len(title) > 2 and not any(skip in title.lower() for skip in ['uygulama', 'telegram', 'iletişim']):
+                if title and len(title) > 2 and not any(skip in title.lower() for skip in['uygulama', 'telegram', 'iletişim']):
                     link = href if href.startswith('http') else f"{base_domain.rstrip('/')}/{href.lstrip('/')}"
                     if link not in seen_links:
                         seen_links.add(link)
@@ -299,7 +299,7 @@ def fetch_atom_spor():
         return {"name": f"ATOM - {name}", "url": m3u8, "group": "ATOM SPOR (VIP)", "logo": atom_logo, "ref": base_domain}
         
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-        futures = [executor.submit(fetch_single, ch) for ch in channels]
+        futures =[executor.submit(fetch_single, ch) for ch in channels]
         for future in concurrent.futures.as_completed(futures):
             results.append(future.result())
             
@@ -310,7 +310,7 @@ def fetch_atom_spor():
 # --- 5. TARAFTARIUM ---
 def fetch_taraftarium_ozel():
     print("[*] Taraftarium (Özel) kanalları ekleniyor...")
-    results = []
+    results =[]
     channels =[
         ("Bein Sports 1", "https://deathless.pantonum1.workers.dev/taraftarium.m3u8"),
         ("Bein Sports 2", "https://deathless.pantonum1.workers.dev/b2.m3u8"),
@@ -421,7 +421,6 @@ def main():
     all_streams =[]
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
-    # Tüm fonksiyonlar eksiksiz olarak çağrılır
     all_streams.extend(fetch_andro_nodes())
     all_streams.extend(fetch_xsport())
     all_streams.extend(fetch_netspor())
@@ -445,28 +444,17 @@ def main():
         url = s["url"]
         ref = s.get("ref", "")
         
-        # VLC Player için genel etiketler
+        # Sadece VLC Player, HLS Player (AppCreator24 Web) destekli etiketler.
+        # Bu kısımlar AppCreator24 ExoPlayer'ı bozmaz, player anlamazsa direkt yok sayar.
         if ref: 
             content += f'#EXTVLCOPT:http-referrer={ref}\n'
             content += f'#EXTVLCOPT:http-origin={ref}\n'
         content += f'#EXTVLCOPT:http-user-agent={HEADERS["User-Agent"]}\n'
         
-        # ==========================================
-        # SADECE NETSPOR / ANDRO İÇİN EXOPLAYER KORUMASI
-        # ==========================================
-        # Diğer hiçbir linkin sonuna "|Referer=..." eklenmeyecektir.
+        # AppCreator24'teki ExoPlayer çökmesin diye | (Pipe) ve sonrasındaki Header enjeksiyonlarını KALDIRDIK.
+        # Böylece listeye sadece tertemiz, saf link basılacak.
         
-        is_netspor = s["group"].startswith("NETSPOR") or s["group"].startswith("ANDRO SPOR")
-        
-        if is_netspor:
-            net_ref = "https://taraftariumizle.org/"
-            # Sadece bu yayınlar için pipe (|) eklenir
-            final_url = f"{url}|User-Agent={HEADERS['User-Agent']}&Referer={net_ref}&Origin={net_ref}"
-        else:
-            # Netspor değilse orijinal url dokunulmadan bırakılır
-            final_url = url
-            
-        content += f'{final_url}\n'
+        content += f'{url}\n'
 
     with open(M3U_OUTPUT_FILE, "w", encoding="utf-8-sig") as f:
         f.write(content)
