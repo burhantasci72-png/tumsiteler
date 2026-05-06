@@ -21,10 +21,10 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # --- 1. ANDRO PANEL ---
 def fetch_andro_nodes():
     print("[*] Andro-Panel taranıyor...")
-    results = []
+    results =[]
     PROXY = "https://proxy.freecdn.workers.dev/?url="
     START = "https://taraftariumizle.org"
-    channels = [
+    channels =[
         ("androstreamlivebiraz1", 'TR:beIN Sport 1 HD'), ("androstreamlivebs1", 'TR:beIN Sport 1 HD'),
         ("androstreamlivebs2", 'TR:beIN Sport 2 HD'), ("androstreamlivebs3", 'TR:beIN Sport 3 HD'),
         ("androstreamlivebs4", 'TR:beIN Sport 4 HD'), ("androstreamlivebs5", 'TR:beIN Sport 5 HD'),
@@ -63,9 +63,9 @@ def fetch_andro_nodes():
                             bm = re.search(r'baseUrls\s*=\s*\[(.*?)\]', h3, re.DOTALL)
                             if bm:
                                 cl = bm.group(1).replace('"', '').replace("'", "").replace("\n", "").replace("\r", "")
-                                srvs = [x.strip() for x in cl.split(',') if x.strip().startswith("http")]
+                                srvs =[x.strip() for x in cl.split(',') if x.strip().startswith("http")]
                                 srvs = list(set(srvs)) 
-                                active_servers = []
+                                active_servers =[]
                                 tid = "androstreamlivebs1" 
                                 for sv in srvs:
                                     sv = sv.rstrip('/')
@@ -84,14 +84,14 @@ def fetch_andro_nodes():
     except Exception as e: print(f"[!] Andro-Panel hatasi: {e}")
     return results
 
-# --- 2. XSPORTV (DEATHLESS) ---
+# --- 2. XSPORTV ---
 def fetch_xsport():
-    print("[*] XSport (Deathless) taranıyor...")
-    results = []
+    print("[*] XSport taranıyor...")
+    results =[]
     base_pattern = "https://www.xsportv{}.xyz/"
     logo = "https://i.hizliresim.com/b6xqz10.jpg"
     
-    channel_ids = [
+    channel_ids =[
         "xbeinsports-1", "xbeinsports-2", "xbeinsports-3", "xbeinsports-4", "xbeinsports-5",
         "xbeinsportsmax-1", "xbeinsportsmax-2", "xtivibuspor-1", "xtivibuspor-2",
         "xtivibuspor-3", "xtivibuspor-4", "xssport", "xssport2", "xtabiispor1",
@@ -109,7 +109,7 @@ def fetch_xsport():
 
     def find_active_domain():
         with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
-            futures = [executor.submit(check_domain, i) for i in range(56, 1000)]
+            futures =[executor.submit(check_domain, i) for i in range(56, 1000)]
             for future in concurrent.futures.as_completed(futures):
                 result = future.result()
                 if result:
@@ -141,7 +141,7 @@ def fetch_xsport():
                             results.append({
                                 "name": f"XSP - {name}",
                                 "url": final_url,
-                                "group": "XSPORTV (DEATHLESS)",
+                                "group": "XSPORTV",
                                 "logo": logo,
                                 "ref": active_domain
                             })
@@ -156,7 +156,7 @@ def fetch_xsport():
 # --- 3. NETSPOR ---
 def fetch_netspor():
     print("[*] Netspor taranıyor...")
-    results = []
+    results =[]
     source_url = "https://netspor-amp.xyz/"
     stream_base = "https://andro.adece12.sbs/checklist/" 
     try:
@@ -180,11 +180,11 @@ def fetch_netspor():
 # --- 4. ATOM SPOR ---
 def fetch_atom_spor():
     print("[*] AtomSpor (VIP) kanalları ekleniyor...")
-    results = []
+    results =[]
     base_url = "https://hlssssss.volepartigo.workers.dev/https://corestream.ronaldovurdu.help//hls/"
     atom_logo = "https://hizliresim.com/gm50rk9b"
     
-    channels = [
+    channels =[
         ("Bein Sports 1", "bein-sports-1"), ("Bein Sports 2", "bein-sports-2"),
         ("Bein Sports 3", "bein-sports-3"), ("Bein Sports 4", "bein-sports-4"),
         ("Bein Sports 5", "bein-sports-5"), ("S Sport 1", "s-sport"),
@@ -204,44 +204,55 @@ def fetch_atom_spor():
         })
     return results
 
-# --- 5. ARDASPOR ---
-def fetch_ardaspor():
-    print("[*] ArdaSpor kanalları ekleniyor...")
+# --- 5. TARAFTARIUM (ESKİ ARDASPOR YERİNE) ---
+def fetch_taraftarium_ozel():
+    print("[*] Taraftarium kanalları ekleniyor...")
     results = []
-    base_url = "https://black-snow-b418.hlsforeveer.workers.dev/https://corestream.ronaldovurdu.help//hls/"
-    ardaspor_logo = "https://i.hizliresim.com/b6xqz10.jpg" 
-    referer = "https://ardaspor10.site/"
     
-    channels = [
-        ("Bein Sports 1 HD", "bein-sports-1"), ("Bein Sports 2 HD", "bein-sports-2"),
-        ("Bein Sports 3 HD", "bein-sports-3"), ("Bein Sports 4 HD", "bein-sports-4"),
-        ("Bein Sports 5 HD", "bein-sports-5"), ("S Sport 1 HD", "s-sport"),
-        ("S Sport 2 HD", "s-sport-2"), ("S Sport Plus", "ssport-plus"),
-        ("Tivibu Spor 1", "tivibu-spor-1"), ("Tivibu Spor 2", "tivibu-spor-2"),
-        ("Tivibu Spor 3", "tivibu-spor-3"), ("Tivibu Spor 4", "tivibu-spor-4"),
-        ("Smart Spor", "smart-spor"), ("TV 8.5", "tv-8-5"),
-        ("A Spor", "a-spor"), ("TRT Spor", "trt-spor"),
-        ("Eurosport 1", "eurosport-1"), ("Eurosport 2", "eurosport-2"),
-        ("Exxen Spor 1", "exxen-1"), ("Exxen Spor 2", "exxen-2")
+    # Ana Liste (Mevcut Linkleriniz)
+    channels =[
+        ("Bein Sports 1", "https://deathless.pantonum1.workers.dev/taraftarium.m3u8"),
+        ("Bein Sports 2", "https://deathless.pantonum1.workers.dev/b2.m3u8"),
+        ("Bein Sports 3", "https://deathless.pantonum1.workers.dev/b3.m3u8"),
+        ("Bein Sports 4", "https://deathless.pantonum1.workers.dev/b4.m3u8"),
+        ("Bein Sports 5", "https://deathless.pantonum1.workers.dev/b5.m3u8"),
+        ("Bein Max 1", "https://deathless.pantonum1.workers.dev/bm1.m3u8"),
+        ("Bein Max 2", "https://deathless.pantonum1.workers.dev/bm2.m3u8"),
+        ("S Sport 1", "https://deathless.pantonum1.workers.dev/ss.m3u8"),
+        ("S Sport 2", "https://deathless.pantonum1.workers.dev/ss2.m3u8"),
+        ("Smart Spor 1", "https://deathless.pantonum1.workers.dev/smarts.m3u8"),
+        ("Smart Spor 2", "https://deathless.pantonum1.workers.dev/sms2.m3u8"),
+        ("Tivibu Spor 1", "https://deathless.pantonum1.workers.dev/t1.m3u8"),
+        ("Tivibu Spor 2", "https://deathless.pantonum1.workers.dev/t2.m3u8"),
+        ("Tivibu Spor 3", "https://deathless.pantonum1.workers.dev/t3.m3u8"),
+        ("Tivibu Spor 4", "https://deathless.pantonum1.workers.dev/t4.m3u8"),
+        ("Eurosport 1", "https://deathless.pantonum1.workers.dev/eu1.m3u8"),
+        ("Eurosport 2", "https://deathless.pantonum1.workers.dev/eu2.m3u8"),
+        
+        # İkinci Mesajınızda Gönderdiğiniz Yedek Liste
+        ("B1 ydk", "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MVTMCC4UTAZVDT/6817/index.m3u8"),
+        ("B2 ydk", "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MVTMCC4UTAZVDT/6818/index.m3u8"),
+        ("B3 ydk", "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MVTMCC4UTAZVDT/6821/index.m3u8"),
+        ("B4 ydk", "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MVTMCC4UTAZVDT/6823/index.m3u8")
     ]
     
-    for name, cid in channels:
+    for name, url in channels:
         results.append({
-            "name": f"ARDA - {name}",
-            "url": f"{base_url}{cid}.m3u8",
-            "group": "ARDASPOR TV",
-            "logo": ardaspor_logo,
-            "ref": referer
+            "name": name,
+            "url": url,
+            "group": "TARAFTARIUM",
+            "logo": "",
+            "ref": ""
         })
     return results
 
 # --- 6. INADINA TV (WORKER) ---
 def fetch_inadina_tv():
     print("[*] INADINA TV (Worker) kanalları ekleniyor...")
-    results = []
+    results =[]
     base_worker = "https://rough-inadinatv.burhantasci72.workers.dev"
     
-    channels = [
+    channels =[
         ("701", "INADINA - beIN SPORTS 1"), ("702", "INADINA - beIN SPORTS 2"),
         ("703", "INADINA - beIN SPORTS 3"), ("704", "INADINA - beIN SPORTS 4"),
         ("705", "INADINA - S SPORT 1"), ("730", "INADINA - S SPORT 2"),
@@ -262,7 +273,7 @@ def fetch_inadina_tv():
 # --- 7. TARAFTARIUM24 ---
 def fetch_taraftarium():
     print("[*] Taraftarium24 taranıyor...")
-    results = []
+    results =[]
     base_url = "https://taraftarium24bet.net"
     stream_template = "https://hls.freepalastne.workers.dev/https://corestream.ronaldovurdu.help//hls/{slug}.m3u8"
     
@@ -293,8 +304,8 @@ def fetch_taraftarium():
 # --- 8. SELÇUKSPOR ---
 def fetch_selcuk_sporcafe():
     print("[*] Selçukspor taranıyor...")
-    results = []
-    selcuk_channels = [
+    results =[]
+    selcuk_channels =[
         {"id": "selcukbeinsports1", "n": "BEIN SPORTS 1"}, {"id": "selcukbeinsports2", "n": "BEIN SPORTS 2"},
         {"id": "selcukbeinsports3", "n": "BEIN SPORTS 3"}, {"id": "selcukbeinsports4", "n": "BEIN SPORTS 4"},
         {"id": "selcukbeinsports5", "n": "BEIN SPORTS 5"}, {"id": "selcukbeinsportsmax1", "n": "BEIN MAX 1"},
@@ -327,7 +338,7 @@ def fetch_selcuk_sporcafe():
 # ==========================================
 
 def main():
-    all_streams = []
+    all_streams =[]
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
     # En öne eklenecek kaynaklar (Sırasıyla: Andro, Xsport, Netspor)
@@ -337,7 +348,7 @@ def main():
     
     # Kalan kaynaklar
     all_streams.extend(fetch_atom_spor())
-    all_streams.extend(fetch_ardaspor())
+    all_streams.extend(fetch_taraftarium_ozel())  # <-- ArdaSpor yerine eklendi
     all_streams.extend(fetch_inadina_tv())
     all_streams.extend(fetch_taraftarium())
     all_streams.extend(fetch_selcuk_sporcafe())
