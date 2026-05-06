@@ -338,20 +338,79 @@ def fetch_taraftarium_ozel():
         results.append({"name": name, "url": url, "group": "TARAFTARIUM", "logo": "", "ref": ""})
     return results
 
-# --- 6. INADINA TV ---
-def fetch_inadina_tv():
-    print("[*] INADINA TV kanalları ekleniyor...")
+# --- 6. SPOR PAS TV (YENİ SİSTEM / İNADINA TV YERİNE) ---
+def fetch_sporpastv():
+    print("[*] Spor Pas TV taranıyor...")
     results =[]
-    base_worker = "https://rough-inadinatv.burhantasci72.workers.dev"
-    channels =[
-        ("701", "INADINA - beIN SPORTS 1"), ("702", "INADINA - beIN SPORTS 2"),
-        ("703", "INADINA - beIN SPORTS 3"), ("704", "INADINA - beIN SPORTS 4"),
-        ("705", "INADINA - S SPORT 1"), ("730", "INADINA - S SPORT 2"),
-        ("706", "INADINA - TIVIBU SPOR 1"), ("711", "INADINA - TIVIBU SPOR 2"),
-        ("712", "INADINA - TIVIBU SPOR 3"), ("713", "INADINA - TIVIBU SPOR 4"),
-    ]
-    for cid, cname in channels:
-        results.append({"name": cname, "url": f"{base_worker}/{cid}.m3u8", "group": "INADINA TV (WORKER)", "logo": "https://hizliresim.com/gm50rk9", "ref": ""})
+    base_domain = "https://sporpastv2.live"
+    
+    try:
+        res = requests.get(base_domain, headers=HEADERS, timeout=10)
+        res.encoding = 'utf-8'
+        soup = BeautifulSoup(res.text, 'html.parser')
+        
+        items_to_fetch =[]
+        seen_links = set()
+        
+        # Site içindeki linkleri ayrıştır
+        for a in soup.find_all('a', href=True):
+            href = a['href']
+            if any(skip in href.lower() for skip in['whatsapp', 't.me', 'twitter', 'instagram', '#', 'apk']): continue
+            title = a.get_text(strip=True)
+            if not title:
+                img = a.find('img', alt=True)
+                if img: title = img.get('alt', '').strip()
+            
+            if title and len(title) > 2:
+                link = href if href.startswith('http') else f"{base_domain.rstrip('/')}/{href.lstrip('/')}"
+                if link not in seen_links and base_domain in link:
+                    seen_links.add(link)
+                    items_to_fetch.append({"title": title, "link": link})
+                    
+        def process_item(item):
+            m3u8 = extract_m3u8_from_page(item["link"], ref=base_domain)
+            if m3u8:
+                return {"name": f"SPORPAS - {item['title']}", "url": m3u8, "group": "SPOR PAS TV", "ref": base_domain, "logo": ""}
+            return None
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+            futures = [executor.submit(process_item, it) for it in items_to_fetch]
+            for future in concurrent.futures.as_completed(futures):
+                r = future.result()
+                if r: results.append(r)
+                
+        # Eğer bot dinamik linkleri yakalayamazsa sizin verdiğiniz Özel Zirve Altyapısını listeye basar
+        if not results:
+            print("    [!] Dinamik link bulunamadı, Spor Pas Yedek (Zirve) Liste devrede...")
+            fallback_channels =[
+                ("BeIN Sports 1", "zirve"),
+                ("BeIN Sports 2", "b2"),
+                ("BeIN Sports 3", "b3"),
+                ("BeIN Sports 4", "b4"),
+                ("BeIN Sports 5", "b5"),
+                ("BeIN Max 1", "max1"),
+                ("BeIN Max 2", "max2"),
+                ("S Sport 1", "ssport"),
+                ("S Sport 2", "ssport2"),
+                ("Tivibu Spor 1", "tivibu1"),
+                ("Tivibu Spor 2", "tivibu2"),
+                ("Tivibu Spor 3", "tivibu3"),
+                ("Smart Spor", "smart"),
+                ("Exxen Spor", "exxen"),
+                ("TRT Spor", "trtspor"),
+                ("A Spor", "aspor")
+            ]
+            for name, path in fallback_channels:
+                results.append({
+                    "name": f"SPORPAS - {name}",
+                    "url": f"https://inz.zirvedesin234.cfd/{path}/mono.m3u8",
+                    "group": "SPOR PAS TV (YEDEK)",
+                    "ref": base_domain,
+                    "logo": ""
+                })
+    except Exception as e:
+        print(f"[!] Spor Pas TV hatası: {e}")
+        
     return results
 
 # --- 7. TARAFTARIUM24 ---
@@ -426,7 +485,7 @@ def main():
     all_streams.extend(fetch_netspor())
     all_streams.extend(fetch_atom_spor())
     all_streams.extend(fetch_taraftarium_ozel())
-    all_streams.extend(fetch_inadina_tv())
+    all_streams.extend(fetch_sporpastv())          # <-- İnadına TV yerine eklendi
     all_streams.extend(fetch_taraftarium())
     all_streams.extend(fetch_selcuk_sporcafe())
     
@@ -444,16 +503,13 @@ def main():
         url = s["url"]
         ref = s.get("ref", "")
         
-        # Sadece VLC Player, HLS Player (AppCreator24 Web) destekli etiketler.
-        # Bu kısımlar AppCreator24 ExoPlayer'ı bozmaz, player anlamazsa direkt yok sayar.
+        # Sadece VLC Player ve Web HLS Player uyumlu, AppCreator24'ü bozmayan etiketler
         if ref: 
             content += f'#EXTVLCOPT:http-referrer={ref}\n'
             content += f'#EXTVLCOPT:http-origin={ref}\n'
         content += f'#EXTVLCOPT:http-user-agent={HEADERS["User-Agent"]}\n'
         
-        # AppCreator24'teki ExoPlayer çökmesin diye | (Pipe) ve sonrasındaki Header enjeksiyonlarını KALDIRDIK.
-        # Böylece listeye sadece tertemiz, saf link basılacak.
-        
+        # Linkin sonuna AppCreator24/ExoPlayer'ı çökertecek | karakterini eklemiyoruz, saf haliyle yazdırıyoruz.
         content += f'{url}\n'
 
     with open(M3U_OUTPUT_FILE, "w", encoding="utf-8-sig") as f:
