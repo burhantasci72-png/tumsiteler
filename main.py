@@ -2,7 +2,8 @@ import requests
 import re
 import datetime
 import urllib3
-import json
+import urllib.parse
+import base64
 import concurrent.futures
 from bs4 import BeautifulSoup
 
@@ -13,6 +14,68 @@ WORKING_BS1_URL = "https://andro.adece12.sbs/checklist/receptestt.m3u8"
 
 # SSL Uyarılarını gizle
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+
+# ==========================================
+#      ORTAK AKILLI M3U8 ÇÖZÜCÜ (BOT)
+# ==========================================
+def extract_m3u8_from_page(url, ref=None):
+    """
+    Verilen URL'nin içine girip iframe veya Base64 ile şifrelenmiş
+    m3u8 yayınlarını tespit ederek saf linki çeken akıllı bot motoru.
+    """
+    try:
+        headers = HEADERS.copy()
+        if ref: headers["Referer"] = ref
+        res = requests.get(url, headers=headers, timeout=10)
+        
+        def find_m3u8(text):
+            # 1. Normal link ara
+            m = re.search(r'(https?://[^\s\'">]+\.m3u8[^\s\'">]*)', text)
+            if m: return m.group(1)
+            
+            # 2. URL Encoded link ara
+            unescaped_m = re.search(r'(https%3A%2F%2F[^\s\'">]+%2Em3u8[^\s\'">]*)', text)
+            if unescaped_m: return urllib.parse.unquote(unescaped_m.group(1))
+            
+            # 3. JS Değişkenlerinde ara
+            m_src = re.search(r'source\s*:\s*[\'"]([^\'"]+\.m3u8[^\'"]*)[\'"]', text)
+            if m_src: return m_src.group(1)
+            
+            # 4. Standart Base64 (atob) Şifrelemesini çöz
+            for b64 in re.findall(r'atob\([\'"]([A-Za-z0-9+/=]+)[\'"]\)', text):
+                try:
+                    decoded = base64.b64decode(b64).decode('utf-8')
+                    m_dec = re.search(r'(https?://[^\s\'">]+\.m3u8[^\s\'">]*)', decoded)
+                    if m_dec: return m_dec.group(1)
+                except: pass
+                
+            # 5. Gizlenmiş Base64 Metinlerini (Uzun Stringler) çöz
+            for b64 in re.findall(r'[\'"]([A-Za-z0-9+/=]{40,})[\'"]', text):
+                try:
+                    decoded = base64.b64decode(b64).decode('utf-8')
+                    if '.m3u8' in decoded:
+                        m_dec = re.search(r'(https?://[^\s\'">]+\.m3u8[^\s\'">]*)', decoded)
+                        if m_dec: return m_dec.group(1)
+                except: pass
+            return None
+
+        # AŞAMA 1: Oynatıcı Iframe'inin İçine Girme
+        iframe_m = re.search(r'<iframe[^>]+src=["\'](https?://[^"\']+)["\']', res.text)
+        if iframe_m:
+            iframe_src = iframe_m.group(1)
+            r2 = requests.get(iframe_src, headers={**HEADERS, "Referer": url}, timeout=10)
+            found = find_m3u8(r2.text)
+            if found: return found
+            
+        # AŞAMA 2: Eğer iframe yoksa doğrudan ana sayfa içinde ara
+        found = find_m3u8(res.text)
+        if found: return found
+            
+    except Exception:
+        pass
+    return None
+
 
 # ==========================================
 #      1. BÖLÜM: YAYINLARI TOPLAMA
@@ -102,18 +165,15 @@ def fetch_xsport():
         url = base_pattern.format(index)
         try:
             response = requests.get(url, headers=HEADERS, timeout=5)
-            if response.status_code == 200:
-                return url
-        except:
-            return None
+            if response.status_code == 200: return url
+        except: return None
 
     def find_active_domain():
         with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
             futures =[executor.submit(check_domain, i) for i in range(56, 1000)]
             for future in concurrent.futures.as_completed(futures):
                 result = future.result()
-                if result:
-                    return result
+                if result: return result
         return None
 
     active_domain = find_active_domain()
@@ -125,7 +185,6 @@ def fetch_xsport():
             for cid in channel_ids:
                 pattern = rf'data-url="(.*?id={cid}.*?)"'
                 match = re.search(pattern, response.text)
-                
                 if match:
                     player_link = match.group(1)
                     try:
@@ -134,54 +193,108 @@ def fetch_xsport():
                         if base_match:
                             base = base_match.group(1)
                             final_url = f"{base}{cid}/playlist.m3u8"
-                            
                             name = cid.replace("x", "").replace("-", " ").upper()
                             if "BEIN" in name: name = name.replace("BEIN", "BEIN SPORTS")
                             
-                            results.append({
-                                "name": f"XSP - {name}",
-                                "url": final_url,
-                                "group": "XSPORTV",
-                                "logo": logo,
-                                "ref": active_domain
-                            })
+                            results.append({"name": f"XSP - {name}", "url": final_url, "group": "XSPORTV", "logo": logo, "ref": active_domain})
                     except: pass
-        except Exception as e:
-            print(f"[!] XSport hatası: {e}")
-    else:
-        print("    [!] XSport aktif domain bulunamadı.")
-        
+        except Exception as e: print(f"[!] XSport hatası: {e}")
+    else: print("    [!] XSport aktif domain bulunamadı.")
     return results
 
-# --- 3. NETSPOR ---
+# --- 3. NETSPOR (GÜNCEL AKILLI TARAYICI) ---
 def fetch_netspor():
-    print("[*] Netspor taranıyor...")
+    print("[*] Netspor taranıyor (Akıllı Bot Devrede)...")
     results =[]
-    source_url = "https://netspor-amp.xyz/"
-    stream_base = "https://andro.adece12.sbs/checklist/" 
+    base_domain = "https://netsporcoamp.xyz"
+    
     try:
-        res = requests.get(source_url, headers=HEADERS, timeout=10)
+        res = requests.get(base_domain, headers=HEADERS, timeout=10)
         res.encoding = 'utf-8'
         soup = BeautifulSoup(res.text, 'html.parser')
+        
+        items_to_fetch =[]
+        
+        # Olası Senaryo 1: A etiketleri içindeki linkler
+        for a in soup.find_all('a', href=True):
+            href = a['href']
+            # Uygulama indirme, sosyal medya linklerini vs atla
+            if any(skip in href.lower() for skip in['whatsapp', 't.me', 'twitter', 'instagram', '#', 'apk']): continue
+            if 'kanal' in href or 'izle' in href or 'yayin' in href or 'play' in href:
+                title = a.get_text(strip=True)
+                if not title:
+                    div = a.find('div')
+                    if div: title = div.get_text(strip=True)
+                if title and len(title) > 2:
+                    link = href if href.startswith('http') else f"{base_domain.rstrip('/')}/{href.lstrip('/')}"
+                    items_to_fetch.append({"title": title, "link": link})
+                    
+        # Olası Senaryo 2: JS onclick ile çalışanlar
+        for div in soup.find_all('div', onclick=True):
+            onclick = div['onclick']
+            m_url = re.search(r'location\.href\s*=\s*[\'"]([^\'"]+)[\'"]', onclick)
+            if m_url:
+                href = m_url.group(1)
+                title = div.get_text(strip=True)
+                if title and len(title) > 2:
+                    link = href if href.startswith('http') else f"{base_domain.rstrip('/')}/{href.lstrip('/')}"
+                    items_to_fetch.append({"title": title, "link": link})
+
+        # Olası Senaryo 3: Eski Tema Option (Div) Yapısı
         for div in soup.find_all('div', class_='mac', option=True):
             sid = div.get('option')
             t_div = div.find('div', class_='match-takimlar')
-            if not sid or not t_div: continue
-            title = t_div.get_text(strip=True)
-            group = "CANLI TV KANALLARI" if div.find_parent('div', id='kontrolPanelKanallar') else "Günün Maçları"
-            if group == "Günün Maçları":
+            if sid and t_div:
+                title = t_div.get_text(strip=True)
                 alt = div.find('div', class_='match-alt')
                 if alt: title = f"{title} ({alt.get_text(' | ', strip=True)})"
-            final_url = WORKING_BS1_URL if sid == "androstreamlivebs1" else f"{stream_base}{sid}.m3u8"
-            results.append({"name": f"NET - {title}", "url": final_url, "group": f"NETSPOR {group.upper()}", "ref": source_url, "logo": ""})
-    except: pass
+                
+                link = f"{base_domain}/canli-mac-izle/{sid}"
+                items_to_fetch.append({"title": title, "link": link})
+
+        # Linkleri temizle ve tekilleştir
+        unique_items =[]
+        seen = set()
+        for item in items_to_fetch:
+            # Boşlukları temizle
+            t = re.sub(r'\s+', ' ', item["title"]).strip()
+            # "Giriş, İletişim" gibi menü linklerini alma
+            if t not in seen and not any(skip in t.lower() for skip in['uygulama', 'telegram', 'giriş', 'iletişim']):
+                seen.add(t)
+                item["title"] = t
+                unique_items.append(item)
+
+        # Paralel İşlem: Tüm sayfalara botu sokarak asıl linki çek
+        def process_item(item):
+            m3u8 = extract_m3u8_from_page(item["link"])
+            if m3u8:
+                group = "NETSPOR KANALLARI" if any(k in item["title"].upper() for k in["BEIN", "SPOR", "TV", "EURO", "SMART"]) else "NETSPOR CANLI MAÇLAR"
+                return {
+                    "name": f"NET - {item['title']}",
+                    "url": m3u8,
+                    "group": group,
+                    "ref": item["link"],
+                    "logo": ""
+                }
+            return None
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+            futures =[executor.submit(process_item, it) for it in unique_items]
+            for future in concurrent.futures.as_completed(futures):
+                r = future.result()
+                if r: results.append(r)
+                    
+        print(f"    [+] Netspor Botu {len(results)} yayın buldu.")
+    except Exception as e:
+        print(f"[!] Netspor hatası: {e}")
+        
     return results
 
-# --- 4. ATOM SPOR ---
+# --- 4. ATOM SPOR (GÜNCEL AKILLI TARAYICI) ---
 def fetch_atom_spor():
-    print("[*] AtomSpor (VIP) kanalları ekleniyor...")
+    print("[*] AtomSpor taranıyor (Akıllı Bot Devrede)...")
     results =[]
-    base_url = "https://hlssssss.volepartigo.workers.dev/https://corestream.ronaldovurdu.help//hls/"
+    base_domain = "https://atomsportv501.top"
     atom_logo = "https://hizliresim.com/gm50rk9b"
     
     channels =[
@@ -193,23 +306,38 @@ def fetch_atom_spor():
         ("Tivibu Spor 3", "tivibu-spor-3"), ("Smart Spor", "smart-spor"),
         ("TV 8.5", "tv-8-5"), ("Bein Sports Haber", "bein-sports-haber")
     ]
-    
-    for name, cid in channels:
-        results.append({
+
+    def fetch_single(item):
+        name, cid = item
+        # Ortak m3u8 çıkarıcı (bot) fonksiyonu çağırıyoruz
+        m3u8 = extract_m3u8_from_page(f"{base_domain}/kanal/{cid}")
+        if not m3u8: 
+            m3u8 = f"https://tv.atomspor.workers.dev/?ID={cid}"
+            
+        return {
             "name": f"ATOM - {name}",
-            "url": f"{base_url}{cid}.m3u8",
+            "url": m3u8,
             "group": "ATOM SPOR (VIP)",
             "logo": atom_logo,
-            "ref": "https://atomsportv485.top/"
-        })
+            "ref": base_domain
+        }
+        
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        futures =[executor.submit(fetch_single, ch) for ch in channels]
+        for future in concurrent.futures.as_completed(futures):
+            results.append(future.result())
+            
+    # Listeleme Düzeni
+    order_map = {f"ATOM - {ch[0]}": i for i, ch in enumerate(channels)}
+    results.sort(key=lambda x: order_map.get(x["name"], 999))
+
     return results
 
 # --- 5. TARAFTARIUM (ESKİ ARDASPOR YERİNE) ---
 def fetch_taraftarium_ozel():
     print("[*] Taraftarium kanalları ekleniyor...")
-    results = []
+    results =[]
     
-    # Ana Liste (Mevcut Linkleriniz)
     channels =[
         ("Bein Sports 1", "https://deathless.pantonum1.workers.dev/taraftarium.m3u8"),
         ("Bein Sports 2", "https://deathless.pantonum1.workers.dev/b2.m3u8"),
@@ -228,8 +356,6 @@ def fetch_taraftarium_ozel():
         ("Tivibu Spor 4", "https://deathless.pantonum1.workers.dev/t4.m3u8"),
         ("Eurosport 1", "https://deathless.pantonum1.workers.dev/eu1.m3u8"),
         ("Eurosport 2", "https://deathless.pantonum1.workers.dev/eu2.m3u8"),
-        
-        # İkinci Mesajınızda Gönderdiğiniz Yedek Liste
         ("B1 ydk", "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MVTMCC4UTAZVDT/6817/index.m3u8"),
         ("B2 ydk", "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MVTMCC4UTAZVDT/6818/index.m3u8"),
         ("B3 ydk", "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MVTMCC4UTAZVDT/6821/index.m3u8"),
@@ -261,13 +387,7 @@ def fetch_inadina_tv():
     ]
     
     for cid, cname in channels:
-        results.append({
-            "name": cname,
-            "url": f"{base_worker}/{cid}.m3u8",
-            "group": "INADINA TV (WORKER)",
-            "logo": "https://hizliresim.com/gm50rk9",
-            "ref": ""
-        })
+        results.append({"name": cname, "url": f"{base_worker}/{cid}.m3u8", "group": "INADINA TV (WORKER)", "logo": "https://hizliresim.com/gm50rk9", "ref": ""})
     return results
 
 # --- 7. TARAFTARIUM24 ---
@@ -290,15 +410,8 @@ def fetch_taraftarium():
                     if slug and slug not in found_slugs:
                         found_slugs.add(slug)
                         name = slug.replace("-", " ").upper()
-                        results.append({
-                            "name": f"TRF - {name}",
-                            "url": stream_template.format(slug=slug),
-                            "group": "TARAFTARIUM24",
-                            "logo": "",
-                            "ref": base_url
-                        })
-    except Exception as e:
-        print(f"[!] Taraftarium hatası: {e}")
+                        results.append({"name": f"TRF - {name}", "url": stream_template.format(slug=slug), "group": "TARAFTARIUM24", "logo": "", "ref": base_url})
+    except Exception as e: print(f"[!] Taraftarium hatası: {e}")
     return results
 
 # --- 8. SELÇUKSPOR ---
@@ -341,14 +454,12 @@ def main():
     all_streams =[]
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
-    # En öne eklenecek kaynaklar (Sırasıyla: Andro, Xsport, Netspor)
+    # Tüm botların tetiklenmesi
     all_streams.extend(fetch_andro_nodes())
     all_streams.extend(fetch_xsport())
-    all_streams.extend(fetch_netspor())
-    
-    # Kalan kaynaklar
-    all_streams.extend(fetch_atom_spor())
-    all_streams.extend(fetch_taraftarium_ozel())  # <-- ArdaSpor yerine eklendi
+    all_streams.extend(fetch_netspor())         # <-- Yeni Akıllı Netspor
+    all_streams.extend(fetch_atom_spor())       # <-- Yeni Akıllı AtomSpor
+    all_streams.extend(fetch_taraftarium_ozel())  
     all_streams.extend(fetch_inadina_tv())
     all_streams.extend(fetch_taraftarium())
     all_streams.extend(fetch_selcuk_sporcafe())
