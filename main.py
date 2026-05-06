@@ -21,12 +21,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 def extract_m3u8_from_page(url, ref=None):
     try:
         headers = HEADERS.copy()
-        if ref: 
-            headers["Referer"] = ref
-            # Referer varsa Origin'i de otomatik oluşturup ekliyoruz (Koruma aşmak için)
-            parsed_uri = urllib.parse.urlparse(ref)
-            headers["Origin"] = '{uri.scheme}://{uri.netloc}'.format(uri=parsed_uri)
-
+        if ref: headers["Referer"] = ref
         res = requests.get(url, headers=headers, timeout=10)
         
         def find_m3u8(text, base_url):
@@ -201,20 +196,15 @@ def fetch_xsport():
         except Exception as e: pass
     return results
 
-# --- 3. NETSPOR (GÜNCELLENDİ: ORIGIN & REFERER KORUMASI AŞICI) ---
+# --- 3. NETSPOR (ÜÇ KATMANLI KORUMA AŞICI & GARANTİ YEDEK) ---
 def fetch_netspor():
-    print("[*] Netspor taranıyor (Gelişmiş Referer/Origin Koruması Devrede)...")
+    print("[*] Netspor taranıyor (3 Katmanlı Güvenlik Ağı Devrede)...")
     results =[]
     base_domain = "https://netsporcoamp.xyz"
     stream_base = "https://andro.adece12.sbs/checklist/" 
     
-    # Netspor'un HTML kaynağını çekerken de bu başlıkları kullanıyoruz
-    req_headers = HEADERS.copy()
-    req_headers["Referer"] = f"{base_domain}/"
-    req_headers["Origin"] = base_domain
-    
     try:
-        res = requests.get(base_domain, headers=req_headers, timeout=10)
+        res = requests.get(base_domain, headers=HEADERS, timeout=10)
         res.encoding = 'utf-8'
         soup = BeautifulSoup(res.text, 'html.parser')
         
@@ -229,20 +219,9 @@ def fetch_netspor():
                 
                 if title and len(title) > 2:
                     title = re.sub(r'\s+', ' ', title).strip()
-                    raw_url = WORKING_BS1_URL if sid == "androstreamlivebs1" else f"{stream_base}{sid}.m3u8"
-                    
-                    # 1. ÇÖZÜM: IPTV oynatıcılarının (Tivimate, vb.) native algıladığı pipe formatı
-                    final_url = f"{raw_url}|Referer={base_domain}/&Origin={base_domain}&User-Agent={HEADERS['User-Agent']}"
-                    
+                    final_url = WORKING_BS1_URL if sid == "androstreamlivebs1" else f"{stream_base}{sid}.m3u8"
                     group = "NETSPOR CANLI MAÇLAR" if " - " in title else "NETSPOR KANALLARI"
-                    results.append({
-                        "name": f"NET - {title}", 
-                        "url": final_url, 
-                        "group": group, 
-                        "ref": f"{base_domain}/", 
-                        "origin": base_domain, # M3U'ya EXTVLCOPT olarak da yazmak için origin ekliyoruz
-                        "logo": ""
-                    })
+                    results.append({"name": f"NET - {title}", "url": final_url, "group": group, "ref": base_domain, "logo": ""})
 
         # KATMAN 2: Akıllı Bot ile linklerin içine sızma
         if not results:
@@ -261,23 +240,10 @@ def fetch_netspor():
                         items_to_fetch.append({"title": title, "link": link})
                         
             def process_item(item):
-                m3u8 = extract_m3u8_from_page(item["link"], ref=f"{base_domain}/")
+                m3u8 = extract_m3u8_from_page(item["link"], ref=base_domain)
                 if m3u8:
-                    group = "NETSPOR KANALLARI" if any(k in item["title"].upper() for k in["BEIN", "SPOR", "TV", "EURO", "SMART"]) else "NETSPOR CANLI MAÇLAR"
-                    
-                    final_m3u8 = m3u8
-                    # Eğer halihazırda pipe header yoksa ekle
-                    if "|" not in final_m3u8:
-                        final_m3u8 = f"{m3u8}|Referer={base_domain}/&Origin={base_domain}&User-Agent={HEADERS['User-Agent']}"
-
-                    return {
-                        "name": f"NET - {item['title']}", 
-                        "url": final_m3u8, 
-                        "group": group, 
-                        "ref": f"{base_domain}/", 
-                        "origin": base_domain,
-                        "logo": ""
-                    }
+                    group = "NETSPOR KANALLARI" if any(k in item["title"].upper() for k in ["BEIN", "SPOR", "TV", "EURO", "SMART"]) else "NETSPOR CANLI MAÇLAR"
+                    return {"name": f"NET - {item['title']}", "url": m3u8, "group": group, "ref": base_domain, "logo": ""}
                 return None
 
             with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
@@ -301,14 +267,12 @@ def fetch_netspor():
                 ("A Spor", "androstreamliveaspor"), ("Euro Sport 1", "androstreamlivees1")
             ]
             for c_name, c_id in netspor_sabitler:
-                raw_url = WORKING_BS1_URL if c_id == "androstreamlivebs1" else f"{stream_base}{c_id}.m3u8"
-                final_url = f"{raw_url}|Referer={base_domain}/&Origin={base_domain}&User-Agent={HEADERS['User-Agent']}"
+                f_url = WORKING_BS1_URL if c_id == "androstreamlivebs1" else f"{stream_base}{c_id}.m3u8"
                 results.append({
                     "name": f"NET - {c_name}",
-                    "url": final_url,
+                    "url": f_url,
                     "group": "NETSPOR KANALLARI (YEDEK)",
-                    "ref": f"{base_domain}/",
-                    "origin": base_domain,
+                    "ref": base_domain,
                     "logo": ""
                 })
                 
@@ -462,7 +426,7 @@ def main():
     
     all_streams.extend(fetch_andro_nodes())
     all_streams.extend(fetch_xsport())
-    all_streams.extend(fetch_netspor())           # <-- Origin & Referer Eklendi
+    all_streams.extend(fetch_netspor())           # <-- Garantili Netspor Modülü
     all_streams.extend(fetch_atom_spor())
     all_streams.extend(fetch_taraftarium_ozel())  
     all_streams.extend(fetch_inadina_tv())
@@ -479,16 +443,8 @@ def main():
     for s in all_streams:
         logo_attr = f' tvg-logo="{s["logo"]}"' if s.get("logo") else ""
         content += f'#EXTINF:-1 group-title="{s["group"]}"{logo_attr},{s["name"]}\n'
-        
-        # 2. ÇÖZÜM: VLC ve HTTP Parser bazlı playerlar için native Origin ve Referer başlıkları
         if s.get("ref"): 
             content += f'#EXTVLCOPT:http-referrer={s["ref"]}\n'
-            content += f'#EXTHTTP:{"Referer"}:{s["ref"]}\n'
-            
-        if s.get("origin"):
-            content += f'#EXTVLCOPT:http-origin={s["origin"]}\n'
-            content += f'#EXTHTTP:{"Origin"}:{s["origin"]}\n'
-            
         content += f'#EXTVLCOPT:http-user-agent={HEADERS["User-Agent"]}\n'
         content += f'#EXTHTTP:{"User-Agent"}:{HEADERS["User-Agent"]}\n'
         content += f'{s["url"]}\n'
