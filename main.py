@@ -15,34 +15,36 @@ WORKING_BS1_URL = "https://andro.adece12.sbs/checklist/receptestt.m3u8"
 # SSL Uyarılarını gizle
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-
 # ==========================================
 #      ORTAK AKILLI M3U8 ÇÖZÜCÜ (BOT)
 # ==========================================
 def extract_m3u8_from_page(url, ref=None):
     """
-    Verilen URL'nin içine girip iframe veya Base64 ile şifrelenmiş
-    m3u8 yayınlarını tespit ederek saf linki çeken akıllı bot motoru.
+    Verilen URL'nin içine girip iç içe geçmiş Iframe'ler (katmanlar) 
+    veya Base64 ile şifrelenmiş m3u8 yayınlarını tespit eden Derin Tarama Motoru.
     """
     try:
         headers = HEADERS.copy()
         if ref: headers["Referer"] = ref
         res = requests.get(url, headers=headers, timeout=10)
         
-        def find_m3u8(text):
-            # 1. Normal link ara
+        def find_m3u8(text, base_url):
+            # 1. Normal tam URL ara
             m = re.search(r'(https?://[^\s\'">]+\.m3u8[^\s\'">]*)', text)
             if m: return m.group(1)
             
-            # 2. URL Encoded link ara
+            # 2. Site içi göreceli (relative) URL ara örn: "/hls/stream.m3u8"
+            m_rel = re.search(r'[\'"](/[^\s\'">]+\.m3u8[^\s\'">]*)[\'"]', text)
+            if m_rel:
+                parsed_uri = urllib.parse.urlparse(base_url)
+                domain = '{uri.scheme}://{uri.netloc}'.format(uri=parsed_uri)
+                return domain + m_rel.group(1)
+            
+            # 3. URL Encoded (Boşlukları/Karakterleri şifrelenmiş) link ara
             unescaped_m = re.search(r'(https%3A%2F%2F[^\s\'">]+%2Em3u8[^\s\'">]*)', text)
             if unescaped_m: return urllib.parse.unquote(unescaped_m.group(1))
             
-            # 3. JS Değişkenlerinde ara
-            m_src = re.search(r'source\s*:\s*[\'"]([^\'"]+\.m3u8[^\'"]*)[\'"]', text)
-            if m_src: return m_src.group(1)
-            
-            # 4. Standart Base64 (atob) Şifrelemesini çöz
+            # 4. Açık atob (Base64) Şifrelemesini çöz
             for b64 in re.findall(r'atob\([\'"]([A-Za-z0-9+/=]+)[\'"]\)', text):
                 try:
                     decoded = base64.b64decode(b64).decode('utf-8')
@@ -50,7 +52,7 @@ def extract_m3u8_from_page(url, ref=None):
                     if m_dec: return m_dec.group(1)
                 except: pass
                 
-            # 5. Gizlenmiş Base64 Metinlerini (Uzun Stringler) çöz
+            # 5. JS İçine Gizlenmiş Uzun Base64 Metinlerini Çöz
             for b64 in re.findall(r'[\'"]([A-Za-z0-9+/=]{40,})[\'"]', text):
                 try:
                     decoded = base64.b64decode(b64).decode('utf-8')
@@ -60,22 +62,32 @@ def extract_m3u8_from_page(url, ref=None):
                 except: pass
             return None
 
-        # AŞAMA 1: Oynatıcı Iframe'inin İçine Girme
-        iframe_m = re.search(r'<iframe[^>]+src=["\'](https?://[^"\']+)["\']', res.text)
-        if iframe_m:
-            iframe_src = iframe_m.group(1)
-            r2 = requests.get(iframe_src, headers={**HEADERS, "Referer": url}, timeout=10)
-            found = find_m3u8(r2.text)
-            if found: return found
-            
-        # AŞAMA 2: Eğer iframe yoksa doğrudan ana sayfa içinde ara
-        found = find_m3u8(res.text)
+        # AŞAMA 1: Girdiğimiz ana sayfanın kendi kodlarında m3u8 ara
+        found = find_m3u8(res.text, url)
         if found: return found
+
+        # AŞAMA 2: Ana sayfadaki tüm oynatıcıların (Iframe) içine sız
+        iframes = re.findall(r'<iframe[^>]+src=["\'](https?://[^"\']+)["\']', res.text)
+        for iframe_src in iframes:
+            try:
+                r2 = requests.get(iframe_src, headers={**HEADERS, "Referer": url}, timeout=10)
+                found = find_m3u8(r2.text, iframe_src)
+                if found: return found
+                
+                # AŞAMA 3: Eğer Iframe içinde bir koruma/Iframe daha varsa ona da sız
+                sub_iframes = re.findall(r'<iframe[^>]+src=["\'](https?://[^"\']+)["\']', r2.text)
+                for sub in sub_iframes:
+                    try:
+                        r3 = requests.get(sub, headers={**HEADERS, "Referer": iframe_src}, timeout=10)
+                        found_sub = find_m3u8(r3.text, sub)
+                        if found_sub: return found_sub
+                    except: continue
+                    
+            except: continue
             
     except Exception:
         pass
     return None
-
 
 # ==========================================
 #      1. BÖLÜM: YAYINLARI TOPLAMA
@@ -202,95 +214,120 @@ def fetch_xsport():
     else: print("    [!] XSport aktif domain bulunamadı.")
     return results
 
-# --- 3. NETSPOR (GÜNCEL AKILLI TARAYICI) ---
+# --- 3. NETSPOR (GELİŞMİŞ AKILLI BOT) ---
 def fetch_netspor():
-    print("[*] Netspor taranıyor (Akıllı Bot Devrede)...")
+    print("[*] Netspor taranıyor (Gelişmiş Akıllı Bot Devrede)...")
     results =[]
     base_domain = "https://netsporcoamp.xyz"
+    items_to_fetch =[]
+    seen_links = set()
     
     try:
         res = requests.get(base_domain, headers=HEADERS, timeout=10)
         res.encoding = 'utf-8'
         soup = BeautifulSoup(res.text, 'html.parser')
         
-        items_to_fetch =[]
-        
-        # Olası Senaryo 1: A etiketleri içindeki linkler
+        # 1. Aşama: Sitedeki tüm mantıklı linkleri ayrıştır
         for a in soup.find_all('a', href=True):
             href = a['href']
-            # Uygulama indirme, sosyal medya linklerini vs atla
-            if any(skip in href.lower() for skip in['whatsapp', 't.me', 'twitter', 'instagram', '#', 'apk']): continue
-            if 'kanal' in href or 'izle' in href or 'yayin' in href or 'play' in href:
-                title = a.get_text(strip=True)
-                if not title:
-                    div = a.find('div')
-                    if div: title = div.get_text(strip=True)
-                if title and len(title) > 2:
-                    link = href if href.startswith('http') else f"{base_domain.rstrip('/')}/{href.lstrip('/')}"
+            # Uygulama, sosyal medya veya geçersiz linkleri atla
+            if any(skip in href.lower() for skip in['whatsapp', 't.me', 'twitter', 'instagram', '#', 'apk', 'mailto:']): continue
+            
+            # Dış site linklerini atla
+            if href.startswith('http') and 'netspor' not in href.lower(): continue
+            
+            title = a.get_text(strip=True)
+            if not title:
+                div = a.find('div')
+                if div: title = div.get_text(strip=True)
+                
+            if title and len(title) > 2:
+                # Menü isimlerini atla
+                if any(skip in title.lower() for skip in['uygulama', 'telegram', 'iletişim', 'giriş', 'ana sayfa']): continue
+                
+                link = href if href.startswith('http') else f"{base_domain.rstrip('/')}/{href.lstrip('/')}"
+                if link not in seen_links:
+                    seen_links.add(link)
                     items_to_fetch.append({"title": title, "link": link})
                     
-        # Olası Senaryo 2: JS onclick ile çalışanlar
-        for div in soup.find_all('div', onclick=True):
-            onclick = div['onclick']
+        # 2. Aşama: Onclick ile çalışan gizli linkleri topla
+        for tag in soup.find_all(['div', 'li', 'tr'], onclick=True):
+            onclick = tag['onclick']
             m_url = re.search(r'location\.href\s*=\s*[\'"]([^\'"]+)[\'"]', onclick)
             if m_url:
                 href = m_url.group(1)
-                title = div.get_text(strip=True)
+                if any(skip in href.lower() for skip in['whatsapp', 't.me', 'twitter', 'instagram', '#']): continue
+                title = tag.get_text(strip=True)
                 if title and len(title) > 2:
                     link = href if href.startswith('http') else f"{base_domain.rstrip('/')}/{href.lstrip('/')}"
+                    if link not in seen_links:
+                        seen_links.add(link)
+                        items_to_fetch.append({"title": title, "link": link})
+
+        # 3. Aşama: Olası site şablon değişikliklerine karşı "Sabit Kanallar" yedeği
+        if len(items_to_fetch) < 5:
+            print("    [!] Dinamik link az bulundu, Netspor yedek kanal taraması başlatılıyor...")
+            fallback_channels =[
+                ("BeIN Sports 1", "beinsports1"), ("BeIN Sports 2", "beinsports2"),
+                ("BeIN Sports 3", "beinsports3"), ("BeIN Sports 4", "beinsports4"),
+                ("BeIN Sports 5", "beinsports5"), ("BeIN Sports Max 1", "beinsportsmax1"),
+                ("BeIN Sports Max 2", "beinsportsmax2"), ("S Sport 1", "ssport"),
+                ("S Sport 2", "ssport2"), ("S Sport Plus", "ssportplus"),
+                ("Tivibu Spor 1", "tivibuspor1"), ("Tivibu Spor 2", "tivibuspor2"),
+                ("Tivibu Spor 3", "tivibuspor3"), ("Smart Spor 1", "smartspor"),
+                ("Smart Spor 2", "smartspor2"), ("Exxen Spor", "exxen"),
+                ("TRT Spor", "trtspor"), ("A Spor", "aspor")
+            ]
+            for title, cid in fallback_channels:
+                link = f"{base_domain}/{cid}"
+                if link not in seen_links:
+                    seen_links.add(link)
                     items_to_fetch.append({"title": title, "link": link})
 
-        # Olası Senaryo 3: Eski Tema Option (Div) Yapısı
-        for div in soup.find_all('div', class_='mac', option=True):
-            sid = div.get('option')
-            t_div = div.find('div', class_='match-takimlar')
-            if sid and t_div:
-                title = t_div.get_text(strip=True)
-                alt = div.find('div', class_='match-alt')
-                if alt: title = f"{title} ({alt.get_text(' | ', strip=True)})"
-                
-                link = f"{base_domain}/canli-mac-izle/{sid}"
-                items_to_fetch.append({"title": title, "link": link})
-
-        # Linkleri temizle ve tekilleştir
-        unique_items =[]
-        seen = set()
-        for item in items_to_fetch:
-            # Boşlukları temizle
-            t = re.sub(r'\s+', ' ', item["title"]).strip()
-            # "Giriş, İletişim" gibi menü linklerini alma
-            if t not in seen and not any(skip in t.lower() for skip in['uygulama', 'telegram', 'giriş', 'iletişim']):
-                seen.add(t)
-                item["title"] = t
-                unique_items.append(item)
-
-        # Paralel İşlem: Tüm sayfalara botu sokarak asıl linki çek
         def process_item(item):
+            # 1. Tahmin: Doğrudan Linkin içine girip yayın ara
             m3u8 = extract_m3u8_from_page(item["link"])
+            
+            # 2. Tahmin: Link yapısı /kanal/id şeklinde olabilir
+            if not m3u8 and "/kanal/" not in item["link"] and base_domain in item["link"]:
+                alt_link = item["link"].replace(f"{base_domain}/", f"{base_domain}/kanal/")
+                m3u8 = extract_m3u8_from_page(alt_link)
+                
             if m3u8:
-                group = "NETSPOR KANALLARI" if any(k in item["title"].upper() for k in["BEIN", "SPOR", "TV", "EURO", "SMART"]) else "NETSPOR CANLI MAÇLAR"
+                t = re.sub(r'\s+', ' ', item["title"]).strip()
+                group = "NETSPOR KANALLARI" if any(k in t.upper() for k in ["BEIN", "SPOR", "TV", "EURO", "SMART"]) else "NETSPOR CANLI MAÇLAR"
                 return {
-                    "name": f"NET - {item['title']}",
+                    "name": f"NET - {t}",
                     "url": m3u8,
                     "group": group,
-                    "ref": item["link"],
+                    "ref": base_domain,
                     "logo": ""
                 }
             return None
 
-        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-            futures =[executor.submit(process_item, it) for it in unique_items]
+        # Temiz ve benzersiz bir isim sırası oluştur
+        unique_tasks =[]
+        seen_titles = set()
+        for it in items_to_fetch:
+            t_clean = re.sub(r'\s+', ' ', it["title"]).strip()
+            if t_clean not in seen_titles:
+                seen_titles.add(t_clean)
+                unique_tasks.append(it)
+
+        # Tüm bulunan linklerin içini eşzamanlı olarak tara
+        with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
+            futures =[executor.submit(process_item, it) for it in unique_tasks]
             for future in concurrent.futures.as_completed(futures):
                 r = future.result()
                 if r: results.append(r)
                     
-        print(f"    [+] Netspor Botu {len(results)} yayın buldu.")
+        print(f"    [+] Netspor Botu başarıyla {len(results)} canlı yayın/kanal buldu.")
     except Exception as e:
         print(f"[!] Netspor hatası: {e}")
         
     return results
 
-# --- 4. ATOM SPOR (GÜNCEL AKILLI TARAYICI) ---
+# --- 4. ATOM SPOR (AKILLI TARAYICI) ---
 def fetch_atom_spor():
     print("[*] AtomSpor taranıyor (Akıllı Bot Devrede)...")
     results =[]
@@ -309,7 +346,6 @@ def fetch_atom_spor():
 
     def fetch_single(item):
         name, cid = item
-        # Ortak m3u8 çıkarıcı (bot) fonksiyonu çağırıyoruz
         m3u8 = extract_m3u8_from_page(f"{base_domain}/kanal/{cid}")
         if not m3u8: 
             m3u8 = f"https://tv.atomspor.workers.dev/?ID={cid}"
@@ -327,13 +363,12 @@ def fetch_atom_spor():
         for future in concurrent.futures.as_completed(futures):
             results.append(future.result())
             
-    # Listeleme Düzeni
     order_map = {f"ATOM - {ch[0]}": i for i, ch in enumerate(channels)}
     results.sort(key=lambda x: order_map.get(x["name"], 999))
 
     return results
 
-# --- 5. TARAFTARIUM (ESKİ ARDASPOR YERİNE) ---
+# --- 5. TARAFTARIUM ---
 def fetch_taraftarium_ozel():
     print("[*] Taraftarium kanalları ekleniyor...")
     results =[]
@@ -454,11 +489,10 @@ def main():
     all_streams =[]
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
-    # Tüm botların tetiklenmesi
     all_streams.extend(fetch_andro_nodes())
     all_streams.extend(fetch_xsport())
-    all_streams.extend(fetch_netspor())         # <-- Yeni Akıllı Netspor
-    all_streams.extend(fetch_atom_spor())       # <-- Yeni Akıllı AtomSpor
+    all_streams.extend(fetch_netspor())         # <-- Yeniden Yazılmış Derin Netspor Botu
+    all_streams.extend(fetch_atom_spor())
     all_streams.extend(fetch_taraftarium_ozel())  
     all_streams.extend(fetch_inadina_tv())
     all_streams.extend(fetch_taraftarium())
