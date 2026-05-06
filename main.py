@@ -83,10 +83,10 @@ def extract_m3u8_from_page(url, ref=None):
 # --- 1. ANDRO PANEL ---
 def fetch_andro_nodes():
     print("[*] Andro-Panel taranıyor...")
-    results =[]
+    results = []
     PROXY = "https://proxy.freecdn.workers.dev/?url="
     START = "https://taraftariumizle.org"
-    channels =[
+    channels = [
         ("androstreamlivebiraz1", 'TR:beIN Sport 1 HD'), ("androstreamlivebs1", 'TR:beIN Sport 1 HD'),
         ("androstreamlivebs2", 'TR:beIN Sport 2 HD'), ("androstreamlivebs3", 'TR:beIN Sport 3 HD'),
         ("androstreamlivebs4", 'TR:beIN Sport 4 HD'), ("androstreamlivebs5", 'TR:beIN Sport 5 HD'),
@@ -125,9 +125,9 @@ def fetch_andro_nodes():
                             bm = re.search(r'baseUrls\s*=\s*\[(.*?)\]', h3, re.DOTALL)
                             if bm:
                                 cl = bm.group(1).replace('"', '').replace("'", "").replace("\n", "").replace("\r", "")
-                                srvs =[x.strip() for x in cl.split(',') if x.strip().startswith("http")]
+                                srvs = [x.strip() for x in cl.split(',') if x.strip().startswith("http")]
                                 srvs = list(set(srvs)) 
-                                active_servers =[]
+                                active_servers = []
                                 tid = "androstreamlivebs1" 
                                 for sv in srvs:
                                     sv = sv.rstrip('/')
@@ -149,11 +149,11 @@ def fetch_andro_nodes():
 # --- 2. XSPORTV ---
 def fetch_xsport():
     print("[*] XSport taranıyor...")
-    results =[]
+    results = []
     base_pattern = "https://www.xsportv{}.xyz/"
     logo = "https://i.hizliresim.com/b6xqz10.jpg"
     
-    channel_ids =[
+    channel_ids = [
         "xbeinsports-1", "xbeinsports-2", "xbeinsports-3", "xbeinsports-4", "xbeinsports-5",
         "xbeinsportsmax-1", "xbeinsportsmax-2", "xtivibuspor-1", "xtivibuspor-2",
         "xtivibuspor-3", "xtivibuspor-4", "xssport", "xssport2", "xtabiispor1",
@@ -169,7 +169,7 @@ def fetch_xsport():
 
     def find_active_domain():
         with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
-            futures =[executor.submit(check_domain, i) for i in range(56, 1000)]
+            futures = [executor.submit(check_domain, i) for i in range(56, 1000)]
             for future in concurrent.futures.as_completed(futures):
                 result = future.result()
                 if result: return result
@@ -201,7 +201,7 @@ def fetch_xsport():
 # --- 3. NETSPOR (3 KATMANLI GÜVENLİK) ---
 def fetch_netspor():
     print("[*] Netspor taranıyor...")
-    results =[]
+    results = []
     base_domain = "https://netsporcoamp.xyz"
     stream_base = "https://andro.evrenesoglu59.lat/checklist/" 
     
@@ -227,14 +227,14 @@ def fetch_netspor():
 
         # KATMAN 2
         if not results:
-            items_to_fetch =[]
+            items_to_fetch = []
             seen_links = set()
             
             for a in soup.find_all('a', href=True):
                 href = a['href']
-                if any(skip in href.lower() for skip in['whatsapp', 't.me', 'twitter', 'instagram', '#', 'apk']): continue
+                if any(skip in href.lower() for skip in ['whatsapp', 't.me', 'twitter', 'instagram', '#', 'apk']): continue
                 title = a.get_text(strip=True)
-                if title and len(title) > 2 and not any(skip in title.lower() for skip in['uygulama', 'telegram', 'iletişim']):
+                if title and len(title) > 2 and not any(skip in title.lower() for skip in ['uygulama', 'telegram', 'iletişim']):
                     link = href if href.startswith('http') else f"{base_domain.rstrip('/')}/{href.lstrip('/')}"
                     if link not in seen_links:
                         seen_links.add(link)
@@ -243,19 +243,19 @@ def fetch_netspor():
             def process_item(item):
                 m3u8 = extract_m3u8_from_page(item["link"], ref=base_domain)
                 if m3u8:
-                    group = "NETSPOR KANALLARI" if any(k in item["title"].upper() for k in["BEIN", "SPOR", "TV", "EURO", "SMART"]) else "NETSPOR CANLI MAÇLAR"
+                    group = "NETSPOR KANALLARI" if any(k in item["title"].upper() for k in ["BEIN", "SPOR", "TV", "EURO", "SMART"]) else "NETSPOR CANLI MAÇLAR"
                     return {"name": f"NET - {item['title']}", "url": m3u8, "group": group, "ref": "https://taraftariumizle.org/", "logo": ""}
                 return None
 
             with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
-                futures =[executor.submit(process_item, it) for it in items_to_fetch]
+                futures = [executor.submit(process_item, it) for it in items_to_fetch]
                 for future in concurrent.futures.as_completed(futures):
                     r = future.result()
                     if r: results.append(r)
 
         # KATMAN 3 (YEDEK SİSTEM)
         if not results:
-            netspor_sabitler =[
+            netspor_sabitler = [
                 ("BeIN Sports 1", "androstreamlivebs1"), ("BeIN Sports 2", "androstreamlivebs2"),
                 ("BeIN Sports 3", "androstreamlivebs3"), ("BeIN Sports 4", "androstreamlivebs4"),
                 ("BeIN Sports 5", "androstreamlivebs5"), ("BeIN Sports Max 1", "androstreamlivebsm1"),
@@ -278,11 +278,11 @@ def fetch_netspor():
 # --- 4. ATOM SPOR ---
 def fetch_atom_spor():
     print("[*] AtomSpor taranıyor...")
-    results =[]
+    results = []
     base_domain = "https://atomsportv501.top"
     atom_logo = "https://hizliresim.com/gm50rk9b"
     
-    channels =[
+    channels = [
         ("Bein Sports 1", "bein-sports-1"), ("Bein Sports 2", "bein-sports-2"),
         ("Bein Sports 3", "bein-sports-3"), ("Bein Sports 4", "bein-sports-4"),
         ("Bein Sports 5", "bein-sports-5"), ("S Sport 1", "s-sport"),
@@ -299,7 +299,7 @@ def fetch_atom_spor():
         return {"name": f"ATOM - {name}", "url": m3u8, "group": "ATOM SPOR (VIP)", "logo": atom_logo, "ref": base_domain}
         
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-        futures =[executor.submit(fetch_single, ch) for ch in channels]
+        futures = [executor.submit(fetch_single, ch) for ch in channels]
         for future in concurrent.futures.as_completed(futures):
             results.append(future.result())
             
@@ -310,8 +310,8 @@ def fetch_atom_spor():
 # --- 5. TARAFTARIUM ---
 def fetch_taraftarium_ozel():
     print("[*] Taraftarium (Özel) kanalları ekleniyor...")
-    results =[]
-    channels =[
+    results = []
+    channels = [
         ("Bein Sports 1", "https://deathless.pantonum1.workers.dev/taraftarium.m3u8"),
         ("Bein Sports 2", "https://deathless.pantonum1.workers.dev/b2.m3u8"),
         ("Bein Sports 3", "https://deathless.pantonum1.workers.dev/b3.m3u8"),
@@ -338,15 +338,19 @@ def fetch_taraftarium_ozel():
         results.append({"name": name, "url": url, "group": "TARAFTARIUM", "logo": "", "ref": ""})
     return results
 
-# --- 6. SPOR PAS TV (ZİRVE ALTYAPISI) ---
+# --- 6. SPOR PAS TV (WORKER PROXY ALTYAPISI) ---
 def fetch_sporpastv():
-    print("[*] Spor Pas TV (Zirve Arka Plan Sunucusu) ekleniyor...")
-    results =[]
+    print("[*] Spor Pas TV (Worker Proxy üzerinden) ekleniyor...")
+    results = []
     
-    # Spor Pas TV'nin direkt arka planda kullandığı temiz yayın sunucusu
+    # Senin belirlediğin Cloudflare Worker adresi eklendi
+    WORKER_URL = "https://salamonline.burhantasci72.workers.dev/?url="
+    
     base_url = "https://inz.zirvedesin234.cfd"
+    # Sunucunun beklediği asıl referer
+    target_referer = "https://sporpastv2.live/" 
     
-    channels =[
+    channels = [
         ("BeIN Sports 1", "zirve"),
         ("BeIN Sports 2", "b2"),
         ("BeIN Sports 3", "b3"),
@@ -366,11 +370,21 @@ def fetch_sporpastv():
     ]
     
     for name, path in channels:
+        # Asıl gitmek istediğimiz m3u8 adresi
+        target_m3u8 = f"{base_url}/{path}/mono.m3u8"
+        
+        # M3U8 linkini ve referans adresini Worker'a parametre olarak veriyoruz
+        encoded_m3u8 = urllib.parse.quote(target_m3u8)
+        encoded_ref = urllib.parse.quote(target_referer)
+        
+        # Sonuç proxy adresi URL ile birleştiriliyor
+        final_proxy_url = f"{WORKER_URL}{encoded_m3u8}&ref={encoded_ref}"
+        
         results.append({
             "name": f"SPORPAS - {name}",
-            "url": f"{base_url}/{path}/mono.m3u8",
+            "url": final_proxy_url,
             "group": "SPOR PAS TV",
-            "ref": "https://sporpastv2.live/",
+            "ref": target_referer,
             "logo": ""
         })
         
@@ -379,7 +393,7 @@ def fetch_sporpastv():
 # --- 7. TARAFTARIUM24 ---
 def fetch_taraftarium():
     print("[*] Taraftarium24 (Canlı Maçlar) taranıyor...")
-    results =[]
+    results = []
     base_url = "https://taraftarium24bet.net"
     stream_template = "https://hls.freepalastne.workers.dev/https://corestream.ronaldovurdu.help//hls/{slug}.m3u8"
     try:
@@ -403,7 +417,7 @@ def fetch_taraftarium():
 def fetch_selcuk_sporcafe():
     print("[*] Selçukspor taranıyor...")
     results = []
-    selcuk_channels =[
+    selcuk_channels = [
         {"id": "selcukbeinsports1", "n": "BEIN SPORTS 1"}, {"id": "selcukbeinsports2", "n": "BEIN SPORTS 2"},
         {"id": "selcukbeinsports3", "n": "BEIN SPORTS 3"}, {"id": "selcukbeinsports4", "n": "BEIN SPORTS 4"},
         {"id": "selcukbeinsports5", "n": "BEIN SPORTS 5"}, {"id": "selcukbeinsportsmax1", "n": "BEIN MAX 1"},
@@ -440,7 +454,7 @@ def fetch_selcuk_sporcafe():
 # ==========================================
 
 def main():
-    all_streams =[]
+    all_streams = []
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
     all_streams.extend(fetch_andro_nodes())
@@ -448,7 +462,7 @@ def main():
     all_streams.extend(fetch_netspor())
     all_streams.extend(fetch_atom_spor())
     all_streams.extend(fetch_taraftarium_ozel())
-    all_streams.extend(fetch_sporpastv())          # <-- Tamamen Netspor (Yedek) mantığına dönüştürüldü
+    all_streams.extend(fetch_sporpastv())          
     all_streams.extend(fetch_taraftarium())
     all_streams.extend(fetch_selcuk_sporcafe())
     
@@ -472,7 +486,6 @@ def main():
             content += f'#EXTVLCOPT:http-origin={ref}\n'
         content += f'#EXTVLCOPT:http-user-agent={HEADERS["User-Agent"]}\n'
         
-        # Sadece saf ve temiz m3u8 URL'si eklenir
         content += f'{url}\n'
 
     with open(M3U_OUTPUT_FILE, "w", encoding="utf-8-sig") as f:
