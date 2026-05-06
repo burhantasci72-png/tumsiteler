@@ -198,7 +198,7 @@ def fetch_xsport():
         except Exception as e: pass
     return results
 
-# --- 3. NETSPOR (GÜNCELLENMİŞ YENİ DOMAIN) ---
+# --- 3. NETSPOR (3 KATMANLI GÜVENLİK) ---
 def fetch_netspor():
     print("[*] Netspor taranıyor...")
     results =[]
@@ -234,7 +234,7 @@ def fetch_netspor():
                 href = a['href']
                 if any(skip in href.lower() for skip in['whatsapp', 't.me', 'twitter', 'instagram', '#', 'apk']): continue
                 title = a.get_text(strip=True)
-                if title and len(title) > 2 and not any(skip in title.lower() for skip in['uygulama', 'telegram', 'iletişim']):
+                if title and len(title) > 2 and not any(skip in title.lower() for skip in ['uygulama', 'telegram', 'iletişim']):
                     link = href if href.startswith('http') else f"{base_domain.rstrip('/')}/{href.lstrip('/')}"
                     if link not in seen_links:
                         seen_links.add(link)
@@ -243,7 +243,7 @@ def fetch_netspor():
             def process_item(item):
                 m3u8 = extract_m3u8_from_page(item["link"], ref=base_domain)
                 if m3u8:
-                    group = "NETSPOR KANALLARI" if any(k in item["title"].upper() for k in ["BEIN", "SPOR", "TV", "EURO", "SMART"]) else "NETSPOR CANLI MAÇLAR"
+                    group = "NETSPOR KANALLARI" if any(k in item["title"].upper() for k in["BEIN", "SPOR", "TV", "EURO", "SMART"]) else "NETSPOR CANLI MAÇLAR"
                     return {"name": f"NET - {item['title']}", "url": m3u8, "group": group, "ref": "https://taraftariumizle.org/", "logo": ""}
                 return None
 
@@ -253,7 +253,7 @@ def fetch_netspor():
                     r = future.result()
                     if r: results.append(r)
 
-        # KATMAN 3 (YEDEK)
+        # KATMAN 3 (YEDEK SİSTEM)
         if not results:
             netspor_sabitler =[
                 ("BeIN Sports 1", "androstreamlivebs1"), ("BeIN Sports 2", "androstreamlivebs2"),
@@ -268,44 +268,150 @@ def fetch_netspor():
             ]
             for c_name, c_id in netspor_sabitler:
                 f_url = WORKING_BS1_URL if c_id == "androstreamlivebs1" else f"{stream_base}{c_id}.m3u8"
-                results.append({"name": f"NET - {c_name}", "url": f_url, "group": "NETSPOR KANALLARI", "ref": "https://taraftariumizle.org/", "logo": ""})
+                results.append({"name": f"NET - {c_name}", "url": f_url, "group": "NETSPOR KANALLARI (YEDEK)", "ref": "https://taraftariumizle.org/", "logo": ""})
                 
     except Exception as e:
         print(f"[!] Netspor hatası: {e}")
         
     return results
 
-# --- Kalan Modüller ---
+# --- 4. ATOM SPOR ---
 def fetch_atom_spor():
+    print("[*] AtomSpor taranıyor...")
     results =[]
     base_domain = "https://atomsportv501.top"
-    channels =[("Bein Sports 1", "bein-sports-1"), ("Bein Sports 2", "bein-sports-2"), ("Bein Sports 3", "bein-sports-3"), ("S Sport 1", "s-sport")]
-    for name, cid in channels:
+    atom_logo = "https://hizliresim.com/gm50rk9b"
+    
+    channels =[
+        ("Bein Sports 1", "bein-sports-1"), ("Bein Sports 2", "bein-sports-2"),
+        ("Bein Sports 3", "bein-sports-3"), ("Bein Sports 4", "bein-sports-4"),
+        ("Bein Sports 5", "bein-sports-5"), ("S Sport 1", "s-sport"),
+        ("S Sport 2", "s-sport-2"), ("S Sport Plus", "ssport-plus"),
+        ("Tivibu Spor 1", "tivibu-spor-1"), ("Tivibu Spor 2", "tivibu-spor-2"),
+        ("Tivibu Spor 3", "tivibu-spor-3"), ("Smart Spor", "smart-spor"),
+        ("TV 8.5", "tv-8-5"), ("Bein Sports Haber", "bein-sports-haber")
+    ]
+
+    def fetch_single(item):
+        name, cid = item
         m3u8 = extract_m3u8_from_page(f"{base_domain}/kanal/{cid}")
         if not m3u8: m3u8 = f"https://tv.atomspor.workers.dev/?ID={cid}"
-        results.append({"name": f"ATOM - {name}", "url": m3u8, "group": "ATOM SPOR (VIP)", "logo": "", "ref": base_domain})
+        return {"name": f"ATOM - {name}", "url": m3u8, "group": "ATOM SPOR (VIP)", "logo": atom_logo, "ref": base_domain}
+        
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        futures = [executor.submit(fetch_single, ch) for ch in channels]
+        for future in concurrent.futures.as_completed(futures):
+            results.append(future.result())
+            
+    order_map = {f"ATOM - {ch[0]}": i for i, ch in enumerate(channels)}
+    results.sort(key=lambda x: order_map.get(x["name"], 999))
     return results
 
+# --- 5. TARAFTARIUM ---
 def fetch_taraftarium_ozel():
-    results =[]
-    channels =[("Bein Sports 1", "https://deathless.pantonum1.workers.dev/taraftarium.m3u8")]
+    print("[*] Taraftarium (Özel) kanalları ekleniyor...")
+    results = []
+    channels =[
+        ("Bein Sports 1", "https://deathless.pantonum1.workers.dev/taraftarium.m3u8"),
+        ("Bein Sports 2", "https://deathless.pantonum1.workers.dev/b2.m3u8"),
+        ("Bein Sports 3", "https://deathless.pantonum1.workers.dev/b3.m3u8"),
+        ("Bein Sports 4", "https://deathless.pantonum1.workers.dev/b4.m3u8"),
+        ("Bein Sports 5", "https://deathless.pantonum1.workers.dev/b5.m3u8"),
+        ("Bein Max 1", "https://deathless.pantonum1.workers.dev/bm1.m3u8"),
+        ("Bein Max 2", "https://deathless.pantonum1.workers.dev/bm2.m3u8"),
+        ("S Sport 1", "https://deathless.pantonum1.workers.dev/ss.m3u8"),
+        ("S Sport 2", "https://deathless.pantonum1.workers.dev/ss2.m3u8"),
+        ("Smart Spor 1", "https://deathless.pantonum1.workers.dev/smarts.m3u8"),
+        ("Smart Spor 2", "https://deathless.pantonum1.workers.dev/sms2.m3u8"),
+        ("Tivibu Spor 1", "https://deathless.pantonum1.workers.dev/t1.m3u8"),
+        ("Tivibu Spor 2", "https://deathless.pantonum1.workers.dev/t2.m3u8"),
+        ("Tivibu Spor 3", "https://deathless.pantonum1.workers.dev/t3.m3u8"),
+        ("Tivibu Spor 4", "https://deathless.pantonum1.workers.dev/t4.m3u8"),
+        ("Eurosport 1", "https://deathless.pantonum1.workers.dev/eu1.m3u8"),
+        ("Eurosport 2", "https://deathless.pantonum1.workers.dev/eu2.m3u8"),
+        ("B1 ydk", "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MVTMCC4UTAZVDT/6817/index.m3u8"),
+        ("B2 ydk", "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MVTMCC4UTAZVDT/6818/index.m3u8"),
+        ("B3 ydk", "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MVTMCC4UTAZVDT/6821/index.m3u8"),
+        ("B4 ydk", "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MVTMCC4UTAZVDT/6823/index.m3u8")
+    ]
     for name, url in channels:
         results.append({"name": name, "url": url, "group": "TARAFTARIUM", "logo": "", "ref": ""})
     return results
 
+# --- 6. INADINA TV ---
 def fetch_inadina_tv():
+    print("[*] INADINA TV kanalları ekleniyor...")
     results =[]
-    channels =[("701", "INADINA - beIN SPORTS 1")]
+    base_worker = "https://rough-inadinatv.burhantasci72.workers.dev"
+    channels =[
+        ("701", "INADINA - beIN SPORTS 1"), ("702", "INADINA - beIN SPORTS 2"),
+        ("703", "INADINA - beIN SPORTS 3"), ("704", "INADINA - beIN SPORTS 4"),
+        ("705", "INADINA - S SPORT 1"), ("730", "INADINA - S SPORT 2"),
+        ("706", "INADINA - TIVIBU SPOR 1"), ("711", "INADINA - TIVIBU SPOR 2"),
+        ("712", "INADINA - TIVIBU SPOR 3"), ("713", "INADINA - TIVIBU SPOR 4"),
+    ]
     for cid, cname in channels:
-        results.append({"name": cname, "url": f"https://rough-inadinatv.burhantasci72.workers.dev/{cid}.m3u8", "group": "INADINA TV (WORKER)", "logo": "", "ref": ""})
+        results.append({"name": cname, "url": f"{base_worker}/{cid}.m3u8", "group": "INADINA TV (WORKER)", "logo": "https://hizliresim.com/gm50rk9", "ref": ""})
     return results
 
+# --- 7. TARAFTARIUM24 ---
 def fetch_taraftarium():
-    return[]
+    print("[*] Taraftarium24 (Canlı Maçlar) taranıyor...")
+    results =[]
+    base_url = "https://taraftarium24bet.net"
+    stream_template = "https://hls.freepalastne.workers.dev/https://corestream.ronaldovurdu.help//hls/{slug}.m3u8"
+    try:
+        res = requests.get(base_url, headers=HEADERS, timeout=15)
+        if res.status_code == 200:
+            soup = BeautifulSoup(res.content, "html.parser")
+            links = soup.find_all("a", href=True)
+            found_slugs = set()
+            for link in links:
+                href = link['href']
+                if "/izle/" in href:
+                    slug = href.split("/izle/")[-1].strip("/")
+                    if slug and slug not in found_slugs:
+                        found_slugs.add(slug)
+                        name = slug.replace("-", " ").upper()
+                        results.append({"name": f"TRF - {name}", "url": stream_template.format(slug=slug), "group": "TARAFTARIUM24", "logo": "", "ref": base_url})
+    except: pass
+    return results
 
+# --- 8. SELÇUKSPOR ---
 def fetch_selcuk_sporcafe():
-    return[]
-
+    print("[*] Selçukspor taranıyor...")
+    results = []
+    selcuk_channels =[
+        {"id": "selcukbeinsports1", "n": "BEIN SPORTS 1"}, {"id": "selcukbeinsports2", "n": "BEIN SPORTS 2"},
+        {"id": "selcukbeinsports3", "n": "BEIN SPORTS 3"}, {"id": "selcukbeinsports4", "n": "BEIN SPORTS 4"},
+        {"id": "selcukbeinsports5", "n": "BEIN SPORTS 5"}, {"id": "selcukbeinsportsmax1", "n": "BEIN MAX 1"},
+        {"id": "selcukbeinsportsmax2", "n": "BEIN MAX 2"}, {"id": "selcukssport", "n": "S SPORT 1"},
+        {"id": "selcukssport2", "n": "S SPORT 2"}, {"id": "selcuktivibuspor1", "n": "TIVIBU 1"},
+        {"id": "selcuktivibuspor2", "n": "TIVIBU 2"}, {"id": "selcuksmartspor", "n": "SMART SPOR 1"},
+        {"id": "selcukaspor", "n": "A SPOR"}, {"id": "selcukeurosport1", "n": "EUROSPORT 1"}
+    ]
+    referer, html = None, None
+    for i in range(6, 150):
+        url = f"https://www.sporcafe{i}.xyz/"
+        try:
+            res = requests.get(url, headers=HEADERS, timeout=1)
+            if "uxsyplayer" in res.text: 
+                referer, html = url, res.text
+                break
+        except: continue
+        
+    if html:
+        m_dom = re.search(r'https?://(main\.uxsyplayer[0-9a-zA-Z\-]+\.click)', html)
+        if m_dom:
+            s_dom = f"https://{m_dom.group(1)}"
+            for ch in selcuk_channels:
+                try:
+                    r = requests.get(f"{s_dom}/index.php?id={ch['id']}", headers={**HEADERS, "Referer": referer}, timeout=5)
+                    base = re.search(r'this\.adsBaseUrl\s*=\s*[\'"]([^\'"]+)', r.text)
+                    if base: 
+                        results.append({"name": f"SL - {ch['n']}", "url": f"{base.group(1)}{ch['id']}/playlist.m3u8", "group": "SELÇUKSPOR HD", "ref": referer, "logo": ""})
+                except: continue
+    return results
 
 # ==========================================
 #      2. BÖLÜM: ANA ÇALIŞTIRICI
@@ -315,6 +421,7 @@ def main():
     all_streams =[]
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
+    # Tüm fonksiyonlar eksiksiz olarak çağrılır
     all_streams.extend(fetch_andro_nodes())
     all_streams.extend(fetch_xsport())
     all_streams.extend(fetch_netspor())
@@ -338,23 +445,27 @@ def main():
         url = s["url"]
         ref = s.get("ref", "")
         
-        # Netspor ve Andro için çok katı koruma vardır, Referer her zaman kendi siteleri olmalı!
-        if "evrenesoglu59" in url or "andro." in url or "proxy.freecdn" in url:
-            ref = "https://taraftariumizle.org/"
-            
-        # 1. PC ve VLC Player için standart etiketler
+        # VLC Player için genel etiketler
         if ref: 
             content += f'#EXTVLCOPT:http-referrer={ref}\n'
             content += f'#EXTVLCOPT:http-origin={ref}\n'
         content += f'#EXTVLCOPT:http-user-agent={HEADERS["User-Agent"]}\n'
         
-        # 2. Android, TiviMate, Smart IPTV, ExoPlayer için "SİHİRLİ EKLENTİ"
-        headers_str = f"User-Agent={HEADERS['User-Agent']}"
-        if ref:
-            headers_str += f"&Referer={ref}&Origin={ref}"
+        # ==========================================
+        # SADECE NETSPOR / ANDRO İÇİN EXOPLAYER KORUMASI
+        # ==========================================
+        # Diğer hiçbir linkin sonuna "|Referer=..." eklenmeyecektir.
+        
+        is_netspor = s["group"].startswith("NETSPOR") or s["group"].startswith("ANDRO SPOR")
+        
+        if is_netspor:
+            net_ref = "https://taraftariumizle.org/"
+            # Sadece bu yayınlar için pipe (|) eklenir
+            final_url = f"{url}|User-Agent={HEADERS['User-Agent']}&Referer={net_ref}&Origin={net_ref}"
+        else:
+            # Netspor değilse orijinal url dokunulmadan bırakılır
+            final_url = url
             
-        # URL'nin sonuna | (pipe) ekleyip headerları yapıştırıyoruz
-        final_url = f"{url}|{headers_str}"
         content += f'{final_url}\n'
 
     with open(M3U_OUTPUT_FILE, "w", encoding="utf-8-sig") as f:
