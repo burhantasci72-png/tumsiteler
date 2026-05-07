@@ -405,14 +405,14 @@ def main():
     all_streams = []
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
-    # İstenilen sıralama: XSport, Taraftarium, Selçukspor, Andro, Netspor, Atom
-    all_streams.extend(fetch_xsport())
-    all_streams.extend(fetch_taraftarium_ozel())
-    all_streams.extend(fetch_taraftarium())
-    all_streams.extend(fetch_selcuk_sporcafe())
-    all_streams.extend(fetch_andro_nodes())
-    all_streams.extend(fetch_netspor())
+    # İstenilen sıralama (Tam Ters): Atom, Netspor, Andro, Selçukspor, Taraftarium, XSport
     all_streams.extend(fetch_atom_spor())
+    all_streams.extend(fetch_netspor())
+    all_streams.extend(fetch_andro_nodes())
+    all_streams.extend(fetch_selcuk_sporcafe())
+    all_streams.extend(fetch_taraftarium())
+    all_streams.extend(fetch_taraftarium_ozel())
+    all_streams.extend(fetch_xsport())
     
     if not all_streams: 
         print("Hicbir kanal bulunamadi!")
