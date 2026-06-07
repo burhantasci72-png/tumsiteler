@@ -1,5 +1,5 @@
 ﻿#EXTM3U
-# Son Guncelleme: 07.06.2026 17:57:05
+# Son Guncelleme: 07.06.2026 19:07:29
 #EXTINF:-1 group-title="ATOM SPOR (VIP)" tvg-logo="https://hizliresim.com/gm50rk9b",ATOM - Bein Sports 1
 #EXTVLCOPT:http-referrer=https://atomsportv501.top
 #EXTVLCOPT:http-origin=https://atomsportv501.top
@@ -70,6 +70,11 @@ https://tv.atomspor.workers.dev/?ID=tv-8-5
 #EXTVLCOPT:http-origin=https://atomsportv501.top
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://tv.atomspor.workers.dev/?ID=bein-sports-haber
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Kosova - AndorraCANLI22:25|Dünya Ülkeler Hazırlık Maçı
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348084.m3u8
 #EXTINF:-1 group-title="NETSPOR KANALLARI",NET - Fb TvCANLI20:00|Fenerbahçe Olağanüstü Genel Kurulu
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
@@ -80,11 +85,6 @@ https://andro.evrenesoglu59.lat/checklist/androstreamlivefb.m3u8
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivessplus1.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Danimarka - UkraynaCANLI19:30|Hazirlik
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamliveexn3.m3u8
 #EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Anadolu Efes - Fenerbahçe BekoCANLI20:00|Basketbol Süper Ligi Play-Off Yari Final
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
@@ -105,42 +105,42 @@ https://andro.evrenesoglu59.lat/checklist/androstreamlivetb5.m3u8
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivess1.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Kosova - Andorra21:00|Hazirlik
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Kosova - AndorraCANLI21:00|Hazirlik
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamliveexn2.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Türkiye - Çekya21:00|CEV Beach Volley Milletler Ligi Kupasi Erkekler Ön Eleme
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Türkiye - ÇekyaCANLI21:00|CEV Beach Volley Milletler Ligi Kupasi Erkekler Ön Eleme
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivessplus1.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - ABD - Almanya21:30|Voleybol Kadinlar Milletler Ligi
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - ABD - AlmanyaCANLI21:30|Voleybol Kadinlar Milletler Ligi
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivess2.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Hirvatistan - Slovenya21:45|Hazirlik
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Hirvatistan - SlovenyaCANLI21:45|Hazirlik
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamliveexn5.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Çekya - Türkiye22:00|CEV Beach Volley Milletler Ligi Kupasi Erkekler Ön Eleme Maç 2
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Çekya - TürkiyeCANLI22:00|CEV Beach Volley Milletler Ligi Kupasi Erkekler Ön Eleme Maç 2
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivessplus1.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Las Palmas - Malaga22:00|İspanya La Liga 2 Play-Off Yari Final
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Las Palmas - MalagaCANLI22:00|İspanya La Liga 2 Play-Off Yari Final
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamliveexn6.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Yunanistan - İtalya22:00|Hazirlik
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Yunanistan - İtalyaCANLI22:00|Hazirlik
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamliveexn7.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Fas - Norveç22:00|Hazirlik
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Fas - NorveçCANLI22:00|Hazirlik
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
@@ -170,181 +170,251 @@ https://andro.evrenesoglu59.lat/checklist/androstreamlivessplus1.m3u8
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivessplus1.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Ascoli - Union BresciaCANLI19:00|Italy: Serie C
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38694953.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Guijuelo - Palencia CFCANLI19:00|Spain: Tercera Federacion
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695025.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Cerrito - CA AtenasCANLI19:00|Uruguay: Segunda Division
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695125.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Maldives - Bangladesh U-23CANLI19:00|National teams: Friendlies
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38694955.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Denmark - UkraineCANLI19:30|National teams: Friendlies
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695265.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - China PR (youth) - Tunisia (youth)CANLI19:30|Youth teams: Maurice Revello Tournament
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695363.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - CD La Serena - Union La CaleraCANLI19:30|Chile: Copa de la Liga
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695345.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Imperial Unido - CD Malleco UnidoCANLI20:00|Chile: Tercera Division
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695873.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Estrella del Sur (w) - Defensa y Justicia (w)CANLI20:00|Argentina: Women. Primera B
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695915.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - New England Mutiny (w) - Maine Footy (w)CANLI20:00|USA: Women. UWS
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695975.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Widad Témara - KAC KénitraCANLI20:10|Fas Şampiyonası. 2.Division
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347381.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - New İngiltere Mutiny (Bayanlar) - Maine Footy (Bayanlar)CANLI20:11|ABD Şampiyonası. UWS. Bayanlar
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347821.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Wolfsburg (Amatörler) - Eintracht (Amatörler)CANLI20:13|BudnesLiga LFL 5x5
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347943.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Universidad de Chile - Audax ItalianoCANLI20:18|Chile. Copa de la liga
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347478.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Imperial Unido - Malleco UnidoCANLI20:19|Şili Şampiyonası. Segunda
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347770.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Harlem (Amatörler) - Sparta (Amatörler)CANLI20:21|Division 4х4
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347929.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Sveikata Kybartai - FKS UkmergeCANLI20:24|Litvanya Şampiyonası. 2.Liga
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347358.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Warrior (2x2) - Prince (2x2)CANLI20:28|Short Football 2x2
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347995.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Bullet (3x3) - Tiger (3x3)CANLI20:30|Short Football 3x3 L1
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348026.m3u8
 #EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Deportivo Laferrere - CS Dock SudCANLI20:30|Argentina: Primera B. Metropolitana
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696225.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Estrella del Sur (Bayanlar) - Defensa y Justicia (Bayanlar)CANLI20:31|Arjantin Şampiyonası. Primera B. Bayanlar
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347791.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - NFK Krumkachy - BGU MinskCANLI20:32|Belarus Şampiyonası. 2.Lig
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347573.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Hohhot - GuangyuanCANLI20:36|Short Football 3x3 L1
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348013.m3u8
 #EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Victoriano Arenas - Defensores de CambaceresCANLI20:37|Argentina: Primera C. Metropolitana
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696227.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - TEO - TOURCANLI20:38|Student League
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Independente Sao-Joseense - Marcilio DiasCANLI21:00|Brazil: Serie D
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347878.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Deportes La Serena - Union La CaleraCANLI20:41|Chile. Copa de la liga
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696637.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Blumenau EC - EC Sao Jose RSCANLI21:00|Brazil: Serie D
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347506.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Monolith+ - Metallurgist+CANLI20:42|Short Football 3x3
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696587.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Kosovo - AndorraCANLI21:00|National teams: Friendlies
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347996.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Stars FC - BlastCANLI20:44|Short Football 2x2
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696501.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - CD Cuarte - Atletico MonzonCANLI21:00|Spain: Tercera Federacion
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348012.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Nurnberg (Amatörler) - 1. Kaiserslautern (Amatörler)CANLI20:44|BudnesLiga LFL 5x5
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696707.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Taubate (w) - Mirassol (w)CANLI21:00|Brazil: Women. Campeonato Paulista
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347944.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Moscow+ - Glasgow+CANLI20:48|Short Football 4x4
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696531.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Juventud Unida Universitario - CA Costa BravaCANLI21:00|Argentina: Torneo Federal A
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348023.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Igatu - PirenopolisCANLI20:49|Short Football 4x4
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696725.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - EC Juventude U-20 - SER Caxias do Sul U-20CANLI21:00|Brazil: U-20 Championship
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348033.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Energy+ - Iceberg+CANLI20:50|Short Football 3x3
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696719.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Olimpo Bahia Blanca - Guillermo BrownCANLI21:00|Argentina: Torneo Federal A
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348029.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - KK Cibona - KK ZadarCANLI19:00|Croatia: Premier League
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696589.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Fluminense Feira - AD LeonicoCANLI21:00|Brazil: Campeonato Baiano. Serie B
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695161.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Saski Baskonia - Joventut BadalonaCANLI20:00|Spain: ACB League
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696689.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Quixada U-20 - Anjos do Ceu FC U-20CANLI21:00|Brazil: U-20 Championship
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695619.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Cholet Basket - Paris BasketballCANLI20:00|France: Pro A
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696779.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Guarani Palhoca - CA TubaraoCANLI21:00|Brazil: Campeonato Catarinense. Serie B
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695621.m3u8
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696789.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Hercilio Luz FC - NacaoCANLI21:00|Brazil: Campeonato Catarinense. Serie B
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696767.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Paulinense U-23 - AA Flamengo U-23CANLI21:00|Brazil: Campeonato Paulista U-23
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696627.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - KS Mieszko Gniezno - Gornik KoninCANLI21:00|Poland: Liga 4
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696653.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - CS Cartagines (w) - Upala Carrillo (w)CANLI21:00|Costa Rica: Women. Segunda Division
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696667.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Inter Toronto - ForgeCANLI21:10|Canada: Premier League
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696425.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Maracana EC - IAPE MACANLI21:30|Brazil: Serie D
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697029.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Parnahyba - Moto Clube MACANLI21:30|Brazil: Serie D
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696977.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Sampaio Correa FC - AD IguatuCANLI21:30|Brazil: Serie D
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696989.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - CA General Lamadrid - Club LujanCANLI21:30|Argentina: Primera C. Metropolitana
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697071.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Canuelas - Club El PorvenirCANLI21:30|Argentina: Primera C. Metropolitana
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696997.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Deportivo Muniz - CSD Central BallesterCANLI21:30|Argentina: Primera C. Metropolitana
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697147.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Defensores de Belgrano Villa Ramallo - CA Douglas HaigCANLI21:30|Argentina: Torneo Federal A
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696961.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - 9 de Julio Rafaela - Sportivo Las ParejasCANLI21:30|Argentina: Torneo Federal A
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697055.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Escobar FC - Club Atletico el LinquenoCANLI21:30|Argentina: Torneo Federal A
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697105.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Gimnasia y Esgrima Concepcion - Sportivo BelgranoCANLI21:30|Argentina: Torneo Federal A
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697083.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Cipolletti - Huracan Las HerasCANLI21:30|Argentina: Torneo Federal A
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697115.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Croatia - SloveniaCANLI21:45|National teams: Friendlies
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696877.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Clube de Regatas Brasil - Sao Bernardo FCCANLI22:00|Brazil: Serie B
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697383.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Las Palmas - MalagaCANLI22:00|Spain: Segunda Division
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697179.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Santa Catarina - Cascavel PRCANLI22:00|Brazil: Serie D
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697385.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Morocco - NorwayCANLI22:00|National teams: Friendlies
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697183.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Greece - ItalyCANLI22:00|National teams: Friendlies
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696889.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Huachipato - CSD Colo-ColoCANLI22:00|Chile: Copa de la Liga
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697377.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Atletico Avila FC - Mineros GuayanaCANLI22:00|Venezuela: Segunda Division
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697181.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Brooklyn FC - Portland Hearts Of PineCANLI22:00|USA: USL League One. Cup
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697369.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Montreal + - Charlotte +CANLI22:11|MLS+
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348475.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Kosova - AndorraCANLI22:25|Dostluk Maçları. Milli Takımlar
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348084.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Spartans - MaraudersCANLI22:26|Short Football 2x2
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348478.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Estrella del Sur (Bayanlar) - Defensa y Justicia (Bayanlar)CANLI22:34|Arjantin Şampiyonası. Primera B. Bayanlar
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347791.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - CD Huachipato - Colo-ColoCANLI22:36|Chile. Copa de la liga
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348522.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - St. Pauli (Amatörler) - FT Braunschweig (Amatörler)CANLI22:46|BudnesLiga LFL 5x5
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348494.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Juventus+ - Real+CANLI22:47|Short Football 3x3
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348517.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Mieszko Gniezno - Gornik KoninCANLI22:54|Polonya Şampiyonası. 4.Lig
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348160.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - TEO - SPACECANLI22:55|Student League
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348373.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Bayer (Amatörler) - Dynamo Dresden (Amatörler)CANLI22:56|BudnesLiga LFL 5x5
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348493.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Excelsior (Amatörler) - Volendam (Amatörler)CANLI22:57|Division 4х4
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348421.m3u8
 #EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - BK KVIS Pardubice - CEZ Basketball NymburkCANLI20:00|Czech Republic: NBL
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
@@ -355,91 +425,66 @@ https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695643.m3u8
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695729.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Stade Malien de Bamako - Koukia BCCANLI20:00|Mali: Championship
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695935.m3u8
 #EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Estudiantes Madrid - Basquet CorunaCANLI20:00|Spain: Primera FEB
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695919.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Bulgaristan (TBL) - New Zealand (TBL)CANLI20:12|Table Basketball League
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348042.m3u8
 #EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Club Atletico Queluz U-23 - CBP 2012CANLI20:15|Portugal: Division 2
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696101.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - BK JIP Pardubice - ERA NymburkCANLI20:16|Çekya Şampiyonası
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347655.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Kolombiya (TBL) - Çin (TBL)CANLI20:17|Table Basketball League
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348039.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Queluz U23 - CBPCANLI20:24|Portekiz Kupası. 2.Bölüm
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347884.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Wwin 3x3 - Aluplastik Zivinice 3x3CANLI20:33|Republika Srpska. 3x3
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347980.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - KK Cibona - KK ZadarCANLI20:40|Hırvatistan Şampiyonası. Premier Liga
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347414.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Vladivostok (Bayanlar) - Murino (Bayanlar)CANLI20:43|IPBL. Pro Division. Bayanlar
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347724.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Titan Academy - SuadiyeCANLI20:47|Türkiye Şampiyonası. EBBL
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347392.m3u8
 #EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Hapoel Tel Aviv - Hapoel JerusalemCANLI20:50|Israel: Superleague
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696423.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Abakan - TaganrogCANLI20:54|IPBL. Pro Division
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Australia (3x3) (w) - USA (3x3) (w)CANLI21:45|3x3: Women. FIBA World Cup
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347794.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Daniel Cukierman - Pietro RicciCANLI18:49|ATP Challenger: Cattolica. Clay. Qualifying
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696917.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Santo Andre (w) - ADRM Maringa (w)CANLI22:00|Brazil: Women. LBF
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38694855.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Noemi Basiletti - Beatrice RicciCANLI19:13|WTA 125K: Modena. Clay. Qualifying
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697407.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Kaliningrad - PlavskCANLI22:10|IPBL. Pro Division
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695163.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Samuel Alejandro Linde Palacios - Benjamin CheliaCANLI19:30|ATP Challenger: San Miguel de Tucuman. Clay. Qualifying
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348466.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - BK JIP Pardubice - ERA NymburkCANLI22:16|Çekya Şampiyonası
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695373.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Edie Griffiths - Naiktha BainsCANLI19:31|WTA 125K: Ilkley. Grass. Qualifying
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347655.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Abakan - MakhachkalaCANLI22:27|IPBL. Pro Division
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695367.m3u8
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348505.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Bulgaristan (TBL) - Çin (TBL)CANLI22:33|Table Basketball League
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348443.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Queluz U23 - CBPCANLI22:41|Portekiz Kupası. 2.Bölüm
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347884.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Salon Torlakovic 3x3 - KB Venom 3x3CANLI22:50|Republika Srpska. 3x3
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348363.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - New Zealand (TBL) - Kolombiya (TBL)CANLI22:55|Table Basketball League
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348448.m3u8
 #EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Michael Mmoh - Filippo RomanoCANLI19:36|ATP Challenger: Ilkley. Grass. Qualifying
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
@@ -450,11 +495,6 @@ https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695487.m3u8
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695365.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Antonia Ruzic - Storm HunterCANLI19:43|WTA: London. Grass. Qualifying
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695559.m3u8
 #EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Yi Zhou - Ben JonesCANLI19:55|ATP Challenger: Ilkley. Grass. Qualifying
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
@@ -465,21 +505,11 @@ https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695731.m3u8
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695791.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Tatjana Maria - Kamilla RakhimovaCANLI20:11|WTA: London. Grass. Qualifying
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696107.m3u8
 #EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Amador Salazar - Ezequiel MonferrerCANLI20:17|ATP Challenger: San Miguel de Tucuman. Clay. Qualifying
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696073.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Adam Walton - Andre IlaganCANLI20:21|ATP Challenger: Tyler. Hard
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696155.m3u8
 #EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Guo Hanyu - Maddison InglisCANLI20:21|WTA: London. Grass. Qualifying
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
@@ -490,61 +520,96 @@ https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696105.m3u8
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696223.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Latvia (w) - Israel (w)CANLI19:30|National teams: Women. CEV European League
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Darja Semenistaja - Maria TimofeevaCANLI21:06|WTA 125K: Makarska. Clay
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695279.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Montenegro (w) - Georgia (w)CANLI20:00|National teams: Women. CEV European League
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696657.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Nicolas Villalon Valdes - Gonzalo ZeituneCANLI21:29|ATP Challenger: San Miguel de Tucuman. Clay. Qualifying
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695651.m3u8
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696951.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Ignacio Monzon - Santiago GiamichelleCANLI21:34|ATP Challenger: San Miguel de Tucuman. Clay. Qualifying
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697017.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Henrique Rocha - Daniel Merida AguilarCANLI21:36|ATP Challenger: Perugia. Clay
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38697053.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Oleg Oreshin - Andrey MerkulovCANLI22:35|ATT. Saransk
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348124.m3u8
 #EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - North Macedonia - LuxembourgCANLI20:00|National teams: CEV European League
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695659.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Arjantin - ABDCANLI20:11|VCA. Master Volleyball League
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347463.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Çin - KanadaCANLI20:12|CBV 23. Duo Masters
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347619.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - İtalya (Bayanlar) - Türkiye (Bayanlar)CANLI20:22|VCA. Master Volleyball League. Bayanlar
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347191.m3u8
 #EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Brazil (w) - Italy (w)CANLI20:30|National teams: FIVB Women's Nations League
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivech38695993.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - İtalya - MısırCANLI20:32|SpikeVolleyball. International Cup
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Linces A (w) - La Sanarateca (w)CANLI20:55|Guatemala: Women. Liga Ascenco (balance up to 27. 5th to 17)
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347782.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Japonya - PolonyaCANLI20:41|VCA. Master Volleyball League
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696639.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Croatia - GeorgiaCANLI21:00|National teams: CEV European League
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696439.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - USA (w) - Germany (w)CANLI21:30|National teams: FIVB Women's Nations League
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech38696701.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Linces (Bayanlar) - La Sanarateca JR (Bayanlar)CANLI22:12|Guatemala Şampiyonası. Ascenso Liga. Bayanlar
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348153.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Avustralya - BrezilyaCANLI22:16|CBV 23. Duo Masters
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348166.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Japonya - PolonyaCANLI22:24|VCA. Master Volleyball League
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348040.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Japonya - ABDCANLI20:44|CBV 23. Duo Masters
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Ukrayna - İtalyaCANLI22:29|CBV 23. Duo Masters
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347439.m3u8
-#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Brezilya (Bayanlar) - Sırbistan (Bayanlar)CANLI20:45|VCA. Master Volleyball League. Bayanlar
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348175.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Arjantin - SırbistanCANLI22:49|SpikeVolleyball. International Cup
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348280.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Polonya - ArjantinCANLI22:49|VCA. Master Volleyball League
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348335.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Brezilya (Bayanlar) - Sırbistan (Bayanlar)CANLI22:55|VCA. Master Volleyball League. Bayanlar
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://andro.evrenesoglu59.lat/checklist/androstreamlivech19347971.m3u8
+#EXTINF:-1 group-title="NETSPOR CANLI MAÇLAR",NET - Çin (Bayanlar) - Rusya (Bayanlar)CANLI22:58|VCA. Master Volleyball League. Bayanlar
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://andro.evrenesoglu59.lat/checklist/androstreamlivech19348109.m3u8
 #EXTINF:-1 group-title="NETSPOR KANALLARI",NET - Bein Sports 1CANLI|7/24.
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
