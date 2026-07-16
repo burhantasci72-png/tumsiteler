@@ -80,12 +80,11 @@ def extract_m3u8_from_page(url, ref=None):
 #      1. BÖLÜM: YAYINLARI TOPLAMA
 # ==========================================
 
-# --- OSSEBET TV (YENİ EKLENEN) ---
+# --- OSSEBET TV ---
 def fetch_ossebet():
     print("[*] Ossebet TV taranıyor...")
     results = []
     
-    # Sitenin güncel m3u8 sunucu adresi ve referans adresi
     base_m3u8_url = "https://tzy.zirvedesin236.cfd"
     referer_url = "https://ossebettv14.com/"
     
@@ -94,13 +93,12 @@ def fetch_ossebet():
         ("b3", "BEIN SPORTS 3"), ("b4", "BEIN SPORTS 4"),
         ("b5", "BEIN SPORTS 5"), ("bm1", "BEIN SPORTS MAX 1"),
         ("bm2", "BEIN SPORTS MAX 2"), ("ss", "S SPOR"),
-        ("ss2", "S SPORT 2"), ("smarts", "SMART SPOR 1"), # Akıllı Spor
+        ("ss2", "S SPORT 2"), ("smarts", "SMART SPOR 1"), 
         ("sms2", "SMART SPOR 2"), ("t1", "TİVİBU SPOR 1"),
         ("t2", "TİVİBU SPOR 2"), ("t3", "TİVİBU SPOR 3"),
         ("t4", "TİVİBU SPOR 4"), ("trtspor", "TRT SPOR"),
         ("trtspor2", "TRT SPOR YILDIZ"), ("trt1", "TRT 1"),
-        ("as", "A SPOR"), # Bir Spor
-        ("atv", "ATV"), ("tv8", "TV 8"),
+        ("as", "A SPOR"), ("atv", "ATV"), ("tv8", "TV 8"),
         ("tv85", "TV 8.5"), ("eu1", "EURO SPORT 1"),
         ("eu2", "EURO SPORT 2"), ("ex7", "TABII SPOR"),
         ("ex1", "TABII SPOR 1"), ("ex2", "TABII SPOR 2"),
@@ -447,7 +445,7 @@ def main():
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
     # İstenilen sıralama
-    all_streams.extend(fetch_ossebet()) # YENİ EKLENEN BURADA
+    all_streams.extend(fetch_ossebet())
     all_streams.extend(fetch_atom_spor())
     all_streams.extend(fetch_netspor())
     all_streams.extend(fetch_andro_nodes())
@@ -469,12 +467,21 @@ def main():
         
         url = s["url"]
         ref = s.get("ref", "")
+        ua = HEADERS["User-Agent"]
         
-        # VLC ve Web Player için standart etiketler
+        # 1. VLC Player (PC) için destekleyici komutlar
         if ref: 
             content += f'#EXTVLCOPT:http-referrer={ref}\n'
             content += f'#EXTVLCOPT:http-origin={ref}\n'
-        content += f'#EXTVLCOPT:http-user-agent={HEADERS["User-Agent"]}\n'
+        content += f'#EXTVLCOPT:http-user-agent={ua}\n'
+        
+        # 2. ExoPlayer, Tivimate, Smarters vb. Android/Smart TV Oynatıcılar için URL Parametreleri
+        # Linkin sonuna | işareti konularak koruma bypass edilir.
+        if "|" not in url:
+            if ref:
+                url = f"{url}|Referer={ref}&Origin={ref}&User-Agent={ua}"
+            else:
+                url = f"{url}|User-Agent={ua}"
         
         content += f'{url}\n'
 
