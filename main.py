@@ -871,16 +871,108 @@ def generate_m3u_content(streams: List[StreamInfo]) -> str:
 # ANA ÇALIŞTIRICI
 # =============================================================================
 
+# =============================================================================
+# KULISBET - SABİT KANAL LİSTESİ
+# =============================================================================
+
+KULISBET_CHANNELS = [
+    {"id": "zirve", "name": "BEIN SPORTS 1", "group": "KULISBET - Spor"},
+    {"id": "b2", "name": "BEIN SPORTS 2", "group": "KULISBET - Spor"},
+    {"id": "b3", "name": "BEIN SPORTS 3", "group": "KULISBET - Spor"},
+    {"id": "b4", "name": "BEIN SPORTS 4", "group": "KULISBET - Spor"},
+    {"id": "b5", "name": "BEIN SPORTS 5", "group": "KULISBET - Spor"},
+    {"id": "bm1", "name": "BEIN SPORTS MAX 1", "group": "KULISBET - Spor"},
+    {"id": "bm2", "name": "BEIN SPORTS MAX 2", "group": "KULISBET - Spor"},
+    {"id": "ss", "name": "S SPOR", "group": "KULISBET - Spor"},
+    {"id": "ss2", "name": "S SPORT 2", "group": "KULISBET - Spor"},
+    {"id": "smarts", "name": "AKILLI SPOR", "group": "KULISBET - Spor"},
+    {"id": "sms2", "name": "SMART SPOR 2", "group": "KULISBET - Spor"},
+    {"id": "t1", "name": "TİVİBU SPOR 1", "group": "KULISBET - Spor"},
+    {"id": "t2", "name": "TİVİBU SPOR 2", "group": "KULISBET - Spor"},
+    {"id": "t3", "name": "TİVİBU SPOR 3", "group": "KULISBET - Spor"},
+    {"id": "t4", "name": "TİVİBU SPOR 4", "group": "KULISBET - Spor"},
+    {"id": "trtspor", "name": "TRT SPOR", "group": "KULISBET - Spor"},
+    {"id": "trtspor2", "name": "TRT SPOR YILDIZ", "group": "KULISBET - Spor"},
+    {"id": "trt1", "name": "TRT 1", "group": "KULISBET - Ulusal"},
+    {"id": "as", "name": "BİR SPOR", "group": "KULISBET - Spor"},
+    {"id": "atv", "name": "ATV", "group": "KULISBET - Ulusal"},
+    {"id": "tv8", "name": "TV 8", "group": "KULISBET - Eğlence"},
+    {"id": "tv85", "name": "TV 8,5", "group": "KULISBET - Eğlence"},
+    {"id": "eu1", "name": "EURO SPORT 1", "group": "KULISBET - Spor"},
+    {"id": "eu2", "name": "EURO SPORT 2", "group": "KULISBET - Spor"},
+    {"id": "ex7", "name": "TABI SPOR", "group": "KULISBET - Spor"},
+    {"id": "ex1", "name": "TABI SPOR 1", "group": "KULISBET - Spor"},
+    {"id": "ex2", "name": "TABI SPOR 2", "group": "KULISBET - Spor"},
+    {"id": "ex3", "name": "TABI SPOR 3", "group": "KULISBET - Spor"},
+    {"id": "ex4", "name": "TABI SPOR 4", "group": "KULISBET - Spor"},
+    {"id": "ex5", "name": "TABI SPOR 5", "group": "KULISBET - Spor"},
+    {"id": "ex6", "name": "TABI SPOR 6", "group": "KULISBET - Spor"},
+]
+
+
+def fetch_kulisbet_channels() -> List[StreamInfo]:
+    """
+    Kulisbet için manuel tanımlanmış sabit kanalları döndürür.
+    Bu kanallar dinamik maç yayınlarına ek olarak her zaman listede bulunur.
+    """
+    results: List[StreamInfo] = []
+    
+    # Kulisbet ana domainini bulmaya çalışalım (Kulis TV ile aynı altyapıyı kullanıyor olabilir)
+    base_pattern = "https://kulistvnew{}.com/"
+    
+    def check_domain(index: int) -> Optional[str]:
+        """Domain'in aktif olup olmadığını kontrol eder."""
+        url = base_pattern.format(index)
+        try:
+            response = requests.get(url, headers=Config.HEADERS, timeout=5)
+            if response.status_code == 200:
+                return url
+        except Exception:
+            pass
+        return None
+    
+    def find_active_domain() -> Optional[str]:
+        """Aktif domain'i bulur."""
+        with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+            futures = [executor.submit(check_domain, i) for i in range(1, 50)]
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                if result:
+                    return result
+        return None
+    
+    active_domain = find_active_domain()
+    
+    if not active_domain:
+        print("⚠️ Kulisbet aktif domain bulunamadı, varsayılan domain kullanılıyor.")
+        active_domain = "https://kulistvnew12.com/"
+    
+    for channel in KULISBET_CHANNELS:
+        # Kulisbet link yapısı: base_url/embed/canal_id
+        stream_url = f"{active_domain}embed/{channel['id']}"
+        
+        results.append(create_stream_info(
+            name=channel["name"],
+            url=stream_url,
+            group=channel["group"],
+            referrer=active_domain
+        ))
+    
+    print(f"    -> {len(results)} adet Kulisbet sabit kanalı eklendi.")
+    return results
+
+
 def main():
     """Ana fonksiyon - tüm kaynakları tarar ve M3U dosyası oluşturur."""
     all_streams: List[StreamInfo] = []
     
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
-    # İstenilen sıralama: Atom, Mahsun, Kulis TV, Netspor, Andro, Selçukspor, Taraftarium, XSport
+    # İstenilen sıralama: Atom, Mahsun, Kulis TV, Kulisbet, Netspor, Andro, Selçukspor, Taraftarium, XSport
     all_streams.extend(fetch_atom_spor())
     all_streams.extend(fetch_mahsun_sports())
     all_streams.extend(fetch_kulis_tv())
+    all_streams.extend(fetch_kulisbet_channels())  # Yeni: Kulisbet sabit kanalları
     all_streams.extend(fetch_netspor())
     all_streams.extend(fetch_andro_nodes())
     all_streams.extend(fetch_selcuk_sporcafe())
