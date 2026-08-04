@@ -623,6 +623,114 @@ def fetch_atom_spor() -> List[StreamInfo]:
     return results
 
 
+def fetch_kulis_tv() -> List[StreamInfo]:
+    """Kulis TV platformundan canlı maç ve kanal bilgilerini toplar."""
+    print("[*] Kulis TV taranıyor...")
+    results: List[StreamInfo] = []
+    
+    # Aktif domain'i bul
+    base_pattern = "https://kulistvnew{}.com/"
+    
+    def check_domain(index: int) -> Optional[str]:
+        """Domain'in aktif olup olmadığını kontrol eder."""
+        url = base_pattern.format(index)
+        try:
+            response = requests.get(url, headers=Config.HEADERS, timeout=5)
+            if response.status_code == 200 and ("maç" in response.text.lower() or "canlı" in response.text.lower()):
+                return url
+        except Exception:
+            pass
+        return None
+    
+    def find_active_domain() -> Optional[str]:
+        """Aktif domain'i bulur."""
+        with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+            futures = [executor.submit(check_domain, i) for i in range(1, 50)]
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                if result:
+                    return result
+        return None
+    
+    active_domain = find_active_domain()
+    
+    if active_domain:
+        print(f"    -> Aktif Kulis TV domaini: {active_domain}")
+        try:
+            main_response = requests.get(active_domain, headers=Config.HEADERS, timeout=10)
+            
+            # data-reality.com URL'ini bul
+            data_url_match = re.search(r"fetch\(['\"]([^'\"]*matches\.php)['\"]", main_response.text)
+            if data_url_match:
+                data_url = data_url_match.group(1)
+                
+                # Maç verilerini çek
+                data_response = requests.get(data_url, headers=Config.HEADERS, timeout=10)
+                soup = BeautifulSoup(data_response.content, "html.parser")
+                
+                matches = soup.find_all("a", class_=re.compile(r"single-match"))
+                
+                for match in matches:
+                    href = match.get("href", "")
+                    if not href:
+                        continue
+                    
+                    # Match ID'yi çıkar
+                    match_id = ""
+                    if "id=" in href:
+                        match_id = href.split("id=")[-1].split("&")[0]
+                    
+                    # Takım/etkinlik adını bul
+                    teams_div = match.find("div", class_="teams")
+                    home_team = ""
+                    away_team = ""
+                    if teams_div:
+                        home = teams_div.find("div", class_="home")
+                        away = teams_div.find("div", class_="away")
+                        if home:
+                            home_team = home.get_text(strip=True)
+                        if away:
+                            away_team = away.get_text(strip=True)
+                    
+                    # Tarih ve saat
+                    event_div = match.find("div", class_="event")
+                    event_time = event_div.get_text(strip=True) if event_div else ""
+                    
+                    date_div = match.find("div", class_="date")
+                    date_text = date_div.get_text(strip=True) if date_div else ""
+                    
+                    # Lig/turnuva bilgisi
+                    match_type = match.get("data-matchtype", "Diğer")
+                    
+                    # Başlık oluştur
+                    if home_team and away_team:
+                        title = f"{home_team} - {away_team}"
+                    elif home_team:
+                        title = home_team
+                    else:
+                        title = f"Maç {match_id}" if match_id else "Canlı Yayın"
+                    
+                    # Stream URL'i oluştur (channel?id=XXX formatında)
+                    if match_id:
+                        stream_url = f"{active_domain}channel?id={match_id}"
+                        
+                        # Grup adı belirle
+                        is_live = "Program" not in date_text and event_time and event_time != ""
+                        group_name = "KULIS CANLI" if is_live else f"KULIS MAÇLAR - {match_type}"
+                        
+                        results.append(create_stream_info(
+                            name=f"KULIS - {title}",
+                            url=stream_url,
+                            group=group_name,
+                            referrer=active_domain
+                        ))
+                    
+        except Exception as e:
+            print(f"    -> Hata: {e}")
+    
+    return results
+
+
 def fetch_mahsun_sports() -> List[StreamInfo]:
     """Mahsun Sports platformundan canlı maç ve kanal bilgilerini toplar."""
     print("[*] Mahsun Sports taranıyor...")
@@ -769,9 +877,10 @@ def main():
     
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
-    # İstenilen sıralama: Atom, Mahsun, Netspor, Andro, Selçukspor, Taraftarium, XSport
+    # İstenilen sıralama: Atom, Mahsun, Kulis TV, Netspor, Andro, Selçukspor, Taraftarium, XSport
     all_streams.extend(fetch_atom_spor())
     all_streams.extend(fetch_mahsun_sports())
+    all_streams.extend(fetch_kulis_tv())
     all_streams.extend(fetch_netspor())
     all_streams.extend(fetch_andro_nodes())
     all_streams.extend(fetch_selcuk_sporcafe())
