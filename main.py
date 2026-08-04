@@ -732,8 +732,12 @@ def fetch_kulis_tv() -> List[StreamInfo]:
 
 
 def fetch_mahsun_sports() -> List[StreamInfo]:
-    """Mahsun Sports platformundan canlı maç ve kanal bilgilerini toplar."""
-    print("[*] Mahsun Sports taranıyor...")
+    """
+    Mahsun Sports sitesinden SADECE ana canlı spor kanallarını (BEIN, S Sport vb.) çeker.
+    Maç bazlı yayınları filtreler, sadece sabit kanal listesini alır.
+    Tek kategori: MAHSUN CANLI
+    """
+    print("[*] Mahsun Sports taranıyor (Sadece Canlı Kanallar)...")
     results: List[StreamInfo] = []
     
     # Aktif domain'i bul
@@ -744,7 +748,7 @@ def fetch_mahsun_sports() -> List[StreamInfo]:
         url = base_pattern.format(index)
         try:
             response = requests.get(url, headers=Config.HEADERS, timeout=5)
-            if response.status_code == 200 and "script" in response.text:
+            if response.status_code == 200:
                 return url
         except Exception:
             pass
@@ -765,78 +769,94 @@ def fetch_mahsun_sports() -> List[StreamInfo]:
     if active_domain:
         print(f"    -> Aktif Mahsun Sports domaini: {active_domain}")
         try:
-            # Script dosyasını çek (genellikle script4.js veya benzeri)
-            script_url = None
+            # Ana sayfadan direkt kanal linklerini çek
             main_response = requests.get(active_domain, headers=Config.HEADERS, timeout=10)
             
-            # Script dosyasını bul - "script" kelimesi içeren ve clappr/jquery olmayan dosyalar
-            script_matches = re.findall(r'<script[^>]+src=["\']([^"\']*\.js)["\']', main_response.text)
-            for script in script_matches:
-                if 'script' in script.lower() and 'clappr' not in script.lower() and 'jquery' not in script.lower():
-                    # email-decode.min.js gibi cloudflare scriptlerini atla
-                    if 'cloudflare' in script.lower() or 'email-decode' in script.lower():
-                        continue
-                    script_url = script if script.startswith('http') else active_domain + script.lstrip('/')
-                    break
+            # Bilinen kanal slug'larını ara (bein, s-sport, a-spor, smart, tivibu, trt)
+            channel_links = re.findall(
+                r'href=["\']([^"\']*(?:bein|s-sport|a-spor|smart-spor|tivibu|trt-spor|eurosport)[^"\']*)["\']',
+                main_response.text,
+                re.IGNORECASE
+            )
             
-            if not script_url:
-                # Varsayılan script yolu
-                script_url = active_domain + "script4.js"
-            
-            script_response = requests.get(script_url, headers=Config.HEADERS, timeout=10)
-            script_content = script_response.text
-            
-            # Gelişmiş pattern - tüm maç objelerini yakalamak için
-            # { "tarih": "...", "time": "...", "league": "...", "title": "...", "url": "...", ... }
-            # veya { "time": "...", "league": "...", "title": "...", "url": "...", "id": "...", ... }
-            
-            # Önce tüm süslü parantez bloklarını bul
-            block_pattern = r'\{[^{}]*"title"[^{}]*"url"[^{}]*\}'
-            matches = re.findall(block_pattern, script_content, re.DOTALL)
-            
-            for match in matches:
-                try:
-                    # Alanları çıkar
-                    title_match = re.search(r'"title":\s*"([^"]+)"', match)
-                    league_match = re.search(r'"league":\s*"([^"]+)"', match)
-                    url_match = re.search(r'"url":\s*"([^"]+)"', match)
-                    live_match = re.search(r'"live":\s*(true|false)', match)
-                    id_match = re.search(r'"id":\s*"([^"]+)"', match)
-                    
-                    if title_match and url_match:
-                        title = title_match.group(1).strip()
-                        league = league_match.group(1).strip() if league_match else "Diğer"
-                        url = url_match.group(1).strip()
-                        is_live = live_match and live_match.group(1) == 'true'
-                        
-                        # Stream ID'yi URL'den çıkar
-                        stream_id = ""
-                        if "id=" in url:
-                            # URL formatı: event.html?id=androstreamlivech19893294 veya /event.html?id=xxx
-                            stream_id = url.split("id=")[-1].strip()
-                        elif id_match:
-                            stream_id = id_match.group(1).strip()
-                        
-                        if stream_id:
-                            # Yayın URL'sini oluştur - event.html?formatında
-                            stream_url = f"{active_domain}event.html?id={stream_id}"
-                            
-                            # Grup adını belirle (CANLI ise ayrı, değilse lig bazlı)
-                            if is_live or "CANLI" in title.upper() or "LIVE" in title.upper():
-                                group_name = "MAHSUN CANLI"
-                            else:
-                                group_name = f"MAHSUN MAÇLAR - {league}"
-                            
-                            results.append(create_stream_info(
-                                name=f"MAHSUN - {title}",
-                                url=stream_url,
-                                group=group_name,
-                                logo="",
-                                referrer=active_domain
-                            ))
-                except Exception:
+            seen_urls = set()
+            for link in channel_links:
+                # Tam URL oluştur
+                if link.startswith('http'):
+                    full_url = link
+                else:
+                    full_url = active_domain + link.lstrip('/')
+                
+                if full_url in seen_urls:
                     continue
+                seen_urls.add(full_url)
+                
+                # URL'den kanal ismi türet
+                slug = full_url.split('/')[-1].rstrip('/')
+                name = slug.replace('-', ' ').upper()
+                
+                # Özel isim düzeltmeleri
+                if "bein" in slug and "1" in slug and "max" not in slug: 
+                    name = "BEIN SPORTS 1 HD"
+                elif "bein" in slug and "2" in slug and "max" not in slug: 
+                    name = "BEIN SPORTS 2 HD"
+                elif "bein" in slug and "3" in slug and "max" not in slug: 
+                    name = "BEIN SPORTS 3 HD"
+                elif "bein" in slug and "4" in slug and "max" not in slug: 
+                    name = "BEIN SPORTS 4 HD"
+                elif "bein" in slug and "max" in slug and "1" in slug: 
+                    name = "BEIN SPORTS MAX 1"
+                elif "bein" in slug and "max" in slug and "2" in slug: 
+                    name = "BEIN SPORTS MAX 2"
+                elif "s-sport" in slug and "plus" in slug: 
+                    name = "S SPORT PLUS"
+                elif "s-sport" in slug: 
+                    name = "S SPORT"
+                elif "a-spor" in slug: 
+                    name = "A SPOR"
+                elif "smart" in slug and "spor" in slug: 
+                    name = "SMART SPOR"
+                elif "tivibu" in slug and "spor" in slug: 
+                    name = "TIVIBU SPOR"
+                elif "trt" in slug and "spor" in slug: 
+                    name = "TRT SPOR"
+                
+                # Sadece spor kanallarını ekle (haber/genel kanalları filtrele)
+                if any(x in name.lower() for x in ["spor", "sport", "bein"]):
+                    results.append(create_stream_info(
+                        name=f"MAHSUN - {name}",
+                        url=full_url,
+                        group="MAHSUN CANLI",
+                        logo="",
+                        referrer=active_domain
+                    ))
+            
+            # Eğer hiç kanal bulunamazsa, manuel fallback listesi
+            if not results:
+                known_channels = [
+                    ("bein-sports-1-hd", "BEIN SPORTS 1 HD"),
+                    ("bein-sports-2-hd", "BEIN SPORTS 2 HD"),
+                    ("bein-sports-3-hd", "BEIN SPORTS 3 HD"),
+                    ("bein-sports-4-hd", "BEIN SPORTS 4 HD"),
+                    ("bein-sports-max-1", "BEIN SPORTS MAX 1"),
+                    ("bein-sports-max-2", "BEIN SPORTS MAX 2"),
+                    ("s-sport-plus", "S SPORT PLUS"),
+                    ("a-spor", "A SPOR"),
+                    ("smart-spor", "SMART SPOR"),
+                    ("tivibu-spor-1", "TIVIBU SPOR 1"),
+                    ("trt-spor", "TRT SPOR")
+                ]
+                for slug, name in known_channels:
+                    results.append(create_stream_info(
+                        name=f"MAHSUN - {name}",
+                        url=f"{active_domain}{slug}",
+                        group="MAHSUN CANLI",
+                        logo="",
+                        referrer=active_domain
+                    ))
                     
+            print(f"    -> {len(results)} adet MAHSUN CANLI kanalı bulundu.")
+            
         except Exception as e:
             print(f"[!] Mahsun Sports hatası: {e}")
     
