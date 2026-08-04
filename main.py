@@ -623,6 +623,118 @@ def fetch_atom_spor() -> List[StreamInfo]:
     return results
 
 
+def fetch_mahsun_sports() -> List[StreamInfo]:
+    """Mahsun Sports platformundan canlı maç ve kanal bilgilerini toplar."""
+    print("[*] Mahsun Sports taranıyor...")
+    results: List[StreamInfo] = []
+    
+    # Aktif domain'i bul
+    base_pattern = "https://mahsunsports{}.xyz/"
+    
+    def check_domain(index: int) -> Optional[str]:
+        """Domain'in aktif olup olmadığını kontrol eder."""
+        url = base_pattern.format(index)
+        try:
+            response = requests.get(url, headers=Config.HEADERS, timeout=5)
+            if response.status_code == 200 and "script" in response.text:
+                return url
+        except Exception:
+            pass
+        return None
+    
+    def find_active_domain() -> Optional[str]:
+        """Aktif domain'i bulur."""
+        with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+            futures = [executor.submit(check_domain, i) for i in range(70, 150)]
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                if result:
+                    return result
+        return None
+    
+    active_domain = find_active_domain()
+    
+    if active_domain:
+        print(f"    -> Aktif Mahsun Sports domaini: {active_domain}")
+        try:
+            # Script dosyasını çek (genellikle script4.js veya benzeri)
+            script_url = None
+            main_response = requests.get(active_domain, headers=Config.HEADERS, timeout=10)
+            
+            # Script dosyasını bul - "script" kelimesi içeren ve clappr/jquery olmayan dosyalar
+            script_matches = re.findall(r'<script[^>]+src=["\']([^"\']*\.js)["\']', main_response.text)
+            for script in script_matches:
+                if 'script' in script.lower() and 'clappr' not in script.lower() and 'jquery' not in script.lower():
+                    # email-decode.min.js gibi cloudflare scriptlerini atla
+                    if 'cloudflare' in script.lower() or 'email-decode' in script.lower():
+                        continue
+                    script_url = script if script.startswith('http') else active_domain + script.lstrip('/')
+                    break
+            
+            if not script_url:
+                # Varsayılan script yolu
+                script_url = active_domain + "script4.js"
+            
+            script_response = requests.get(script_url, headers=Config.HEADERS, timeout=10)
+            script_content = script_response.text
+            
+            # Gelişmiş pattern - tüm maç objelerini yakalamak için
+            # { "tarih": "...", "time": "...", "league": "...", "title": "...", "url": "...", ... }
+            # veya { "time": "...", "league": "...", "title": "...", "url": "...", "id": "...", ... }
+            
+            # Önce tüm süslü parantez bloklarını bul
+            block_pattern = r'\{[^{}]*"title"[^{}]*"url"[^{}]*\}'
+            matches = re.findall(block_pattern, script_content, re.DOTALL)
+            
+            for match in matches:
+                try:
+                    # Alanları çıkar
+                    title_match = re.search(r'"title":\s*"([^"]+)"', match)
+                    league_match = re.search(r'"league":\s*"([^"]+)"', match)
+                    url_match = re.search(r'"url":\s*"([^"]+)"', match)
+                    live_match = re.search(r'"live":\s*(true|false)', match)
+                    id_match = re.search(r'"id":\s*"([^"]+)"', match)
+                    
+                    if title_match and url_match:
+                        title = title_match.group(1).strip()
+                        league = league_match.group(1).strip() if league_match else "Diğer"
+                        url = url_match.group(1).strip()
+                        is_live = live_match and live_match.group(1) == 'true'
+                        
+                        # Stream ID'yi URL'den çıkar
+                        stream_id = ""
+                        if "id=" in url:
+                            # URL formatı: event.html?id=androstreamlivech19893294 veya /event.html?id=xxx
+                            stream_id = url.split("id=")[-1].strip()
+                        elif id_match:
+                            stream_id = id_match.group(1).strip()
+                        
+                        if stream_id:
+                            # Yayın URL'sini oluştur - event.html?formatında
+                            stream_url = f"{active_domain}event.html?id={stream_id}"
+                            
+                            # Grup adını belirle (CANLI ise ayrı, değilse lig bazlı)
+                            if is_live or "CANLI" in title.upper() or "LIVE" in title.upper():
+                                group_name = "MAHSUN CANLI"
+                            else:
+                                group_name = f"MAHSUN MAÇLAR - {league}"
+                            
+                            results.append(create_stream_info(
+                                name=f"MAHSUN - {title}",
+                                url=stream_url,
+                                group=group_name,
+                                logo="",
+                                referrer=active_domain
+                            ))
+                except Exception:
+                    continue
+                    
+        except Exception as e:
+            print(f"[!] Mahsun Sports hatası: {e}")
+    
+    return results
+
+
 # =============================================================================
 # M3U DOSYA OLUŞTURUCU
 # =============================================================================
@@ -657,8 +769,9 @@ def main():
     
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
-    # İstenilen sıralama: Atom, Netspor, Andro, Selçukspor, Taraftarium, XSport
+    # İstenilen sıralama: Atom, Mahsun, Netspor, Andro, Selçukspor, Taraftarium, XSport
     all_streams.extend(fetch_atom_spor())
+    all_streams.extend(fetch_mahsun_sports())
     all_streams.extend(fetch_netspor())
     all_streams.extend(fetch_andro_nodes())
     all_streams.extend(fetch_selcuk_sporcafe())

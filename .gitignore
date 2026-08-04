@@ -1,4 +1,40 @@
 ```
-__pycache__/
+# Compiled Python files
 *.pyc
+__pycache__/
+
+# Environment files
+.env
+.env.local
+*.env.*
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+.coverage
+coverage/
+htmlcov/
+
+# Dependency directories
+node_modules/
+venv/
+.venv/
+.mypy_cache/
+.pytest_cache/
+dist/
+build/
+target/
+.gradle/
 ```
