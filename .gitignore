@@ -1,5 +1,4 @@
-Since the only file change is the addition of `.gitignore` itself and there are no other files listed that would suggest specific ignore patterns are needed, the optimized .gitignore content is:
-
 ```
-# No specific patterns needed based on the provided file changes
+__pycache__/
+*.pyc
 ```
