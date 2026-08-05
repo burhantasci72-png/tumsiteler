@@ -865,14 +865,203 @@ KULISBET_CHANNELS = [
     {"id": "as", "name": "BİR SPOR"},
     {"id": "eu1", "name": "EURO SPORT 1"},
     {"id": "eu2", "name": "EURO SPORT 2"},
-    {"id": "ex7", "name": "TABI SPOR"},
-    {"id": "ex1", "name": "TABI SPOR 1"},
-    {"id": "ex2", "name": "TABI SPOR 2"},
-    {"id": "ex3", "name": "TABI SPOR 3"},
-    {"id": "ex4", "name": "TABI SPOR 4"},
-    {"id": "ex5", "name": "TABI SPOR 5"},
-    {"id": "ex6", "name": "TABI SPOR 6"},
+    {"id": "ex7", "name": "TABİİ SPOR"},
+    {"id": "ex1", "name": "TABİİ SPOR 1"},
+    {"id": "ex2", "name": "TABİİ SPOR 2"},
+    {"id": "ex3", "name": "TABİİ SPOR 3"},
+    {"id": "ex4", "name": "TABİİ SPOR 4"},
+    {"id": "ex5", "name": "TABİİ SPOR 5"},
+    {"id": "ex6", "name": "TABİİ SPOR 6"},
 ]
+
+# İNADINA TV (TURHAN) KANALLARI
+INADINA_TV_CHANNELS = [
+    {"id": "zirve", "name": "BEIN SPORTS 1"},
+    {"id": "b2", "name": "BEIN SPORTS 2"},
+    {"id": "b3", "name": "BEIN SPORTS 3"},
+    {"id": "b4", "name": "BEIN SPORTS 4"},
+    {"id": "b5", "name": "BEIN SPORTS 5"},
+    {"id": "bm1", "name": "BEIN SPORTS MAX 1"},
+    {"id": "bm2", "name": "BEIN SPORTS MAX 2"},
+    {"id": "ss", "name": "S SPORT"},
+    {"id": "ss2", "name": "S SPORT 2"},
+    {"id": "smarts", "name": "SMART SPOR"},
+    {"id": "sms2", "name": "SMART SPOR 2"},
+    {"id": "t1", "name": "TİVİBU SPOR 1"},
+    {"id": "t2", "name": "TİVİBU SPOR 2"},
+    {"id": "t3", "name": "TİVİBU SPOR 3"},
+    {"id": "t4", "name": "TİVİBU SPOR 4"},
+    {"id": "trtspor", "name": "TRT SPOR"},
+    {"id": "trtspor2", "name": "TRT SPOR YILDIZ"},
+    {"id": "trt1", "name": "TRT 1"},
+    {"id": "as", "name": "A SPOR"},
+    {"id": "atv", "name": "ATV"},
+    {"id": "tv8", "name": "TV 8"},
+    {"id": "tv85", "name": "TV 8,5"},
+    {"id": "eu1", "name": "EURO SPORT 1"},
+    {"id": "eu2", "name": "EURO SPORT 2"},
+    {"id": "ex7", "name": "TABİİ SPOR"},
+    {"id": "ex1", "name": "TABİİ SPOR 1"},
+    {"id": "ex2", "name": "TABİİ SPOR 2"},
+    {"id": "ex3", "name": "TABİİ SPOR 3"},
+    {"id": "ex4", "name": "TABİİ SPOR 4"},
+    {"id": "ex5", "name": "TABİİ SPOR 5"},
+    {"id": "ex6", "name": "TABİİ SPOR 6"},
+]
+
+# PAŞİZLE KANALLARI
+PASIZLE_CHANNELS = [
+    {"id": "zirve", "name": "BEIN SPORTS 1"},
+    {"id": "b2", "name": "BEIN SPORTS 2"},
+    {"id": "b3", "name": "BEIN SPORTS 3"},
+    {"id": "b4", "name": "BEIN SPORTS 4"},
+    {"id": "b5", "name": "BEIN SPORTS 5"},
+    {"id": "bm1", "name": "BEIN SPORTS MAX 1"},
+    {"id": "bm2", "name": "BEIN SPORTS MAX 2"},
+    {"id": "ss", "name": "S SPORT"},
+    {"id": "ss2", "name": "S SPORT 2"},
+    {"id": "smarts", "name": "SMART SPOR"},
+    {"id": "smarts2", "name": "SMART SPOR 2"},
+    {"id": "t1", "name": "TİVİBU SPOR 1"},
+    {"id": "t2", "name": "TİVİBU SPOR 2"},
+    {"id": "t3", "name": "TİVİBU SPOR 3"},
+    {"id": "t4", "name": "TİVİBU SPOR 4"},
+    {"id": "trtspor", "name": "TRT SPOR"},
+    {"id": "trtspor2", "name": "TRT SPOR YILDIZ"},
+    {"id": "trt1", "name": "TRT 1"},
+    {"id": "as", "name": "A SPOR"},
+    {"id": "atv", "name": "ATV"},
+    {"id": "tv8", "name": "TV 8"},
+    {"id": "tv85", "name": "TV 8,5"},
+    {"id": "ex5", "name": "Sıfır Tv"},
+    {"id": "ex6", "name": "Bi Kanal"},
+    {"id": "skyf1", "name": "SKY SPORTS F1"},
+    {"id": "eu1", "name": "EURO SPORT 1"},
+    {"id": "eu2", "name": "EURO SPORT 2"},
+    {"id": "ex7", "name": "TABİİ SPOR"},
+    {"id": "ex1", "name": "TABİİ SPOR 1"},
+    {"id": "ex2", "name": "TABİİ SPOR 2"},
+    {"id": "ex3", "name": "TABİİ SPOR 3"},
+    {"id": "ex4", "name": "TABİİ SPOR 4"},
+    {"id": "ex5b", "name": "TABİİ SPOR 5"},
+    {"id": "ex6b", "name": "TABİİ SPOR 6"},
+]
+
+
+def fetch_inadina_tv() -> List[StreamInfo]:
+    """
+    İnadına TV (Turhan) kanallarını otomatik domain tespiti ile toplar.
+    Link formatı: https://royaltvXX.com/
+    m3u8 bulunamadığı için direkt site linkleri kullanılır.
+    """
+    results: List[StreamInfo] = []
+    
+    # İnadına TV domain pattern'i
+    base_pattern = "https://royaltv{}.com/"
+    
+    def check_domain(index: int) -> Optional[str]:
+        """Domain'in aktif olup olmadığını kontrol eder."""
+        url = base_pattern.format(index)
+        try:
+            response = requests.get(url, headers=Config.HEADERS, timeout=5)
+            if response.status_code == 200:
+                return url
+        except Exception:
+            pass
+        return None
+    
+    def find_active_domain() -> Optional[str]:
+        """Aktif domain'i bulur."""
+        with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+            futures = [executor.submit(check_domain, i) for i in range(1, 100)]
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                if result:
+                    return result
+        return None
+    
+    active_domain = find_active_domain()
+    
+    if not active_domain:
+        print("⚠️ İnadına TV aktif domain bulunamadı, varsayılan domain kullanılıyor.")
+        active_domain = "https://royaltv33.com/"
+    
+    # Domain'i temizle (sonundaki / varsa kaldır)
+    active_domain = active_domain.rstrip('/')
+    
+    for channel in INADINA_TV_CHANNELS:
+        # İnadına TV link yapısı: base_url/ (ana sayfada kanal ID'si ile açılıyor)
+        stream_url = f"{active_domain}/"
+        
+        # Direkt site linkini ekle (m3u8 bulunamadığı için)
+        results.append(StreamInfo(
+            name=f"İNADINA - {channel['name']}",
+            url=stream_url,
+            group="İNADINA TV HD",
+            logo="",
+            referrer=active_domain
+        ))
+    
+    print(f"    -> {len(results)} adet İnadına TV kanalı eklendi.")
+    return results
+
+
+def fetch_pasizle_channels() -> List[StreamInfo]:
+    """
+    PaŞizle kanallarını otomatik domain tespiti ile toplar.
+    Link formatı: https://pasizleXXX.com/ch.html?id={id}
+    m3u8 bulunamadığı için direkt site linkleri kullanılır.
+    """
+    results: List[StreamInfo] = []
+    
+    # PaŞizle domain pattern'i
+    base_pattern = "https://pasizle{}.com/"
+    
+    def check_domain(index: int) -> Optional[str]:
+        """Domain'in aktif olup olmadığını kontrol eder."""
+        url = base_pattern.format(index)
+        try:
+            response = requests.get(url, headers=Config.HEADERS, timeout=5)
+            if response.status_code == 200:
+                return url
+        except Exception:
+            pass
+        return None
+    
+    def find_active_domain() -> Optional[str]:
+        """Aktif domain'i bulur."""
+        with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+            futures = [executor.submit(check_domain, i) for i in range(800, 900)]
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                if result:
+                    return result
+        return None
+    
+    active_domain = find_active_domain()
+    
+    if not active_domain:
+        print("⚠️ PaŞizle aktif domain bulunamadı, varsayılan domain kullanılıyor.")
+        active_domain = "https://pasizle857.com/"
+    
+    # Domain'i temizle (sonundaki / varsa kaldır)
+    active_domain = active_domain.rstrip('/')
+    
+    for channel in PASIZLE_CHANNELS:
+        # PaŞizle link yapısı: base_url/ch.html?id={id}
+        stream_url = f"{active_domain}/ch.html?id={channel['id']}"
+        
+        # Direkt site linkini ekle (m3u8 bulunamadığı için)
+        results.append(StreamInfo(
+            name=f"PAŞİZLE - {channel['name']}",
+            url=stream_url,
+            group="PAŞİZLE HD",
+            logo="",
+            referrer=active_domain
+        ))
+    
+    print(f"    -> {len(results)} adet PaŞizle kanalı eklendi.")
+    return results
 
 
 def fetch_kulisbet_channels() -> List[StreamInfo]:
@@ -940,7 +1129,7 @@ def main():
     
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
-    # Tüm platformları tara (Eski sistem geri getirildi)
+    # Tüm platformları tara (Eski sistem + Yeni eklemeler)
     print("\n[1] XSport taranıyor...")
     all_streams.extend(fetch_xsport())
     
@@ -962,6 +1151,15 @@ def main():
     
     print("\n[7] Mahsun Sports taranıyor (Sadece Canlı Kanallar)...")
     all_streams.extend(fetch_mahsun_sports())
+    
+    print("\n[8] İnadına TV (Turhan) taranıyor...")
+    all_streams.extend(fetch_inadina_tv())
+    
+    print("\n[9] PaŞizle taranıyor...")
+    all_streams.extend(fetch_pasizle_channels())
+    
+    print("\n[10] Kulisbet taranıyor...")
+    all_streams.extend(fetch_kulisbet_channels())
     
     if not all_streams:
         print("Hiçbir kanal bulunamadı!")
