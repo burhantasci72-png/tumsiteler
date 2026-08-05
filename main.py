@@ -940,7 +940,27 @@ def main():
     
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
-    # Sadece Mahsun Spor kanalları (Kulis TV ve diğerleri kaldırıldı)
+    # Tüm platformları tara (Eski sistem geri getirildi)
+    print("\n[1] XSport taranıyor...")
+    all_streams.extend(fetch_xsport())
+    
+    print("\n[2] Taraftarium taranıyor...")
+    all_streams.extend(fetch_taraftarium())
+    all_streams.extend(fetch_taraftarium_ozel())
+    
+    print("\n[3] Selçukspor taranıyor...")
+    all_streams.extend(fetch_selcuk_sporcafe())
+    
+    print("\n[4] Andro Panel taranıyor...")
+    all_streams.extend(fetch_andro_nodes())
+    
+    print("\n[5] Netspor taranıyor...")
+    all_streams.extend(fetch_netspor())
+    
+    print("\n[6] Atom Spor taranıyor...")
+    all_streams.extend(fetch_atom_spor())
+    
+    print("\n[7] Mahsun Sports taranıyor (Sadece Canlı Kanallar)...")
     all_streams.extend(fetch_mahsun_sports())
     
     if not all_streams:
