@@ -940,17 +940,8 @@ def main():
     
     print("--- SPOR LİSTESİ OLUŞTURUCU BAŞLATILDI ---")
     
-    # İstenilen sıralama: Atom, Mahsun, Kulis TV, Kulisbet, Netspor, Andro, Selçukspor, Taraftarium, XSport
-    all_streams.extend(fetch_atom_spor())
+    # Sadece Mahsun Spor kanalları (Kulis TV ve diğerleri kaldırıldı)
     all_streams.extend(fetch_mahsun_sports())
-    all_streams.extend(fetch_kulis_tv())
-    all_streams.extend(fetch_kulisbet_channels())  # Yeni: Kulisbet sabit kanalları
-    all_streams.extend(fetch_netspor())
-    all_streams.extend(fetch_andro_nodes())
-    all_streams.extend(fetch_selcuk_sporcafe())
-    all_streams.extend(fetch_taraftarium())
-    all_streams.extend(fetch_taraftarium_ozel())
-    all_streams.extend(fetch_xsport())
     
     if not all_streams:
         print("Hiçbir kanal bulunamadı!")
