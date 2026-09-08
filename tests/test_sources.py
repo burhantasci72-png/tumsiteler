@@ -120,6 +120,38 @@ class TestFindDomain(DiscoveryTestBase):
         self.assertIsNone(sources.find_domain(cfg))
 
 
+class TestM3uParsing(DiscoveryTestBase):
+    SAMPLE = """#EXTM3U
+#EXTINF:-1 tvg-logo="http://l.png" group-title="SPOR",BeIN Sports UHD 1
+#EXTVLCOPT:http-user-agent=Dalvik/2.1.0 (Linux; U; Android 13)
+https://andro.226503.xyz/checklist/androstreamlivebs1.m3u8
+#EXTINF:-1 group-title="SPOR",TRT Spor
+#EXTHTTP:{"User-Agent": "X/1", "Referer": "https://ref.example/"}
+https://cdn.example/live/trt.m3u8
+"""
+
+    def test_parses_name_url_ua_referer(self):
+        entries = sources.parse_m3u_entries(self.SAMPLE)
+        self.assertEqual(len(entries), 2)
+
+        first, second = entries
+        self.assertEqual(first["name"], "BeIN Sports UHD 1")
+        self.assertEqual(first["user_agent"], "Dalvik/2.1.0 (Linux; U; Android 13)")
+        self.assertEqual(first["attr_group-title"], "SPOR")
+        self.assertEqual(second["referrer"], "https://ref.example/")
+        self.assertEqual(second["user_agent"], "X/1")
+
+    def test_parse_empty(self):
+        self.assertEqual(sources.parse_m3u_entries(""), [])
+
+
+class TestExternalScriptExtraction(DiscoveryTestBase):
+    def test_extract_follows_script_src(self):
+        found = core.extract_m3u8(f"{self.base}/jspage.html")
+        self.assertIsNotNone(found)
+        self.assertTrue(found.endswith("/good.m3u8"))
+
+
 class TestChecklistDiscovery(DiscoveryTestBase):
     def test_discovers_servers_from_panel_html(self):
         html = sources.get_text(f"{self.base}/newpanel/")
@@ -127,8 +159,8 @@ class TestChecklistDiscovery(DiscoveryTestBase):
         self.assertIn(f"http://127.0.0.1:{self.port}/checklisthost", servers)
 
     def test_probe_checklist_accepts_valid_hls(self):
-        server = sources._probe_checklist(f"http://127.0.0.1:{self.port}")
-        self.assertEqual(server, f"http://127.0.0.1:{self.port}")
+        found = sources._probe_checklist(f"http://127.0.0.1:{self.port}")
+        self.assertEqual(found[0], f"http://127.0.0.1:{self.port}")
 
     def test_probe_checklist_rejects_dead(self):
         self.assertIsNone(sources._probe_checklist("http://127.0.0.1:1"))

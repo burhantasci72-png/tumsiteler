@@ -344,7 +344,11 @@ def _fetch_panel(family: str, page_template: str,
     ]
     results = resolve_pages(entries, group=group, source=source,
                             referrer=domain, logo=logo)
-    _log(f"-> {FAMILIES[family]['label']}: {len(results)}/{len(entries)} kanalda m3u8 bulundu")
+    label = FAMILIES[family]["label"]
+    _log(f"-> {label}: {len(results)}/{len(entries)} kanalda m3u8 bulundu")
+    FAMILY_STATUS[family if isinstance(family, str) else label] = (
+        f"m3u8 {len(results)}/{len(entries)} ({domain})"
+    )
     return results
 
 
@@ -658,33 +662,51 @@ def discover_checklist_servers(*htmls: str) -> List[str]:
         for base in _checklist_candidates_from_text(html):
             add(base)
 
+    # Topluluk listeleri guncel checklist sunucularini tasiyabilir
+    community = community_m3u_text()
+    if community:
+        for base in _checklist_candidates_from_text(community):
+            add(base)
+
     for server in _previous_list_servers():
         add(server)
 
     return candidates
 
 
-def _probe_checklist(server: str, channel_id: str = "androstreamlivebs1") -> Optional[str]:
-    """Checklist sunucusu gercekten yayin veriyor mu? (ilk baytlar HLS imzasi)"""
+def _probe_checklist(server: str, channel_id: str = "androstreamlivebs1"):
+    """Checklist sunucusu gercekten yayin veriyor mu?
+
+    Basarili olursa (sunucu, calisan user-agent) demeti dondurur.
+    Checklist sunuculari cogunlukla Android/Dalvik UA bekler; once tarayici
+    UA, olmazsa Dalvik denenir.
+    """
     url = _andro_url(server, channel_id)
-    response = http_get(
-        url,
-        referrer=ANDRO_REFERER,
-        timeout=(4, 7),
-        stream=True,
-    )
-    if response is None:
-        return None
-    try:
-        if response.status_code != 200:
-            return None
-        head = read_chunk(response, 256)
-    finally:
+    for ua, referer in (
+        (None, ANDRO_REFERER),
+        (DALVIK_UA, None),
+    ):
+        extra = {"User-Agent": ua} if ua else None
+        response = http_get(
+            url,
+            referrer=referer,
+            timeout=(4, 7),
+            stream=True,
+            extra_headers=extra,
+        )
+        if response is None:
+            continue
         try:
-            response.close()
-        except Exception:
-            pass
-    return server if b"#EXT" in head else None
+            if response.status_code == 200:
+                head = read_chunk(response, 256)
+                if b"#EXT" in head:
+                    return server, (ua or None)
+        finally:
+            try:
+                response.close()
+            except Exception:
+                pass
+    return None
 
 
 def _andro_url(server: str, channel_id: str) -> str:
@@ -707,20 +729,20 @@ def fetch_andro() -> List[StreamInfo]:
         FAMILY_STATUS["andro"] = "sunucu-yok"
         return []
 
-    active = [
+    probes = [
         s for s in run_parallel(_probe_checklist, servers, Settings.SCRAPE_WORKERS)
         if s
     ]
-    if not active:
+    if not probes:
         _log(f"-> Andro: {len(servers)} sunucudan hicbiri yanit vermedi")
         FAMILY_STATUS["andro"] = f"{len(servers)} aday olmus"
         return []
 
-    _log(f"-> Andro: {len(active)}/{len(servers)} sunucu aktif: {active[:3]}")
-    FAMILY_STATUS["andro"] = f"{len(active)}/{len(servers)} sunucu aktif"
+    _log(f"-> Andro: {len(probes)}/{len(servers)} sunucu aktif: {[p[0] for p in probes][:3]}")
+    FAMILY_STATUS["andro"] = f"{len(probes)}/{len(servers)} sunucu aktif"
 
     results: List[StreamInfo] = []
-    for server in active:
+    for server, ua in probes:
         for channel_id, name in ANDRO_IDS:
             results.append(
                 StreamInfo(
@@ -729,6 +751,7 @@ def fetch_andro() -> List[StreamInfo]:
                     group="ANDRO SPOR",
                     referrer=ANDRO_REFERER,
                     source="andro",
+                    user_agent=ua or "",
                 )
             )
     return results
@@ -761,16 +784,16 @@ def fetch_netspor() -> List[StreamInfo]:
         FAMILY_STATUS["netspor"] = "sunucu-yok"
         return []
 
-    active = [
+    probes = [
         s for s in run_parallel(_probe_checklist, servers, Settings.SCRAPE_WORKERS)
         if s
     ]
-    if not active:
+    if not probes:
         _log(f"-> Netspor: {len(servers)} sunucudan hicbiri canli degil")
         FAMILY_STATUS["netspor"] = f"{len(servers)} aday olmus"
         return []
-    _log(f"-> Netspor: {len(active)}/{len(servers)} sunucu aktif: {active[:3]}")
-    FAMILY_STATUS["netspor"] = f"{len(active)}/{len(servers)} sunucu aktif"
+    _log(f"-> Netspor: {len(probes)}/{len(servers)} sunucu aktif: {[p[0] for p in probes][:3]}")
+    FAMILY_STATUS["netspor"] = f"{len(probes)}/{len(servers)} sunucu aktif"
 
     soup = BeautifulSoup(html, "html.parser")
     results: List[StreamInfo] = []
@@ -793,7 +816,7 @@ def fetch_netspor() -> List[StreamInfo]:
             continue
         seen.add(key)
 
-        for server in active:
+        for server, ua in probes:
             results.append(
                 StreamInfo(
                     name=title,
@@ -801,6 +824,7 @@ def fetch_netspor() -> List[StreamInfo]:
                     group="NETSPOR",
                     referrer=ANDRO_REFERER,
                     source="netspor",
+                    user_agent=ua or "",
                 )
             )
 
@@ -812,7 +836,7 @@ def fetch_netspor() -> List[StreamInfo]:
         }:
             continue
         seen.add((stream_id, stream_id))
-        for server in active:
+        for server, ua in probes:
             results.append(
                 StreamInfo(
                     name=stream_id,
@@ -820,6 +844,7 @@ def fetch_netspor() -> List[StreamInfo]:
                     group="NETSPOR",
                     referrer=ANDRO_REFERER,
                     source="netspor",
+                    user_agent=ua or "",
                 )
             )
 
@@ -949,11 +974,153 @@ def fetch_kulisbet() -> List[StreamInfo]:
     )
 
 
+
+# =============================================================================
+# 11. TOPLULUK LISTELERI (guncel sunucu ve UA bilgisi tasiyan curutulmus M3U'lar)
+# =============================================================================
+
+COMMUNITY_M3U_URLS = [
+    url.strip()
+    for url in os.environ.get(
+        "COMMUNITY_M3U",
+        "https://raw.githubusercontent.com/Kral-Turk/Kral-Turk-TV/main/TURK_TV.m3u_plus,"
+        "https://raw.githubusercontent.com/Kral-Turk/Kral-Turk-TV/main/Kral-Sport.m3u_plus",
+    ).split(",")
+    if url.strip()
+]
+
+# Android/Dalvik istemcisi: checklist sunuculari cogunlukla bunu bekler
+DALVIK_UA = (
+    "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
+)
+
+_EXTINF_ATTR = re.compile(r'([a-zA-Z0-9-]+)="([^"]*)"')
+
+
+def _community_cache_path() -> str:
+    import tempfile
+
+    return os.path.join(tempfile.gettempdir(), "community_m3u.cache")
+
+
+def community_m3u_text() -> str:
+    """Topluluk M3U'larini indirir (surec boyunca tek sefer; dosya onbellekli)."""
+    cache = _community_cache_path()
+    if os.path.exists(cache):
+        try:
+            with open(cache, encoding="utf-8", errors="ignore") as handle:
+                return handle.read()
+        except Exception:
+            pass
+
+    parts: List[str] = []
+    for url in COMMUNITY_M3U_URLS:
+        response = http_get(url, timeout=(6, 20))
+        if response is None or response.status_code != 200:
+            continue
+        body = getattr(response, "text", "") or ""
+        if "#EXTINF" in body:
+            parts.append(body)
+        try:
+            response.close()
+        except Exception:
+            pass
+
+    text = "\n".join(parts)
+    if text:
+        try:
+            with open(cache, "w", encoding="utf-8") as handle:
+                handle.write(text)
+        except Exception:
+            pass
+    return text
+
+
+def parse_m3u_entries(text: str) -> List[Dict[str, str]]:
+    """M3U_PLUS metnini girdi sozluklerine ayristirir (UA/Referer dahil)."""
+    entries: List[Dict[str, str]] = []
+    current: Optional[Dict[str, str]] = None
+
+    for line in (text or "").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        low = line.lower()
+        if low.startswith("#extinf"):
+            name = line.split(",", 1)[1].strip() if "," in line else ""
+            current = {"name": name}
+            for key, value in _EXTINF_ATTR.findall(line):
+                current.setdefault(f"attr_{key.lower()}", value)
+        elif low.startswith("#extvlcopt:http-user-agent=") and current is not None:
+            current.setdefault("user_agent", line.split("=", 1)[1].strip())
+        elif low.startswith("#extvlcopt:http-referrer=") and current is not None:
+            current.setdefault("referrer", line.split("=", 1)[1].strip())
+        elif low.startswith("#extvlcopt:http-origin=") and current is not None:
+            current.setdefault("referrer", current.get("referrer") or line.split("=", 1)[1].strip())
+        elif low.startswith("#extvlcopt") or low.startswith("#extgrp") or low.startswith("#ext-x"):
+            continue
+        elif low.startswith("#exthttp") and current is not None:
+            blob = line.split(":", 1)[1]
+            try:
+                headers = json.loads(blob)
+                current.setdefault("user_agent", headers.get("User-Agent", ""))
+                current.setdefault("referrer", headers.get("Referer", ""))
+            except Exception:
+                pass
+        elif line.startswith("#"):
+            continue
+        elif current is not None:
+            if line.startswith(("http://", "https://")):
+                current["url"] = line
+                entries.append(current)
+            current = None
+
+    return entries
+
+
+def fetch_community_m3u() -> List[StreamInfo]:
+    """Topluluk listelerini okur; dogrulama katmani olulerini eler.
+
+    Bu listeler sunucu rotasyonunu gunluk takip ettigi icin checklist
+    sunucularinin en guncel kaynaklarindan biridir.
+    """
+    text = community_m3u_text()
+    if not text:
+        _log("-> Topluluk: liste alinamadi")
+        FAMILY_STATUS["topluluk"] = "liste-yok"
+        return []
+
+    raw_entries = parse_m3u_entries(text)
+    results: List[StreamInfo] = []
+    for entry in raw_entries:
+        url = entry.get("url", "")
+        if not url:
+            continue
+        # tinyurl/redirect iceren girdileri cozerken asiri istek atma;
+        # dogrudan adresler ve bilinen desenler kalsin
+        results.append(
+            StreamInfo(
+                name=entry.get("name") or "Bilinmeyen",
+                url=url,
+                group=entry.get("attr_group-title") or "TOPLULUK",
+                logo=entry.get("attr_tvg-logo", ""),
+                referrer=entry.get("referrer", ""),
+                source="topluluk",
+                user_agent=entry.get("user_agent", ""),
+            )
+        )
+
+    FAMILY_STATUS["topluluk"] = f"{len(results)} girdi"
+    _log(f"-> Topluluk: {len(results)} girdi")
+    return results
+
+
 # =============================================================================
 # KAYIT
 # =============================================================================
 
 COLLECTORS: List[Tuple[str, Callable[[], List[StreamInfo]]]] = [
+    ("Topluluk listesi", fetch_community_m3u),
     ("XSport", fetch_xsport),
     ("Taraftarium (sabit)", fetch_taraftarium_static),
     ("Taraftarium24 (canlı)", fetch_taraftarium_live),
