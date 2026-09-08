@@ -255,6 +255,72 @@ class TestAtomWorkerFallback(DiscoveryTestBase):
         self.assertTrue(all(s.group == "ATOM SPOR" for s in streams))
 
 
+class TestPanelCache(DiscoveryTestBase):
+    """Panel adresi hafizasi (rastgele ekli sporcafe-*.xyz gibi adresler icin)."""
+
+    def setUp(self):
+        super().setUp()
+        self._orig = sources.PANEL_CACHE_FILE
+        self.path = os.path.join(tempfile.mkdtemp(), "panel_cache.json")
+        sources.PANEL_CACHE_FILE = self.path
+        sources._PANEL_CACHE = None
+
+    def tearDown(self):
+        sources.PANEL_CACHE_FILE = self._orig
+        sources._PANEL_CACHE = None
+
+    def test_remember_then_read(self):
+        self.assertEqual(sources.cached_panel("selcuk"), "")
+        sources.remember_panel("selcuk", "https://panel.example/")
+        self.assertEqual(sources.cached_panel("selcuk"), "https://panel.example")
+        # Dosyaya yazilmis olmali (yeni kosuda da okunur)
+        sources._PANEL_CACHE = None
+        self.assertEqual(sources.cached_panel("selcuk"), "https://panel.example")
+
+    def test_empty_domain_ignored(self):
+        sources.remember_panel("selcuk", "")
+        self.assertEqual(sources.cached_panel("selcuk"), "")
+
+    def test_repo_cache_file_parses(self):
+        repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        sources.PANEL_CACHE_FILE = os.path.join(repo, "panel_cache.json")
+        sources._PANEL_CACHE = None
+        self.assertTrue(sources.cached_panel("selcuk").startswith("https://"))
+        self.assertTrue(sources.cached_panel("atom").startswith("https://"))
+
+
+class TestFindDomains(DiscoveryTestBase):
+    """find_domains birden fazla calisan adres dondurebilmeli."""
+
+    def test_seeds_first_and_multiple(self):
+        cfg = {
+            "label": "TestCoklu",
+            "seeds": [f"{self.base}/redirect-panel", f"{self.base}/yok"],
+            "patterns": [(f"{self.base}/yok{{}}", range(1, 3))],
+            "signature": ("bein",),
+        }
+        found = sources.find_domains(cfg, limit=2)
+        self.assertTrue(found, found)
+        self.assertTrue(any(u.endswith("/newpanel") for u in found), found)
+
+    def test_find_domain_uses_cache(self):
+        sources.PANEL_CACHE_FILE = os.path.join(tempfile.mkdtemp(), "c.json")
+        sources._PANEL_CACHE = None
+        try:
+            sources.remember_panel("Cached", f"{self.base}/newpanel")
+            cfg = {
+                "label": "Cached",
+                "seeds": [],
+                "patterns": [],
+                "signature": ("bein",),
+            }
+            self.assertEqual(
+                sources.find_domain(cfg), f"{self.base}/newpanel"
+            )
+        finally:
+            sources._PANEL_CACHE = None
+
+
 class TestPanelDiscovery(DiscoveryTestBase):
     """Yeni nesil (slug) paneller icin kanal/kcozucu kesfi."""
 

@@ -86,7 +86,8 @@ jobs:
           git config --local user.name "GitHub Action"
           # NOT: health_report.json .gitignore'da oldugu icin eklenMEZ;
           # git add'in tamamini kirdigi icin liste uzun sure commit edilemedi.
-          if ! git add Canli_Spor_Hepsi.m3u channels.json 2>/tmp/add.err; then
+          # panel_cache.json: yayin veren panel adreslerinin hafizasi.
+          if ! git add Canli_Spor_Hepsi.m3u channels.json panel_cache.json 2>/tmp/add.err; then
             echo "::error::git add basarisiz: $(tail -2 /tmp/add.err)"
             exit 1
           fi

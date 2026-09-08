@@ -25,6 +25,8 @@ from __future__ import annotations
 import json
 import os
 import re
+import threading
+import time
 import urllib.parse
 from typing import Callable, Dict, List, Optional, Sequence, Tuple
 
@@ -37,6 +39,7 @@ from core import (
     extract_m3u8,
     find_m3u8_in_text,
     first_match,
+    first_matches,
     get_text,
     http_get,
     read_chunk,
@@ -88,7 +91,10 @@ FAMILIES: Dict[str, Dict] = {
             "https://selcuksporlive.online",
             "https://selcuksportshd5.click",
             "https://selcukiptv58.top",
-            # Eski nesil (uxsyplayer) adresler - hala yayin verenler
+            # Eski nesil (uxsyplayer) adresler - hala yayin verenler.
+            # Not: gercek panel adresleri rastgele ekli ("sporcafe-<hash>.xyz"),
+            # bulunduklarinda panel_cache.json icine yazilirlar.
+            "https://www.sporcafe-0c2608ad69.xyz",
             "https://www.sporcafe1.xyz",
         ],
         "patterns": [
@@ -263,18 +269,13 @@ def probe_domain(
     return final_url.rstrip("/")
 
 
-def find_domain(family) -> Optional[str]:
-    """Bir ailenin AKTIF ve GUNCEL domainini bulur.
+def find_domains(family, limit: int = 2) -> List[str]:
+    """Aileye ait calisan adresleri dondurur (tohumlar once, sonra tarama).
 
-    `family` ya FAMILIES icindeki bir anahtar ya da dogrudan bir
-    yapilandirma sozlugu olabilir (testler icin).
-
-    Sirasiyla: seeds -> uretilmis araliklar taranir; bulunan sayfadaki
-    'GUNCEL ADRES' duyurusu takip edilir; aile domainleri de hasat edilir.
+    Birden fazla adres istenebilir: ornegin Selcukspor'un yayin paneli ile
+    "giris" sayfasi farkli adreslerde olabiliyor.
     """
     cfg = family if isinstance(family, dict) else FAMILIES[family]
-    label = cfg["label"]
-    status_key = family if isinstance(family, str) else label
     signature = cfg.get("signature") or None
 
     seeds: List[str] = list(cfg.get("seeds", []))
@@ -282,23 +283,65 @@ def find_domain(family) -> Optional[str]:
     for template, indexes in cfg.get("patterns", []):
         candidates.extend(template.format(index) for index in indexes)
 
-    # Once bilinen/duyurulan adresler denenir: numara taramasi hem yavas hem
-    # de ayni imzayi tasiyan baska bir siteye (yanlis panel) dusecebilir.
-    found = None
+    found: List[str] = []
     if seeds:
-        found = first_match(
-            lambda url: probe_domain(url, signature),
-            seeds,
-            min(len(seeds), 8),
-            budget_seconds=max(20, Settings.SOURCE_BUDGET // 3),
+        found.extend(
+            first_matches(
+                lambda url: probe_domain(url, signature),
+                seeds,
+                min(len(seeds), 8),
+                limit,
+                budget_seconds=max(20, Settings.SOURCE_BUDGET // 3),
+            )
         )
-    if not found and candidates:
-        found = first_match(
-            lambda url: probe_domain(url, signature),
-            candidates,
-            Settings.DOMAIN_PROBE_WORKERS,
-            budget_seconds=Settings.SOURCE_BUDGET,
+    if len(found) < limit and candidates:
+        found.extend(
+            first_matches(
+                lambda url: probe_domain(url, signature),
+                candidates,
+                Settings.DOMAIN_PROBE_WORKERS,
+                limit - len(found),
+                budget_seconds=Settings.SOURCE_BUDGET,
+            )
         )
+
+    unique: List[str] = []
+    for url in found:
+        if url and url not in unique:
+            unique.append(url)
+    return unique
+
+
+def find_domain(family) -> Optional[str]:
+    """Bir ailenin AKTIF ve GUNCEL domainini bulur.
+
+    `family` ya FAMILIES icindeki bir anahtar ya da dogrudan bir
+    yapilandirma sozlugu olabilir (testler icin).
+
+    Sirasiyla: hatirlanan adres -> seeds -> uretilmis araliklar taranir;
+    bulunan sayfadaki 'GUNCEL ADRES' duyurusu takip edilir; aile domainleri
+    de hasat edilir.
+    """
+    cfg = family if isinstance(family, dict) else FAMILIES[family]
+    label = cfg["label"]
+    status_key = family if isinstance(family, str) else label
+    signature = cfg.get("signature") or None
+
+    found = None
+    cache_keys = [
+        key for key in (family if isinstance(family, str) else "", label) if key
+    ]
+    for key in dict.fromkeys(cache_keys):
+        cached = cached_panel(key)
+        if not cached:
+            continue
+        found = probe_domain(cached, signature)
+        if found:
+            _log(f"-> {label}: hatirlanan adres {found}")
+            break
+    if not found:
+        domains = find_domains(family, 1)
+        found = domains[0] if domains else None
     if not found:
         FAMILY_STATUS[status_key] = "domain-bulunamadi"
         _log(f"-> {label}: aktif domain bulunamadi")
@@ -358,6 +401,72 @@ def resolve_pages(
         )
 
     return run_parallel(work, entries, Settings.SCRAPE_WORKERS)
+
+
+# =============================================================================
+# PANEL ADRES HAFIZASI (panel_cache.json)
+# =============================================================================
+#
+# Bazi panellerin gercek adresi rastgele ekliyor ("www.sporcafe-0c2608ad69.xyz"
+# gibi); ne numara taramasi ne de "GUNCEL ADRESIMIZ" duyurusu bunu bulamaz.
+# Bir kez yayin veren adres bulundugunda buraya yazilir ve sonraki kosularda
+# ILK olarak burasi denenir. Boylece adres degisene kadar tarama gerekmez;
+# adres degisirse hafiza basarisiz olur ve normal kesfe dusulur.
+#
+# Dosya is akisi tarafindan commit edilir (liste dosyalariyla ayni adimda).
+
+PANEL_CACHE_FILE = os.environ.get("PANEL_CACHE", "panel_cache.json")
+_PANEL_CACHE: Optional[Dict[str, Dict[str, str]]] = None
+_PANEL_CACHE_LOCK = threading.Lock()
+
+
+def _load_panel_cache() -> Dict[str, Dict[str, str]]:
+    global _PANEL_CACHE
+    if _PANEL_CACHE is not None:
+        return _PANEL_CACHE
+    data: Dict[str, Dict[str, str]] = {}
+    try:
+        with open(PANEL_CACHE_FILE, encoding="utf-8") as handle:
+            loaded = json.load(handle)
+        if isinstance(loaded, dict):
+            data = {
+                str(key): value
+                for key, value in loaded.items()
+                if isinstance(value, dict)
+            }
+    except Exception:
+        data = {}
+    _PANEL_CACHE = data
+    return data
+
+
+def cached_panel(family: str) -> str:
+    """Hatirlanan panel adresi (yoksa '')."""
+    if not PANEL_CACHE_FILE:
+        return ""
+    return str(_load_panel_cache().get(family, {}).get("domain", "") or "").rstrip("/")
+
+
+def remember_panel(family: str, domain: str) -> None:
+    """Yayin veren panel adresini hatirla (sonraki kosu ilk burayi dener)."""
+    domain = (domain or "").rstrip("/")
+    if not domain or not PANEL_CACHE_FILE:
+        return
+    cache = _load_panel_cache()
+    with _PANEL_CACHE_LOCK:
+        if cache.get(family, {}).get("domain") == domain:
+            return
+        cache[family] = {
+            "domain": domain,
+            "updated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        }
+        try:
+            tmp = f"{PANEL_CACHE_FILE}.tmp"
+            with open(tmp, "w", encoding="utf-8") as handle:
+                json.dump(cache, handle, ensure_ascii=False, indent=1)
+            os.replace(tmp, PANEL_CACHE_FILE)
+        except Exception:
+            pass
 
 
 # =============================================================================
@@ -698,16 +807,25 @@ def _selcuk_site_links(html: str) -> List[str]:
 
 
 def _selcuk_domain_candidates() -> List[str]:
-    """Denenecek Selçukspor adresleri (keşfedilen + bilinen tohumlar)."""
+    """Denenecek Selçukspor adresleri.
+
+    Yayin paneli ile "giris" sayfasi farkli adreslerde olabiliyor; bu
+    yuzden hatirlanan adres + kesfedilen adresler + tohumlar birlikte
+    denenir (yayin veren ilk adres kazanir).
+    """
     domains: List[str] = []
-    found = find_domain("selcuk")
-    if found:
-        domains.append(found.rstrip("/"))
+
+    def push(url: str) -> None:
+        url = (url or "").rstrip("/")
+        if url and url not in domains:
+            domains.append(url)
+
+    push(cached_panel("selcuk"))
+    for domain in find_domains("selcuk", limit=2):
+        push(domain)
     for seed in FAMILIES["selcuk"].get("seeds", []):
-        seed = seed.rstrip("/")
-        if seed not in domains:
-            domains.append(seed)
-    return domains[:5]
+        push(seed)
+    return domains[:6]
 
 
 def _selcuk_legacy_streams(domain: str, server: str) -> List[StreamInfo]:
@@ -826,6 +944,9 @@ def fetch_selcukspor() -> List[StreamInfo]:
             add(legacy)
 
         if results:
+            # Yayin veren adresi hatirla: panel adresi rastgele ekli oldugu
+            # icin sonraki kosuda dogrudan buradan baslanir.
+            remember_panel("selcuk", domain)
             FAMILY_STATUS["selcuk"] = f"{domain} | {len(results)} kanal"
             break
 
@@ -1248,6 +1369,8 @@ def fetch_atom() -> List[StreamInfo]:
 
         results = run_parallel(work, entries, Settings.SCRAPE_WORKERS)
         _log(f"-> AtomSpor: {len(results)}/{len(slugs)} kanalda m3u8 bulundu")
+        if results:
+            remember_panel("atom", entries_dom)
 
         # Ilk yol tutmadiysa diger olasi yollari da dene (panel tasinmis olabilir)
         if not results:
