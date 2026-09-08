@@ -27,6 +27,31 @@ ve kalıcı çözümler:
 
 | 13 | **AtomSpor / Selçukspor / beIN MAX 2 listede yoktu** — Atom'un panel sayfası Actions'tan Cloudflare'e takılıyor, Selçuk'un seed adresleri yalnızca "giriş" sayfası; ayrıca `.m3u8` içermeyen **çözücü** adresler (`workers.dev/?ID=kanal` → 302 → m3u8) doğrulayıcı tarafından "sayfa" sanılıp eleniyordu | Repo içinde **`seeds.m3u`** (bilinen kalıcı adresler; her koşuda diğerleri gibi doğrulanır), AtomSpor için **worker çözücü yedeği**, Selçuk için giriş sayfasından asıl siteye geçiş; doğrulayıcı artık çözücü adresleri indirip gerçekten HLS dönüyorsa kabul ediyor ve segmentleri **yönlendirme sonrası** adrese göre çözüyor. Oynatıcı/proxy de aynı adresleri HLS sayar |
 
+## Kategori düzeni (temiz + sıralı liste)
+
+Liste artık kaynak sitenin grup adını (`NETSPOR`, `TR ULUSAL-UHD`, `ATOM SPOR`)
+değil, **kanalın kendi kategorisini** taşır. Kategoriler sabit bir öncelik
+sırasıyla yazılır — **beIN Sports her zaman ilk kategoridir**:
+
+| # | Kategori | İçerik |
+|---|----------|--------|
+| 1 | `BEIN SPORTS` | beIN Sports 1-5, Max 1-2, Haber, 4K |
+| 2 | `S SPORT` | S Sport 1-2, S Sport Plus |
+| 3 | `TİVİBU SPOR` | Tivibu Spor 1-4 |
+| 4 | `TRT SPOR` | TRT Spor, TRT Spor Yıldız, TRT 1 |
+| 5 | `TABİİ SPOR` | Tabii Spor 1-7 |
+| 6 | `DİĞER SPOR KANALLARI` | Smart Spor, Eurosport, A Spor, FB TV, GS TV ... |
+| 7 | `CANLI MAÇLAR` | maç yayınları (saate göre sıralı) |
+
+Aynı kanal birden fazla sitede bulunduğunda tek kartta birleştirilir; en hızlı
+doğrulanmış kaynak birincil olur, diğerleri **yedek** olarak arkasına yazılır.
+Yani "beIN Sports 1" kartı açılmazsa Atom → Selçuk → Netspor sırayla denenir.
+
+**Spor dışı temizlik:** topluluk listeleri çocuk/haber/ulusal kanalları da
+taşıdığı için liste kirleniyordu. `core.filter_publishable()` bu kayıtları
+(grup adı + kanal adına bakarak) doğrulama öncesinde eler; maç yayınları ve
+spor kanalları her zaman korunur.
+
 ### Sabit tohum listesi (`seeds.m3u`)
 
 Otomatik keşfin kaçırdığı ama bilinen adresler için repo kökünde `seeds.m3u`
@@ -38,8 +63,8 @@ Andro/Netspor sunucu keşfine ipucu olur.
 Yeni bir adres eklemek için:
 
 ```
-#EXTINF:-1 group-title="ATOM SPOR",Bein Sports Max 2
-#EXTVLCOPT:http-referrer=https://atomsportv501.top
+#EXTINF:-1 group-title="ATOM SPOR",beIN Sports Max 2
+#EXTVLCOPT:http-referrer=https://www.atomsportv514.top
 https://tv.atomspor.workers.dev/?ID=bein-sports-max-2
 ```
 
@@ -58,6 +83,29 @@ COMMUNITY_M3U="https://.../TURK_TV.m3u_plus,https://.../Kral-Sport.m3u_plus" pyt
 Bu listeler checklist yayın sunucularının (andro.XYZ/checklist/...) en güncel
 adreslerini taşır; bot hem bunları kanal olarak doğrulayıp listesine ekler hem
 de **checklist sunucu keşfine ipucu** olarak kullanır.
+
+### Yeni nesil paneller (AtomSpor / Selçukspor)
+
+Bu iki aile artık numaralı kimlikler yerine **slug** kullanıyor
+(`/matches?id=bein-sports-1`, `/izle/bein-sports-max-1`) ve yayını sayfa
+yüklendikten sonra JS ile getiriyor. Toplayıcılar bu yüzden üç katmanlı:
+
+1. **Kanal keşfi** — ana sayfadaki bağlantılar taranır; slug'ı kanonik bir
+   kanala çevrilebilenler (`bein-sports-1` → beIN Sports 1) kanal, çevrilemeyen
+   maç sayfaları (`aek-atina-lask-linz`) elenir.
+2. **Sayfa tarama** — kanal sayfası, iframe'leri ve harici `<script>` dosyaları
+   `extract_m3u8()` ile taranır.
+3. **Çözücü (resolver) adayları** — panelin JS'inde geçen `*.workers.dev`
+   adresleri ile bilinen çözücü (`ATOM_WORKER`) `?ID=<slug>` ile denenir.
+   Bunlar `302 → gerçek m3u8` döndürür; doğrulama katmanı HLS dönmeyenleri
+   eler, yani panel Cloudflare'e takılsa bile kanal listede kalır.
+
+Selçukspor ayrıca eski nesil `uxsyplayer` yolunu da dener (hâlâ yayın veren
+sunucular var), böylece iki panel nesli aynı anda desteklenir.
+
+Domain tamamen değişirse `FAMILIES["atom"]` / `FAMILIES["selcuk"]` içindeki
+`seeds` listesine yeni adresi ekleyin; **tohum adresler numara taramasından
+önce** denendiği için tek satırlık güncelleme yeterli olur.
 
 ## Domain bakımı (domainler değişince ne yapmalı?)
 

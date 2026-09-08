@@ -86,10 +86,20 @@ def main() -> int:
         print("[!] Hicbir kaynaktan kayit alinamadi. Mevcut dosya korunuyor.")
         return 1
 
-    print("\n[2/4] Kanal adlari normalize ediliyor...")
+    print("\n[2/4] Kanal adlari normalize ediliyor + liste temizleniyor...")
+    # Once temizlik: kaynaklarin kendi grup adi (HABER/COCUK/ULUSAL) sinyal
+    # olarak kullanilir; normalize adimindan sonra bu bilgi kaybolur.
+    streams, dropped = core.filter_publishable(streams)
+    if dropped:
+        print(f"    Spor disi/gurultu temizlendi: {dropped}")
+
     core.assign_keys(streams)
     unique_keys = len({s.key for s in streams})
     print(f"    {len(streams)} kayit -> {unique_keys} mantiksal kanal")
+
+    if not streams:
+        print("[!] Spor disi temizlikten sonra kayit kalmadi. Mevcut dosya korunuyor.")
+        return 1
 
     print("\n[3/4] Yayinlar dogrulaniyor...")
     if Settings.VALIDATE:

@@ -255,6 +255,49 @@ class TestAtomWorkerFallback(DiscoveryTestBase):
         self.assertTrue(all(s.group == "ATOM SPOR" for s in streams))
 
 
+class TestPanelDiscovery(DiscoveryTestBase):
+    """Yeni nesil (slug) paneller icin kanal/kcozucu kesfi."""
+
+    HOME = (
+        '<a href="/matches?id=bein-sports-1">'
+        '<img src="https://site/img/beinsports1.png" alt="BEIN SPORTS 1"></a>'
+        '<a href="/matches?id=aek-atina-lask-linz">AEK Atina - Lask Linz</a>'
+        '<a href="/izle/s-sport"><img src="https://site/img/ssport.png" alt="S SPORT"></a>'
+        '<a href="/">Ana sayfa</a>'
+    )
+
+    def test_only_channel_links_are_kept(self):
+        found = sources.discover_panel_channels(self.HOME)
+        slugs = [slug for slug, _name in found]
+        self.assertIn("bein-sports-1", slugs)
+        self.assertIn("s-sport", slugs)
+        # Mac sayfalari kanal degildir -> elenir
+        self.assertNotIn("aek-atina-lask-linz", slugs)
+
+    def test_names_are_canonical(self):
+        found = dict(sources.discover_panel_channels(self.HOME))
+        self.assertEqual(found["bein-sports-1"], "beIN Sports 1")
+        self.assertEqual(found["s-sport"], "S Sport 1")
+
+    def test_logos(self):
+        logos = sources.discover_logos(self.HOME)
+        self.assertEqual(logos.get("bein-sports-1"), "https://site/img/beinsports1.png")
+        self.assertEqual(logos.get("s-sport"), "https://site/img/ssport.png")
+
+    def test_resolver_discovery(self):
+        html = "var src='https://tv.atomspor.workers.dev/?ID=bein-sports-1';"
+        self.assertIn("https://tv.atomspor.workers.dev",
+                      sources.discover_resolvers(html))
+        self.assertEqual(sources.discover_resolvers("<html>yok</html>"), [])
+
+    def test_slug_channel(self):
+        self.assertEqual(
+            sources.slug_channel("bein-sports-max-2"),
+            ("bein-sports-max-2", "beIN Sports Max 2"),
+        )
+        self.assertEqual(sources.slug_channel("real-madrid-inter")[1], "")
+
+
 class TestSelcukHelpers(DiscoveryTestBase):
     def test_player_server_regex(self):
         html = '<iframe src="https://main.uxsyplayer6859599e6c.click/index.php?id=x">'

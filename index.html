@@ -486,6 +486,28 @@
             padding-left: 12px;
         }
 
+        /* Oncelikli kategori (beIN Sports) */
+        .m3u-category-chip.priority-category {
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 0 0 1px rgba(229, 9, 20, 0.25);
+        }
+
+        .m3u-category-chip .chip-count {
+            margin-left: 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            opacity: 0.7;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 1px 7px;
+        }
+
+        .m3u-category-chip.active .chip-count {
+            background: rgba(255, 255, 255, 0.22);
+            opacity: 1;
+        }
+
         /* ===== APP CONTAINER ===== */
         .app-container {
             padding: 120px 14px 20px;
@@ -1935,9 +1957,10 @@
                 }
             });
 
+            // Alfabetik degil, listedeki (oncelik) sirasi korunur.
             return {
                 items,
-                categories: Array.from(categories).sort()
+                categories: Array.from(categories)
             };
         }
 
@@ -1945,11 +1968,30 @@
             const container = document.getElementById('m3uCategoriesScroll');
             container.innerHTML = '';
 
-            const createChip = (text, type, extraClass = '') => {
+            const countOf = (name) => {
+                if (name === 'all') return allChannels.length;
+                if (name === 'tr') return allChannels.filter(i => {
+                    const str = (i.title + ' ' + i.group).toLowerCase();
+                    return str.match(/türk|turkey|turkiye|(^|\s)tr/);
+                }).length;
+                return allChannels.filter(i => i.group === name).length;
+            };
+
+            const createChip = (text, type, extraClass = '', count = null) => {
                 const chip = document.createElement('div');
                 chip.className = `m3u-category-chip ${extraClass}`;
-                chip.textContent = text;
                 chip.dataset.category = type;
+
+                const label = document.createElement('span');
+                label.textContent = text;
+                chip.appendChild(label);
+
+                if (count !== null) {
+                    const badge = document.createElement('span');
+                    badge.className = 'chip-count';
+                    badge.textContent = count;
+                    chip.appendChild(badge);
+                }
 
                 if (type === 'all') chip.classList.add('active');
 
@@ -1962,12 +2004,16 @@
                 return chip;
             };
 
-            container.appendChild(createChip('Tüm Kanallar', 'all'));
-            container.appendChild(createChip('TR Kanallar', 'tr', 'tr-category'));
+            container.appendChild(createChip('Tüm Kanallar', 'all', '', countOf('all')));
+            container.appendChild(createChip('TR Kanallar', 'tr', 'tr-category', countOf('tr')));
 
-            categories.forEach(cat => {
-                const isTr = cat.toLowerCase().match(/türk|turkey|tr|turkiye/);
-                container.appendChild(createChip(cat, cat, isTr ? 'tr-category' : ''));
+            categories.forEach((cat, index) => {
+                const isTr = cat.toLowerCase().match(/türk|turkey|turkiye|(^|\s)tr/);
+                // Ilk gercek kategori onceliklidir (liste beIN Sports ile baslar)
+                const isPriority = index === 0 && /bein/i.test(cat);
+                const extra = [isTr ? 'tr-category' : '', isPriority ? 'priority-category' : '']
+                    .filter(Boolean).join(' ');
+                container.appendChild(createChip(cat, cat, extra, countOf(cat)));
             });
         }
 
@@ -2186,7 +2232,16 @@
                 };
             });
 
-            return { items, categories: Array.from(categories).sort() };
+            // Liste kendi kategori sirasini gonderir (beIN Sports once);
+            // yoksa kanallarin gelis sirasi (yine oncelik sirasi) kullanilir.
+            const ordered = Array.isArray(data.categories) && data.categories.length
+                ? data.categories
+                : Array.from(categories);
+
+            // Listeden gelen ama kanal sirasinda gorulmeyen kategorileri de ekle
+            Array.from(categories).forEach(c => { if (!ordered.includes(c)) ordered.push(c); });
+
+            return { items, categories: ordered };
         }
 
         async function initM3U() {
