@@ -5,14 +5,25 @@ Kaynak toplayicilar.
 Her toplayici `List[StreamInfo]` dondurur ve ASLA istisna sizdirmaz.
 Hepsi core.py'deki ortak HTTP/kesif katmanini kullanir.
 
-Onemli tasarim kurali: bir toplayici yalnizca gercek `.m3u8` adresi
-uretmelidir. Sayfa linki (event.html?id=..., /channel?id=...) uretmek
-oynaticinin calismamasina yol acar; bu yuzden bu tur kaynaklarda once
-sayfa gezilip m3u8 cikarilir.
+Onemli tasarim kurallari:
+  1. Bir toplayici yalnizca gercek `.m3u8` adresi uretmelidir. Sayfa linki
+     (event.html?id=..., /channel?id=...) uretmek oynaticinin calismamasina
+     yol acar; bu yuzden bu tur kaynaklarda once sayfa gezilip m3u8 cikarilir.
+  2. DOMAINLER SUREKLI DEGISIR. Bu yuzden:
+       - Her ailenin "seed" (bilinen guncel) adresleri + uretilen aday
+         araliklari paralel taranir,
+       - Bulunan sayfadaki "GUNCEL ADRESIMIZ: ..." duyurusu takip edilir,
+       - Sayfadaki aile desenine uyan diger domainler de hasat edilir,
+       - Yonlenen (redirect edilen) SON adres kullanilir.
+  3. Yayin sunuculari (checklist) ASLA tek bir koda gomulu adrese baglanmaz;
+     sayfalardan + onceki basarili listeden (channels.json) toplanip
+     canlilik testinden gecenler kullanilir.
 """
 
 from __future__ import annotations
 
+import json
+import os
 import re
 import urllib.parse
 from typing import Callable, Dict, List, Optional, Tuple
@@ -27,10 +38,14 @@ from core import (
     first_match,
     get_text,
     http_get,
+    read_chunk,
     run_parallel,
 )
 
 LOGO_DEFAULT = ""
+
+# Calisma raporlari: aile -> bulunulan durum (health_report icin)
+FAMILY_STATUS: Dict[str, str] = {}
 
 
 def _log(message: str) -> None:
@@ -38,54 +53,252 @@ def _log(message: str) -> None:
 
 
 # =============================================================================
-# DOMAIN KESFI
+# DOMAIN KESFI (kendi kendini guncelleyen katman)
 # =============================================================================
+
+# Aile yapilandirmasi:
+#   seeds    : bilinen/duyurulan guncel adresler (ilk bunlar denenir)
+#   patterns : (sablon, indexler) — eski "numarali domain" aileleri
+#   signature: sayfanin bu aileye ait oldugunu gosteren icerik imzalari (OR)
+FAMILIES: Dict[str, Dict] = {
+    "xsport": {
+        "label": "XSport",
+        "seeds": [],
+        "patterns": [("https://www.xsportv{}.xyz/", range(56, 300))],
+        "signature": ("data-url", "xsport", "bein"),
+    },
+    "taraftarium24": {
+        "label": "Taraftarium24",
+        "seeds": [
+            "https://taraftarium24-gsfb.com",
+            "https://taraftarium24-off12.com",
+        ],
+        "patterns": [
+            ("https://taraftarium24bet{}.net", [""] + list(range(1, 60))),
+            ("https://taraftarium24hd{}.net", list(range(1, 60))),
+        ],
+        "signature": ("/izle/", "canli", "maç", "mac"),
+    },
+    "selcuk": {
+        "label": "Selçukspor",
+        "seeds": [
+            "https://selcuksporlive.top",
+            "https://selcuksports-hd.com",
+            "https://selcuksportshd.is",
+            "https://selcuksportshd.su",
+        ],
+        "patterns": [
+            ("https://www.sporcafe{}.xyz/", range(1, 220)),
+            ("https://selcuksports{}.top", range(1, 260)),
+        ],
+        "signature": ("uxsyplayer", "selcuk", "kanal", "izle"),
+    },
+    "netspor": {
+        "label": "Netspor",
+        "seeds": ["https://netsporcoamp.xyz"],
+        "patterns": [
+            ("https://netsporco{}.xyz", ["amp"] + [f"amp{i}" for i in range(1, 40)]),
+            ("https://netsporco{}.com", ["amp"] + [f"amp{i}" for i in range(1, 20)]),
+        ],
+        "signature": ("androstreamlive", "option", "data-id", "checklist"),
+    },
+    "atom": {
+        "label": "AtomSpor",
+        "seeds": [],
+        "patterns": [("https://atomsportv{}.top", range(400, 720))],
+        "signature": ("kanal", "atom"),
+    },
+    "mahsun": {
+        "label": "Mahsun Sports",
+        "seeds": [
+            "https://mahsunsports.xyz",
+            "https://tr-mahsunsports.xyz",
+        ],
+        "patterns": [("https://mahsunsports{}.xyz", range(1, 220))],
+        "signature": ("event.html", "androstreamlive", "mahsun"),
+    },
+    "pasizle": {
+        "label": "Paşizle",
+        "seeds": [],
+        "patterns": [("https://pasizle{}.com", range(700, 1000))],
+        "signature": ("ch.html", "kanal", "spor"),
+    },
+    "inadina": {
+        "label": "İnadına TV",
+        "seeds": [],
+        "patterns": [("https://royaltv{}.com", range(1, 220))],
+        "signature": ("kanal", "spor", "izle"),
+    },
+    "kulisbet": {
+        "label": "Kulisbet",
+        "seeds": [],
+        "patterns": [("https://kulistvnew{}.com", range(1, 160))],
+        "signature": ("channel", "spor", "mac"),
+    },
+}
+
+# "GUNCEL ADRESIMIZ: ..." duyurusu (paneller kendi yeni adreslerini boyle ilan eder)
+# Hem "GÜNCEL" hem "GUNCEL" (Türkçe karakterler kaybolmus) yazimlarini kapsar.
+_GUNCEL_RE = re.compile(
+    r"g[üu]?ncel\s+adres[a-zıİ]*\s*[:\-]?\s*"
+    r"(?:<a[^>]+href=[\"']?)?(https?://[a-z0-9.\-]+(?::\d+)?(?:/[^\s\"'<>)]*)?)",
+    re.I,
+)
+_GUNCEL_ANCHOR_RE = re.compile(
+    r"<a[^>]+href=[\"'](https?://[a-z0-9.\-][^\"']+)[\"'][^>]*>[^<]*g[üu]?ncel", re.I
+)
+
+
+def _family_domain_regex(family) -> re.Pattern:
+    """Aile desenlerinden domain hasat regex'i uretir."""
+    cfg = family if isinstance(family, dict) else FAMILIES[family]
+    template = cfg["patterns"][0][0] if cfg["patterns"] else ""
+    if not template:
+        # Hasat deseni yok (yalnizca seed kullanan aile)
+        return re.compile(r"(?!x)x")
+    netloc = urllib.parse.urlparse(template).netloc
+    stem = netloc.split(".")[1] if netloc.startswith("www.") else netloc.split(".")[0]
+    stem = stem.split("{")[0] or cfg["label"]
+    return re.compile(
+        r"https?://(?:[a-z0-9\-]*\.)*" + re.escape(stem) + r"[a-z0-9\-]*\.[a-z]{2,}",
+        re.I,
+    )
+
+
+def _harvest_family_urls(family, html: str, limit: int = 8) -> List[str]:
+    """Bir metin icinde aile desenine uyan (alt domainler dahil) adresleri toplar."""
+    if not html:
+        return []
+    regex = _family_domain_regex(family)
+    found: List[str] = []
+    for match in regex.finditer(html):
+        url = match.group(0).rstrip(".,;\\\"')")
+        if url not in found:
+            found.append(url)
+        if len(found) >= limit:
+            break
+    return found
+
+
+def _guncel_address_candidates(html: str, base_url: str) -> List[str]:
+    """Sayfadaki 'GUNCEL ADRES' duyurularindan aday adresler cikarir.
+
+    Kok path'li duyurular netloc'a indirgenir; path'li olanlar (testler ve
+    alt-sayfa duyurulari icin) path'iyle korunur.
+    """
+    if not html:
+        return []
+    candidates: List[str] = []
+    for match in _GUNCEL_RE.findall(html):
+        candidates.append(match if match.startswith("http") else f"https://{match}")
+    for match in _GUNCEL_ANCHOR_RE.findall(html):
+        candidates.append(match)
+    cleaned: List[str] = []
+    seen_keys = set()
+    for url in candidates:
+        url = url.rstrip("/\\\"'<>)].,;")
+        parsed = urllib.parse.urlparse(
+            url if url.startswith("http") else f"https://{url}"
+        )
+        if not parsed.netloc:
+            continue
+        if parsed.path and parsed.path != "/":
+            final = f"{parsed.scheme}://{parsed.netloc}{parsed.path}"
+        else:
+            final = f"{parsed.scheme}://{parsed.netloc}"
+        if final not in seen_keys:
+            seen_keys.add(final)
+            cleaned.append(final)
+    return cleaned
+
 
 def probe_domain(
     url: str, must_contain: Optional[Tuple[str, ...]] = None
 ) -> Optional[str]:
-    """Domain canli mi? Istege bagli olarak icerik imzasi da aranir."""
-    response = http_get(url, timeout=(4, 6))
+    """Domain canli mi? Istege bagli icerik imzasi da aranir.
+
+    BASARILI olursa YONLENEN SON adresi dondurur (eski domain yeni domaine
+    yonleniyorsa artik yeni adresi kullaniriz).
+    """
+    response = http_get(url, timeout=(4, 7), page=True)
     if response is None or response.status_code != 200:
         return None
+    final_url = getattr(response, "url", None) or url
     if must_contain:
-        body = response.text.lower()
-        if not any(token.lower() in body for token in must_contain):
+        body = (getattr(response, "text", "") or "").lower()
+        if not body:
+            try:
+                response.close()
+            except Exception:
+                pass
             return None
-    return url
+        if not any(token.lower() in body for token in must_contain):
+            try:
+                response.close()
+            except Exception:
+                pass
+            return None
+    try:
+        response.close()
+    except Exception:
+        pass
+    return final_url.rstrip("/")
 
 
-def find_domain(
-    pattern: str,
-    indexes,
-    must_contain: Optional[Tuple[str, ...]] = None,
-    fallback: Optional[str] = None,
-    label: str = "",
-) -> Optional[str]:
+def find_domain(family) -> Optional[str]:
+    """Bir ailenin AKTIF ve GUNCEL domainini bulur.
+
+    `family` ya FAMILIES icindeki bir anahtar ya da dogrudan bir
+    yapilandirma sozlugu olabilir (testler icin).
+
+    Sirasiyla: seeds -> uretilmis araliklar taranir; bulunan sayfadaki
+    'GUNCEL ADRES' duyurusu takip edilir; aile domainleri de hasat edilir.
     """
-    `pattern` icindeki {} yerine indexleri koyarak ilk calisan domaini bulur.
+    cfg = family if isinstance(family, dict) else FAMILIES[family]
+    label = cfg["label"]
+    status_key = family if isinstance(family, str) else label
+    signature = cfg.get("signature") or None
 
-    Paralel tarama yapar ve ilk basarili sonucta durur.
-    """
-    def check(index) -> Optional[str]:
-        return probe_domain(pattern.format(index), must_contain)
+    candidates: List[str] = list(cfg.get("seeds", []))
+    for template, indexes in cfg.get("patterns", []):
+        candidates.extend(template.format(index) for index in indexes)
 
     found = first_match(
-        check,
-        list(indexes),
+        lambda url: probe_domain(url, signature),
+        candidates,
         Settings.DOMAIN_PROBE_WORKERS,
         budget_seconds=Settings.SOURCE_BUDGET,
     )
-    if found:
-        _log(f"-> {label or pattern}: aktif domain {found}")
-        return found.rstrip("/")
+    if not found:
+        FAMILY_STATUS[status_key] = "domain-bulunamadi"
+        _log(f"-> {label}: aktif domain bulunamadi")
+        return None
 
-    if fallback and probe_domain(fallback, must_contain):
-        _log(f"-> {label or pattern}: yedek domain {fallback}")
-        return fallback.rstrip("/")
+    # 1) Bulunan sayfada "GUNCEL ADRESIMIZ" duyurusu var mi?
+    html = get_text(found) or ""
+    if html:
+        for candidate in _guncel_address_candidates(html, found)[:3]:
+            if candidate.rstrip("/") == found.rstrip("/"):
+                continue
+            current = probe_domain(candidate, signature)
+            if current:
+                _log(f"-> {label}: duyurulan guncel adres {current}")
+                FAMILY_STATUS[status_key] = f"guncel-adres: {current}"
+                return current
 
-    _log(f"-> {label or pattern}: aktif domain bulunamadi")
-    return None
+        # 2) Sayfada aile desenine uyan baska domainler var mi?
+        harvested = [u for u in _harvest_family_urls(family, html)
+                     if urllib.parse.urlparse(u).netloc != urllib.parse.urlparse(found).netloc]
+        for candidate in harvested[:3]:
+            current = probe_domain(candidate, signature)
+            if current:
+                _log(f"-> {label}: hasat edilen domain {current}")
+                FAMILY_STATUS[status_key] = f"hasat: {current}"
+                return current
+
+    FAMILY_STATUS[status_key] = found
+    _log(f"-> {label}: aktif domain {found}")
+    return found.rstrip("/")
 
 
 def resolve_pages(
@@ -117,6 +330,24 @@ def resolve_pages(
     return run_parallel(work, entries, Settings.SCRAPE_WORKERS)
 
 
+def _fetch_panel(family: str, page_template: str,
+                 channels: List[Tuple[str, str]], group: str, source: str,
+                 logo: str = "") -> List[StreamInfo]:
+    """Panel tipi siteler icin ortak toplayici (domain kefi + sayfa gezme)."""
+    domain = find_domain(family)
+    if not domain:
+        return []
+
+    entries = [
+        (page_template.format(domain=domain, id=channel_id), name)
+        for channel_id, name in channels
+    ]
+    results = resolve_pages(entries, group=group, source=source,
+                            referrer=domain, logo=logo)
+    _log(f"-> {FAMILIES[family]['label']}: {len(results)}/{len(entries)} kanalda m3u8 bulundu")
+    return results
+
+
 # =============================================================================
 # 1. XSPORT
 # =============================================================================
@@ -132,12 +363,7 @@ XSPORT_IDS = [
 
 def fetch_xsport() -> List[StreamInfo]:
     """XSport: aktif domaini bulur, oynatici sayfasindan baseStreamUrl ceker."""
-    domain = find_domain(
-        "https://www.xsportv{}.xyz/",
-        range(56, 220),
-        must_contain=("data-url", "xsport", "bein"),
-        label="XSport",
-    )
+    domain = find_domain("xsport")
     if not domain:
         return []
 
@@ -200,7 +426,12 @@ TARAFTARIUM_IDS = [
 
 
 def fetch_taraftarium_static() -> List[StreamInfo]:
-    """Taraftarium worker uzerindeki sabit kanallar."""
+    """Taraftarium worker uzerindeki sabit kanallar.
+
+    NOT: Bu adresteki origin zaman zaman Cloudflare tarafindan engelleniyor
+    (o zaman m3u8 yerine blok sayfasi doner). Dogrulama katmani bozuk olanlari
+    listeden duserek korur.
+    """
     return [
         StreamInfo(
             name=name,
@@ -215,12 +446,7 @@ def fetch_taraftarium_static() -> List[StreamInfo]:
 
 def fetch_taraftarium_live() -> List[StreamInfo]:
     """Taraftarium24 canli mac yayinlari."""
-    domain = find_domain(
-        "https://taraftarium24bet{}.net",
-        [""] + list(range(1, 40)),
-        must_contain=("/izle/",),
-        label="Taraftarium24",
-    )
+    domain = find_domain("taraftarium24")
     if not domain:
         return []
 
@@ -256,6 +482,7 @@ def fetch_taraftarium_live() -> List[StreamInfo]:
             )
         )
 
+    FAMILY_STATUS["taraftarium24-mac"] = f"{len(results)} mac"
     return results
 
 
@@ -278,12 +505,7 @@ SELCUK_IDS = [
 
 def fetch_selcukspor() -> List[StreamInfo]:
     """Selcukspor / Sporcafe."""
-    domain = find_domain(
-        "https://www.sporcafe{}.xyz/",
-        range(6, 180),
-        must_contain=("uxsyplayer",),
-        label="Selçukspor",
-    )
+    domain = find_domain("selcuk")
     if not domain:
         return []
 
@@ -294,6 +516,7 @@ def fetch_selcukspor() -> List[StreamInfo]:
     match = re.search(r"https?://(main\.uxsyplayer[0-9a-zA-Z\-]*\.[a-z]+)", html)
     if not match:
         _log("-> Selçukspor: oynatici sunucusu bulunamadi")
+        FAMILY_STATUS["selcuk"] = "oynatici-sunucusu-yok"
         return []
     server = f"https://{match.group(1)}"
 
@@ -321,7 +544,7 @@ def fetch_selcukspor() -> List[StreamInfo]:
 
 
 # =============================================================================
-# 4. ANDRO PANEL
+# 4-5. ANDRO PANEL + NETSPOR (ayni checklist sunucu ailesi)
 # =============================================================================
 
 ANDRO_IDS = [
@@ -341,10 +564,22 @@ ANDRO_IDS = [
 
 ANDRO_REFERER = "https://taraftariumizle.org/"
 
+# Panel ailesinin bilinen sayfalari (ayni isletici; birbirine yonlenir)
+ANDRO_PANEL_PAGES = [
+    "https://taraftariumizle.org",
+    "https://patronmutlusonistiyor.com",
+    "https://mahsunsports.xyz",
+]
+
+_CHECKLIST_URL_RE = re.compile(
+    r"https?://[a-z0-9.\-]+\.[a-z]{2,}/checklist(?:/[^\s\"'<>\\\\]*)?", re.I
+)
+_ANDRO_HOST_RE = re.compile(r"https?://(?:andro|net)[a-z0-9.\-]+\.[a-z]{2,}", re.I)
+
 
 def _andro_servers(html: str) -> List[str]:
     """Sayfa icindeki baseUrls dizisini cikarir."""
-    match = re.search(r"baseUrls\s*=\s*\[(.*?)\]", html, re.DOTALL)
+    match = re.search(r"baseUrls\s*=\s*\[(.*?)\]", html or "", re.DOTALL)
     if not match:
         return []
     raw = match.group(1).replace('"', "").replace("'", "")
@@ -356,69 +591,133 @@ def _andro_servers(html: str) -> List[str]:
     return sorted(servers)
 
 
+def _checklist_candidates_from_text(text: str) -> List[str]:
+    """Metindeki checklist sunucularini toplar (tam URL'lerden tabana indirir)."""
+    bases = set()
+    if not text:
+        return []
+    for url in _CHECKLIST_URL_RE.findall(text):
+        base = url.split("/checklist", 1)[0].rstrip("/")
+        bases.add(base)
+    for url in _ANDRO_HOST_RE.findall(text):
+        bases.add(url.rstrip("/"))
+    return sorted(bases)
+
+
+def _previous_list_servers() -> List[str]:
+    """Onceki BASARILI listeden (channels.json) checklist sunuculari toplar.
+
+    Sunucular sik degistigi icin son iyi listenin kendisi en guncel
+    ipucu kaynagidir.
+    """
+    path = Settings.JSON_OUTPUT_FILE
+    if not path or not os.path.exists(path):
+        return []
+    try:
+        with open(path, encoding="utf-8-sig") as handle:
+            data = json.load(handle)
+    except Exception:
+        return []
+    servers = set()
+    for channel in data.get("channels", []) or []:
+        for link in [channel.get("url", "")] + [
+            (b.get("url", "") if isinstance(b, dict) else str(b))
+            for b in channel.get("backups", []) or []
+        ]:
+            if "/checklist/" in (link or ""):
+                servers.add(link.split("/checklist/", 1)[0])
+    return sorted(servers)
+
+
+def discover_checklist_servers(*htmls: str) -> List[str]:
+    """Tum ipuclarindan checklist sunucu adaylarini toplar.
+
+    Ipuclari: verilen sayfa HTML'leri + panel ailesi sayfalari + onceki liste.
+    """
+    candidates: List[str] = []
+    seen = set()
+
+    def add(url: str) -> None:
+        url = url.rstrip("/")
+        if url and url not in seen:
+            seen.add(url)
+            candidates.append(url)
+
+    for html in htmls:
+        for server in _andro_servers(html or ""):
+            add(server)
+        for base in _checklist_candidates_from_text(html or ""):
+            add(base)
+
+    for page_url in ANDRO_PANEL_PAGES:
+        html = get_text(page_url)
+        if not html:
+            continue
+        for server in _andro_servers(html):
+            add(server)
+        for base in _checklist_candidates_from_text(html):
+            add(base)
+
+    for server in _previous_list_servers():
+        add(server)
+
+    return candidates
+
+
+def _probe_checklist(server: str, channel_id: str = "androstreamlivebs1") -> Optional[str]:
+    """Checklist sunucusu gercekten yayin veriyor mu? (ilk baytlar HLS imzasi)"""
+    url = _andro_url(server, channel_id)
+    response = http_get(
+        url,
+        referrer=ANDRO_REFERER,
+        timeout=(4, 7),
+        stream=True,
+    )
+    if response is None:
+        return None
+    try:
+        if response.status_code != 200:
+            return None
+        head = read_chunk(response, 256)
+    finally:
+        try:
+            response.close()
+        except Exception:
+            pass
+    return server if b"#EXT" in head else None
+
+
 def _andro_url(server: str, channel_id: str) -> str:
-    if "checklist" in server:
+    if "/checklist" in server:
         return f"{server}/{channel_id}.m3u8"
     return f"{server}/checklist/{channel_id}.m3u8"
 
 
 def fetch_andro() -> List[StreamInfo]:
-    """Andro Panel: amp sayfasi -> iframe -> baseUrls sunucu listesi."""
-    html = get_text("https://taraftariumizle.org")
-    if not html:
-        _log("-> Andro: ana sayfa alinamadi")
-        return []
+    """Andro Panel: panel sayfalari -> checklist sunuculari -> sabit kanallar."""
+    htmls: List[str] = []
+    for page_url in ANDRO_PANEL_PAGES:
+        html = get_text(page_url)
+        if html:
+            htmls.append(html)
 
-    servers: List[str] = _andro_servers(html)
-
-    if not servers:
-        soup = BeautifulSoup(html, "html.parser")
-        amp = soup.find("link", rel="amphtml")
-        if amp and amp.get("href"):
-            amp_html = get_text(amp["href"])
-            if amp_html:
-                servers = _andro_servers(amp_html)
-                if not servers:
-                    frame = re.search(
-                        r'\[src\]="appState\.currentIframe".*?src="(https?://[^"]+)"',
-                        amp_html,
-                        re.DOTALL,
-                    )
-                    if frame:
-                        inner = get_text(frame.group(1), referrer=amp["href"])
-                        if inner:
-                            servers = _andro_servers(inner)
-
+    servers = discover_checklist_servers(*htmls)
     if not servers:
         _log("-> Andro: sunucu listesi bulunamadi")
+        FAMILY_STATUS["andro"] = "sunucu-yok"
         return []
 
-    # Hangi sunucular gercekten yayin veriyor?
-    def probe(server: str) -> Optional[str]:
-        response = http_get(
-            _andro_url(server, "androstreamlivebs1"),
-            referrer=ANDRO_REFERER,
-            timeout=(4, 7),
-            stream=True,
-        )
-        if response is None:
-            return None
-        try:
-            if response.status_code != 200:
-                return None
-            head = response.raw.read(256, decode_content=True) or b""
-        except Exception:
-            return None
-        finally:
-            response.close()
-        return server if b"#EXT" in head else None
-
-    active = run_parallel(probe, servers, Settings.SCRAPE_WORKERS)
+    active = [
+        s for s in run_parallel(_probe_checklist, servers, Settings.SCRAPE_WORKERS)
+        if s
+    ]
     if not active:
         _log(f"-> Andro: {len(servers)} sunucudan hicbiri yanit vermedi")
+        FAMILY_STATUS["andro"] = f"{len(servers)} aday olmus"
         return []
 
-    _log(f"-> Andro: {len(active)}/{len(servers)} sunucu aktif")
+    _log(f"-> Andro: {len(active)}/{len(servers)} sunucu aktif: {active[:3]}")
+    FAMILY_STATUS["andro"] = f"{len(active)}/{len(servers)} sunucu aktif"
 
     results: List[StreamInfo] = []
     for server in active:
@@ -439,14 +738,16 @@ def fetch_andro() -> List[StreamInfo]:
 # 5. NETSPOR
 # =============================================================================
 
+_NETSPOR_ID_RE = re.compile(r"\b(?:andro|net)[a-z0-9]*stream[a-z0-9]*\b", re.I)
+
+
 def fetch_netspor() -> List[StreamInfo]:
-    """Netspor: kanal ve canli mac listesi."""
-    domain = find_domain(
-        "https://netsporco{}.xyz",
-        ["amp"] + [f"amp{i}" for i in range(1, 20)],
-        must_contain=("androstreamlive", "option", "data-id"),
-        label="Netspor",
-    )
+    """Netspor: kanal ve canli mac listesi.
+
+    Duzeltme: checklist sunucusu ARTIK koda gomulu degil; sayfalardan ve
+    onceki basarili listeden kesfedilir, canlilik testinden gecer.
+    """
+    domain = find_domain("netspor")
     if not domain:
         return []
 
@@ -454,10 +755,24 @@ def fetch_netspor() -> List[StreamInfo]:
     if not html:
         return []
 
-    soup = BeautifulSoup(html, "html.parser")
-    servers = _andro_servers(html) or ["https://andro.evrenesoglu59.lat/checklist"]
-    server = servers[0]
+    servers = discover_checklist_servers(html)
+    if not servers:
+        _log("-> Netspor: checklist sunucusu bulunamadi")
+        FAMILY_STATUS["netspor"] = "sunucu-yok"
+        return []
 
+    active = [
+        s for s in run_parallel(_probe_checklist, servers, Settings.SCRAPE_WORKERS)
+        if s
+    ]
+    if not active:
+        _log(f"-> Netspor: {len(servers)} sunucudan hicbiri canli degil")
+        FAMILY_STATUS["netspor"] = f"{len(servers)} aday olmus"
+        return []
+    _log(f"-> Netspor: {len(active)}/{len(servers)} sunucu aktif: {active[:3]}")
+    FAMILY_STATUS["netspor"] = f"{len(active)}/{len(servers)} sunucu aktif"
+
+    soup = BeautifulSoup(html, "html.parser")
     results: List[StreamInfo] = []
     seen = set()
 
@@ -478,17 +793,38 @@ def fetch_netspor() -> List[StreamInfo]:
             continue
         seen.add(key)
 
-        results.append(
-            StreamInfo(
-                name=title,
-                url=_andro_url(server, stream_id),
-                group="NETSPOR",
-                referrer=ANDRO_REFERER,
-                source="netspor",
+        for server in active:
+            results.append(
+                StreamInfo(
+                    name=title,
+                    url=_andro_url(server, stream_id),
+                    group="NETSPOR",
+                    referrer=ANDRO_REFERER,
+                    source="netspor",
+                )
             )
-        )
+
+    # Sayfada option/data-id disinda gecen androstream id'lerini de topla
+    for match in _NETSPOR_ID_RE.findall(html):
+        stream_id = match.strip()
+        if not stream_id.startswith(("andro", "net")) or stream_id in {
+            k for pair in seen for k in pair
+        }:
+            continue
+        seen.add((stream_id, stream_id))
+        for server in active:
+            results.append(
+                StreamInfo(
+                    name=stream_id,
+                    url=_andro_url(server, stream_id),
+                    group="NETSPOR",
+                    referrer=ANDRO_REFERER,
+                    source="netspor",
+                )
+            )
 
     _log(f"-> Netspor: {len(results)} kayit")
+    FAMILY_STATUS["netspor-kayit"] = str(len(results))
     return results
 
 
@@ -511,24 +847,21 @@ ATOM_IDS = [
 
 def fetch_atom() -> List[StreamInfo]:
     """AtomSpor: kanal sayfalarindan m3u8 cikarir."""
-    domain = find_domain(
-        "https://atomsportv{}.top",
-        range(495, 560),
-        must_contain=("kanal", "atom"),
-        fallback="https://atomsportv501.top",
-        label="AtomSpor",
-    )
-    if not domain:
+    entries_dom = find_domain("atom")
+    if not entries_dom:
         return []
-
-    entries = [(f"{domain}/kanal/{slug}", name) for slug, name in ATOM_IDS]
-    return resolve_pages(
+    entries = [
+        (f"{entries_dom}/kanal/{slug}", name) for slug, name in ATOM_IDS
+    ]
+    results = resolve_pages(
         entries,
         group="ATOM SPOR",
         source="atom",
-        referrer=domain,
+        referrer=entries_dom,
         logo="https://i.hizliresim.com/gm50rk9b.jpg",
     )
+    _log(f"-> AtomSpor: {len(results)}/{len(entries)} kanalda m3u8 bulundu")
+    return results
 
 
 # =============================================================================
@@ -569,62 +902,24 @@ MAHSUN_CHANNELS = [
 ]
 
 
-def _fetch_panel(
-    label: str,
-    pattern: str,
-    indexes,
-    page_template: str,
-    channels: List[Tuple[str, str]],
-    group: str,
-    source: str,
-    must_contain: Optional[Tuple[str, ...]] = None,
-    fallback: Optional[str] = None,
-) -> List[StreamInfo]:
-    """
-    Panel tipi siteler icin ortak toplayici.
-
-    ONEMLI: eski surum burada sayfa linkini dogrudan m3u dosyasina yaziyordu;
-    bu linkler yayin olmadigi icin hicbir oynaticida calismiyordu. Artik her
-    sayfa geziliyor ve yalnizca gercek m3u8 adresi kaydediliyor.
-    """
-    domain = find_domain(
-        pattern, indexes, must_contain=must_contain, fallback=fallback, label=label
-    )
-    if not domain:
-        return []
-
-    entries = [
-        (page_template.format(domain=domain, id=channel_id), name)
-        for channel_id, name in channels
-    ]
-    results = resolve_pages(entries, group=group, source=source, referrer=domain)
-    _log(f"-> {label}: {len(results)}/{len(entries)} kanalda m3u8 bulundu")
-    return results
-
-
 def fetch_mahsun() -> List[StreamInfo]:
-    return _fetch_panel(
-        "Mahsun Sports",
-        "https://mahsunsports{}.xyz",
-        range(70, 160),
+    results = _fetch_panel(
+        "mahsun",
         "{domain}/event.html?id={id}",
         MAHSUN_CHANNELS,
         group="MAHSUN SPOR",
         source="mahsun",
-        must_contain=("event.html", "androstreamlive"),
     )
+    return results
 
 
 def fetch_pasizle() -> List[StreamInfo]:
     return _fetch_panel(
-        "Paşizle",
-        "https://pasizle{}.com",
-        range(800, 920),
+        "pasizle",
         "{domain}/ch.html?id={id}",
         PANEL_CHANNELS,
         group="PAŞİZLE",
         source="pasizle",
-        must_contain=("ch.html", "kanal", "spor"),
     )
 
 
@@ -636,27 +931,21 @@ def fetch_inadina() -> List[StreamInfo]:
     veriliyordu (kanal id'si hic kullanilmiyordu), yani 31 kayit da aynidir.
     """
     return _fetch_panel(
-        "İnadına TV",
-        "https://royaltv{}.com",
-        range(1, 120),
+        "inadina",
         "{domain}/ch.html?id={id}",
         PANEL_CHANNELS,
         group="İNADINA TV",
         source="inadina",
-        must_contain=("kanal", "spor", "izle"),
     )
 
 
 def fetch_kulisbet() -> List[StreamInfo]:
     return _fetch_panel(
-        "Kulisbet",
-        "https://kulistvnew{}.com",
-        range(1, 60),
+        "kulisbet",
         "{domain}/channel?id={id}",
         PANEL_CHANNELS,
         group="KULISBET",
         source="kulisbet",
-        must_contain=("channel", "spor", "mac"),
     )
 
 

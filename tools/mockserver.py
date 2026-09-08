@@ -38,6 +38,9 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         path = self.path.split("?")[0]
+        # Sondaki / farkini yut (gercek sunucular cogunlukla esnek davranir)
+        if len(path) > 1 and path.endswith("/"):
+            path = path.rstrip("/")
         port = self.server.server_address[1]
 
         if path == "/good.m3u8":
@@ -71,6 +74,35 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return self._send(200, PAGE % port, "text/html")
         if path.endswith(".ts"):
             return self._send(200, SEG, "video/mp2t")
+
+        # --- Domain kesfi / panel testleri ---
+        if path == "/redirect-panel":
+            self.send_response(302)
+            self.send_header("Location", f"http://127.0.0.1:{port}/newpanel/")
+            self.end_headers()
+            return
+        if path == "/oldpanel":
+            # Eski domain -> sayfada GUNCEL ADRES duyurusu yayinlar
+            body = (
+                "<html><body>GUNCEL ADRESIMIZ: "
+                f"<a href='http://127.0.0.1:{port}/newpanel/'>burada</a>"
+                "</body></html>"
+            ).encode()
+            return self._send(200, body, "text/html")
+        if path == "/newpanel":
+            body = (
+                "<html><body><select>"
+                "<option androstreamlivebs1='x'>beIN Sports 1</option>"
+                "<option androstreamlivebs2='x'>beIN Sports 2</option>"
+                "</select>"
+                "<script>baseUrls = [\"http://127.0.0.1:%d/checklisthost\"];</script>"
+                "</body></html>" % port
+            ).encode()
+            return self._send(200, body, "text/html")
+        if path.startswith("/checklisthost/"):
+            return self._send(200, MEDIA)
+        if path.startswith("/checklist/"):
+            return self._send(200, MEDIA)
 
         return self._send(404, b"nf", "text/plain")
 

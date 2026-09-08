@@ -137,7 +137,11 @@ def _write(path: str, content: str) -> None:
 def _write_report(
     all_streams: List[StreamInfo], final: List[StreamInfo], generated_at: str
 ) -> None:
-    report = core.build_report(all_streams, final, generated_at)
+    import sources
+
+    report = core.build_report(
+        all_streams, final, generated_at, families=dict(sources.FAMILY_STATUS)
+    )
     with open(Settings.REPORT_FILE, "w", encoding="utf-8") as handle:
         handle.write(report)
     print(f"    -> {Settings.REPORT_FILE}")
