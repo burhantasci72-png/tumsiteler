@@ -715,6 +715,26 @@
             text-overflow: ellipsis;
         }
 
+        .card-backups {
+            display: inline-block;
+            margin-left: 6px;
+            padding: 0 5px;
+            border-radius: 6px;
+            font-size: 0.58rem;
+            font-weight: 800;
+            background: rgba(56, 200, 110, 0.18);
+            color: #4ad17a;
+            vertical-align: 1px;
+        }
+
+        .cat-card.unverified {
+            opacity: 0.6;
+        }
+
+        .cat-card.unverified .card-badge {
+            background: rgba(120, 120, 130, 0.85);
+        }
+
         .play-action-btn {
             background: var(--primary-gradient);
             border: none;
@@ -1864,7 +1884,21 @@
 
         function isHlsUrl(url) {
             if (!url) return false;
-            return url.toLowerCase().includes('.m3u8');
+            const low = url.toLowerCase();
+            if (low.includes('.m3u8')) return true;
+            // Proxy uzerinden gecen her sey HLS'dir (proxy playlist'i yeniden yazar)
+            if (playerProxy && low.startsWith(playerProxy.toLowerCase())) return true;
+            // "Cozucu" adresler: .m3u8 icermez ama 302 ile playlist'e gider
+            // (orn. Cloudflare worker /?ID=kanal). Sayfa uzantisi yoksa HLS say.
+            return isResolverUrl(low);
+        }
+
+        /** .m3u8 icermeyen ama HLS'e yonlendiren bilinen adres kaliplari. */
+        function isResolverUrl(low) {
+            if (!low) return false;
+            if (/\.(html?|aspx|php|jsp)(\?|#|$)/.test(low)) return false;
+            if (/\/(ch|channel|event|izle|player|embed)(\?|\/|$)/.test(low)) return false;
+            return /workers\.dev\/\?id=/.test(low) || /\/checklist\//.test(low);
         }
 
         function triggerFilter() {
@@ -2016,6 +2050,22 @@
                     const sub = document.createElement('div');
                     sub.className = 'card-sub';
                     sub.textContent = item.group || 'Genel';
+
+                    // Yedek kaynak sayisi: kart uzerinde kucuk rozet
+                    const backupCount = (item.backups || []).length;
+                    if (backupCount) {
+                        const bk = document.createElement('span');
+                        bk.className = 'card-backups';
+                        bk.title = `${backupCount} yedek kaynak`;
+                        bk.textContent = `+${backupCount}`;
+                        sub.appendChild(bk);
+                    }
+
+                    if (item.verified === false) {
+                        card.classList.add('unverified');
+                        badge.innerHTML = '<span class="badge-dot"></span>?';
+                        badge.title = 'Son kontrolde doğrulanamadı';
+                    }
 
                     body.appendChild(name);
                     body.appendChild(sub);

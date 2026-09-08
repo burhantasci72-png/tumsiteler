@@ -1,0 +1,224 @@
+#EXTM3U
+# SABIT TOHUM LISTESI (seeds.m3u)
+#
+# Bot her kosuda bu dosyayi da bir kaynak olarak okur. Buradaki girdiler
+# DOGRUDAN listeye yazilmaz; once digerleri gibi dogrulanir (playlist +
+# segment). Amac: otomatik kesfin kacirdigi kalici adresleri (worker
+# cozuculer, bilinen checklist sunuculari) her zaman denemek.
+#
+# Kurallar:
+#   - Yalnizca .m3u8 veya m3u8'e YONLENEN adresler ekleyin (sayfa linki degil).
+#   - Referer gerekiyorsa #EXTVLCOPT:http-referrer= satirini yazin.
+#   - Buradaki checklist sunuculari ayrica Andro/Netspor sunucu kesfine ipucu olur.
+#
+# Kaynak: 08.09.2026 tarihli calisan liste (kullanici tarafindan saglandi).
+
+# --- ATOM SPOR: Cloudflare worker cozucusu (302 -> gercek m3u8) ---
+#EXTINF:-1 group-title="ATOM SPOR",Bein Sports 1
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=bein-sports-1
+#EXTINF:-1 group-title="ATOM SPOR",Bein Sports 2
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=bein-sports-2
+#EXTINF:-1 group-title="ATOM SPOR",Bein Sports 3
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=bein-sports-3
+#EXTINF:-1 group-title="ATOM SPOR",Bein Sports 4
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=bein-sports-4
+#EXTINF:-1 group-title="ATOM SPOR",Bein Sports 5
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=bein-sports-5
+#EXTINF:-1 group-title="ATOM SPOR",S Sport 1
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=s-sport
+#EXTINF:-1 group-title="ATOM SPOR",S Sport 2
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=s-sport-2
+#EXTINF:-1 group-title="ATOM SPOR",S Sport Plus
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=ssport-plus
+#EXTINF:-1 group-title="ATOM SPOR",Tivibu Spor 1
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=tivibu-spor-1
+#EXTINF:-1 group-title="ATOM SPOR",Tivibu Spor 2
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=tivibu-spor-2
+#EXTINF:-1 group-title="ATOM SPOR",Tivibu Spor 3
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=tivibu-spor-3
+#EXTINF:-1 group-title="ATOM SPOR",Smart Spor
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=smart-spor
+#EXTINF:-1 group-title="ATOM SPOR",TV 8.5
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=tv-8-5
+#EXTINF:-1 group-title="ATOM SPOR",Bein Sports Haber
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=bein-sports-haber
+# --- NETSPOR: bilinen checklist sunucusu (kanal + sunucu kesif ipucu) ---
+#EXTINF:-1 group-title="NETSPOR",Bein Sports 1
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/receptestt.m3u8
+#EXTINF:-1 group-title="NETSPOR",Bein Sports 2
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivebs2.m3u8
+#EXTINF:-1 group-title="NETSPOR",Bein Sports 3
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivebs3.m3u8
+#EXTINF:-1 group-title="NETSPOR",Bein Sports 4
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivebs4.m3u8
+#EXTINF:-1 group-title="NETSPOR",Bein Sports 5
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivebs5.m3u8
+#EXTINF:-1 group-title="NETSPOR",Bein Sports Max 1
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivebsm1.m3u8
+#EXTINF:-1 group-title="NETSPOR",Bein Sports Max 2
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivebsm2.m3u8
+#EXTINF:-1 group-title="NETSPOR",beIN Sports Haber
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivebsh.m3u8
+#EXTINF:-1 group-title="NETSPOR",S Sport
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivess1.m3u8
+#EXTINF:-1 group-title="NETSPOR",S Sport 2
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivess2.m3u8
+#EXTINF:-1 group-title="NETSPOR",S Sport Plus
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivessplus1.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tivibu Spor
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivets.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tivibu Spor 1
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivets1.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tivibu Spor 2
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivets2.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tivibu Spor 3
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivets3.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tivibu Spor 4
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivets4.m3u8
+#EXTINF:-1 group-title="NETSPOR",Spor Smart
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivesm1.m3u8
+#EXTINF:-1 group-title="NETSPOR",Spor Smart 2
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivesm2.m3u8
+#EXTINF:-1 group-title="NETSPOR",Euro Sport 1
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivees1.m3u8
+#EXTINF:-1 group-title="NETSPOR",Euro Sport 2
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivees2.m3u8
+#EXTINF:-1 group-title="NETSPOR",iDMAN Tv
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamliveidm.m3u8
+#EXTINF:-1 group-title="NETSPOR",Trt 1
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetrt1.m3u8
+#EXTINF:-1 group-title="NETSPOR",TRT Spor
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetrts.m3u8
+#EXTINF:-1 group-title="NETSPOR",Trt Spor Yildiz
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetrtsy.m3u8
+#EXTINF:-1 group-title="NETSPOR",Atv
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamliveatv.m3u8
+#EXTINF:-1 group-title="NETSPOR",A Spor
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamliveas.m3u8
+#EXTINF:-1 group-title="NETSPOR",A2
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivea2.m3u8
+#EXTINF:-1 group-title="NETSPOR",TJK Tv
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetjk.m3u8
+#EXTINF:-1 group-title="NETSPOR",Red Bull TV
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamliveredb.m3u8
+#EXTINF:-1 group-title="NETSPOR",Ht Spor
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamliveht.m3u8
+#EXTINF:-1 group-title="NETSPOR",NBA TV
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivenba.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tv8
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetv8.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tv8,5
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetv85.m3u8
+#EXTINF:-1 group-title="NETSPOR",tabii Spor
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetb.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tabi Spor 1
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetb1.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tabi Spor 2
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetb2.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tabi Spor 3
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetb3.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tabi Spor 4
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetb4.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tabi Spor 5
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetb5.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tabi Spor 6
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetb6.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tabi Spor 7
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetb7.m3u8
+#EXTINF:-1 group-title="NETSPOR",Tabi Spor 8
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivetb8.m3u8
+#EXTINF:-1 group-title="NETSPOR",FB Tv
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivefb.m3u8
+#EXTINF:-1 group-title="NETSPOR",Cbc Sport
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivecbcs.m3u8
+#EXTINF:-1 group-title="NETSPOR",GS Tv
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivegs.m3u8
+#EXTINF:-1 group-title="NETSPOR",Sports Tv
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamlivesptstv.m3u8
+#EXTINF:-1 group-title="NETSPOR",Exxen Tv
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamliveexn.m3u8
+#EXTINF:-1 group-title="NETSPOR",Exxen Sports 1
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamliveexn1.m3u8
+#EXTINF:-1 group-title="NETSPOR",Exxen Sports 2
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamliveexn2.m3u8
+#EXTINF:-1 group-title="NETSPOR",Exxen Sports 3
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamliveexn3.m3u8
+#EXTINF:-1 group-title="NETSPOR",Exxen Sports 4
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamliveexn4.m3u8
+#EXTINF:-1 group-title="NETSPOR",Exxen Sports 5
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamliveexn5.m3u8
+#EXTINF:-1 group-title="NETSPOR",Exxen Sports 6
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamliveexn6.m3u8
+#EXTINF:-1 group-title="NETSPOR",Exxen Sports 7
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamliveexn7.m3u8
+#EXTINF:-1 group-title="NETSPOR",Exxen Sports 8
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+https://andro.evrenesoglu59.lat/checklist/androstreamliveexn8.m3u8

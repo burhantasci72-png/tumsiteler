@@ -507,6 +507,30 @@ SELCUK_IDS = [
 ]
 
 
+_SELCUK_PLAYER_RE = re.compile(
+    r"https?://((?:main|player|www)\.uxsyplayer[0-9a-zA-Z\-]*\.[a-z]+)", re.I
+)
+_SELCUK_SITE_RE = re.compile(
+    r"https?://(?:www\.)?(?:selcuksports?(?:hd)?|sporcafe|xyzsports)[a-z0-9\-]*\.[a-z]{2,}/?",
+    re.I,
+)
+
+
+def _selcuk_player_server(html: str) -> Optional[str]:
+    match = _SELCUK_PLAYER_RE.search(html or "")
+    return f"https://{match.group(1)}" if match else None
+
+
+def _selcuk_site_links(html: str) -> List[str]:
+    """Giris sayfasindaki asil site linkleri (sira korunur, tekrarsiz)."""
+    found: List[str] = []
+    for match in _SELCUK_SITE_RE.finditer(html or ""):
+        url = match.group(0).rstrip("/")
+        if url not in found:
+            found.append(url)
+    return found
+
+
 def fetch_selcukspor() -> List[StreamInfo]:
     """Selcukspor / Sporcafe."""
     domain = find_domain("selcuk")
@@ -517,12 +541,24 @@ def fetch_selcukspor() -> List[StreamInfo]:
     if not html:
         return []
 
-    match = re.search(r"https?://(main\.uxsyplayer[0-9a-zA-Z\-]*\.[a-z]+)", html)
-    if not match:
+    server = _selcuk_player_server(html)
+    if not server:
+        # Seed adresler cogunlukla "giris" sayfasidir: asil site, sayfadaki
+        # ilk selcuk/sporcafe/xyzsports linkinin arkasindadir. Oraya da bak.
+        for candidate in _selcuk_site_links(html)[:4]:
+            inner = get_text(candidate, referrer=domain)
+            if not inner:
+                continue
+            server = _selcuk_player_server(inner)
+            if server:
+                _log(f"-> Selçukspor: asil site {candidate}")
+                domain = candidate.rstrip("/")
+                break
+    if not server:
         _log("-> Selçukspor: oynatici sunucusu bulunamadi")
         FAMILY_STATUS["selcuk"] = "oynatici-sunucusu-yok"
         return []
-    server = f"https://{match.group(1)}"
+    FAMILY_STATUS["selcuk"] = f"{domain} | oynatici {server}"
 
     def work(entry: Tuple[str, str]) -> Optional[StreamInfo]:
         channel_id, name = entry
@@ -667,6 +703,10 @@ def discover_checklist_servers(*htmls: str) -> List[str]:
     if community:
         for base in _checklist_candidates_from_text(community):
             add(base)
+
+    # Repo icindeki sabit tohum listesi de sunucu ipucu tasir
+    for base in _checklist_candidates_from_text(_seeds_text()):
+        add(base)
 
     for server in _previous_list_servers():
         add(server)
@@ -870,22 +910,58 @@ ATOM_IDS = [
 ]
 
 
-def fetch_atom() -> List[StreamInfo]:
-    """AtomSpor: kanal sayfalarindan m3u8 cikarir."""
-    entries_dom = find_domain("atom")
-    if not entries_dom:
-        return []
-    entries = [
-        (f"{entries_dom}/kanal/{slug}", name) for slug, name in ATOM_IDS
+# AtomSpor'un kanal sayfalari yayini bu Cloudflare worker uzerinden cozer:
+#   GET /?ID=<slug>  ->  302  ->  gercek m3u8
+# Panel sayfasi Cloudflare'e takilsa bile worker cogunlukla ayaktadir; bu
+# yuzden sayfa taramasi bos donerse worker adresleri dogrudan aday yapilir
+# (dogrulama katmani gercekten HLS donmeyenleri eler).
+ATOM_WORKER = os.environ.get("ATOM_WORKER", "https://tv.atomspor.workers.dev")
+ATOM_LOGO = "https://i.hizliresim.com/gm50rk9b.jpg"
+
+
+def _atom_worker_streams(referrer: str) -> List[StreamInfo]:
+    return [
+        StreamInfo(
+            name=name,
+            url=f"{ATOM_WORKER}/?ID={slug}",
+            group="ATOM SPOR",
+            logo=ATOM_LOGO,
+            referrer=referrer,
+            source="atom",
+        )
+        for slug, name in ATOM_IDS
     ]
-    results = resolve_pages(
-        entries,
-        group="ATOM SPOR",
-        source="atom",
-        referrer=entries_dom,
-        logo="https://i.hizliresim.com/gm50rk9b.jpg",
-    )
-    _log(f"-> AtomSpor: {len(results)}/{len(entries)} kanalda m3u8 bulundu")
+
+
+def fetch_atom() -> List[StreamInfo]:
+    """AtomSpor: kanal sayfalarindan m3u8 cikarir; olmazsa worker'a duser."""
+    entries_dom = find_domain("atom")
+    results: List[StreamInfo] = []
+    if entries_dom:
+        entries = [
+            (f"{entries_dom}/kanal/{slug}", name) for slug, name in ATOM_IDS
+        ]
+        results = resolve_pages(
+            entries,
+            group="ATOM SPOR",
+            source="atom",
+            referrer=entries_dom,
+            logo=ATOM_LOGO,
+        )
+        _log(f"-> AtomSpor: {len(results)}/{len(entries)} kanalda m3u8 bulundu")
+
+    if len(results) < len(ATOM_IDS):
+        found = {r.name for r in results}
+        worker = [
+            s for s in _atom_worker_streams(entries_dom or ATOM_WORKER)
+            if s.name not in found
+        ]
+        results.extend(worker)
+        _log(f"-> AtomSpor: {len(worker)} kanal worker cozucusu ile denenecek")
+        FAMILY_STATUS["atom"] = (
+            f"{FAMILY_STATUS.get('atom', entries_dom or 'domain-yok')} "
+            f"| worker: {len(worker)}"
+        )
     return results
 
 
@@ -1116,10 +1192,63 @@ def fetch_community_m3u() -> List[StreamInfo]:
 
 
 # =============================================================================
+# 12. SABIT TOHUM LISTESI (repo icindeki seeds.m3u)
+# =============================================================================
+#
+# Otomatik kesif her seyi bulamaz: bazi kaynaklar sayfa yerine dogrudan bir
+# "cozucu" adres uzerinden yayin verir (orn. AtomSpor'un Cloudflare worker'i)
+# ve panel sayfasi Cloudflare'e takildiginda bot bunlari kacirir. seeds.m3u
+# bu tur bilinen adresleri tasir; her kosuda diger kaynaklarla AYNI dogrulama
+# katmanindan gecer, yani olu girdiler listeye sizmaz.
+
+SEEDS_FILE = os.environ.get("SEEDS_FILE", "seeds.m3u")
+
+
+def _seeds_text() -> str:
+    path = SEEDS_FILE
+    if not path or not os.path.exists(path):
+        return ""
+    try:
+        with open(path, encoding="utf-8-sig", errors="ignore") as handle:
+            return handle.read()
+    except Exception:
+        return ""
+
+
+def fetch_seeds() -> List[StreamInfo]:
+    """Repo icindeki sabit tohum listesini okur (dogrulama sonra yapilir)."""
+    text = _seeds_text()
+    if not text:
+        FAMILY_STATUS["seeds"] = "dosya-yok"
+        return []
+
+    results: List[StreamInfo] = []
+    for entry in parse_m3u_entries(text):
+        url = entry.get("url", "")
+        if not url:
+            continue
+        results.append(
+            StreamInfo(
+                name=entry.get("name") or "Bilinmeyen",
+                url=url,
+                group=entry.get("attr_group-title") or "SABIT",
+                logo=entry.get("attr_tvg-logo", ""),
+                referrer=entry.get("referrer", ""),
+                source="seeds",
+                user_agent=entry.get("user_agent", ""),
+            )
+        )
+    FAMILY_STATUS["seeds"] = f"{len(results)} girdi"
+    _log(f"-> Sabit tohum listesi: {len(results)} girdi")
+    return results
+
+
+# =============================================================================
 # KAYIT
 # =============================================================================
 
 COLLECTORS: List[Tuple[str, Callable[[], List[StreamInfo]]]] = [
+    ("Sabit tohum listesi", fetch_seeds),
     ("Topluluk listesi", fetch_community_m3u),
     ("XSport", fetch_xsport),
     ("Taraftarium (sabit)", fetch_taraftarium_static),

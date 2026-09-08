@@ -17,6 +17,7 @@ on:
       - 'main.py'
       - 'core.py'
       - 'sources.py'
+      - 'seeds.m3u'
       - '.github/workflows/update.yml'
 
 permissions:

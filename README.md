@@ -25,6 +25,28 @@ ve kalıcı çözümler:
 | 11 | Sabit worker kanallarının origin'i Cloudflare'den engellenince blok sayfası "yayın" gibi listelendi | Doğrulama katmanı HLS imzası görmeyen her şeyi eler |
 | 12 | Kaynak siteler akışı artık **JS ile yüklediği** için sayfa HTML'inde m3u8 görünmüyordu | Bot harici `<script src>` dosyalarını da tarıyor; ayrıca **günlük güncellenen topluluk M3U listeleri** (`Kral-Turk` vb.) kaynak olarak ekleniyor — girdi başına User-Agent/Referer bilgisi de olduğu gibi alınıyor |
 
+| 13 | **AtomSpor / Selçukspor / beIN MAX 2 listede yoktu** — Atom'un panel sayfası Actions'tan Cloudflare'e takılıyor, Selçuk'un seed adresleri yalnızca "giriş" sayfası; ayrıca `.m3u8` içermeyen **çözücü** adresler (`workers.dev/?ID=kanal` → 302 → m3u8) doğrulayıcı tarafından "sayfa" sanılıp eleniyordu | Repo içinde **`seeds.m3u`** (bilinen kalıcı adresler; her koşuda diğerleri gibi doğrulanır), AtomSpor için **worker çözücü yedeği**, Selçuk için giriş sayfasından asıl siteye geçiş; doğrulayıcı artık çözücü adresleri indirip gerçekten HLS dönüyorsa kabul ediyor ve segmentleri **yönlendirme sonrası** adrese göre çözüyor. Oynatıcı/proxy de aynı adresleri HLS sayar |
+
+### Sabit tohum listesi (`seeds.m3u`)
+
+Otomatik keşfin kaçırdığı ama bilinen adresler için repo kökünde `seeds.m3u`
+tutulur. Bot bunu her koşuda **bir kaynak gibi** okur: girdiler doğrudan
+listeye yazılmaz, diğer kaynaklarla aynı doğrulamadan (playlist + segment)
+geçer; ölü olanlar düşer. İçindeki `checklist` sunucuları ayrıca
+Andro/Netspor sunucu keşfine ipucu olur.
+
+Yeni bir adres eklemek için:
+
+```
+#EXTINF:-1 group-title="ATOM SPOR",Bein Sports Max 2
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=bein-sports-max-2
+```
+
+Kurallar: yalnızca `.m3u8` **veya m3u8'e yönlenen** adres (sayfa linki değil);
+Referer gerekiyorsa `#EXTVLCOPT:http-referrer=` satırı. Dosya yolu `SEEDS_FILE`
+ortam değişkeniyle değiştirilebilir.
+
 ### Topluluk listeleri
 
 `sources.py` varsayılan olarak şu listeleri okur (env ile değiştirilebilir):
