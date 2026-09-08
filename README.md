@@ -23,6 +23,19 @@ ve kalıcı çözümler:
 | 9 | **İş akışı bozulmayı gizliyordu** — liste üretilemese bile "success" görünüyordu | Build başarısızsa koşu artık **kırmızı** biter |
 | 10 | **`channels.json` hiç commit edilmedi** — workflow gitignore'lu `health_report.json`'u `git add`'lemeye çalışıyordu | Yalnızca `Canli_Spor_Hepsi.m3u` + `channels.json` commit edilir; site boş liste gösteremez |
 | 11 | Sabit worker kanallarının origin'i Cloudflare'den engellenince blok sayfası "yayın" gibi listelendi | Doğrulama katmanı HLS imzası görmeyen her şeyi eler |
+| 12 | Kaynak siteler akışı artık **JS ile yüklediği** için sayfa HTML'inde m3u8 görünmüyordu | Bot harici `<script src>` dosyalarını da tarıyor; ayrıca **günlük güncellenen topluluk M3U listeleri** (`Kral-Turk` vb.) kaynak olarak ekleniyor — girdi başına User-Agent/Referer bilgisi de olduğu gibi alınıyor |
+
+### Topluluk listeleri
+
+`sources.py` varsayılan olarak şu listeleri okur (env ile değiştirilebilir):
+
+```
+COMMUNITY_M3U="https://.../TURK_TV.m3u_plus,https://.../Kral-Sport.m3u_plus" python main.py
+```
+
+Bu listeler checklist yayın sunucularının (andro.XYZ/checklist/...) en güncel
+adreslerini taşır; bot hem bunları kanal olarak doğrulayıp listesine ekler hem
+de **checklist sunucu keşfine ipucu** olarak kullanır.
 
 ## Domain bakımı (domainler değişince ne yapmalı?)
 
