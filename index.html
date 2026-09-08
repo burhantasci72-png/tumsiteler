@@ -2091,13 +2091,15 @@
             else localStorage.removeItem(PLAYER_PROXY_KEY);
         }
 
-        /** Yayin adresini proxy uzerinden gecirir (proxy yoksa oldugu gibi). */
-        function viaProxy(url, referrer) {
+        /** Yayin adresini proxy uzerinden gecirir (proxy yoksa oldugu gibi).
+         *  Bazi yayinlar ozel User-Agent ister (orn. Dalvik) -> ua parametresi. */
+        function viaProxy(url, referrer, ua) {
             if (!playerProxy || !url) return url;
             if (url.startsWith(playerProxy)) return url;
 
             const params = new URLSearchParams({ url });
             if (referrer) params.set('ref', referrer);
+            if (ua) params.set('ua', ua);
             return `${playerProxy}/hls?${params.toString()}`;
         }
 
@@ -2117,8 +2119,9 @@
                 // Her yedek KENDI referrer'ini tasir
                 const backups = (ch.backups || []).map(b =>
                     typeof b === 'string'
-                        ? { url: b, referrer: ch.referrer || '' }
-                        : { url: b.url, referrer: b.referrer || ch.referrer || '' }
+                        ? { url: b, referrer: ch.referrer || '', ua: ch.user_agent || '' }
+                        : { url: b.url, referrer: b.referrer || ch.referrer || '',
+                            ua: b.user_agent || '' }
                 );
 
                 return {
@@ -2127,6 +2130,7 @@
                     group: ch.group || 'Genel',
                     url: ch.url,
                     referrer: ch.referrer || '',
+                    ua: ch.user_agent || '',
                     backups,
                     verified: ch.verified !== false,
                 };
@@ -2686,7 +2690,7 @@
          * olursa DOGRUDAN deneme yapilir (proxy kotasi dolmus/kapali olabilir).
          */
         function buildSourceList(item) {
-            const raw = [{ url: item.url, referrer: item.referrer || '' }]
+            const raw = [{ url: item.url, referrer: item.referrer || '', ua: item.ua || '' }]
                 .concat(item.backups || []);
 
             const out = [];
@@ -2697,7 +2701,7 @@
                 if (!safe) return;
 
                 const candidates = playerProxy
-                    ? [viaProxy(safe, entry.referrer), safe]
+                    ? [viaProxy(safe, entry.referrer, entry.ua), safe]
                     : [safe];
 
                 candidates.forEach(url => {

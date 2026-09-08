@@ -118,6 +118,7 @@ class BackupLink:
     url: str
     referrer: str = ""
     source: str = ""
+    user_agent: str = ""
 
 
 @dataclass
@@ -130,6 +131,8 @@ class StreamInfo:
     logo: str = ""
     referrer: str = ""
     source: str = ""
+    # Bazi yayinlar ozel User-Agent ister (orn. Dalvik/Android)
+    user_agent: str = ""
     # Dogrulama sonuclari
     verified: bool = False
     status: str = "unchecked"
@@ -380,6 +383,7 @@ _M3U8_ENCODED = re.compile(
 _ATOB = re.compile(r'atob\(\s*[\'"]([A-Za-z0-9+/=]{8,})[\'"]\s*\)')
 _B64_BLOB = re.compile(r'[\'"]([A-Za-z0-9+/=]{40,})[\'"]')
 _IFRAME = re.compile(r'<iframe[^>]+src=["\']([^"\']+)["\']', re.I)
+_SCRIPT_SRC = re.compile(r'<script[^>]+src=["\']([^"\']+)["\']', re.I)
 _SOURCE_VAR = re.compile(
     r'(?:source|file|src|hlsUrl|streamUrl|playbackUrl)\s*[:=]\s*[\'"]([^\'"]+)[\'"]', re.I
 )
@@ -461,6 +465,20 @@ def extract_m3u8(
     if depth <= 0:
         return None
 
+    # Harici <script src> dosyalarini da tara (yeni nesil paneller yayin
+    # adresini dis JS dosyasindan yukler; ana HTML'de bulunmaz).
+    for raw_src in _SCRIPT_SRC.findall(text)[:4]:
+        script_url = urllib.parse.urljoin(url, raw_src)
+        if script_url in seen or not script_url.startswith("http"):
+            continue
+        seen.add(script_url)
+        script_text = get_text(script_url, referrer=referrer)
+        if not script_text:
+            continue
+        found = find_m3u8_in_text(script_text, script_url)
+        if found:
+            return found
+
     for raw_src in _IFRAME.findall(text)[:5]:
         iframe_url = urllib.parse.urljoin(url, raw_src)
         if not iframe_url.startswith("http"):
@@ -503,11 +521,13 @@ def validate_stream(stream: StreamInfo) -> StreamInfo:
         return stream
 
     started = time.time()
+    extra = {"User-Agent": stream.user_agent} if stream.user_agent else None
     response = http_get(
         url,
         referrer=stream.referrer or None,
         timeout=(Settings.CONNECT_TIMEOUT, Settings.VALIDATE_TIMEOUT),
         stream=True,
+        extra_headers=extra,
     )
     if response is None:
         stream.status = "network-error"
@@ -547,6 +567,7 @@ def validate_stream(stream: StreamInfo) -> StreamInfo:
             url=urllib.parse.urljoin(url, variant),
             group=stream.group,
             referrer=stream.referrer,
+            user_agent=stream.user_agent,
         )
         child = validate_stream(child)
         stream.verified = child.verified
@@ -569,6 +590,7 @@ def validate_stream(stream: StreamInfo) -> StreamInfo:
         referrer=stream.referrer or None,
         timeout=(Settings.CONNECT_TIMEOUT, Settings.VALIDATE_TIMEOUT),
         stream=True,
+        extra_headers=extra,
     )
     if seg_response is None:
         stream.status = "segment-error"
@@ -836,7 +858,10 @@ def dedupe_and_rank(streams: List[StreamInfo]) -> List[StreamInfo]:
         unique.sort(key=lambda s: (not s.verified, s.latency_ms or 99999))
         primary = unique[0]
         primary.backups = [
-            BackupLink(url=s.url, referrer=s.referrer, source=s.source)
+            BackupLink(
+                url=s.url, referrer=s.referrer, source=s.source,
+                user_agent=s.user_agent,
+            )
             for s in unique[1:8]
         ]
         merged.append(primary)
@@ -857,7 +882,7 @@ def dedupe_and_rank(streams: List[StreamInfo]) -> List[StreamInfo]:
 # CIKTI URETIMI
 # =============================================================================
 
-def proxied(url: str, referrer: str = "") -> str:
+def proxied(url: str, referrer: str = "", _ua: str = "") -> str:
     """
     Tarayici oynaticisinin kullanacagi adres.
 
@@ -866,7 +891,9 @@ def proxied(url: str, referrer: str = "") -> str:
     """
     if not Settings.PLAYER_PROXY or not url.lower().startswith(("http://", "https://")):
         return url
-    query = urllib.parse.urlencode({"url": url, "ref": referrer or "", "ua": USER_AGENT})
+    query = urllib.parse.urlencode(
+        {"url": url, "ref": referrer or "", "ua": _ua or USER_AGENT}
+    )
     return f"{Settings.PLAYER_PROXY}/hls?{query}"
 
 
@@ -886,15 +913,19 @@ def build_m3u(streams: List[StreamInfo], generated_at: str) -> str:
             attrs.append(f'tvg-logo="{stream.logo}"')
         out.append(f'#EXTINF:-1 {" ".join(attrs)},{stream.name}')
 
+        ua = stream.user_agent or USER_AGENT
         if stream.referrer:
             out.append(f"#EXTVLCOPT:http-referrer={stream.referrer}")
             out.append(f"#EXTVLCOPT:http-origin={stream.referrer}")
-        out.append(f"#EXTVLCOPT:http-user-agent={USER_AGENT}")
+        out.append(f"#EXTVLCOPT:http-user-agent={ua}")
 
         # Kodi/TiviMate tarzi inline header'lar da eklensin
-        out.append(f"#EXTHTTP:{json.dumps({'User-Agent': USER_AGENT, 'Referer': stream.referrer})}")
+        exthttp = {"User-Agent": ua}
+        if stream.referrer:
+            exthttp["Referer"] = stream.referrer
+        out.append(f"#EXTHTTP:{json.dumps(exthttp)}")
 
-        out.append(proxied(stream.url, stream.referrer))
+        out.append(proxied(stream.url, stream.referrer, ua))
 
     return "\n".join(out) + "\n"
 
@@ -902,11 +933,12 @@ def build_m3u(streams: List[StreamInfo], generated_at: str) -> str:
 def _backup_dict(backup, fallback_referrer: str = "") -> Dict[str, str]:
     """Yedek kaydi sozluge cevirir (duz string de kabul edilir)."""
     if isinstance(backup, str):
-        return {"url": backup, "referrer": fallback_referrer, "source": ""}
+        return {"url": backup, "referrer": fallback_referrer, "source": "", "user_agent": ""}
     return {
         "url": backup.url,
         "referrer": backup.referrer or fallback_referrer,
         "source": backup.source,
+        "user_agent": getattr(backup, "user_agent", ""),
     }
 
 
@@ -932,6 +964,7 @@ def build_json(streams: List[StreamInfo], generated_at: str) -> str:
                 "status": s.status,
                 "latency_ms": s.latency_ms,
                 "url": s.url,
+                "user_agent": s.user_agent,
                 "backups": [_backup_dict(b, s.referrer) for b in s.backups],
             }
             for s in streams

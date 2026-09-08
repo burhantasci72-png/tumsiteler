@@ -72,6 +72,18 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return self._send(404, b"nope", "text/plain")
         if path == "/page.html":
             return self._send(200, PAGE % port, "text/html")
+        if path == "/jspage.html":
+            body = (
+                "<html><head>"
+                f"<script src='http://127.0.0.1:{port}/player.js'></script>"
+                "</head><body></body></html>"
+            ).encode()
+            return self._send(200, body, "text/html")
+        if path == "/player.js":
+            body = (
+                f'var streamUrl = "http://127.0.0.1:{port}/good.m3u8";'
+            ).encode()
+            return self._send(200, body, "application/javascript")
         if path.endswith(".ts"):
             return self._send(200, SEG, "video/mp2t")
 
