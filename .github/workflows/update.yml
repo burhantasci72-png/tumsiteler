@@ -57,6 +57,7 @@ jobs:
           PLAYER_PROXY: ${{ vars.PLAYER_PROXY }}
           VALIDATE_WORKERS: '48'
           SCRAPE_WORKERS: '24'
+          IMPERSONATE: '1'
         # main.py kaynaklara ulasamazsa 1 doner; bu durumda mevcut liste
         # KORUNUR (bozuk/bos liste asla commit edilmez).
         run: |
@@ -102,7 +103,10 @@ jobs:
             } >> "$GITHUB_STEP_SUMMARY"
           fi
 
-      - name: Kaynaklar erisilemezse uyar
+      - name: Kaynaklar erisilemezse calisma BASARISIZ olsun
         if: steps.build.outputs.status != '0'
         run: |
-          echo "::warning::Liste uretilemedi; mevcut dosyalar korundu."
+          echo "::error::Liste uretilemedi; mevcut dosyalar korundu."
+          echo "::error::Kaynaklara Actions'tan erisilemedi. Ayrinti icin 'Listeyi olustur' adiminin ciktisina bakin."
+          # Onceki davranis is akisini 'success' gosteriyordu; bozulma fark edilmiyordu.
+          exit 1

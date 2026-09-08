@@ -3,27 +3,54 @@
 Çeşitli spor yayın platformlarını tarayıp **doğrulanmış** bir M3U/JSON kanal
 listesi üreten bot + web oynatıcı.
 
-## Neden bazı kanallar çalışmıyordu?
+## Neden bazı kanallar çalışmıyordu? (Eylül 2026 denetimi)
 
-Eski sürümdeki temel sorunlar ve çözümleri:
+Bu projedeki asıl düşman **domain/yayın sunucusu rotasyonu**: paneller haftada,
+checklist yayın sunucuları ise saatler içinde değişiyor. Bu yüzden "liste
+geliyor ama oynatmıyor" sorunları yaşanıyordu. Denetimde bulunan kök nedenler
+ve kalıcı çözümler:
 
 | # | Sorun | Çözüm |
 |---|-------|-------|
 | 1 | **Hiç doğrulama yoktu** — ölü linkler listeye yazılıyordu | Her yayın indirilip HLS imzası, varyant ve **ilk segment** kontrol ediliyor |
-| 2 | **~110 kayıt yayın değil, web sayfasıydı** (`event.html?id=`, `/channel?id=`) — hiçbir oynatıcı açamaz | Bu siteler artık geziliyor ve yalnızca gerçek `.m3u8` kaydediliyor |
-| 3 | **Tarayıcı `Referer`/`Origin`/`User-Agent` gönderemez** (forbidden headers) → hotlink korumalı yayınlar 403 | Header enjekte eden [Cloudflare Worker proxy](worker/) |
-| 4 | **CORS** başlığı olmayan sunucularda hls.js manifesti okuyamıyordu | Aynı proxy permissive CORS ekliyor + m3u8 içindeki tüm alt adresleri yeniden yazıyor |
-| 5 | İnadına TV'de **31 kanalın hepsine aynı URL** veriliyordu (`id` kullanılmıyordu) | Düzeltildi |
-| 6 | Aynı kanal 8 kaynakta ayrı ayrı listeleniyor, biri ölünce çare yok | Kanallar birleştirilip **otomatik yedek kaynak** (failover) veriliyor |
-| 7 | Bot boş liste üretse bile commit ediyordu | Az/boş sonuçta mevcut liste **korunuyor** |
-| 8 | `.gitignore` markdown ``` içinde olduğu için çalışmıyordu | Düzeltildi |
+| 2 | **~110 kayıt yayın değil, web sayfasıydı** (`event.html?id=`, `/channel?id=`) | Bu siteler geziliyor, yalnızca gerçek `.m3u8` kaydediliyor |
+| 3 | **Tarayıcı `Referer`/`Origin`/`User-Agent` gönderemez** → hotlink korumalı yayınlar 403 | Header enjekte eden [Cloudflare Worker proxy](worker/) |
+| 4 | **CORS** başlığı olmayan sunucularda hls.js manifesti okuyamıyordu | Aynı proxy permissive CORS ekliyor + m3u8 alt adreslerini yeniden yazıyor |
+| 5 | Aynı kanal 8 kaynakta ayrı ayrı listeleniyordu | Kanallar birleştirilip **otomatik yedek kaynak** (failover) veriliyor |
+| 6 | **Checklist sunucusu tek koda gömülüydü** — sunucu ölünce 205 Netspor kanalı birden öldü | Sunucular artık panel sayfalarından + **son başarılı listeden (channels.json)** keşfediliyor, canlılık testi sonrası kullanılıyor |
+| 7 | **Domain aralıkları bayatlıyordu** — `netsporco5.xyz` yok, `netsporcoamp23.xyz` var | `FAMILIES` tablosu: bilinen **seed** adresler + geniş numara aralıkları; ayrıca panellerin **"GÜNCEL ADRESİMİZ"** duyuruları takip ediliyor, sayfalardaki aile domainleri **hasat** ediliyor, **yönlendirilen son adres** kullanılıyor |
+| 8 | **GitHub Actions'tan hiçbir site açılmıyordu** — python-requests'in TLS parmak izi bot korumasına takılıyordu | `curl_cffi` ile **Chrome parmak izi** taklidi (`IMPERSONATE=1`, kurulu değilse otomatik requests'e düşer) |
+| 9 | **İş akışı bozulmayı gizliyordu** — liste üretilemese bile "success" görünüyordu | Build başarısızsa koşu artık **kırmızı** biter |
+| 10 | **`channels.json` hiç commit edilmedi** — workflow gitignore'lu `health_report.json`'u `git add`'lemeye çalışıyordu | Yalnızca `Canli_Spor_Hepsi.m3u` + `channels.json` commit edilir; site boş liste gösteremez |
+| 11 | Sabit worker kanallarının origin'i Cloudflare'den engellenince blok sayfası "yayın" gibi listelendi | Doğrulama katmanı HLS imzası görmeyen her şeyi eler |
+
+## Domain bakımı (domainler değişince ne yapmalı?)
+
+Bot çoğu değişimi kendi halleder: seed adresler panellerin "GÜNCEL ADRESİMİZ"
+duyurusunu ve sayfa içi aile linklerini takip eder. Yine de kaynak tamamen
+yer değiştirdiyse `sources.py` içindeki `FAMILIES` tablosunu güncelleyin:
+
+```python
+"mahsun": {
+    "label": "Mahsun Sports",
+    "seeds": ["https://mahsunsports.xyz"],      # <- bilinen guncel adres
+    "patterns": [("https://mahsunsports{}.xyz", range(1, 220))],
+    "signature": ("event.html", "androstreamlive", "mahsun"),
+},
+```
+
+- `seeds`: yeni adresi öğrendiyseniz buraya ekleyin (ilk bunlar denenir).
+- `signature`: sayfanın bu aileye ait olduğunu gösteren kelimeler.
+- Bulunan her sayfadaki durum `health_report.json` içindeki `families`
+  alanına yazılır — hangi kaynağın nerede takıldığını oradan görün.
 
 ## Yapı
 
 ```
 main.py       Akış: topla -> normalize et -> doğrula -> birleştir -> yaz
-core.py       HTTP oturumu, m3u8 keşfi, doğrulama, kanal normalizasyonu, çıktı
-sources.py    Kaynak toplayıcılar (her biri izole; biri çökerse diğerleri sürer)
+core.py       HTTP oturumu (curl_cffi impersonation dahil), m3u8 keşfi,
+              doğrulama, kanal normalizasyonu, çıktı
+sources.py    Kaynak toplayıcılar + domain/checklist keşif katmanı (FAMILIES)
 index.html    Web arayüzü + yerleşik HLS oynatıcı
 worker/       Cloudflare Worker HLS proxy (header enjeksiyonu + CORS)
 tests/        Birim + entegrasyon testleri (ağ erişimi gerektirmez)
@@ -69,6 +96,7 @@ python main.py
 | `PLAYER_PROXY` | — | HLS proxy adresi (tarayıcı oynatma için) |
 | `ONLY` | — | Sadece belirli kaynakları tara (`ONLY=netspor,andro`) |
 | `VALIDATE_WORKERS` | `40` | Paralel doğrulama sayısı |
+| `IMPERSONATE` | `1` | Chrome TLS parmak izi taklidi (curl_cffi gerekir; yoksa requests kullanılır) |
 
 ### Testler
 

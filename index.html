@@ -1649,6 +1649,37 @@
             notifTimer = setTimeout(() => el.classList.remove('show'), duration);
         }
 
+        /* ===== PROXY EKSIKSE BILGILENDIRME ===== */
+        let proxyBannerShown = false;
+        function maybeShowProxyBanner() {
+            if (proxyBannerShown || playerProxy) return;
+            proxyBannerShown = true;
+            const banner = document.createElement('div');
+            banner.id = 'proxyBanner';
+            banner.style.cssText = [
+                'margin:10px auto', 'max-width:960px', 'padding:12px 16px',
+                'border-radius:12px', 'border:1px solid #ffb02055',
+                'background:#2b2005', 'color:#ffd479', 'font-size:14px',
+                'display:flex', 'gap:12px', 'align-items:center',
+                'flex-wrap:wrap'
+            ].join(';');
+            banner.innerHTML =
+                '<span style="font-size:18px">&#128737;</span>' +
+                '<span style="flex:1;min-width:220px">' +
+                'Yayın proxy\'si <b>ayarlı değil</b>. Referer korumalı kanalların çoğu ' +
+                'tarayıcıda ancak HLS proxy ile açılır (VLC/Kodi etkilenmez).</span>' +
+                '<button id="proxyBannerBtn" style="padding:8px 14px;border-radius:8px;' +
+                'border:0;background:#ffb020;color:#1a1405;font-weight:700;cursor:pointer">' +
+                'Proxy Kur</button>';
+            const container = document.getElementById('channelsContainer');
+            if (container && container.parentNode) {
+                container.parentNode.insertBefore(banner, container);
+            }
+            document.getElementById('proxyBannerBtn')?.addEventListener('click', () => {
+                document.getElementById('proxyBtn')?.click();
+            });
+        }
+
         /* ===== DROPDOWNS ===== */
         function closeAllDropdowns() {
             document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
@@ -2116,6 +2147,7 @@
                     allChannels = items;
                     renderM3UCategories(categories);
                     filterChannelsByCategory('all');
+                    maybeShowProxyBanner();
 
                     const withBackup = items.filter(i => i.backups.length).length;
                     showNotification(
@@ -2137,6 +2169,7 @@
                 renderM3UCategories(categories);
                 filterChannelsByCategory('all');
 
+                maybeShowProxyBanner();
                 showNotification(`${items.length} kanal yüklendi`, 'tv');
             } catch (e) {
                 container.innerHTML = `
@@ -2408,7 +2441,12 @@
                 showNotification(`${reason}: yedek kaynağa geçiliyor`, 'random');
                 npPlayIndex(npIndex + 1);
             } else {
-                npShowOverlay(`${reason}. Tüm kaynaklar denendi.`, true);
+                let hint = '';
+                if (!playerProxy && /403|forbidden|Referer/i.test(reason)) {
+                    hint = ' Bu yayın Referer korumalı; tarayıcı başlık gönderemez. ' +
+                           'Kalkan simgesinden HLS proxy adresi ayarlayın.';
+                }
+                npShowOverlay(`${reason}. Tüm kaynaklar denendi.${hint}`, true);
             }
         }
 
@@ -2514,7 +2552,15 @@
                             return;
                         }
 
-                        npNextSource('Yayın açılamadı');
+                        const httpCode =
+                            data && data.response && data.response.code
+                                ? data.response.code
+                                : null;
+                        npNextSource(
+                            httpCode
+                                ? `Yayın açılamadı (HTTP ${httpCode})`
+                                : 'Yayın açılamadı'
+                        );
                     });
                 } else if (NP.video.canPlayType('application/vnd.apple.mpegurl')) {
                     NP.enginePill.textContent = 'yerel HLS';

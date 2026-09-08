@@ -47,6 +47,20 @@ BASE_HEADERS = {
     "Accept-Language": "tr-TR,tr;q=0.9,en;q=0.8",
 }
 
+# HTML sayfaları icin tarayıcı benzeri basliklar (Cloudflare bot skorunu dusurur)
+PAGE_HEADERS = {
+    **BASE_HEADERS,
+    "Accept": (
+        "text/html,application/xhtml+xml,application/xml;q=0.9,"
+        "image/avif,image/webp,*/*;q=0.8"
+    ),
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+}
+
 
 def _env_int(name: str, default: int) -> int:
     try:
@@ -138,11 +152,74 @@ class StreamInfo:
 _local = threading.local()
 
 
-def get_session() -> requests.Session:
-    """Thread-basina yeniden kullanilan, retry destekli oturum."""
+# --- Tarayıcı TLS parmak izi (IMPERSONATE=1 ve curl_cffi kuruluysa) ---
+# python-requests'in TLS parmak izi (JA3) bot korumalarında anında yakalanir;
+# curl_cffi gerçek Chrome parmak izini taklit ederek bircogundan gecer.
+try:  # opsiyonel bagimlilik
+    from curl_cffi import requests as _curl_requests
+
+    _CURL_AVAILABLE = True
+except Exception:  # pragma: no cover
+    _curl_requests = None
+    _CURL_AVAILABLE = False
+
+IMPERSONATE_ENABLED = _env_flag("IMPERSONATE", True) and _CURL_AVAILABLE
+IMPERSONATE_TARGET = os.environ.get("IMPERSONATE_TARGET", "chrome124")
+
+
+class _CurlResponse:
+    """curl_cffi yanitini requests benzeri arayuze saran ince kutu."""
+
+    def __init__(self, resp):
+        self._resp = resp
+        self.status_code = resp.status_code
+        self.url = str(resp.url)
+        self.text = resp.text
+        self.content = resp.content or b""
+        self.encoding = "utf-8"
+        self.apparent_encoding = "utf-8"
+        self.raw = None  # raw akis yok; read_chunk() content kullanir
+
+    def close(self):
+        try:
+            self._resp.close()
+        except Exception:
+            pass
+
+
+def read_chunk(response, limit: int) -> bytes:
+    """Yanitin ilk `limit` baytini dondurur (requests VE curl uyumlu)."""
+    raw = getattr(response, "raw", None)
+    if raw is not None and hasattr(raw, "read"):
+        try:
+            return raw.read(limit, decode_content=True) or b""
+        except Exception:
+            return b""
+    return (getattr(response, "content", b"") or b"")[:limit]
+
+
+def get_session():
+    """Thread-basina yeniden kullanilan HTTP istemcisi dondurur.
+
+    IMPERSONATE aciksa ve curl_cffi kuruluysa Chrome parmak izli istemci,
+    degilse requests.Session doner. Yanit tipi degisken olabilir; cagri
+    siteleri read_chunk()/status_code/text kullandigi surece fark etmez.
+    """
     session = getattr(_local, "session", None)
     if session is not None:
         return session
+
+    if IMPERSONATE_ENABLED:
+        try:
+            session = _curl_requests.Session(impersonate=IMPERSONATE_TARGET)
+        except Exception:
+            try:
+                session = _curl_requests.Session(impersonate="chrome")
+            except Exception:
+                session = None
+        if session is not None:
+            _local.session = session
+            return session
 
     session = requests.Session()
     session.headers.update(BASE_HEADERS)
@@ -173,22 +250,46 @@ def http_get(
     timeout: Optional[Tuple[int, int] | int] = None,
     stream: bool = False,
     extra_headers: Optional[Dict[str, str]] = None,
+    page: bool = False,
 ) -> Optional[requests.Response]:
-    """Guvenli GET. Hata durumunda None doner, asla istisna firlatmaz."""
-    headers = dict(BASE_HEADERS)
+    """Guvenli GET. Hata durumunda None doner, asla istisna firlatmaz.
+
+    page=True ise tarayici benzeri basliklar kullanilir (panel sayfalari icin).
+    curl_cffi impersonation aktifse yanit _CurlResponse olarak doner.
+    """
+    base = PAGE_HEADERS if page else BASE_HEADERS
+    headers = dict(base)
     if referrer:
         headers["Referer"] = referrer
         parsed = urllib.parse.urlparse(referrer)
         if parsed.scheme and parsed.netloc:
             headers["Origin"] = f"{parsed.scheme}://{parsed.netloc}"
+            headers.setdefault("Sec-Fetch-Site", "same-origin")
     if extra_headers:
         headers.update(extra_headers)
 
+    timeout = timeout or TIMEOUT
+    session = get_session()
+
+    # curl_cffi yolu (Chrome TLS parmak izi)
+    if IMPERSONATE_ENABLED and not isinstance(session, requests.Session):
+        try:
+            resp = session.get(
+                url,
+                headers=headers,
+                timeout=float(max(timeout) if isinstance(timeout, tuple) else timeout),
+                allow_redirects=True,
+                verify=False,
+            )
+            return _CurlResponse(resp)
+        except Exception:
+            return None
+
     try:
-        return get_session().get(
+        return session.get(
             url,
             headers=headers,
-            timeout=timeout or TIMEOUT,
+            timeout=timeout,
             verify=False,
             stream=stream,
             allow_redirects=True,
@@ -199,11 +300,16 @@ def http_get(
 
 def get_text(url: str, referrer: Optional[str] = None) -> Optional[str]:
     """Sayfa metnini doner (200 disi ve hata -> None)."""
-    response = http_get(url, referrer=referrer)
+    response = http_get(url, referrer=referrer, page=True)
     if response is None or response.status_code != 200:
         return None
-    if not response.encoding or response.encoding.lower() == "iso-8859-1":
-        response.encoding = response.apparent_encoding or "utf-8"
+    if not getattr(response, "encoding", None) or str(
+        getattr(response, "encoding", "")
+    ).lower() == "iso-8859-1":
+        try:
+            response.encoding = response.apparent_encoding or "utf-8"
+        except Exception:
+            pass
     return response.text
 
 
@@ -413,7 +519,7 @@ def validate_stream(stream: StreamInfo) -> StreamInfo:
             return stream
 
         try:
-            body = response.raw.read(65536, decode_content=True) or b""
+            body = read_chunk(response, 65536)
         except Exception:
             stream.status = "read-error"
             return stream
@@ -473,7 +579,7 @@ def validate_stream(stream: StreamInfo) -> StreamInfo:
             stream.status = f"segment-http-{seg_response.status_code}"
             return stream
         try:
-            chunk = seg_response.raw.read(2048, decode_content=True) or b""
+            chunk = read_chunk(seg_response, 2048)
         except Exception:
             chunk = b""
         if len(chunk) < 256:
@@ -835,7 +941,10 @@ def build_json(streams: List[StreamInfo], generated_at: str) -> str:
 
 
 def build_report(
-    all_streams: List[StreamInfo], final_streams: List[StreamInfo], generated_at: str
+    all_streams: List[StreamInfo],
+    final_streams: List[StreamInfo],
+    generated_at: str,
+    families: Optional[Dict[str, str]] = None,
 ) -> str:
     """Kaynak bazli saglik raporu."""
     by_source: Dict[str, Dict[str, int]] = {}
@@ -855,6 +964,7 @@ def build_report(
             "scraped": len(all_streams),
             "verified": sum(1 for s in all_streams if s.verified),
             "published": len(final_streams),
+            "families": families or {},
             "by_source": dict(sorted(by_source.items())),
             "failure_reasons": dict(
                 sorted(reasons.items(), key=lambda kv: -kv[1])
