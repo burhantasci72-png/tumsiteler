@@ -629,32 +629,53 @@ def validate_stream(stream: StreamInfo) -> StreamInfo:
         return stream
 
     segment_url = urllib.parse.urljoin(base_url, segments[0])
-    seg_response = http_get(
-        segment_url,
-        referrer=stream.referrer or None,
-        timeout=(Settings.CONNECT_TIMEOUT, Settings.VALIDATE_TIMEOUT),
-        stream=True,
-        extra_headers=extra,
-    )
-    if seg_response is None:
-        stream.status = "segment-error"
+
+    # Bazi CDN'ler segmenti yalnizca belirli bir Referer ile (ya da Referer
+    # OLMADAN) veriyor. Calisan varyanti bulup kaynak olarak kullanıyoruz;
+    # aksi halde calisan yayinlar 403 yuzunden listeye giremiyordu.
+    parsed_seg = urllib.parse.urlparse(segment_url)
+    seg_origin = f"{parsed_seg.scheme}://{parsed_seg.netloc}/"
+    referrer_variants: List[str] = []
+    for candidate in (stream.referrer or "", "", seg_origin):
+        if candidate not in referrer_variants:
+            referrer_variants.append(candidate)
+
+    last_status = "segment-error"
+    for index, referrer in enumerate(referrer_variants):
+        seg_response = http_get(
+            segment_url,
+            referrer=referrer or None,
+            timeout=(Settings.CONNECT_TIMEOUT, Settings.VALIDATE_TIMEOUT),
+            stream=True,
+            extra_headers=extra,
+        )
+        if seg_response is None:
+            last_status = "segment-error"
+            continue
+
+        try:
+            if seg_response.status_code != 200:
+                last_status = f"segment-http-{seg_response.status_code}"
+                continue
+            try:
+                chunk = read_chunk(seg_response, 2048)
+            except Exception:
+                chunk = b""
+            if len(chunk) < 256:
+                last_status = "segment-empty"
+                continue
+        finally:
+            seg_response.close()
+
+        # Bu Referer ile segment geliyor: yayin gercekten oynuyor.
+        if index > 0:
+            stream.referrer = referrer
+        stream.verified = True
+        stream.status = "ok"
         return stream
 
-    try:
-        if seg_response.status_code != 200:
-            stream.status = f"segment-http-{seg_response.status_code}"
-            return stream
-        try:
-            chunk = read_chunk(seg_response, 2048)
-        except Exception:
-            chunk = b""
-        if len(chunk) < 256:
-            stream.status = "segment-empty"
-            return stream
-    finally:
-        seg_response.close()
-
-    stream.verified = True
+    stream.status = last_status
+    return stream
     stream.status = "ok"
     return stream
 
@@ -1198,6 +1219,7 @@ def build_report(
     """Kaynak bazli saglik raporu."""
     by_source: Dict[str, Dict[str, int]] = {}
     reasons: Dict[str, int] = {}
+    by_source_status: Dict[str, Dict[str, int]] = {}
 
     for stream in all_streams:
         entry = by_source.setdefault(stream.source or "?", {"total": 0, "ok": 0})
@@ -1206,6 +1228,8 @@ def build_report(
             entry["ok"] += 1
         else:
             reasons[stream.status] = reasons.get(stream.status, 0) + 1
+            statuses = by_source_status.setdefault(stream.source or "?", {})
+            statuses[stream.status] = statuses.get(stream.status, 0) + 1
 
     return json.dumps(
         {
@@ -1218,6 +1242,16 @@ def build_report(
             "failure_reasons": dict(
                 sorted(reasons.items(), key=lambda kv: -kv[1])
             ),
+            # Kaynak basina hata dagilimi (hangi kaynak neden dusuyor?)
+            "by_source_status": {
+                source: dict(
+                    sorted(
+                        statuses.items(),
+                        key=lambda kv: -kv[1],
+                    )
+                )
+                for source, statuses in sorted(by_source_status.items())
+            },
         },
         ensure_ascii=False,
         indent=1,

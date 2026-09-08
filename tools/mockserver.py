@@ -100,6 +100,18 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return self._send(200, b"<html>blocked</html>", "text/html")
         if path == "/seg1.ts" or path == "/seg2.ts":
             return self._send(200, SEG, "video/mp2t")
+        if path == "/noref.ts":
+            # Referer GELIRSE reddeden CDN (Selcukspor segmentleri gibi)
+            if self.headers.get("Referer"):
+                return self._send(403, b"forbidden", "text/plain")
+            return self._send(200, SEG, "video/mp2t")
+        if path == "/noref.m3u8":
+            body = (
+                "#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-TARGETDURATION:4\n"
+                f"#EXTINF:4.0,\nhttp://127.0.0.1:{port}/noref.ts\n"
+                "#EXT-X-ENDLIST\n"
+            ).encode()
+            return self._send(200, body)
         if path.startswith("/sub/") and path.endswith(".ts"):
             return self._send(200, SEG, "video/mp2t")
         if path.endswith(".ts"):
