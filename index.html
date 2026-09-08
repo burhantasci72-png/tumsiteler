@@ -1270,6 +1270,150 @@
                 font-size: 0.86rem;
             }
         }
+        /* ===== YERLESIK HLS OYNATICI ===== */
+        .np-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, .92);
+            padding: 16px;
+        }
+        .np-modal.show { display: flex; }
+
+        .np-box {
+            width: 100%;
+            max-width: 1100px;
+            background: #0d0f14;
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .np-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, .04);
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        }
+        .np-title {
+            flex: 1;
+            font-weight: 700;
+            font-size: 15px;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .np-btn {
+            background: rgba(255, 255, 255, .08);
+            border: none;
+            color: #fff;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .np-btn:hover { background: rgba(255, 255, 255, .18); }
+        .np-btn.close:hover { background: #e2364d; }
+
+        .np-stage {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
+        .np-stage video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+            display: block;
+        }
+        .np-stage iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .np-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: #fff;
+            background: rgba(0, 0, 0, .72);
+            text-align: center;
+            padding: 18px;
+            font-size: 14px;
+        }
+        .np-overlay.hidden { display: none; }
+        .np-spin {
+            width: 38px;
+            height: 38px;
+            border: 3px solid rgba(255, 255, 255, .16);
+            border-top-color: #ff3c64;
+            border-radius: 50%;
+            animation: npspin 1s linear infinite;
+        }
+        @keyframes npspin { to { transform: rotate(360deg); } }
+
+        .np-retry {
+            background: #ff3c64;
+            border: none;
+            color: #fff;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .np-foot {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            font-size: 12px;
+            color: #9aa4b2;
+        }
+        .np-pill {
+            background: rgba(255, 255, 255, .07);
+            padding: 3px 9px;
+            border-radius: 20px;
+        }
+        .np-pill.ok { color: #38d39f; }
+        .np-pill.warn { color: #ffb020; }
+
+        .np-box:fullscreen, .np-box:-webkit-full-screen {
+            max-width: none;
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0;
+            justify-content: center;
+        }
+        .np-box:fullscreen .np-stage,
+        .np-box:-webkit-full-screen .np-stage {
+            aspect-ratio: auto;
+            flex: 1;
+        }
+
+        @media (max-width: 640px) {
+            .np-modal { padding: 0; }
+            .np-box { height: 100%; max-width: none; border-radius: 0; }
+        }
     </style>
 </head>
 
@@ -1365,6 +1509,14 @@
                 <button class="player-options-close" id="playerOptionsClose"><i class="fas fa-times"></i></button>
             </div>
 
+            <div class="player-option" id="playNative" tabindex="0">
+                <i class="fas fa-play-circle"></i>
+                <div>
+                    <div class="player-option-title">Sitede Oynat (Önerilen)</div>
+                    <div class="player-option-desc" id="nativePlayerDesc">Yerleşik HLS oynatıcı + otomatik yedek kaynak</div>
+                </div>
+            </div>
+
             <div class="player-option" id="playWithExoplayer" tabindex="0">
                 <i class="fas fa-external-link-square-alt"></i>
                 <div>
@@ -1379,6 +1531,36 @@
                     <div class="player-option-title">Iframe Player'da Aç</div>
                     <div class="player-option-desc" id="iframePlayerDesc">16:9 sinema iframe oynatıcı</div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YERLESIK HLS OYNATICI -->
+    <div class="np-modal" id="npModal" aria-hidden="true">
+        <div class="np-box" id="npBox">
+            <div class="np-head">
+                <div class="np-title" id="npTitle">Oynatıcı</div>
+                <button class="np-btn" id="npPrevSrc" title="Önceki kaynak"><i class="fas fa-step-backward"></i></button>
+                <button class="np-btn" id="npNextSrc" title="Sonraki kaynak"><i class="fas fa-step-forward"></i></button>
+                <button class="np-btn" id="npPip" title="Mini oynatıcı"><i class="fas fa-clone"></i></button>
+                <button class="np-btn" id="npFs" title="Tam ekran"><i class="fas fa-expand"></i></button>
+                <button class="np-btn close" id="npClose" title="Kapat"><i class="fas fa-times"></i></button>
+            </div>
+
+            <div class="np-stage" id="npStage">
+                <video id="npVideo" playsinline controls autoplay></video>
+                <div class="np-overlay" id="npOverlay">
+                    <div class="np-spin"></div>
+                    <span id="npOverlayText">Yayın başlatılıyor...</span>
+                    <button class="np-retry" id="npRetry" style="display:none">Tekrar Dene</button>
+                </div>
+            </div>
+
+            <div class="np-foot">
+                <span class="np-pill" id="npSrcPill">Kaynak 1</span>
+                <span class="np-pill" id="npEnginePill">—</span>
+                <span class="np-pill" id="npQualityPill" style="display:none">Otomatik</span>
+                <span class="np-pill" id="npLatencyPill" style="display:none"></span>
             </div>
         </div>
     </div>
@@ -1606,9 +1788,18 @@
         });
 
         /* ===== M3U VE KANAL SİSTEMİ ===== */
+        const RAW_BASE = "https://raw.githubusercontent.com/burhantasci72-png/tumsiteler/main";
+
         const m3uConfig = {
-            proxyUrl: "https://script.google.com/macros/s/AKfycbzv4yjrPMkMTcZsnMA8dpi9b5mn0ju9OLhtmyR-Xau3k3lhEtfHhWXzCRqz9bxdVB4sUQ/dev",
-            m3uFileUrl: "https://raw.githubusercontent.com/burhantasci72-png/tumsiteler/refs/heads/main/Canli_Spor_Hepsi.m3u"
+            // channels.json yedek linkleri de icerir -> otomatik failover
+            jsonUrl: `${RAW_BASE}/channels.json`,
+            m3uFileUrl: `${RAW_BASE}/Canli_Spor_Hepsi.m3u`,
+            // CORS icin denenecek aynalar (ilk calisan kullanilir)
+            corsProxies: [
+                u => u,
+                u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+                u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+            ],
         };
 
         let allChannels = [];
@@ -1668,6 +1859,7 @@
                     if (currentItem.group) categories.add(currentItem.group);
                 } else if (line && !line.startsWith('#') && currentItem) {
                     currentItem.url = line;
+                    currentItem.backups = [];
                     items.push(currentItem);
                     currentItem = null;
                 }
@@ -1807,19 +1999,19 @@
                             card.dataset.longPressTriggered = '';
                             return;
                         }
-                        showPlayerOptions(item.url, item.title);
+                        showPlayerOptions(item);
                     });
 
                     card.addEventListener('keydown', (e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
                             e.preventDefault();
-                            showPlayerOptions(item.url, item.title);
+                            showPlayerOptions(item);
                         }
                     });
 
-                    // Uzun bas: doğrudan iframe player
+                    // Uzun bas: dogrudan yerlesik oynatici
                     attachLongPress(card, () => {
-                        openIframePlayer(item.url, item.title, true);
+                        openNativePlayer(item);
                     });
 
                     container.appendChild(card);
@@ -1832,23 +2024,83 @@
                 displayedItemsCount < currentFilteredList.length ? 'block' : 'none';
         }
 
-        async function initM3U() {
-            try {
-                const res = await fetch(`${m3uConfig.proxyUrl}?url=${encodeURIComponent(m3uConfig.m3uFileUrl)}`);
-                const text = await res.text();
+        /** Birden fazla ayna deneyerek metin ceker. */
+        async function fetchWithFallback(url) {
+            let lastError = null;
 
+            for (const wrap of m3uConfig.corsProxies) {
+                try {
+                    const res = await fetch(wrap(url), { cache: 'no-store' });
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    const text = await res.text();
+                    if (text && text.length > 32) return text;
+                    throw new Error('bos yanit');
+                } catch (err) {
+                    lastError = err;
+                }
+            }
+            throw lastError || new Error('alinamadi');
+        }
+
+        /** channels.json -> zengin kanal listesi (yedek linkler dahil). */
+        function parseChannelsJson(text) {
+            const data = JSON.parse(text);
+            const categories = new Set();
+
+            const items = (data.channels || []).map(ch => {
+                if (ch.group) categories.add(ch.group);
+                return {
+                    title: ch.name || 'İsimsiz Kanal',
+                    image: ch.logo || fallbackLogo,
+                    group: ch.group || 'Genel',
+                    url: ch.url,
+                    backups: ch.backups || [],
+                    verified: ch.verified !== false,
+                };
+            });
+
+            return { items, categories: Array.from(categories).sort() };
+        }
+
+        async function initM3U() {
+            const container = document.getElementById('channelsContainer');
+
+            // 1) Once zengin JSON (yedek linkli) denenir
+            try {
+                const text = await fetchWithFallback(m3uConfig.jsonUrl);
+                const { items, categories } = parseChannelsJson(text);
+
+                if (items.length) {
+                    allChannels = items;
+                    renderM3UCategories(categories);
+                    filterChannelsByCategory('all');
+
+                    const withBackup = items.filter(i => i.backups.length).length;
+                    showNotification(
+                        `${items.length} kanal yüklendi (${withBackup} kanalda yedek kaynak)`,
+                        'tv'
+                    );
+                    return;
+                }
+            } catch (e) {
+                /* M3U'ya dusulur */
+            }
+
+            // 2) Yedek: klasik M3U
+            try {
+                const text = await fetchWithFallback(m3uConfig.m3uFileUrl);
                 const { items, categories } = parseM3U(text);
 
                 allChannels = items;
-
                 renderM3UCategories(categories);
                 filterChannelsByCategory('all');
 
                 showNotification(`${items.length} kanal yüklendi`, 'tv');
             } catch (e) {
-                document.getElementById('channelsContainer').innerHTML = `
+                container.innerHTML = `
                     <div class="loading-placeholder">
-                        Hata: Kanal listesi yüklenemedi.
+                        Kanal listesi yüklenemedi.<br>
+                        <small>${(e && e.message) || 'Bilinmeyen hata'}</small>
                     </div>
                 `;
             }
@@ -1926,11 +2178,27 @@
         let iframeLoadTimer = null;
         let iframeHideTimer = null;
 
-        function showPlayerOptions(url, name) {
-            currentUrl = safeHttpUrl(url, '') || '';
-            currentName = name || 'Kanal';
+        let currentItem = null;
+
+        function showPlayerOptions(item) {
+            // Geriye donuk uyum: (url, name) seklinde de cagrilabilir
+            if (typeof item === 'string') {
+                item = { url: item, title: arguments[1], backups: [] };
+            }
+
+            currentItem = item || {};
+            currentUrl = safeHttpUrl(currentItem.url, '') || '';
+            currentName = currentItem.title || 'Kanal';
 
             document.getElementById('playerOptionsTitle').textContent = currentName;
+
+            const backupCount = (currentItem.backups || []).length;
+            const nativeDesc = document.getElementById('nativePlayerDesc');
+            if (nativeDesc) {
+                nativeDesc.textContent = backupCount
+                    ? `Yerleşik HLS oynatıcı + ${backupCount} yedek kaynak`
+                    : 'Yerleşik HLS oynatıcı';
+            }
 
             const iframeDesc = document.getElementById('iframePlayerDesc');
             if (iframeDesc) {
@@ -1961,6 +2229,16 @@
             if (e.target === pModal) closePlayerOptions();
         });
 
+        /* Yerlesik oynatici (onerilen) */
+        document.getElementById('playNative')?.addEventListener('click', () => {
+            if (!currentUrl) {
+                showNotification('Geçerli bir yayın linki bulunamadı!', 'exclamation-circle');
+                return;
+            }
+            closePlayerOptions();
+            openNativePlayer(currentItem);
+        });
+
         /* Exoplayer / harici yönlendirme */
         document.getElementById('playWithExoplayer')?.addEventListener('click', () => {
             if (!currentUrl) {
@@ -1985,6 +2263,306 @@
             closePlayerOptions();
             openIframePlayer(currentUrl, currentName, true);
         });
+
+        /* =====================================================================
+           YERLESIK HLS OYNATICI
+
+           Katmanlar (sirayla denenir):
+             1. hls.js (MSE)          - masaustu + Android
+             2. Yerel HLS             - Safari / iOS
+             3. Yedek kaynak listesi  - ayni kanalin diger sitelerdeki linki
+             4. Iframe'e dusme        - m3u8 degilse veya hepsi basarisizsa
+
+           Ayrica: agir hata kurtarma, buffer stall kurtarma, otomatik
+           yeniden baglanma ve canliya geri yakalama.
+        ===================================================================== */
+        const NP = {
+            modal: document.getElementById('npModal'),
+            box: document.getElementById('npBox'),
+            video: document.getElementById('npVideo'),
+            stage: document.getElementById('npStage'),
+            overlay: document.getElementById('npOverlay'),
+            overlayText: document.getElementById('npOverlayText'),
+            retry: document.getElementById('npRetry'),
+            title: document.getElementById('npTitle'),
+            srcPill: document.getElementById('npSrcPill'),
+            enginePill: document.getElementById('npEnginePill'),
+            qualityPill: document.getElementById('npQualityPill'),
+            latencyPill: document.getElementById('npLatencyPill'),
+        };
+
+        let npHls = null;
+        let npSources = [];
+        let npIndex = 0;
+        let npChannel = '';
+        let npRecover = 0;
+        let npStallTimer = null;
+        let npHlsReady = null;
+
+        /** hls.js'i yalnizca ihtiyac aninda yukler. */
+        function loadHlsLib() {
+            if (window.Hls) return Promise.resolve(window.Hls);
+            if (npHlsReady) return npHlsReady;
+
+            npHlsReady = new Promise((resolve, reject) => {
+                const s = document.createElement('script');
+                s.src = 'https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js';
+                s.onload = () => resolve(window.Hls);
+                s.onerror = () => reject(new Error('hls.js yüklenemedi'));
+                document.head.appendChild(s);
+            });
+            return npHlsReady;
+        }
+
+        function npShowOverlay(text, showRetry = false) {
+            NP.overlay.classList.remove('hidden');
+            NP.overlayText.textContent = text;
+            NP.retry.style.display = showRetry ? '' : 'none';
+        }
+
+        function npHideOverlay() {
+            NP.overlay.classList.add('hidden');
+        }
+
+        function npDestroy() {
+            clearTimeout(npStallTimer);
+            npStallTimer = null;
+
+            if (npHls) {
+                try { npHls.destroy(); } catch (e) {}
+                npHls = null;
+            }
+
+            // iframe fallback temizligi
+            const frame = NP.stage.querySelector('iframe');
+            if (frame) frame.remove();
+            NP.video.style.display = '';
+
+            try {
+                NP.video.pause();
+                NP.video.removeAttribute('src');
+                NP.video.load();
+            } catch (e) {}
+        }
+
+        /** Buffer takilirsa canliya atla; uzun surerse kaynak degistir. */
+        function npArmStallWatch() {
+            clearTimeout(npStallTimer);
+            npStallTimer = setTimeout(() => {
+                if (NP.video.readyState >= 3 && !NP.video.paused) return;
+                if (npHls && npHls.liveSyncPosition) {
+                    NP.video.currentTime = npHls.liveSyncPosition;
+                    NP.video.play().catch(() => {});
+                    npArmStallWatch();
+                } else {
+                    npNextSource('Yayın takıldı');
+                }
+            }, 15000);
+        }
+
+        function npNextSource(reason) {
+            if (npIndex + 1 < npSources.length) {
+                showNotification(`${reason}: yedek kaynağa geçiliyor`, 'random');
+                npPlayIndex(npIndex + 1);
+            } else {
+                npShowOverlay(`${reason}. Tüm kaynaklar denendi.`, true);
+            }
+        }
+
+        /** Son care: sayfayi iframe icinde ac. */
+        function npFallbackIframe(url) {
+            npDestroy();
+            NP.video.style.display = 'none';
+
+            const frame = document.createElement('iframe');
+            frame.src = url;
+            frame.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+            frame.allowFullscreen = true;
+            frame.referrerPolicy = 'no-referrer';
+            NP.stage.appendChild(frame);
+
+            NP.enginePill.textContent = 'iframe';
+            npHideOverlay();
+        }
+
+        function npPlayIndex(index) {
+            npDestroy();
+
+            npIndex = index;
+            npRecover = 0;
+
+            const source = npSources[index];
+            if (!source) {
+                npShowOverlay('Oynatılabilir kaynak yok.', true);
+                return;
+            }
+
+            NP.srcPill.textContent = `Kaynak ${index + 1}/${npSources.length}`;
+            NP.qualityPill.style.display = 'none';
+            NP.latencyPill.style.display = 'none';
+            npShowOverlay('Yayın başlatılıyor...');
+
+            // m3u8 degilse dogrudan iframe
+            if (!isHlsUrl(source)) {
+                npFallbackIframe(source);
+                return;
+            }
+
+            const started = performance.now();
+
+            loadHlsLib().then((Hls) => {
+                if (Hls && Hls.isSupported()) {
+                    NP.enginePill.textContent = 'hls.js';
+
+                    npHls = new Hls({
+                        enableWorker: true,
+                        lowLatencyMode: true,
+                        backBufferLength: 60,
+                        maxBufferLength: 30,
+                        maxMaxBufferLength: 90,
+                        manifestLoadingTimeOut: 12000,
+                        manifestLoadingMaxRetry: 3,
+                        levelLoadingMaxRetry: 4,
+                        fragLoadingTimeOut: 20000,
+                        fragLoadingMaxRetry: 6,
+                    });
+
+                    npHls.loadSource(source);
+                    npHls.attachMedia(NP.video);
+
+                    npHls.on(Hls.Events.MANIFEST_PARSED, () => {
+                        NP.latencyPill.textContent = `${Math.round(performance.now() - started)} ms`;
+                        NP.latencyPill.style.display = '';
+
+                        const levels = npHls.levels || [];
+                        if (levels.length > 1) {
+                            NP.qualityPill.textContent = `${levels.length} kalite`;
+                            NP.qualityPill.style.display = '';
+                        }
+
+                        NP.video.play().catch(() => {
+                            // Otomatik oynatma engellendiyse sessize alip tekrar dene
+                            NP.video.muted = true;
+                            NP.video.play().catch(() => {
+                                npShowOverlay('Başlatmak için dokunun', true);
+                            });
+                        });
+                    });
+
+                    npHls.on(Hls.Events.ERROR, (evt, data) => {
+                        if (!data || !data.fatal) return;
+
+                        if (data.type === Hls.ErrorTypes.NETWORK_ERROR && npRecover < 3) {
+                            npRecover++;
+                            npShowOverlay(`Bağlantı hatası, yeniden deneniyor (${npRecover}/3)...`);
+                            setTimeout(() => { try { npHls.startLoad(); } catch (e) {} }, 1200);
+                            return;
+                        }
+
+                        if (data.type === Hls.ErrorTypes.MEDIA_ERROR && npRecover < 3) {
+                            npRecover++;
+                            npShowOverlay('Görüntü hatası kurtarılıyor...');
+                            try { npHls.recoverMediaError(); } catch (e) {}
+                            return;
+                        }
+
+                        npNextSource('Yayın açılamadı');
+                    });
+                } else if (NP.video.canPlayType('application/vnd.apple.mpegurl')) {
+                    NP.enginePill.textContent = 'yerel HLS';
+                    NP.video.src = source;
+                    NP.video.play().catch(() => {
+                        NP.video.muted = true;
+                        NP.video.play().catch(() => {});
+                    });
+                } else {
+                    npFallbackIframe(source);
+                }
+            }).catch(() => {
+                if (NP.video.canPlayType('application/vnd.apple.mpegurl')) {
+                    NP.enginePill.textContent = 'yerel HLS';
+                    NP.video.src = source;
+                    NP.video.play().catch(() => {});
+                } else {
+                    npFallbackIframe(source);
+                }
+            });
+        }
+
+        NP.video.addEventListener('playing', () => {
+            npHideOverlay();
+            npArmStallWatch();
+        });
+        NP.video.addEventListener('waiting', () => {
+            npShowOverlay('Arabelleğe alınıyor...');
+            npArmStallWatch();
+        });
+        NP.video.addEventListener('error', () => {
+            if (!npHls) npNextSource('Video hatası');
+        });
+
+        NP.retry.addEventListener('click', () => npPlayIndex(npIndex));
+        document.getElementById('npNextSrc').addEventListener('click', () => {
+            if (npIndex + 1 < npSources.length) npPlayIndex(npIndex + 1);
+            else showNotification('Başka kaynak yok', 'info-circle');
+        });
+        document.getElementById('npPrevSrc').addEventListener('click', () => {
+            if (npIndex > 0) npPlayIndex(npIndex - 1);
+            else showNotification('İlk kaynaktasınız', 'info-circle');
+        });
+
+        document.getElementById('npPip').addEventListener('click', async () => {
+            try {
+                if (document.pictureInPictureElement) await document.exitPictureInPicture();
+                else await NP.video.requestPictureInPicture();
+            } catch (e) {
+                showNotification('Mini oynatıcı desteklenmiyor', 'exclamation-circle');
+            }
+        });
+
+        document.getElementById('npFs').addEventListener('click', () => {
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            } else if (NP.box.requestFullscreen) {
+                NP.box.requestFullscreen().catch(() => {});
+            } else if (NP.box.webkitRequestFullscreen) {
+                NP.box.webkitRequestFullscreen();
+            }
+        });
+
+        function npClose() {
+            npDestroy();
+            NP.modal.classList.remove('show');
+            NP.modal.setAttribute('aria-hidden', 'true');
+            if (pModal.style.display !== 'flex') {
+                document.body.classList.remove('player-modal-open');
+            }
+        }
+
+        document.getElementById('npClose').addEventListener('click', npClose);
+        NP.modal.addEventListener('click', (e) => { if (e.target === NP.modal) npClose(); });
+
+        /** Kanali yerlesik oynaticida acar (yedek kaynaklarla birlikte). */
+        function openNativePlayer(item) {
+            npChannel = item.title || 'Kanal';
+            NP.title.textContent = npChannel;
+
+            const list = [item.url].concat(item.backups || []);
+            npSources = list
+                .map(u => safeHttpUrl(u))
+                .filter((u, i, arr) => u && arr.indexOf(u) === i);
+
+            if (!npSources.length) {
+                showNotification('Geçerli yayın linki yok!', 'exclamation-circle');
+                return;
+            }
+
+            NP.modal.classList.add('show');
+            NP.modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('player-modal-open');
+
+            npPlayIndex(0);
+        }
 
         /* ===== HLS IFRAME SRCDOC ===== */
         function buildHlsSrcdoc(url) {
@@ -2217,7 +2795,9 @@
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                if (iframeModal.classList.contains('show')) {
+                if (NP.modal.classList.contains('show')) {
+                    npClose();
+                } else if (iframeModal.classList.contains('show')) {
                     closeIframePlayer();
                 } else if (pModal.style.display === 'flex') {
                     closePlayerOptions();

@@ -1,0 +1,8 @@
+name = "hls-proxy"
+main = "hls-proxy.js"
+compatibility_date = "2024-11-01"
+
+# Dagitim:
+#   cd worker && npx wrangler deploy
+# Sonra main.py'yi PLAYER_PROXY=https://hls-proxy.<hesabiniz>.workers.dev
+# ile calistirin; index.html icindeki PLAYER_PROXY sabitini de guncelleyin.
