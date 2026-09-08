@@ -84,8 +84,26 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 f'var streamUrl = "http://127.0.0.1:{port}/good.m3u8";'
             ).encode()
             return self._send(200, body, "application/javascript")
-        if path.endswith(".ts"):
+        # Cozucu adres: .m3u8 icermez, 302 ile alt dizindeki playlist'e gider.
+        # Segmentler GORECELI oldugu icin yonlendirme sonrasi adresle
+        # birlestirilmeli (aksi halde /seg1.ts -> 404).
+        if path == "/resolve":
+            self.send_response(302)
+            self.send_header("Location", f"http://127.0.0.1:{port}/sub/media.m3u8")
+            self.end_headers()
+            return
+        if path == "/sub/media.m3u8":
+            return self._send(200, MEDIA)
+        if path == "/sub/seg1.ts" or path == "/sub/seg2.ts":
             return self._send(200, SEG, "video/mp2t")
+        if path == "/resolve-html":
+            return self._send(200, b"<html>blocked</html>", "text/html")
+        if path == "/seg1.ts" or path == "/seg2.ts":
+            return self._send(200, SEG, "video/mp2t")
+        if path.startswith("/sub/") and path.endswith(".ts"):
+            return self._send(200, SEG, "video/mp2t")
+        if path.endswith(".ts"):
+            return self._send(404, b"nf", "text/plain")
 
         # --- Domain kesfi / panel testleri ---
         if path == "/redirect-panel":

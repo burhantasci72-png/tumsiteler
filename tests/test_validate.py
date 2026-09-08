@@ -84,6 +84,18 @@ class TestValidation(unittest.TestCase):
         self.assertFalse(result.verified)
         self.assertEqual(result.status, "not-a-stream")
 
+    def test_resolver_url_redirecting_to_hls_is_accepted(self):
+        """.m3u8 icermeyen cozucu adres (worker) 302 ile playlist'e gidiyorsa
+        kabul edilmeli; segmentler YONLENDIRME SONRASI adrese gore cozulmeli."""
+        result = self.check("/resolve?ID=bein-sports-1")
+        self.assertTrue(result.verified, result.status)
+        self.assertEqual(result.status, "ok")
+
+    def test_resolver_url_returning_html_is_rejected(self):
+        result = self.check("/resolve-html?ID=x")
+        self.assertFalse(result.verified)
+        self.assertEqual(result.status, "not-a-stream")
+
     def test_extract_m3u8_from_page(self):
         found = core.extract_m3u8(f"{self.base}/page.html")
         self.assertEqual(found, f"{self.base}/good.m3u8")

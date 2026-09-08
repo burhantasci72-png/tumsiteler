@@ -167,10 +167,12 @@ export default {
       });
     }
 
-    // Playlist ise yeniden yaz, degilse (segment) akisi oldugu gibi gecir
-    if (isPlaylist(contentType, upstream.pathname)) {
+    // Playlist ise yeniden yaz, degilse (segment) akisi oldugu gibi gecir.
+    // Yonlendirme SONRASI adres kontrol edilir: cozucu adresler (/?ID=kanal)
+    // .m3u8 icermez ama 302 ile gercek playlist'e gider.
+    const finalUrl = response.url || upstream.toString();
+    if (isPlaylist(contentType, finalUrl) || isPlaylist(contentType, upstream.pathname)) {
       const body = await response.text();
-      const finalUrl = response.url || upstream.toString();
       outHeaders.set("Content-Type", "application/vnd.apple.mpegurl");
       outHeaders.delete("Content-Length");
       return new Response(rewritePlaylist(body, finalUrl, ref, ua), {

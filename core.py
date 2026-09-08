@@ -501,6 +501,22 @@ def _looks_like_playlist(chunk: bytes) -> bool:
     return any(marker in chunk for marker in _PLAYLIST_MARKERS)
 
 
+# Acikca web sayfasi / dosya olan adresler: bunlar icin istek bile atilmaz.
+_PAGE_LIKE_EXT = (
+    ".html", ".htm", ".aspx", ".jsp",
+    ".mp4", ".mkv", ".avi", ".ts", ".mpd", ".flv", ".webm",
+)
+
+
+def _looks_like_page_url(url: str) -> bool:
+    """URL bir HTML sayfasi ya da duz medya dosyasi gibi mi gorunuyor?"""
+    try:
+        path = urllib.parse.urlparse(url).path.lower()
+    except Exception:
+        return False
+    return path.endswith(_PAGE_LIKE_EXT)
+
+
 def validate_stream(stream: StreamInfo) -> StreamInfo:
     """
     Yayinin gercekten oynatilabilir olup olmadigini kontrol eder.
@@ -515,11 +531,15 @@ def validate_stream(stream: StreamInfo) -> StreamInfo:
         stream.status = "bad-scheme"
         return stream
 
-    if ".m3u8" not in url.lower():
+    is_direct = ".m3u8" in url.lower()
+    if not is_direct and _looks_like_page_url(url):
         # Sayfa linki: yayin degil, oynatici bunu iframe ile acamaz.
         stream.status = "not-a-stream"
         return stream
 
+    # NOT: URL'de .m3u8 gecmese de "cozucu" adresler olabilir (orn. Cloudflare
+    # worker: /?ID=kanal -> 302 -> gercek m3u8). Bunlar indirilir; yalnizca
+    # gercekten HLS icerigi donenler kabul edilir.
     started = time.time()
     extra = {"User-Agent": stream.user_agent} if stream.user_agent else None
     response = http_get(
@@ -545,8 +565,14 @@ def validate_stream(stream: StreamInfo) -> StreamInfo:
             return stream
 
         if not _looks_like_playlist(body):
-            stream.status = "not-hls"
+            stream.status = "not-hls" if is_direct else "not-a-stream"
             return stream
+
+        # Yonlendirme sonrasi gercek adres: varyant/segment birlestirmede
+        # BU kullanilmali (cozucu adresine gore birlestirmek 404 uretir).
+        base_url = getattr(response, "url", None) or url
+        if not str(base_url).lower().startswith(("http://", "https://")):
+            base_url = url
 
         stream.latency_ms = int((time.time() - started) * 1000)
         text = body.decode("utf-8", "ignore")
@@ -564,7 +590,7 @@ def validate_stream(stream: StreamInfo) -> StreamInfo:
             return stream
         child = StreamInfo(
             name=stream.name,
-            url=urllib.parse.urljoin(url, variant),
+            url=urllib.parse.urljoin(base_url, variant),
             group=stream.group,
             referrer=stream.referrer,
             user_agent=stream.user_agent,
@@ -584,7 +610,7 @@ def validate_stream(stream: StreamInfo) -> StreamInfo:
         stream.status = "ok-playlist"
         return stream
 
-    segment_url = urllib.parse.urljoin(url, segments[0])
+    segment_url = urllib.parse.urljoin(base_url, segments[0])
     seg_response = http_get(
         segment_url,
         referrer=stream.referrer or None,

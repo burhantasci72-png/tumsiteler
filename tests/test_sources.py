@@ -190,5 +190,92 @@ class TestChecklistDiscovery(DiscoveryTestBase):
         self.assertIn("https://old.example", found)
 
 
+class TestSeeds(DiscoveryTestBase):
+    SEEDS = """#EXTM3U
+# yorum satiri
+#EXTINF:-1 group-title="ATOM SPOR",Bein Sports 1
+#EXTVLCOPT:http-referrer=https://atomsportv501.top
+https://tv.atomspor.workers.dev/?ID=bein-sports-1
+#EXTINF:-1 group-title="NETSPOR",Bein Sports Max 2
+https://andro.seedhost.example/checklist/androstreamlivebsm2.m3u8
+"""
+
+    def setUp(self):
+        super().setUp()
+        self._orig = sources.SEEDS_FILE
+        tmp = tempfile.mkdtemp()
+        self.path = os.path.join(tmp, "seeds.m3u")
+        with open(self.path, "w", encoding="utf-8") as handle:
+            handle.write(self.SEEDS)
+        sources.SEEDS_FILE = self.path
+
+    def tearDown(self):
+        sources.SEEDS_FILE = self._orig
+
+    def test_fetch_seeds_reads_entries(self):
+        streams = sources.fetch_seeds()
+        self.assertEqual(len(streams), 2)
+        first = streams[0]
+        self.assertEqual(first.source, "seeds")
+        self.assertEqual(first.group, "ATOM SPOR")
+        self.assertEqual(first.referrer, "https://atomsportv501.top")
+        self.assertIn("workers.dev/?ID=bein-sports-1", first.url)
+
+    def test_missing_file_is_harmless(self):
+        sources.SEEDS_FILE = os.path.join(tempfile.mkdtemp(), "yok.m3u")
+        self.assertEqual(sources.fetch_seeds(), [])
+
+    def test_seeds_feed_checklist_discovery(self):
+        servers = sources.discover_checklist_servers("")
+        self.assertIn("https://andro.seedhost.example", servers)
+
+    def test_repo_seeds_file_parses(self):
+        """Depodaki gercek seeds.m3u bozuk olmamali."""
+        repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        sources.SEEDS_FILE = os.path.join(repo, "seeds.m3u")
+        streams = sources.fetch_seeds()
+        self.assertGreater(len(streams), 10)
+        groups = {s.group for s in streams}
+        self.assertIn("ATOM SPOR", groups)
+        for s in streams:
+            self.assertTrue(s.url.startswith(("http://", "https://")), s.url)
+
+
+class TestAtomWorkerFallback(DiscoveryTestBase):
+    def test_worker_candidates_when_domain_dead(self):
+        original = sources.find_domain
+        sources.find_domain = lambda family: None
+        try:
+            streams = sources.fetch_atom()
+        finally:
+            sources.find_domain = original
+        self.assertEqual(len(streams), len(sources.ATOM_IDS))
+        self.assertTrue(all(s.source == "atom" for s in streams))
+        self.assertTrue(all("?ID=" in s.url for s in streams))
+        self.assertTrue(all(s.group == "ATOM SPOR" for s in streams))
+
+
+class TestSelcukHelpers(DiscoveryTestBase):
+    def test_player_server_regex(self):
+        html = '<iframe src="https://main.uxsyplayer6859599e6c.click/index.php?id=x">'
+        self.assertEqual(
+            sources._selcuk_player_server(html),
+            "https://main.uxsyplayer6859599e6c.click",
+        )
+        self.assertIsNone(sources._selcuk_player_server("<html>bos</html>"))
+
+    def test_site_links_from_giris_page(self):
+        html = (
+            '<a href="https://www.selcuksportshdbd813bd00f.xyz/">Site Giris</a>'
+            '<a href="https://www.xyzsports-53b16cb40a.xyz/">Xyz</a>'
+            '<a href="https://dizi74.life/">dizi</a>'
+            '<a href="https://www.sporcafe-0c2608ad69.xyz/">cafe</a>'
+        )
+        links = sources._selcuk_site_links(html)
+        self.assertEqual(links[0], "https://www.selcuksportshdbd813bd00f.xyz")
+        self.assertIn("https://www.sporcafe-0c2608ad69.xyz", links)
+        self.assertFalse(any("dizi74" in u for u in links))
+
+
 if __name__ == "__main__":
     unittest.main()
