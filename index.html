@@ -1457,6 +1457,10 @@
                 </div>
             </div>
 
+            <button class="ctrl-btn" id="proxyBtn" title="Yayın Proxy Ayarı">
+                <i class="fas fa-shield-halved"></i>
+            </button>
+
             <div class="dropdown-wrap">
                 <button class="ctrl-btn" id="themeBtn" title="Tema Seçimi">
                     <i class="fas fa-moon" id="themeIcon"></i>
@@ -1558,6 +1562,7 @@
 
             <div class="np-foot">
                 <span class="np-pill" id="npSrcPill">Kaynak 1</span>
+                <span class="np-pill" id="npProxyPill" title="Yayın proxy'si">Proxy: —</span>
                 <span class="np-pill" id="npEnginePill">—</span>
                 <span class="np-pill" id="npQualityPill" style="display:none">Otomatik</span>
                 <span class="np-pill" id="npLatencyPill" style="display:none"></span>
@@ -2042,19 +2047,56 @@
             throw lastError || new Error('alinamadi');
         }
 
+        /* ===== HLS PROXY (calisma zamani) =====
+           Tarayici Referer/Origin/User-Agent gonderemez ve yayin sunuculari
+           CORS baslıgi vermez. Proxy her ikisini de cozer. Adres calisma
+           zamaninda uygulanir; liste ham adresleri tasir. */
+        const PLAYER_PROXY_KEY = 'inadina-proxy';
+        let playerProxy = localStorage.getItem(PLAYER_PROXY_KEY) || '';
+
+        function setPlayerProxy(url) {
+            playerProxy = (url || '').replace(/\/+$/, '');
+            if (playerProxy) localStorage.setItem(PLAYER_PROXY_KEY, playerProxy);
+            else localStorage.removeItem(PLAYER_PROXY_KEY);
+        }
+
+        /** Yayin adresini proxy uzerinden gecirir (proxy yoksa oldugu gibi). */
+        function viaProxy(url, referrer) {
+            if (!playerProxy || !url) return url;
+            if (url.startsWith(playerProxy)) return url;
+
+            const params = new URLSearchParams({ url });
+            if (referrer) params.set('ref', referrer);
+            return `${playerProxy}/hls?${params.toString()}`;
+        }
+
         /** channels.json -> zengin kanal listesi (yedek linkler dahil). */
         function parseChannelsJson(text) {
             const data = JSON.parse(text);
             const categories = new Set();
 
+            // Liste kendi proxy adresini onerir; kullanici elle degistirmediyse kullan
+            if (data.proxy && !localStorage.getItem(PLAYER_PROXY_KEY)) {
+                playerProxy = String(data.proxy).replace(/\/+$/, '');
+            }
+
             const items = (data.channels || []).map(ch => {
                 if (ch.group) categories.add(ch.group);
+
+                // Her yedek KENDI referrer'ini tasir
+                const backups = (ch.backups || []).map(b =>
+                    typeof b === 'string'
+                        ? { url: b, referrer: ch.referrer || '' }
+                        : { url: b.url, referrer: b.referrer || ch.referrer || '' }
+                );
+
                 return {
                     title: ch.name || 'İsimsiz Kanal',
                     image: ch.logo || fallbackLogo,
                     group: ch.group || 'Genel',
                     url: ch.url,
-                    backups: ch.backups || [],
+                    referrer: ch.referrer || '',
+                    backups,
                     verified: ch.verified !== false,
                 };
             });
@@ -2286,6 +2328,7 @@
             retry: document.getElementById('npRetry'),
             title: document.getElementById('npTitle'),
             srcPill: document.getElementById('npSrcPill'),
+            proxyPill: document.getElementById('npProxyPill'),
             enginePill: document.getElementById('npEnginePill'),
             qualityPill: document.getElementById('npQualityPill'),
             latencyPill: document.getElementById('npLatencyPill'),
@@ -2398,6 +2441,11 @@
             }
 
             NP.srcPill.textContent = `Kaynak ${index + 1}/${npSources.length}`;
+
+            const usingProxy = !!playerProxy && source.startsWith(playerProxy);
+            NP.proxyPill.textContent = usingProxy ? 'Proxy: açık' : 'Proxy: doğrudan';
+            NP.proxyPill.className = 'np-pill ' + (usingProxy ? 'ok' : 'warn');
+
             NP.qualityPill.style.display = 'none';
             NP.latencyPill.style.display = 'none';
             npShowOverlay('Yayın başlatılıyor...');
@@ -2539,18 +2587,90 @@
             }
         }
 
+        /* ===== PROXY AYARI ===== */
+        document.getElementById('proxyBtn')?.addEventListener('click', async () => {
+            const current = playerProxy || '';
+            const input = prompt(
+                'Yayın proxy adresi (Cloudflare Worker).\n\n' +
+                'Tarayıcı Referer/User-Agent gönderemediği için korumalı ' +
+                'kanallar yalnızca proxy ile açılır.\n' +
+                'Boş bırakırsanız doğrudan bağlanılır.',
+                current
+            );
+            if (input === null) return;
+
+            const value = input.trim();
+            if (!value) {
+                setPlayerProxy('');
+                showNotification('Proxy kapatıldı (doğrudan bağlantı)', 'shield-halved');
+                return;
+            }
+
+            let normalized;
+            try {
+                const u = new URL(value);
+                if (!/^https?:$/.test(u.protocol)) throw new Error('scheme');
+                normalized = u.origin;
+            } catch (e) {
+                showNotification('Geçersiz adres!', 'exclamation-circle');
+                return;
+            }
+
+            showNotification('Proxy test ediliyor...', 'spinner');
+            try {
+                const res = await fetch(`${normalized}/health`, { cache: 'no-store' });
+                const text = await res.text();
+                if (!res.ok || !text.includes('hls-proxy')) throw new Error('bad');
+                setPlayerProxy(normalized);
+                showNotification('Proxy doğrulandı ve kaydedildi', 'circle-check');
+            } catch (e) {
+                setPlayerProxy(normalized);
+                showNotification('Proxy kaydedildi (test başarısız)', 'triangle-exclamation');
+            }
+        });
+
         document.getElementById('npClose').addEventListener('click', npClose);
         NP.modal.addEventListener('click', (e) => { if (e.target === NP.modal) npClose(); });
+
+        /**
+         * Denenecek kaynak listesini kurar.
+         *
+         * Her mantiksal kaynak icin once PROXY'li deneme yapilir (Referer/CORS
+         * gerektiren yayinlarin cogu yalnizca boyle acilir), proxy basarisiz
+         * olursa DOGRUDAN deneme yapilir (proxy kotasi dolmus/kapali olabilir).
+         */
+        function buildSourceList(item) {
+            const raw = [{ url: item.url, referrer: item.referrer || '' }]
+                .concat(item.backups || []);
+
+            const out = [];
+            const seen = new Set();
+
+            raw.forEach(entry => {
+                const safe = safeHttpUrl(entry.url);
+                if (!safe) return;
+
+                const candidates = playerProxy
+                    ? [viaProxy(safe, entry.referrer), safe]
+                    : [safe];
+
+                candidates.forEach(url => {
+                    if (url && !seen.has(url)) {
+                        seen.add(url);
+                        out.push(url);
+                    }
+                });
+            });
+
+            return out;
+        }
 
         /** Kanali yerlesik oynaticida acar (yedek kaynaklarla birlikte). */
         function openNativePlayer(item) {
             npChannel = item.title || 'Kanal';
             NP.title.textContent = npChannel;
 
-            const list = [item.url].concat(item.backups || []);
-            npSources = list
-                .map(u => safeHttpUrl(u))
-                .filter((u, i, arr) => u && arr.indexOf(u) === i);
+            npSources = buildSourceList(item);
 
             if (!npSources.length) {
                 showNotification('Geçerli yayın linki yok!', 'exclamation-circle');

@@ -45,6 +45,10 @@ Web oynatıcı bir kanalı açarken sırayla dener:
 3. **Yedek kaynaklar** — aynı kanalın diğer sitelerdeki linkleri
 4. **iframe** — m3u8 değilse veya hepsi başarısızsa
 
+Her mantıksal kaynak için **önce proxy'li, sonra doğrudan** deneme yapılır;
+yani 2 kaynaklı bir kanalda 4 deneme hakkı olur. Her yedek **kendi
+`Referer`'ını** taşır (farklı siteler farklı Referer ister).
+
 Ayrıca: ağır hata kurtarma, buffer takılma kurtarma (canlıya geri yakalama),
 otomatik yeniden bağlanma, PiP ve tam ekran.
 
@@ -72,13 +76,44 @@ python main.py
 python -m unittest discover -s tests -v
 ```
 
-## Proxy kurulumu (önerilen)
+## Proxy kurulumu
 
-Hotlink korumalı kanalların tarayıcıda açılması için:
+Hotlink korumalı kanalların **tarayıcıda** açılması için proxy gerekir.
+İki yolu var:
+
+### A) Otomatik (önerilen)
+
+Depoya iki secret ekleyin — gerisini GitHub Actions halleder:
+
+**Settings → Secrets and variables → Actions → New repository secret**
+
+| Secret | Nereden alınır |
+|--------|----------------|
+| `CLOUDFLARE_API_TOKEN` | Cloudflare → My Profile → API Tokens → Create Token → **"Edit Cloudflare Workers"** şablonu |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare Dashboard sağ sütun → Account ID |
+
+Sonra **Actions → "HLS Proxy Dagit" → Run workflow**. Bu iş akışı:
+
+1. Worker'ı Cloudflare'e dağıtır
+2. `/health` ile canlı olduğunu doğrular
+3. Adresi `PLAYER_PROXY` değişkenine **otomatik yazar**
+
+Bundan sonra liste her güncellendiğinde proxy adresi `channels.json` içine
+gömülür ve site onu kendiliğinden kullanır — elle ayar gerekmez.
+
+### B) Elle
 
 ```bash
 cd worker && npx wrangler deploy
 ```
 
-Sonra deponun **Settings → Secrets and variables → Actions → Variables**
-bölümüne `PLAYER_PROXY` değişkenini worker adresinizle ekleyin.
+Çıkan adresi sitedeki **kalkan simgesine** tıklayıp yapıştırın (tarayıcınıza
+kaydedilir), veya `PLAYER_PROXY` değişkenine ekleyin.
+
+### Proxy olmadan ne olur?
+
+- **VLC / Kodi / TiviMate:** sorunsuz çalışır (M3U header etiketleri sayesinde)
+- **Tarayıcı:** yalnızca hotlink koruması olmayan kanallar açılır
+
+Oynatıcı her kaynağı **önce proxy'li, sonra doğrudan** dener; yani proxy
+kapalıysa veya kotası dolduysa yayın yine de açılmaya çalışılır.

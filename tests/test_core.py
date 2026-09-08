@@ -98,6 +98,22 @@ class TestDedupe(unittest.TestCase):
         merged = core.dedupe_and_rank(streams)
         self.assertEqual(merged[0].url, "http://fast/ok.m3u8")
 
+    def test_backups_keep_own_referrer(self):
+        """Yedekler kendi Referer'ini korumali; aksi halde failover 403 alir."""
+        a = self._make("Bein Sports 1", "http://a/1.m3u8", True, 100)
+        a.referrer = "https://site-a/"
+        a.source = "a"
+        b = self._make("ATOM - Bein Sports 1", "http://b/1.m3u8", True, 500)
+        b.referrer = "https://site-b/"
+        b.source = "b"
+
+        core.assign_keys([a, b])
+        merged = core.dedupe_and_rank([a, b])
+
+        self.assertEqual(merged[0].referrer, "https://site-a/")
+        self.assertEqual(merged[0].backups[0].referrer, "https://site-b/")
+        self.assertEqual(merged[0].backups[0].source, "b")
+
     def test_identical_urls_collapse(self):
         streams = [
             self._make("Bein Sports 4", "http://same/x.m3u8"),
@@ -167,12 +183,18 @@ class TestOutput(unittest.TestCase):
                 group="TEST",
                 key="beinsports1",
                 verified=True,
-                backups=["https://cdn/b.m3u8"],
+                backups=[core.BackupLink(url="https://cdn/b.m3u8",
+                                         referrer="https://other/")],
             )
         ]
         data = json.loads(core.build_json(streams, "now"))
         self.assertEqual(data["count"], 1)
-        self.assertEqual(data["channels"][0]["backups"], ["https://cdn/b.m3u8"])
+        backup = data["channels"][0]["backups"][0]
+        self.assertEqual(backup["url"], "https://cdn/b.m3u8")
+        # Yedek KENDI referrer'ini korumali
+        self.assertEqual(backup["referrer"], "https://other/")
+        # JSON ham adres tasir; proxy calisma zamaninda uygulanir
+        self.assertEqual(data["channels"][0]["url"], "https://cdn/a.m3u8")
 
     def test_proxy_wrapping(self):
         original = core.Settings.PLAYER_PROXY

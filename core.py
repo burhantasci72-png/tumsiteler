@@ -98,6 +98,15 @@ TIMEOUT: Tuple[int, int] = (Settings.CONNECT_TIMEOUT, Settings.READ_TIMEOUT)
 # =============================================================================
 
 @dataclass
+class BackupLink:
+    """Bir kanalin alternatif kaynagi (kendi referrer'i ile birlikte)."""
+
+    url: str
+    referrer: str = ""
+    source: str = ""
+
+
+@dataclass
 class StreamInfo:
     """Tek bir yayin kaydi."""
 
@@ -113,8 +122,10 @@ class StreamInfo:
     latency_ms: int = 0
     # Ayni mantiksal kanalin farkli kaynaklardaki kopyalarini eslestirmek icin
     key: str = ""
-    # Yedek URL'ler (ayni kanal, baska kaynak)
-    backups: List[str] = field(default_factory=list)
+    # Yedek kaynaklar (ayni kanal, baska site).
+    # Her yedek kendi referrer'ini tasir: farkli siteler farkli Referer ister,
+    # birincilin referrer'i kullanilirsa yedek 403 alir.
+    backups: List["BackupLink"] = field(default_factory=list)
 
     def as_dict(self) -> Dict:
         return asdict(self)
@@ -718,7 +729,10 @@ def dedupe_and_rank(streams: List[StreamInfo]) -> List[StreamInfo]:
 
         unique.sort(key=lambda s: (not s.verified, s.latency_ms or 99999))
         primary = unique[0]
-        primary.backups = [s.url for s in unique[1:8]]
+        primary.backups = [
+            BackupLink(url=s.url, referrer=s.referrer, source=s.source)
+            for s in unique[1:8]
+        ]
         merged.append(primary)
 
     def sort_key(stream: StreamInfo) -> Tuple:
@@ -779,11 +793,24 @@ def build_m3u(streams: List[StreamInfo], generated_at: str) -> str:
     return "\n".join(out) + "\n"
 
 
+def _backup_dict(backup, fallback_referrer: str = "") -> Dict[str, str]:
+    """Yedek kaydi sozluge cevirir (duz string de kabul edilir)."""
+    if isinstance(backup, str):
+        return {"url": backup, "referrer": fallback_referrer, "source": ""}
+    return {
+        "url": backup.url,
+        "referrer": backup.referrer or fallback_referrer,
+        "source": backup.source,
+    }
+
+
 def build_json(streams: List[StreamInfo], generated_at: str) -> str:
     """Web oynatici icin zengin JSON (yedek linkler + header bilgisi dahil)."""
     payload = {
         "generated_at": generated_at,
         "user_agent": USER_AGENT,
+        # Oynatici proxy'yi CALISMA ZAMANINDA uygular. Boylece proxy adresi
+        # degistiginde listeyi yeniden uretmek gerekmez; ham adresler korunur.
         "proxy": Settings.PLAYER_PROXY,
         "count": len(streams),
         "verified": sum(1 for s in streams if s.verified),
@@ -798,10 +825,8 @@ def build_json(streams: List[StreamInfo], generated_at: str) -> str:
                 "verified": s.verified,
                 "status": s.status,
                 "latency_ms": s.latency_ms,
-                "url": proxied(s.url, s.referrer),
-                "raw_url": s.url,
-                "backups": [proxied(u, s.referrer) for u in s.backups],
-                "raw_backups": s.backups,
+                "url": s.url,
+                "backups": [_backup_dict(b, s.referrer) for b in s.backups],
             }
             for s in streams
         ],
