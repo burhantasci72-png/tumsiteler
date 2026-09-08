@@ -78,6 +78,24 @@ class TestValidation(unittest.TestCase):
         self.assertFalse(result.verified)
         self.assertEqual(result.status, "segment-http-403")
 
+    def test_segment_referrer_fallback(self):
+        """Segment Referer ile 403 veriyorsa Referer'siz denenmeli.
+
+        Selcukspor gibi panellerde manifest geliyor ama segmentler yalnizca
+        Referer GONDERILMEDIGINDE aciliyordu; calisan varyant kaydedilir.
+        """
+        stream = StreamInfo(
+            name="t",
+            url=f"{self.base}/noref.m3u8",
+            group="G",
+            referrer="https://panel.example/",
+        )
+        result = core.validate_stream(stream)
+        self.assertTrue(result.verified, result.status)
+        self.assertEqual(result.status, "ok")
+        # Calisan varyant kaynak olarak kullanilir
+        self.assertEqual(result.referrer, "")
+
     def test_page_url_is_not_a_stream(self):
         """Sayfa linkleri yayin sayilmaz (eski surumun ana hatasi)."""
         result = self.check("/page.html")
