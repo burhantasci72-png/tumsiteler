@@ -26,13 +26,14 @@ import json
 import os
 import re
 import urllib.parse
-from typing import Callable, Dict, List, Optional, Tuple
+from typing import Callable, Dict, List, Optional, Sequence, Tuple
 
 from bs4 import BeautifulSoup
 
 from core import (
     Settings,
     StreamInfo,
+    canonical_channel,
     extract_m3u8,
     find_m3u8_in_text,
     first_match,
@@ -82,16 +83,22 @@ FAMILIES: Dict[str, Dict] = {
     "selcuk": {
         "label": "Selçukspor",
         "seeds": [
+            # Yeni nesil (VOLESTREAM oynaticili) adresler
             "https://selcuksporlive.top",
-            "https://selcuksports-hd.com",
-            "https://selcuksportshd.is",
-            "https://selcuksportshd.su",
+            "https://selcuksporlive.online",
+            "https://selcuksportshd5.click",
+            "https://selcukiptv58.top",
+            # Eski nesil (uxsyplayer) adresler - hala yayin verenler
+            "https://www.sporcafe1.xyz",
         ],
         "patterns": [
+            ("https://selcuksportshd{}.click", range(1, 40)),
+            ("https://selcukiptv{}.top", range(40, 90)),
+            ("https://selcuksporlive{}.top", range(1, 30)),
             ("https://www.sporcafe{}.xyz/", range(1, 220)),
             ("https://selcuksports{}.top", range(1, 260)),
         ],
-        "signature": ("uxsyplayer", "selcuk", "kanal", "izle"),
+        "signature": ("selcuk", "sporcafe", "volestream", "uxsyplayer"),
     },
     "netspor": {
         "label": "Netspor",
@@ -104,9 +111,16 @@ FAMILIES: Dict[str, Dict] = {
     },
     "atom": {
         "label": "AtomSpor",
-        "seeds": [],
-        "patterns": [("https://atomsportv{}.top", range(400, 720))],
-        "signature": ("kanal", "atom"),
+        "seeds": [
+            "https://www.atomsportv514.top",
+            "https://atomsportv514.top",
+        ],
+        "patterns": [
+            ("https://www.atomsportv{}.top", range(508, 560)),
+            ("https://atomsportv{}.top", range(508, 560)),
+            ("https://atomsportv{}.top", range(400, 720)),
+        ],
+        "signature": ("atomspor", "atomsport", "volestream"),
     },
     "mahsun": {
         "label": "Mahsun Sports",
@@ -150,17 +164,21 @@ _GUNCEL_ANCHOR_RE = re.compile(
 
 
 def _family_domain_regex(family) -> re.Pattern:
-    """Aile desenlerinden domain hasat regex'i uretir."""
+    """Aile desenlerinden domain hasat regex'i uretir (tum kalip govdeleri)."""
     cfg = family if isinstance(family, dict) else FAMILIES[family]
-    template = cfg["patterns"][0][0] if cfg["patterns"] else ""
-    if not template:
+    stems: List[str] = []
+    for template, _indexes in cfg.get("patterns", []):
+        netloc = urllib.parse.urlparse(template).netloc
+        stem = netloc.split(".")[1] if netloc.startswith("www.") else netloc.split(".")[0]
+        stem = stem.split("{")[0]
+        if stem and stem not in stems:
+            stems.append(stem)
+    if not stems:
         # Hasat deseni yok (yalnizca seed kullanan aile)
         return re.compile(r"(?!x)x")
-    netloc = urllib.parse.urlparse(template).netloc
-    stem = netloc.split(".")[1] if netloc.startswith("www.") else netloc.split(".")[0]
-    stem = stem.split("{")[0] or cfg["label"]
+    alternation = "|".join(re.escape(stem) for stem in stems)
     return re.compile(
-        r"https?://(?:[a-z0-9\-]*\.)*" + re.escape(stem) + r"[a-z0-9\-]*\.[a-z]{2,}",
+        r"https?://(?:[a-z0-9\-]*\.)*(?:" + alternation + r")[a-z0-9\-]*\.[a-z]{2,}",
         re.I,
     )
 
@@ -259,16 +277,28 @@ def find_domain(family) -> Optional[str]:
     status_key = family if isinstance(family, str) else label
     signature = cfg.get("signature") or None
 
-    candidates: List[str] = list(cfg.get("seeds", []))
+    seeds: List[str] = list(cfg.get("seeds", []))
+    candidates: List[str] = []
     for template, indexes in cfg.get("patterns", []):
         candidates.extend(template.format(index) for index in indexes)
 
-    found = first_match(
-        lambda url: probe_domain(url, signature),
-        candidates,
-        Settings.DOMAIN_PROBE_WORKERS,
-        budget_seconds=Settings.SOURCE_BUDGET,
-    )
+    # Once bilinen/duyurulan adresler denenir: numara taramasi hem yavas hem
+    # de ayni imzayi tasiyan baska bir siteye (yanlis panel) dusecebilir.
+    found = None
+    if seeds:
+        found = first_match(
+            lambda url: probe_domain(url, signature),
+            seeds,
+            min(len(seeds), 8),
+            budget_seconds=max(20, Settings.SOURCE_BUDGET // 3),
+        )
+    if not found and candidates:
+        found = first_match(
+            lambda url: probe_domain(url, signature),
+            candidates,
+            Settings.DOMAIN_PROBE_WORKERS,
+            budget_seconds=Settings.SOURCE_BUDGET,
+        )
     if not found:
         FAMILY_STATUS[status_key] = "domain-bulunamadi"
         _log(f"-> {label}: aktif domain bulunamadi")
@@ -328,6 +358,126 @@ def resolve_pages(
         )
 
     return run_parallel(work, entries, Settings.SCRAPE_WORKERS)
+
+
+# =============================================================================
+# YENI NESIL PANEL YARDIMCILARI (slug tabanli: /izle/<slug>, /matches?id=<slug>)
+# =============================================================================
+#
+# Yeni paneller kanallari numarali kimlikler yerine "bein-sports-1" gibi
+# okunabilir slug'larla sunuyor ve yayini sayfa yuklendikten sonra JS ile
+# (ya da bir "cozucu" worker uzerinden) getiriyor. Bu yardimcilar:
+#   * ana sayfadaki kanal baglantilarini kesfeder (mac sayfalarini eler),
+#   * sayfada gecen worker/pages "cozucu" adreslerini toplar.
+
+_ANCHOR_RE = re.compile(
+    r"<a\s[^>]*href=['\"]([^'\"]+)['\"][^>]*>(.*?)</a>", re.I | re.S
+)
+_CHANNEL_HREF_RE = re.compile(
+    r"(?:/(?:izle|kanal|channel|canli)/|(?:matches|channel|izle)\?id=)"
+    r"([a-z0-9][a-z0-9\-]{1,49})",
+    re.I,
+)
+_IMG_ATTR_RE = re.compile(r"(?:alt|title)=['\"]([^'\"]{2,60})['\"]", re.I)
+_IMG_SRC_RE = re.compile(r"<img[^>]+src=['\"]([^'\"]+)['\"]", re.I)
+_TAG_RE = re.compile(r"<[^>]+>")
+_RESOLVER_RE = re.compile(
+    r"https?://[a-z0-9][a-z0-9\-]*[a-z0-9\-.]*\.(?:workers\.dev|pages\.dev)",
+    re.I,
+)
+
+
+def slug_channel(slug: str, label: str = "") -> Tuple[str, str]:
+    """
+    Slug + sayfa etiketini kanonik kanala cevirir.
+
+    Donus: (slug, gorunen_ad) — kanal degilse ad bos string olur.
+    Ornek: ("bein-sports-max-1", "") -> ("bein-sports-max-1", "beIN Sports Max 1")
+           ("aek-atina-lask-linz", "") -> ("aek-atina-lask-linz", "")  [mac]
+    """
+    slug = (slug or "").strip().lower().strip("/")
+    if not slug:
+        return "", ""
+    for candidate in (label or "", slug.replace("-", " ").replace("_", " ")):
+        canon = canonical_channel(candidate)
+        if canon:
+            return slug, canon[1]
+    return slug, ""
+
+
+def discover_panel_channels(html: str, limit: int = 40) -> List[Tuple[str, str]]:
+    """Panel ana sayfasindaki (slug, kanal_adi) ciftlerini cikarir.
+
+    Yalnizca gercekten kanala benzeyen baglantilar alinir; mac sayfalari
+    ("aek-atina-lask-linz") kanonik eslesme vermedigi icin elenir.
+    """
+    found: List[Tuple[str, str]] = []
+    seen = set()
+    for href, inner in _ANCHOR_RE.findall(html or ""):
+        match = _CHANNEL_HREF_RE.search(href)
+        if not match:
+            continue
+        slug, name = slug_channel(match.group(1), _label_from_html(inner))
+        if not name or slug in seen:
+            continue
+        seen.add(slug)
+        found.append((slug, name))
+        if len(found) >= limit:
+            break
+    return found
+
+
+def _label_from_html(fragment: str) -> str:
+    """Baglanti icindeki gorunen adi bulur (img alt/title ya da yazi)."""
+    alt = _IMG_ATTR_RE.search(fragment or "")
+    if alt:
+        return re.sub(r"\s+", " ", alt.group(1)).strip()
+    text = _TAG_RE.sub(" ", fragment or "")
+    return re.sub(r"\s+", " ", text).strip()[:60]
+
+
+def discover_logos(html: str) -> Dict[str, str]:
+    """Ana sayfadaki kanal baglantilarindan slug -> logo eslemesi cikarir."""
+    logos: Dict[str, str] = {}
+    for href, inner in _ANCHOR_RE.findall(html or ""):
+        match = _CHANNEL_HREF_RE.search(href)
+        if not match:
+            continue
+        img = _IMG_SRC_RE.search(inner or "")
+        if not img:
+            continue
+        slug = match.group(1).strip().lower()
+        src = img.group(1)
+        if slug and src.startswith(("http://", "https://")) and slug not in logos:
+            logos[slug] = src
+    return logos
+
+
+def discover_resolvers(
+    html: str, extra: Sequence[str] = (), max_discovered: int = 2
+) -> List[str]:
+    """Sayfada gecen 'cozucu' adresleri (Cloudflare worker/pages) toplar.
+
+    Bu tur adresler `?ID=<slug>` ile gercek m3u8'e yonlendirir; panelin
+    kendi HTML'i degistiginde bile yayini bulmanin en saglam yolu.
+    Bilinen adresler (`extra`) hep bastadir, sayfadan en fazla
+    `max_discovered` yeni adres alinir (gereksiz dogrulama isini onler).
+    """
+    hosts: List[str] = []
+    for base in list(extra):
+        base = (base or "").rstrip("/")
+        if base and base not in hosts:
+            hosts.append(base)
+
+    found = 0
+    for url in _RESOLVER_RE.findall(html or ""):
+        if found >= max_discovered:
+            break
+        base = url.rstrip("/")
+        if base and base not in hosts:
+            hosts.append(base)
+            found += 1
+    return hosts
 
 
 def _fetch_panel(family: str, page_template: str,
@@ -506,6 +656,22 @@ SELCUK_IDS = [
     ("selcukeurosport1", "Eurosport 1"),
 ]
 
+# Yeni nesil (slug) paneldeki kanallar. Sayfada bunlardan farkli bir kanal
+# kesfedilirse liste otomatik olarak genisler.
+SELCUK_SLUGS: List[Tuple[str, str]] = [
+    ("bein-sports-1", "beIN Sports 1"), ("bein-sports-2", "beIN Sports 2"),
+    ("bein-sports-3", "beIN Sports 3"), ("bein-sports-4", "beIN Sports 4"),
+    ("bein-sports-5", "beIN Sports 5"),
+    ("bein-sports-max-1", "beIN Sports Max 1"),
+    ("bein-sports-max-2", "beIN Sports Max 2"),
+    ("s-sport", "S Sport 1"), ("s-sport-2", "S Sport 2"),
+    ("trt-spor", "TRT Spor"), ("trt-1", "TRT 1"), ("a-spor", "A Spor"),
+    ("tivibu-spor-1", "Tivibu Spor 1"), ("tivibu-spor-2", "Tivibu Spor 2"),
+    ("smart-spor", "Smart Spor 1"),
+]
+
+SELCUK_LOGO = ""
+
 
 _SELCUK_PLAYER_RE = re.compile(
     r"https?://((?:main|player|www)\.uxsyplayer[0-9a-zA-Z\-]*\.[a-z]+)", re.I
@@ -531,34 +697,21 @@ def _selcuk_site_links(html: str) -> List[str]:
     return found
 
 
-def fetch_selcukspor() -> List[StreamInfo]:
-    """Selcukspor / Sporcafe."""
-    domain = find_domain("selcuk")
-    if not domain:
-        return []
+def _selcuk_domain_candidates() -> List[str]:
+    """Denenecek Selçukspor adresleri (keşfedilen + bilinen tohumlar)."""
+    domains: List[str] = []
+    found = find_domain("selcuk")
+    if found:
+        domains.append(found.rstrip("/"))
+    for seed in FAMILIES["selcuk"].get("seeds", []):
+        seed = seed.rstrip("/")
+        if seed not in domains:
+            domains.append(seed)
+    return domains[:5]
 
-    html = get_text(domain)
-    if not html:
-        return []
 
-    server = _selcuk_player_server(html)
-    if not server:
-        # Seed adresler cogunlukla "giris" sayfasidir: asil site, sayfadaki
-        # ilk selcuk/sporcafe/xyzsports linkinin arkasindadir. Oraya da bak.
-        for candidate in _selcuk_site_links(html)[:4]:
-            inner = get_text(candidate, referrer=domain)
-            if not inner:
-                continue
-            server = _selcuk_player_server(inner)
-            if server:
-                _log(f"-> Selçukspor: asil site {candidate}")
-                domain = candidate.rstrip("/")
-                break
-    if not server:
-        _log("-> Selçukspor: oynatici sunucusu bulunamadi")
-        FAMILY_STATUS["selcuk"] = "oynatici-sunucusu-yok"
-        return []
-    FAMILY_STATUS["selcuk"] = f"{domain} | oynatici {server}"
+def _selcuk_legacy_streams(domain: str, server: str) -> List[StreamInfo]:
+    """Eski nesil (uxsyplayer) oynaticidan kanal yayinlarini ceker."""
 
     def work(entry: Tuple[str, str]) -> Optional[StreamInfo]:
         channel_id, name = entry
@@ -581,6 +734,105 @@ def fetch_selcukspor() -> List[StreamInfo]:
         )
 
     return run_parallel(work, SELCUK_IDS, Settings.SCRAPE_WORKERS)
+
+
+def fetch_selcukspor() -> List[StreamInfo]:
+    """Selcukspor / Sporcafe.
+
+    Iki ayri panel neslini destekler:
+      1) Yeni nesil: ana sayfadaki ``/izle/<slug>`` kanallari gezilir,
+         sayfa/iframe/dis JS taranarak m3u8 cikarilir.
+      2) Eski nesil: ``uxsyplayer`` oynatici sunucusu + ``index.php?id=``
+         kimlikleri (hala yayin veren sunucular var).
+    """
+    results: List[StreamInfo] = []
+    seen_names = set()
+
+    def add(items: List[StreamInfo]) -> None:
+        for item in items or []:
+            if item.name not in seen_names:
+                seen_names.add(item.name)
+                results.append(item)
+
+    for domain in _selcuk_domain_candidates():
+        html = get_text(domain)
+        if not html:
+            continue
+
+        # --- 1) Yeni nesil slug paneli -------------------------------------
+        channels = discover_panel_channels(html)
+        if channels:
+            known = {slug for slug, _ in channels}
+            for slug, name in SELCUK_SLUGS:
+                if slug not in known:
+                    channels.append((slug, name))
+        else:
+            channels = list(SELCUK_SLUGS)
+
+        logos = discover_logos(html)
+
+        def work(entry: Tuple[str, str]) -> Optional[StreamInfo]:
+            slug, name = entry
+            m3u8 = extract_m3u8(f"{domain}/izle/{slug}", referrer=domain)
+            if not m3u8:
+                return None
+            return StreamInfo(
+                name=name,
+                url=m3u8,
+                group="SELÇUKSPOR",
+                logo=logos.get(slug) or SELCUK_LOGO,
+                referrer=domain,
+                source="selcukspor",
+            )
+
+        found = run_parallel(work, channels, Settings.SCRAPE_WORKERS)
+        if found:
+            _log(f"-> Selçukspor: {len(found)}/{len(channels)} kanal (slug paneli)")
+            add(found)
+
+        # --- 2) Sayfada "cozucu" (worker) adresi varsa onu da dene ---------
+        resolvers = discover_resolvers(html)
+        if resolvers:
+            missing = [c for c in channels if c[1] not in seen_names] or channels
+            add([
+                StreamInfo(
+                    name=name,
+                    url=f"{resolvers[0]}/?ID={slug}",
+                    group="SELÇUKSPOR",
+                    referrer=domain,
+                    source="selcukspor",
+                )
+                for slug, name in missing
+            ])
+
+        # --- 3) Eski nesil uxsyplayer --------------------------------------
+        server = _selcuk_player_server(html)
+        if not server:
+            # Seed adresler cogunlukla "giris" sayfasidir: asil site, sayfadaki
+            # ilk selcuk/sporcafe/xyzsports linkinin arkasindadir.
+            for candidate in _selcuk_site_links(html)[:4]:
+                inner = get_text(candidate, referrer=domain)
+                if not inner:
+                    continue
+                server = _selcuk_player_server(inner)
+                if server:
+                    _log(f"-> Selçukspor: asil site {candidate}")
+                    domain = candidate.rstrip("/")
+                    break
+        if server:
+            legacy = _selcuk_legacy_streams(domain, server)
+            if legacy:
+                _log(f"-> Selçukspor: {len(legacy)} kanal (uxsyplayer)")
+            add(legacy)
+
+        if results:
+            FAMILY_STATUS["selcuk"] = f"{domain} | {len(results)} kanal"
+            break
+
+    if not results:
+        _log("-> Selçukspor: yayin bulunamadi")
+        FAMILY_STATUS.setdefault("selcuk", "yayin-yok")
+    return results
 
 
 # =============================================================================
@@ -901,16 +1153,21 @@ ATOM_IDS = [
     ("bein-sports-1", "beIN Sports 1"), ("bein-sports-2", "beIN Sports 2"),
     ("bein-sports-3", "beIN Sports 3"), ("bein-sports-4", "beIN Sports 4"),
     ("bein-sports-5", "beIN Sports 5"),
+    ("bein-sports-max-1", "beIN Sports Max 1"),
+    ("bein-sports-max-2", "beIN Sports Max 2"),
     ("s-sport", "S Sport 1"), ("s-sport-2", "S Sport 2"),
     ("ssport-plus", "S Sport Plus"),
     ("tivibu-spor-1", "Tivibu Spor 1"), ("tivibu-spor-2", "Tivibu Spor 2"),
     ("tivibu-spor-3", "Tivibu Spor 3"),
     ("smart-spor", "Smart Spor 1"), ("tv-8-5", "TV 8.5"),
     ("bein-sports-haber", "beIN Sports Haber"),
+    ("trt-spor", "TRT Spor"), ("trt-1", "TRT 1"), ("a-spor", "A Spor"),
 ]
 
+# Kanal sayfalarinin olasi yollari (paneller zamanla degistiriyor).
+ATOM_PATHS = ("/matches?id={slug}", "/kanal/{slug}", "/izle/{slug}")
 
-# AtomSpor'un kanal sayfalari yayini bu Cloudflare worker uzerinden cozer:
+# AtomSpor'un kanal sayfalari yayini bir Cloudflare worker uzerinden cozer:
 #   GET /?ID=<slug>  ->  302  ->  gercek m3u8
 # Panel sayfasi Cloudflare'e takilsa bile worker cogunlukla ayaktadir; bu
 # yuzden sayfa taramasi bos donerse worker adresleri dogrudan aday yapilir
@@ -919,49 +1176,101 @@ ATOM_WORKER = os.environ.get("ATOM_WORKER", "https://tv.atomspor.workers.dev")
 ATOM_LOGO = "https://i.hizliresim.com/gm50rk9b.jpg"
 
 
-def _atom_worker_streams(referrer: str) -> List[StreamInfo]:
+def _atom_worker_streams(
+    referrer: str,
+    entries: Optional[Sequence[Tuple[str, str]]] = None,
+    resolvers: Optional[Sequence[str]] = None,
+) -> List[StreamInfo]:
+    """Cozucu adresler uzerinden aday uretir (dogrulama sonra yapilir)."""
+    hosts = [h.rstrip("/") for h in (resolvers or [ATOM_WORKER]) if h]
     return [
         StreamInfo(
             name=name,
-            url=f"{ATOM_WORKER}/?ID={slug}",
+            url=f"{host}/?ID={slug}",
             group="ATOM SPOR",
             logo=ATOM_LOGO,
             referrer=referrer,
             source="atom",
         )
-        for slug, name in ATOM_IDS
+        for host in hosts
+        for slug, name in (entries if entries is not None else ATOM_IDS)
     ]
 
 
 def fetch_atom() -> List[StreamInfo]:
-    """AtomSpor: kanal sayfalarindan m3u8 cikarir; olmazsa worker'a duser."""
+    """AtomSpor.
+
+    1) Panel ana sayfasindaki kanal baglantilari kesfedilir (mac sayfalari
+       elenir) ve her kanal sayfasi taranarak m3u8 cikarilir.
+    2) Bulunamayan kanallar icin bilinen/cozucu (worker) adresler aday
+       yapilir — dogrulama katmani oluleri eler.
+    """
     entries_dom = find_domain("atom")
     results: List[StreamInfo] = []
-    if entries_dom:
-        entries = [
-            (f"{entries_dom}/kanal/{slug}", name) for slug, name in ATOM_IDS
-        ]
-        results = resolve_pages(
-            entries,
-            group="ATOM SPOR",
-            source="atom",
-            referrer=entries_dom,
-            logo=ATOM_LOGO,
-        )
-        _log(f"-> AtomSpor: {len(results)}/{len(entries)} kanalda m3u8 bulundu")
+    slugs: List[Tuple[str, str]] = list(ATOM_IDS)
+    resolvers: List[str] = [ATOM_WORKER]
 
-    if len(results) < len(ATOM_IDS):
-        found = {r.name for r in results}
-        worker = [
-            s for s in _atom_worker_streams(entries_dom or ATOM_WORKER)
-            if s.name not in found
+    if entries_dom:
+        html = get_text(entries_dom) or ""
+        found_channels = discover_panel_channels(html)
+        if found_channels:
+            known = {slug for slug, _ in slugs}
+            for slug, name in found_channels:
+                if slug not in known:
+                    slugs.append((slug, name))
+                    known.add(slug)
+        resolvers = discover_resolvers(html, extra=[ATOM_WORKER])
+
+        # Kanal sayfalarini gez (yol paneller arasinda degisiyor)
+        logos = discover_logos(html)
+        entries = [
+            (f"{entries_dom}{ATOM_PATHS[0].format(slug=slug)}", name)
+            for slug, name in slugs
         ]
+
+        def work(entry: Tuple[str, str]) -> Optional[StreamInfo]:
+            page_url, name = entry
+            m3u8 = extract_m3u8(page_url, referrer=entries_dom)
+            if not m3u8:
+                return None
+            slug = ""
+            match = re.search(r"id=([a-z0-9\-]+)", page_url, re.I)
+            if match:
+                slug = match.group(1).lower()
+            return StreamInfo(
+                name=name,
+                url=m3u8,
+                group="ATOM SPOR",
+                logo=logos.get(slug) or ATOM_LOGO,
+                referrer=entries_dom,
+                source="atom",
+            )
+
+        results = run_parallel(work, entries, Settings.SCRAPE_WORKERS)
+        _log(f"-> AtomSpor: {len(results)}/{len(slugs)} kanalda m3u8 bulundu")
+
+        # Ilk yol tutmadiysa diger olasi yollari da dene (panel tasinmis olabilir)
+        if not results:
+            for path in ATOM_PATHS[1:]:
+                alt = [(f"{entries_dom}{path.format(slug=slug)}", name)
+                       for slug, name in slugs]
+                results = run_parallel(work, alt, Settings.SCRAPE_WORKERS)
+                if results:
+                    _log(f"-> AtomSpor: {len(results)} kanal ({path})")
+                    break
+
+    found_names = {r.name for r in results}
+    missing = [(slug, name) for slug, name in slugs if name not in found_names]
+    if missing:
+        worker = _atom_worker_streams(
+            entries_dom or ATOM_WORKER, missing, resolvers
+        )
         results.extend(worker)
         _log(f"-> AtomSpor: {len(worker)} kanal worker cozucusu ile denenecek")
-        FAMILY_STATUS["atom"] = (
-            f"{FAMILY_STATUS.get('atom', entries_dom or 'domain-yok')} "
-            f"| worker: {len(worker)}"
-        )
+    FAMILY_STATUS["atom"] = (
+        f"{FAMILY_STATUS.get('atom', entries_dom or 'domain-yok')} "
+        f"| aday: {len(results)}/{len(slugs)}"
+    )
     return results
 
 

@@ -125,6 +125,89 @@ class TestDedupe(unittest.TestCase):
         self.assertEqual(merged[0].backups, [])
 
 
+class TestCategories(unittest.TestCase):
+    """Kategoriler temiz ve oncelik sirali olmali (beIN Sports en basta)."""
+
+    def test_bein_is_first_category(self):
+        self.assertEqual(core.CATEGORY_ORDER[0], "BEIN SPORTS")
+        self.assertEqual(core.categorize("beIN Sports 3"), "BEIN SPORTS")
+        self.assertEqual(core.categorize("S Sport 2"), "S SPORT")
+        self.assertEqual(core.categorize("Tivibu Spor 1"), "TİVİBU SPOR")
+        self.assertEqual(core.categorize("TRT Spor"), "TRT SPOR")
+        self.assertEqual(core.categorize("Tabii Spor 2"), "TABİİ SPOR")
+        self.assertEqual(core.categorize("Eurosport 1"), "DİĞER SPOR KANALLARI")
+        self.assertEqual(core.categorize("x", is_event=True), "CANLI MAÇLAR")
+
+    def test_rank_order(self):
+        ranks = [core.category_rank(c) for c in core.CATEGORY_ORDER]
+        self.assertEqual(ranks, sorted(ranks))
+        self.assertGreater(core.category_rank("BILINMEYEN"), ranks[-1])
+
+    def test_group_is_category_after_assign(self):
+        stream = StreamInfo(name="NET - Bein Sports 1", url="http://a/1.m3u8",
+                            group="NETSPOR")
+        core.assign_keys([stream])
+        self.assertEqual(stream.group, "BEIN SPORTS")
+
+    def test_bein_sports_sorted_before_others(self):
+        streams = [
+            StreamInfo(name="Eurosport 1", url="http://a/e.m3u8", group="X"),
+            StreamInfo(name="S Sport 1", url="http://a/s.m3u8", group="X"),
+            StreamInfo(name="Bein Sports 1", url="http://a/b1.m3u8", group="X"),
+            StreamInfo(name="22:00 Porto - Manchester City", url="http://a/m.m3u8",
+                       group="X"),
+        ]
+        core.assign_keys(streams)
+        merged = core.dedupe_and_rank(streams)
+        self.assertEqual(merged[0].name, "beIN Sports 1")
+        self.assertEqual(merged[-1].name, "22:00 Porto - Manchester City")
+        self.assertEqual([s.group for s in merged][0], "BEIN SPORTS")
+
+    def test_turkish_prefix_stripped(self):
+        """'İNADINA - TİVİBU SPOR 4' gibi kaynak onekleri atilabilmeli."""
+        result = core.canonical_channel("İNADINA - TİVİBU SPOR 4")
+        self.assertIsNotNone(result)
+        self.assertEqual(result[1], "Tivibu Spor 4")
+
+    def test_two_letter_tag_is_not_event(self):
+        self.assertIsNone(core.parse_event("TR - KUKILI TV"))
+        self.assertIsNotNone(core.parse_event("Fenerbahçe - Beşiktaş"))
+
+
+class TestSportsFilter(unittest.TestCase):
+    """Spor disi kanallar (cocuk/haber/ulusal) listeye girmemeli."""
+
+    def test_non_sport_dropped(self):
+        streams = [
+            StreamInfo(name="TRT COCUK HD", url="http://a/1.m3u8", group="TR: COCUK"),
+            StreamInfo(name="KANAL D UHD", url="http://a/2.m3u8", group="TR ULUSAL-UHD"),
+            StreamInfo(name="HABER GLOBAL", url="http://a/3.m3u8", group="HABER"),
+            StreamInfo(name="Bein Sports 1", url="http://a/4.m3u8", group="NETSPOR"),
+            StreamInfo(name="19:45 Fenerbahçe - Beşiktaş", url="http://a/5.m3u8",
+                       group="Süper Lig"),
+            StreamInfo(name="Web BeIN Sports+++", url="http://a/6.m3u8",
+                       group="SPOR KANALI"),
+        ]
+        kept, dropped = core.filter_publishable(streams)
+        names = {s.name for s in kept}
+        self.assertIn("Bein Sports 1", names)
+        self.assertIn("19:45 Fenerbahçe - Beşiktaş", names)
+        self.assertNotIn("TRT COCUK HD", names)
+        self.assertNotIn("KANAL D UHD", names)
+        self.assertNotIn("HABER GLOBAL", names)
+        self.assertNotIn("Web BeIN Sports+++", names)
+        self.assertEqual(sum(dropped.values()), 4)
+
+    def test_national_group_keeps_sports_channel(self):
+        """Ulusal grup icindeki TV 8.5 gibi spor kanallari korunmali."""
+        streams = [
+            StreamInfo(name="TV 8.5", url="http://a/1.m3u8", group="TR ULUSAL-UHD"),
+            StreamInfo(name="STAR TV HD", url="http://a/2.m3u8", group="TR ULUSAL-UHD"),
+        ]
+        kept, _dropped = core.filter_publishable(streams)
+        self.assertEqual([s.name for s in kept], ["TV 8.5"])
+
+
 class TestExtraction(unittest.TestCase):
     def test_absolute(self):
         text = 'var s = "https://cdn.x/live/a.m3u8?t=1";'

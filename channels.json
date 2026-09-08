@@ -1,61 +1,23 @@
 ﻿{
- "generated_at": "08.09.2026 17:40:16",
+ "generated_at": "08.09.2026 18:45:38",
  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+ "categories": [
+  "BEIN SPORTS",
+  "S SPORT",
+  "TİVİBU SPOR",
+  "TRT SPOR",
+  "TABİİ SPOR",
+  "DİĞER SPOR KANALLARI",
+  "CANLI MAÇLAR"
+ ],
  "proxy": "",
- "count": 110,
- "verified": 110,
+ "count": 66,
+ "verified": 66,
  "channels": [
-  {
-   "key": "beinsportsmax1",
-   "name": "beIN Sports Max 1",
-   "group": "ANDRO SPOR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "andro",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 212,
-   "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivebsm1.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.226503.xyz/checklist/androstreamlivebsm1.m3u8",
-     "referrer": "https://trgoals1537.xyz",
-     "source": "topluluk",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebsm1.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "andro",
-     "user_agent": ""
-    },
-    {
-     "url": "https://dga1op10s1u3lea.82250d06d39d38.click/live/selcukbeinsportsmax1/playlist.m3u8",
-     "referrer": "https://www.sporcafe-0c2608ad69.xyz",
-     "source": "selcukspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "beinsportsmax2",
-   "name": "beIN Sports Max 2",
-   "group": "SELÇUKSPOR",
-   "logo": "",
-   "referrer": "https://www.sporcafe-0c2608ad69.xyz",
-   "source": "selcukspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 474,
-   "url": "https://dga1op10s1u3lea.82250d06d39d38.click/live/selcukbeinsportsmax2/playlist.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
   {
    "key": "beinsports1",
    "name": "beIN Sports 1",
-   "group": "ANDRO SPOR",
+   "group": "BEIN SPORTS",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "andro",
@@ -94,7 +56,7 @@
   {
    "key": "beinsports2",
    "name": "beIN Sports 2",
-   "group": "ANDRO SPOR",
+   "group": "BEIN SPORTS",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "andro",
@@ -133,7 +95,7 @@
   {
    "key": "beinsports3",
    "name": "beIN Sports 3",
-   "group": "ANDRO SPOR",
+   "group": "BEIN SPORTS",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "andro",
@@ -172,7 +134,7 @@
   {
    "key": "beinsports4",
    "name": "beIN Sports 4",
-   "group": "ANDRO SPOR",
+   "group": "BEIN SPORTS",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "andro",
@@ -211,7 +173,7 @@
   {
    "key": "beinsports5",
    "name": "beIN Sports 5",
-   "group": "ANDRO SPOR",
+   "group": "BEIN SPORTS",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "andro",
@@ -242,9 +204,56 @@
    ]
   },
   {
+   "key": "beinsportsmax1",
+   "name": "beIN Sports Max 1",
+   "group": "BEIN SPORTS",
+   "logo": "",
+   "referrer": "https://taraftariumizle.org/",
+   "source": "andro",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 212,
+   "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivebsm1.m3u8",
+   "user_agent": "",
+   "backups": [
+    {
+     "url": "https://andro.226503.xyz/checklist/androstreamlivebsm1.m3u8",
+     "referrer": "https://trgoals1537.xyz",
+     "source": "topluluk",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebsm1.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "andro",
+     "user_agent": ""
+    },
+    {
+     "url": "https://dga1op10s1u3lea.82250d06d39d38.click/live/selcukbeinsportsmax1/playlist.m3u8",
+     "referrer": "https://www.sporcafe-0c2608ad69.xyz",
+     "source": "selcukspor",
+     "user_agent": ""
+    }
+   ]
+  },
+  {
+   "key": "beinsportsmax2",
+   "name": "beIN Sports Max 2",
+   "group": "BEIN SPORTS",
+   "logo": "",
+   "referrer": "https://www.sporcafe-0c2608ad69.xyz",
+   "source": "selcukspor",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 474,
+   "url": "https://dga1op10s1u3lea.82250d06d39d38.click/live/selcukbeinsportsmax2/playlist.m3u8",
+   "user_agent": "",
+   "backups": []
+  },
+  {
    "key": "beinsportshaber",
    "name": "beIN Sports Haber",
-   "group": "SPOR KANALI",
+   "group": "BEIN SPORTS",
    "logo": "https://bit.ly/302Lfmo",
    "referrer": "",
    "source": "topluluk",
@@ -256,9 +265,23 @@
    "backups": []
   },
   {
+   "key": "raw:beinsports4k",
+   "name": "BeIN Sports 4K",
+   "group": "BEIN SPORTS",
+   "logo": "https://bit.ly/3f86zet",
+   "referrer": "",
+   "source": "topluluk",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 443,
+   "url": "https://corestream.ardastream.live//beintv/tracks-v1a1/mono.m3u8",
+   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
+   "backups": []
+  },
+  {
    "key": "ssportplus",
    "name": "S Sport Plus",
-   "group": "NETSPOR",
+   "group": "S SPORT",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -285,7 +308,7 @@
   {
    "key": "ssport1",
    "name": "S Sport 1",
-   "group": "ANDRO SPOR",
+   "group": "S SPORT",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "andro",
@@ -330,7 +353,7 @@
   {
    "key": "ssport2",
    "name": "S Sport 2",
-   "group": "ANDRO SPOR",
+   "group": "S SPORT",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "andro",
@@ -375,7 +398,7 @@
   {
    "key": "tivibuspor1",
    "name": "Tivibu Spor 1",
-   "group": "WEB SPOR KANALI",
+   "group": "TİVİBU SPOR",
    "logo": "https://i0.wp.com/resim.yayins.com/spor/tivibusp1.png",
    "referrer": "https://trgoals1537.xyz",
    "source": "topluluk",
@@ -426,7 +449,7 @@
   {
    "key": "tivibuspor2",
    "name": "Tivibu Spor 2",
-   "group": "ANDRO SPOR",
+   "group": "TİVİBU SPOR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "andro",
@@ -459,7 +482,7 @@
   {
    "key": "tivibuspor3",
    "name": "Tivibu Spor 3",
-   "group": "ANDRO SPOR",
+   "group": "TİVİBU SPOR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "andro",
@@ -486,7 +509,7 @@
   {
    "key": "tivibuspor4",
    "name": "Tivibu Spor 4",
-   "group": "ANDRO SPOR",
+   "group": "TİVİBU SPOR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "andro",
@@ -511,115 +534,94 @@
    ]
   },
   {
-   "key": "smartspor1",
-   "name": "Smart Spor 1",
-   "group": "ANDRO SPOR",
+   "key": "trtsporyldz",
+   "name": "TRT Spor Yıldız",
+   "group": "TRT SPOR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
-   "source": "andro",
+   "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 183,
-   "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivesm1.m3u8",
+   "latency_ms": 198,
+   "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivetrtsy.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.226503.xyz/checklist/androstreamlivesm1.m3u8",
+     "url": "https://andro.226503.xyz/checklist/androstreamlivetrtsy.m3u8",
      "referrer": "https://taraftariumizle.org/",
-     "source": "andro",
+     "source": "netspor",
      "user_agent": ""
     },
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm1.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrtsy.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "netspor",
+     "user_agent": ""
+    }
+   ]
+  },
+  {
+   "key": "trtspor",
+   "name": "TRT Spor",
+   "group": "TRT SPOR",
+   "logo": "",
+   "referrer": "https://taraftariumizle.org/",
+   "source": "netspor",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 388,
+   "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivetrts.m3u8",
+   "user_agent": "",
+   "backups": [
+    {
+     "url": "https://andro.226503.xyz/checklist/androstreamlivetrts.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "netspor",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrts.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "netspor",
+     "user_agent": ""
+    }
+   ]
+  },
+  {
+   "key": "trt1",
+   "name": "TRT 1",
+   "group": "TRT SPOR",
+   "logo": "",
+   "referrer": "https://taraftariumizle.org/",
+   "source": "netspor",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 196,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrt1.m3u8",
+   "user_agent": "",
+   "backups": [
+    {
+     "url": "http://89.187.191.41/TRT-1-HD-TR/tracks-v1a1/mono.ts.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "topluluk",
-     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
+     "user_agent": ""
     },
     {
-     "url": "https://dga1op10s1u3lea.82250d06d39d38.click/live/selcuksmartspor/playlist.m3u8",
-     "referrer": "https://www.sporcafe-0c2608ad69.xyz",
-     "source": "selcukspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "smartspor2",
-   "name": "Smart Spor 2",
-   "group": "ANDRO SPOR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "andro",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 200,
-   "url": "https://andro.226503.xyz/checklist/androstreamlivesm2.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivesm2.m3u8",
+     "url": "https://andro.226503.xyz/checklist/androstreamlivetrt1.m3u8",
      "referrer": "https://taraftariumizle.org/",
-     "source": "andro",
+     "source": "netspor",
      "user_agent": ""
     },
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm2.m3u8",
+     "url": "https://corestream.ardastream.live//trt1/tracks-v1a1/mono.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "topluluk",
-     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
-    }
-   ]
-  },
-  {
-   "key": "eurosport1",
-   "name": "Eurosport 1",
-   "group": "ANDRO SPOR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "andro",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 188,
-   "url": "https://andro.226503.xyz/checklist/androstreamlivees1.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivees1.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "andro",
      "user_agent": ""
     },
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivees1.m3u8",
+     "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivetrt1.m3u8",
      "referrer": "https://taraftariumizle.org/",
-     "source": "andro",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "eurosport2",
-   "name": "Eurosport 2",
-   "group": "ANDRO SPOR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "andro",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 282,
-   "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivees2.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivees2.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "andro",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.226503.xyz/checklist/androstreamlivees2.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "andro",
+     "source": "netspor",
      "user_agent": ""
     }
    ]
@@ -627,7 +629,7 @@
   {
    "key": "tabiispor1",
    "name": "Tabii Spor 1",
-   "group": "TR: Tabii Spor",
+   "group": "TABİİ SPOR",
    "logo": "https://i0.wp.com/resim.yayins.com/spor/tabii1.png",
    "referrer": "",
    "source": "topluluk",
@@ -641,20 +643,20 @@
      "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivetb1.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "andro",
-     "user_agent": ""
+     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
     },
     {
      "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb1.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "andro",
-     "user_agent": ""
+     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
     }
    ]
   },
   {
    "key": "tabiispor2",
    "name": "Tabii Spor 2",
-   "group": "TR: Tabii Spor",
+   "group": "TABİİ SPOR",
    "logo": "https://i0.wp.com/resim.yayins.com/spor/tabii2.png",
    "referrer": "",
    "source": "topluluk",
@@ -668,20 +670,20 @@
      "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivetb2.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "andro",
-     "user_agent": ""
+     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
     },
     {
      "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb2.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "andro",
-     "user_agent": ""
+     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
     }
    ]
   },
   {
    "key": "tabiispor3",
    "name": "Tabii Spor 3",
-   "group": "NETSPOR",
+   "group": "TABİİ SPOR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -708,7 +710,7 @@
   {
    "key": "tabiispor4",
    "name": "Tabii Spor 4",
-   "group": "TR: Tabii Spor",
+   "group": "TABİİ SPOR",
    "logo": "https://i0.wp.com/resim.yayins.com/spor/tabii4.png",
    "referrer": "",
    "source": "topluluk",
@@ -722,20 +724,20 @@
      "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb4.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
-     "user_agent": ""
+     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
     },
     {
      "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivetb4.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
-     "user_agent": ""
+     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
     }
    ]
   },
   {
    "key": "tabiispor5",
    "name": "Tabii Spor 5",
-   "group": "TR: Tabii Spor",
+   "group": "TABİİ SPOR",
    "logo": "https://i0.wp.com/resim.yayins.com/spor/tabii5.png",
    "referrer": "",
    "source": "topluluk",
@@ -749,20 +751,20 @@
      "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivetb5.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
-     "user_agent": ""
+     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
     },
     {
      "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb5.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
-     "user_agent": ""
+     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
     }
    ]
   },
   {
    "key": "tabiispor6",
    "name": "Tabii Spor 6",
-   "group": "NETSPOR",
+   "group": "TABİİ SPOR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -789,7 +791,7 @@
   {
    "key": "tabiispor",
    "name": "Tabii Spor",
-   "group": "NETSPOR",
+   "group": "TABİİ SPOR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -838,94 +840,143 @@
    ]
   },
   {
-   "key": "trtsporyldz",
-   "name": "TRT Spor Yıldız",
-   "group": "NETSPOR",
+   "key": "smartspor1",
+   "name": "Smart Spor 1",
+   "group": "DİĞER SPOR KANALLARI",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
+   "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 198,
-   "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivetrtsy.m3u8",
+   "latency_ms": 183,
+   "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivesm1.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.226503.xyz/checklist/androstreamlivetrtsy.m3u8",
+     "url": "https://andro.226503.xyz/checklist/androstreamlivesm1.m3u8",
      "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
+     "source": "andro",
      "user_agent": ""
     },
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrtsy.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm1.m3u8",
      "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
+     "source": "topluluk",
+     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
+    },
+    {
+     "url": "https://dga1op10s1u3lea.82250d06d39d38.click/live/selcuksmartspor/playlist.m3u8",
+     "referrer": "https://www.sporcafe-0c2608ad69.xyz",
+     "source": "selcukspor",
      "user_agent": ""
     }
    ]
   },
   {
-   "key": "trtspor",
-   "name": "TRT Spor",
-   "group": "NETSPOR",
+   "key": "smartspor2",
+   "name": "Smart Spor 2",
+   "group": "DİĞER SPOR KANALLARI",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
+   "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 388,
-   "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivetrts.m3u8",
+   "latency_ms": 200,
+   "url": "https://andro.226503.xyz/checklist/androstreamlivesm2.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.226503.xyz/checklist/androstreamlivetrts.m3u8",
+     "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivesm2.m3u8",
      "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
+     "source": "andro",
      "user_agent": ""
     },
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrts.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm2.m3u8",
      "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
+     "source": "topluluk",
+     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
+    }
+   ]
+  },
+  {
+   "key": "saransports1",
+   "name": "Saran Sports 1",
+   "group": "DİĞER SPOR KANALLARI",
+   "logo": "https://i0.wp.com/resim.yayins.com/spor/ssport-1.png",
+   "referrer": "https://trgoals1537.xyz",
+   "source": "topluluk",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 259,
+   "url": "https://andro.226503.xyz/checklist/androstreamlivess1.m3u8",
+   "user_agent": "",
+   "backups": []
+  },
+  {
+   "key": "saransports2",
+   "name": "Saran Sports 2",
+   "group": "DİĞER SPOR KANALLARI",
+   "logo": "https://i0.wp.com/resim.yayins.com/spor/ssport-2.png",
+   "referrer": "https://trgoals1537.xyz",
+   "source": "topluluk",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 200,
+   "url": "https://andro.226503.xyz/checklist/androstreamlivess2.m3u8",
+   "user_agent": "",
+   "backups": []
+  },
+  {
+   "key": "eurosport1",
+   "name": "Eurosport 1",
+   "group": "DİĞER SPOR KANALLARI",
+   "logo": "",
+   "referrer": "https://taraftariumizle.org/",
+   "source": "andro",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 188,
+   "url": "https://andro.226503.xyz/checklist/androstreamlivees1.m3u8",
+   "user_agent": "",
+   "backups": [
+    {
+     "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivees1.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "andro",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivees1.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "andro",
      "user_agent": ""
     }
    ]
   },
   {
-   "key": "trt1",
-   "name": "TRT 1",
-   "group": "NETSPOR",
+   "key": "eurosport2",
+   "name": "Eurosport 2",
+   "group": "DİĞER SPOR KANALLARI",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
+   "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 196,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrt1.m3u8",
+   "latency_ms": 282,
+   "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivees2.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "http://89.187.191.41/TRT-1-HD-TR/tracks-v1a1/mono.ts.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivees2.m3u8",
      "referrer": "https://taraftariumizle.org/",
-     "source": "topluluk",
+     "source": "andro",
      "user_agent": ""
     },
     {
-     "url": "https://andro.226503.xyz/checklist/androstreamlivetrt1.m3u8",
+     "url": "https://andro.226503.xyz/checklist/androstreamlivees2.m3u8",
      "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    },
-    {
-     "url": "https://corestream.ardastream.live//trt1/tracks-v1a1/mono.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "topluluk",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivetrt1.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
+     "source": "andro",
      "user_agent": ""
     }
    ]
@@ -933,7 +984,7 @@
   {
    "key": "aspor",
    "name": "A Spor",
-   "group": "NETSPOR",
+   "group": "DİĞER SPOR KANALLARI",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -978,7 +1029,7 @@
   {
    "key": "atv",
    "name": "ATV",
-   "group": "NETSPOR",
+   "group": "DİĞER SPOR KANALLARI",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1011,7 +1062,7 @@
   {
    "key": "tv85",
    "name": "TV 8.5",
-   "group": "TR ULUSAL-UHD",
+   "group": "DİĞER SPOR KANALLARI",
    "logo": "https://www.lyngsat-logo.com/logo/tv/tt/tv85_tr.png",
    "referrer": "",
    "source": "topluluk",
@@ -1025,7 +1076,7 @@
   {
    "key": "tv8",
    "name": "TV 8",
-   "group": "TR ULUSAL-UHD",
+   "group": "DİĞER SPOR KANALLARI",
    "logo": "https://www.lyngsat-logo.com/logo/tv/tt/tv8_tr.png",
    "referrer": "",
    "source": "topluluk",
@@ -1046,7 +1097,7 @@
   {
    "key": "exxen",
    "name": "Exxen",
-   "group": "NETSPOR",
+   "group": "DİĞER SPOR KANALLARI",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1103,7 +1154,7 @@
   {
    "key": "cbcsport",
    "name": "CBC Sport",
-   "group": "NETSPOR",
+   "group": "DİĞER SPOR KANALLARI",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1130,7 +1181,7 @@
   {
    "key": "redbulltv",
    "name": "Red Bull TV",
-   "group": "NETSPOR",
+   "group": "DİĞER SPOR KANALLARI",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1157,7 +1208,7 @@
   {
    "key": "htspor",
    "name": "HT Spor",
-   "group": "NETSPOR",
+   "group": "DİĞER SPOR KANALLARI",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1184,7 +1235,7 @@
   {
    "key": "fbtv",
    "name": "FB TV",
-   "group": "NETSPOR",
+   "group": "DİĞER SPOR KANALLARI",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1217,7 +1268,7 @@
   {
    "key": "gstv",
    "name": "GS TV",
-   "group": "NETSPOR",
+   "group": "DİĞER SPOR KANALLARI",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1244,7 +1295,7 @@
   {
    "key": "sportstv",
    "name": "Sports TV",
-   "group": "NETSPOR",
+   "group": "DİĞER SPOR KANALLARI",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1269,42 +1320,9 @@
    ]
   },
   {
-   "key": "a2",
-   "name": "A2",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://i.hizliresim.com/17g158f.jpg",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok-master",
-   "latency_ms": 202,
-   "url": "http://89.187.191.41/A2-HD-TR/video.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivea2.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.226503.xyz/checklist/androstreamlivea2.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.evrenesoglu57.click/checklist/androstreamlivea2.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:clujnapoca|tofas",
+   "key": "evt:1445tofas|clujnapoca",
    "name": "14:45 Tofaş - Cluj Napoca",
-   "group": "Gloria Cup Basketbol",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1329,9 +1347,9 @@
    ]
   },
   {
-   "key": "evt:anadoluefes|lokomotivkuban",
+   "key": "evt:1700anadoluefes|lokomotivkuban",
    "name": "17:00 Anadolu Efes - Lokomotiv Kuban",
-   "group": "Gloria Cup Basketbol",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1356,9 +1374,9 @@
    ]
   },
   {
-   "key": "evt:japonyacanli|macaristan",
-   "name": "18:45 Macaristan - Japonya CANLI",
-   "group": "FIBA Kadinlar Dünya Kupasi",
+   "key": "evt:1845macaristan|japonya",
+   "name": "18:45 Macaristan - Japonya",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1383,9 +1401,9 @@
    ]
   },
   {
-   "key": "evt:cin|portoriko",
+   "key": "evt:1845portoriko|cin",
    "name": "18:45 Porto Riko - Çin",
-   "group": "FIBA Kadinlar Dünya Kupasi",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1410,9 +1428,9 @@
    ]
   },
   {
-   "key": "evt:bahcesehirklj|dubaibasket",
+   "key": "evt:1915bahcesehirklj|dubaibasket",
    "name": "19:15 Bahçeşehir Klj - Dubai Basket",
-   "group": "Gloria Cup Basketbol",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1437,9 +1455,9 @@
    ]
   },
   {
-   "key": "evt:aek|lasklinzcanli",
-   "name": "19:45 AEK - LASK Linz CANLI",
-   "group": "UEFA Champions League (English)",
+   "key": "evt:1945aek|lasklinz",
+   "name": "19:45 AEK - LASK Linz",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1494,9 +1512,9 @@
    ]
   },
   {
-   "key": "evt:barcelona|feyenoord",
+   "key": "evt:1945barcelona|feyenoord",
    "name": "19:45 Barcelona - Feyenoord",
-   "group": "UEFA Şampiyonlar Ligi",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1521,9 +1539,9 @@
    ]
   },
   {
-   "key": "evt:astonvillacanli|clubbrugge",
-   "name": "19:45 Club Brugge - Aston Villa CANLI",
-   "group": "UEFA Champions League (Deutsch)",
+   "key": "evt:1945clubbrugge|astonvilla",
+   "name": "19:45 Club Brugge - Aston Villa",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1578,9 +1596,9 @@
    ]
   },
   {
-   "key": "evt:stuttgart|viking",
+   "key": "evt:1945stuttgart|viking",
    "name": "19:45 Stuttgart - Viking",
-   "group": "UEFA Şampiyonlar Ligi",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1605,9 +1623,9 @@
    ]
   },
   {
-   "key": "evt:abha|alnassr",
+   "key": "evt:2100alnassr|abha",
    "name": "21:00 Al Nassr - Abha",
-   "group": "Suudi Arabistan Pro Lig",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1632,9 +1650,9 @@
    ]
   },
   {
-   "key": "evt:alahli|alqadsiah",
+   "key": "evt:2100alqadsiah|alahli",
    "name": "21:00 Al Qadsiah - Al Ahli",
-   "group": "Suudi Arabistan Pro Lig",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1659,9 +1677,9 @@
    ]
   },
   {
-   "key": "evt:almanya|guneykore",
+   "key": "evt:2145almanya|guneykore",
    "name": "21:45 Almanya - Güney Kore",
-   "group": "FIBA Kadinlar Dünya Kupasi",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1686,9 +1704,9 @@
    ]
   },
   {
-   "key": "evt:avustralya|italya",
+   "key": "evt:2145italya|avustralya",
    "name": "21:45 İtalya - Avustralya",
-   "group": "FIBA Kadinlar Dünya Kupasi",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1713,9 +1731,9 @@
    ]
   },
   {
-   "key": "evt:borussiadortmund|villarreal",
+   "key": "evt:2200borussiadortmund|villarreal",
    "name": "22:00 Borussia Dortmund - Villarreal",
-   "group": "UEFA Champions League (Deutsch)",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1770,9 +1788,9 @@
    ]
   },
   {
-   "key": "evt:lille|realbetis",
+   "key": "evt:2200lille|realbetis",
    "name": "22:00 Lille - Real Betis",
-   "group": "UEFA Champions League (English)",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1797,9 +1815,9 @@
    ]
   },
   {
-   "key": "evt:atleticomadrid|liverpool",
+   "key": "evt:2200liverpool|atleticomadrid",
    "name": "22:00 Liverpool - Atletico Madrid",
-   "group": "UEFA Şampiyonlar Ligi",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1824,9 +1842,9 @@
    ]
   },
   {
-   "key": "evt:arsenal|napoli",
+   "key": "evt:2200napoli|arsenal",
    "name": "22:00 Napoli - Arsenal",
-   "group": "UEFA Şampiyonlar Ligi",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1851,9 +1869,9 @@
    ]
   },
   {
-   "key": "evt:manchestercity|porto",
+   "key": "evt:2200porto|manchestercity",
    "name": "22:00 Porto - Manchester City",
-   "group": "UEFA Şampiyonlar Ligi (Türkçe)",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1896,9 +1914,9 @@
    ]
   },
   {
-   "key": "evt:manchestercityazerice|porto",
+   "key": "evt:2200porto|manchestercityazerice",
    "name": "22:00 Porto - Manchester City (Azerice)",
-   "group": "UEFA Şampiyonlar Ligi",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1923,9 +1941,9 @@
    ]
   },
   {
-   "key": "evt:psg|slovanbratislava",
+   "key": "evt:2200psg|slovanbratislava",
    "name": "22:00 PSG - Slovan Bratislava",
-   "group": "UEFA Şampiyonlar Ligi",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -1950,9 +1968,9 @@
    ]
   },
   {
-   "key": "evt:inter|realmadrid",
+   "key": "evt:2200realmadrid|inter",
    "name": "22:00 Real Madrid - Inter",
-   "group": "UEFA Şampiyonlar Ligi (Azerice)",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -2007,9 +2025,9 @@
    ]
   },
   {
-   "key": "evt:galatasaray|sportinglisbon",
+   "key": "evt:2200sportinglisbon|galatasaray",
    "name": "22:00 Sporting Lisbon - Galatasaray",
-   "group": "UEFA Şampiyonlar Ligi",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -2034,9 +2052,9 @@
    ]
   },
   {
-   "key": "evt:celtic|stjohnstone",
+   "key": "evt:2200stjohnstone|celtic",
    "name": "22:00 St.Johnstone - Celtic",
-   "group": "İskoçya Premier Lig",
+   "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
@@ -2059,671 +2077,6 @@
      "user_agent": ""
     }
    ]
-  },
-  {
-   "key": "evt:kukilitv|tr",
-   "name": "TR - KUKILI TV",
-   "group": "TR: COCUK",
-   "logo": "http://go4.pw/TURKIYE/metropol.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 654,
-   "url": "https://vod02.cdn.web.tv/xm/ms/xmmst5anr7d_,120,240,360,480,720,.mp4.urlset/playlist-f5-v1-a1.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:360tvfhd",
-   "name": "360 TV FHD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://i.imgur.com/DDj2Edt.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok-master",
-   "latency_ms": 496,
-   "url": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:360tvuhd",
-   "name": "360 TV UHD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://i.imgur.com/DDj2Edt.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 519,
-   "url": "https://turkmedya-live.ercdn.net/tv360/tv360_1080p.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:beinsports4k",
-   "name": "BeIN Sports 4K",
-   "group": "SPOR KANALI",
-   "logo": "https://bit.ly/3f86zet",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 443,
-   "url": "https://corestream.ardastream.live//beintv/tracks-v1a1/mono.m3u8",
-   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
-   "backups": []
-  },
-  {
-   "key": "raw:benguturk",
-   "name": "BENGU TURK",
-   "group": "HABER",
-   "logo": "https://i.ibb.co/CHWhMvQ/bengu-turk.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 248,
-   "url": "https://tv.ensonhaber.com/benguturk/benguturk_720p.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:beyaztvuhd",
-   "name": "BEYAZ TV UHD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://www.lyngsat-logo.com/logo/tv/bb/beyaz_tv_tr.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 517,
-   "url": "https://beyaztv-live.daioncdn.net/beyaztv/beyaztv_1080p.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:ekoltv",
-   "name": "Ekol TV",
-   "group": "TR:HABER",
-   "logo": "https://play-lh.googleusercontent.com/NcMpZLeMJzAQboY5GKm17MLkFqtthxweBH8RUeMP7GHKfqnMuxtvorh_xOAmLsCpGQ",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 578,
-   "url": "https://ekoltv-live.ercdn.net/ekoltv/ekoltv_1080p.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:eurod",
-   "name": "EURO D",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://www.lyngsat-logo.com/logo/tv/ee/eurod.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok-master",
-   "latency_ms": 513,
-   "url": "http://live.duhnet.tv/S2/HLS_LIVE/eurodnp/playlist.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:flashhaber",
-   "name": "FLASH HABER",
-   "group": "HABER",
-   "logo": "https://i.ibb.co/8cP5NzX/flash-haber.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 472,
-   "url": "https://flashhaber-live.ercdn.net/flashhaber/flashhaber_1080p.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:foxtvhd",
-   "name": "FOX TV HD",
-   "group": "TOPLULUK",
-   "logo": "https://www.lyngsat-logo.com/logo/tv/ff/fox_global.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 2365,
-   "url": "https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv_720p.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:foxtvuhd",
-   "name": "FOX TV UHD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://www.lyngsat-logo.com/logo/tv/ff/fox_global.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok-master",
-   "latency_ms": 983,
-   "url": "https://sweet-truth-729d.han686314.workers.dev/?url=https://helga.iptv2022.com/sh/NOW/index.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:haberglobal",
-   "name": "HABER GLOBAL",
-   "group": "HABER",
-   "logo": "https://i.ibb.co/4ZpZWkf/haber-global.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 240,
-   "url": "https://tv.ensonhaber.com/haberglobal/haberglobal_720p.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://tv.ensonhaber.com/haberglobal/haberglobal.m3u8",
-     "referrer": "",
-     "source": "topluluk",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "raw:halktv",
-   "name": "Halk TV",
-   "group": "TR:HABER",
-   "logo": "https://blutv-images.mncdn.com/q/t/i/bluv2/100/750x750/5dc2bfbd866ac31da06187c5",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 468,
-   "url": "https://halktv-live.daioncdn.net/halktv/halktv_720p.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://halktv.daioncdn.net/halktv/halktv_1080p.m3u8?app=c86957d3-74a7-44da-9ad2-dc358c769609",
-     "referrer": "",
-     "source": "topluluk",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "raw:kanal24",
-   "name": "Kanal 24",
-   "group": "TR:HABER",
-   "logo": "https://blutv-images.mncdn.com/q/t/i/bluv2/100/750x750/5dc2bca3866ac331e0feb1ed",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 565,
-   "url": "https://turkmedya-live.ercdn.net/tv24/tv24_720p.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:kanaldfhd",
-   "name": "KANAL D FHD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://www.lyngsat-logo.com/logo/tv/kk/kanal_d_tr.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 4876,
-   "url": "https://ackaxsqacw.turknet.ercdn.net/ozfkfbbjba/kanald/kanald_1080p.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:kanaldhd",
-   "name": "KANAL D HD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://www.lyngsat-logo.com/logo/tv/kk/kanal_d_tr.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 944,
-   "url": "https://demiroren.daioncdn.net/kanald/kanald_1080p.m3u8?&sid=7te08khb0uxy&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:kanalduhd",
-   "name": "KANAL D UHD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://www.lyngsat-logo.com/logo/tv/kk/kanal_d_tr.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 1324,
-   "url": "https://demiroren.daioncdn.net/kanald/kanald_1080p.m3u8?app=kanald_web&ce=3",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:minikacocuk",
-   "name": "MINIKA COCUK",
-   "group": "TR: COCUK",
-   "logo": "https://i.ibb.co/S794c6W/minika-cocuk.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 1264,
-   "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/minikago_cocuk/minikago_cocuk_720p.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:minikago",
-   "name": "MINIKA GO",
-   "group": "TR: COCUK",
-   "logo": "https://i.ibb.co/2ZwxWr0/minika-go.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 1474,
-   "url": "http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/minikago/minikago_720p.m3u8?tv=1",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:ntv",
-   "name": "NTV",
-   "group": "HABER",
-   "logo": "https://i.ibb.co/gRR1zpm/ntv.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 561,
-   "url": "https://dogus.daioncdn.net/ntv/ntv_1080p.m3u8?ce=3",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "http://dygvideo.dygdigital.com/live/hls/ntv4puhu?m3u8",
-     "referrer": "",
-     "source": "topluluk",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "raw:saransports1",
-   "name": "Saran Sports 1",
-   "group": "WEB SPOR KANALI",
-   "logo": "https://i0.wp.com/resim.yayins.com/spor/ssport-1.png",
-   "referrer": "https://trgoals1537.xyz",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 259,
-   "url": "https://andro.226503.xyz/checklist/androstreamlivess1.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:saransports2",
-   "name": "Saran Sports 2",
-   "group": "WEB SPOR KANALI",
-   "logo": "https://i0.wp.com/resim.yayins.com/spor/ssport-2.png",
-   "referrer": "https://trgoals1537.xyz",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 200,
-   "url": "https://andro.226503.xyz/checklist/androstreamlivess2.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:showtvfhd",
-   "name": "SHOW TV FHD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://www.lyngsat-logo.com/logo/tv/ss/show_tv_tr.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok-master",
-   "latency_ms": 850,
-   "url": "https://rmtftbjlne.turknet.ercdn.net/bpeytmnqyp/showtv/showtv.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:showtvuhd",
-   "name": "SHOW TV UHD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://www.lyngsat-logo.com/logo/tv/ss/show_tv_tr.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 871,
-   "url": "https://ciner.daioncdn.net/showtv/showtv_1080p.m3u8?app=showtv_web&ce=3",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:smartsports1",
-   "name": "Smart SPORTS 1",
-   "group": "WEB SPOR KANALI",
-   "logo": "https://i0.wp.com/resim.yayins.com/spor/smartspor.png",
-   "referrer": "https://trgoals1537.xyz/",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 293,
-   "url": "https://andro.226503.xyz/checklist/androstreamlivesm1.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:smartsports2",
-   "name": "Smart Sports 2",
-   "group": "WEB SPOR KANALI",
-   "logo": "https://i0.wp.com/resim.yayins.com/spor/smartspor2.png",
-   "referrer": "https://trgoals1537.xyz/",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 218,
-   "url": "https://andro.226503.xyz/checklist/androstreamlivesm2.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:startvfhd",
-   "name": "STAR TV FHD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://www.lyngsat-logo.com/logo/tv/ss/star_tv_tr.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 847,
-   "url": "https://dogus.daioncdn.net/startv/startv_720p.m3u8?&app=startv_web&ce=3",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:startvhd",
-   "name": "STAR TV HD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://www.lyngsat-logo.com/logo/tv/ss/star_tv_tr.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok-master",
-   "latency_ms": 670,
-   "url": "http://dygvideo.dygdigital.com/live/hls/startv4puhu?m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:tele1",
-   "name": "Tele 1",
-   "group": "TR:HABER",
-   "logo": "https://blutv-images.mncdn.com/q/t/i/bluv2/100/750x750/60e54dfe866ac30fa0be7528",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 469,
-   "url": "https://tele1-live.ercdn.net/tele1/tele1_1080p.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:teve2fhd",
-   "name": "TEVE2 FHD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://www.lyngsat-logo.com/logo/tv/tt/teve_2_tr.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 407,
-   "url": "https://demiroren.daioncdn.net/teve2/teve2_1080p.m3u8?&sid=7uxeo0kx44nq&app=6aab838a-437e-4a1b-bbd0-e30f79cdbbbd&ce=3",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:teve2uhd",
-   "name": "TEVE2 UHD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://www.lyngsat-logo.com/logo/tv/tt/teve_2_tr.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 1261,
-   "url": "https://ackaxsqacw.turknet.ercdn.net/ozfkfbbjba/teve2/teve2_1080p.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:tgrthaber",
-   "name": "TGRT Haber",
-   "group": "TR:HABER",
-   "logo": "https://blutv-images.mncdn.com/q/t/i/bluv2/100/750x750/5c63c466866ac30cbc2ad84f",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 688,
-   "url": "https://tgrthaber-live.daioncdn.net/tgrthaber/tgrthaber_720p.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:tgrthaberhd",
-   "name": "TGRT HABER HD",
-   "group": "HABER",
-   "logo": "https://i.ibb.co/K5frjVY/tgrt-haber.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 397,
-   "url": "https://canli.tgrthaber.com/tgrt.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:trt4kfhd",
-   "name": "TRT 4K FHD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://i.hizliresim.com/lezd6k8.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 559,
-   "url": "http://c3921155.edmonst.net/iptv/DVHP2VB5QXL7UC/4001/index.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:trt4kuhd",
-   "name": "TRT 4K UHD",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://i.hizliresim.com/lezd6k8.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 728,
-   "url": "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/HW7DHBZQE4ZYG9/4001/index.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:trtavaz",
-   "name": "TRT AVAZ",
-   "group": "TR ULUSAL-UHD",
-   "logo": "",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 259,
-   "url": "http://tv-trtavaz.medya.trt.com.tr/master_720.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:trtcocukhd",
-   "name": "TRT COCUK HD",
-   "group": "TR: COCUK",
-   "logo": "https://cdn-i.pr.trt.com.tr/trttv/w750/h750/q100/13060701.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 512,
-   "url": "https://tv-trtcocuk.medya.trt.com.tr/master_720.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:trtdiyanetcocuk",
-   "name": "TRT Diyanet Çocuk",
-   "group": "TR: COCUK",
-   "logo": "http://assets.tvcdn.net/dba05bf2-9d24-4d20-bc6c-f54a2b60ef7f.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok-master",
-   "latency_ms": 387,
-   "url": "https://tv-trtdiyanetcocuk.medya.trt.com.tr/master.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:trthaber",
-   "name": "TRT HABER",
-   "group": "HABER",
-   "logo": "https://i.ibb.co/NCvRHC3/trt-haber.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 232,
-   "url": "https://tv-trthaber.medya.trt.com.tr/master_720.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:trtturk",
-   "name": "TRT TÜRK",
-   "group": "TR ULUSAL-UHD",
-   "logo": "",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 444,
-   "url": "https://tv-trtturk.medya.trt.com.tr/master_720.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:turkhaber",
-   "name": "TURKHABER",
-   "group": "HABER",
-   "logo": "https://i.ibb.co/ySv65wg/turk-haber.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok-master",
-   "latency_ms": 1039,
-   "url": "https://edge1.socialsmart.tv/turkhaber/bant1/playlist.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:tv4",
-   "name": "TV 4",
-   "group": "TR ULUSAL-UHD",
-   "logo": "https://i.ibb.co/pXncfpb/tv422.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok-master",
-   "latency_ms": 614,
-   "url": "https://turkmedya-live.ercdn.net/tv4/tv4.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:webbeinsports",
-   "name": "Web BeIN Sports+++",
-   "group": "SPOR KANALI",
-   "logo": "https://bit.ly/3f86zet",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 388,
-   "url": "https://andro.226503.xyz/checklist/androstreamlivebiraz1.m3u8",
-   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
-   "backups": []
-  },
-  {
-   "key": "raw:webyayininat",
-   "name": "Web YAYIN INAT",
-   "group": "WEB SPOR KANALI",
-   "logo": "https://i.hizliresim.com/bkxshkf.png",
-   "referrer": "https://trgoals1537.xyz",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 293,
-   "url": "https://andro.226503.xyz/checklist/androstreamlivebs1.m3u8",
-   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
-   "backups": []
-  },
-  {
-   "key": "raw:webyayinzirve",
-   "name": "Web YAYIN ZIRVE",
-   "group": "WEB SPOR KANALI",
-   "logo": "https://i.hizliresim.com/gji5o3h.jpg",
-   "referrer": "https://trgoals1537.xyz",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 195,
-   "url": "https://corestream.ardastream.live//beintv/tracks-v1a1/mono.m3u8",
-   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
-   "backups": []
-  },
-  {
-   "key": "raw:zaroktv",
-   "name": "Zarok TV",
-   "group": "TR: COCUK",
-   "logo": "https://upload.wikimedia.org/wikipedia/commons/e/ee/1_ZarokTVLogonet5.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok-master",
-   "latency_ms": 451,
-   "url": "https://zindikurmanci.zaroktv.com.tr/hls/stream.m3u8",
-   "user_agent": "",
-   "backups": []
   }
  ]
 }

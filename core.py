@@ -662,11 +662,22 @@ _NOISE = re.compile(
 )
 _SOURCE_PREFIX = re.compile(
     r"^\s*(xsp|trf|sl|andro|net|atom|mahsun|inadina|i̇nadina|pasizle|pa[sş]izle|"
-    r"kulis|kulisbet)\s*[-:]\s*",
+    r"kulis|kulisbet|selcuk|selcuks?spor|sporcafe|web|canli)\s*[-:|]\s*",
     re.I,
 )
+# "BILINMEYEN SITE - Kanal Adi" bicimindeki generik on ekler
+_GENERIC_PREFIX = re.compile(r"^\s*[a-z0-9çğıöşü._]{2,16}\s*[-:|]\s+", re.I)
 
 _TR_MAP = str.maketrans("çğıİöşüÇĞÖŞÜ", "cgiiosucgosu")
+
+
+def _fold(text: str) -> str:
+    """Eslestirme icin sade metin: Turkce karakterler indirilir + kucuk harf.
+
+    `_TR_MAP` birebir karakter esledigi icin indeksler korunur; Boylece
+    "INADINA - ..." gibi buyuk harfli/Turkce on ekler de guvenle atilir.
+    """
+    return (text or "").translate(_TR_MAP).lower()
 
 # Kanonik kanal adlari: (regex, gorunen ad, sira)
 _CANON: List[Tuple[re.Pattern, str, int]] = []
@@ -676,11 +687,13 @@ def _add_canon(pattern: str, display: str) -> None:
     _CANON.append((re.compile(pattern, re.I), display, len(_CANON)))
 
 
-for _i in range(1, 6):
-    _add_canon(rf"\bbein\s*(?:sports?)?\s*max\s*{_i}\b", f"beIN Sports Max {_i}")
+# SIRA = listede gosterilecek oncelik sirasi. beIN Sports en basta.
 for _i in range(1, 6):
     _add_canon(rf"\bbein\s*(?:sports?)?\s*{_i}\b", f"beIN Sports {_i}")
+for _i in range(1, 6):
+    _add_canon(rf"\bbein\s*(?:sports?)?\s*max\s*{_i}\b", f"beIN Sports Max {_i}")
 _add_canon(r"\bbein\s*(?:sports?)?\s*haber\b", "beIN Sports Haber")
+_add_canon(r"\bbein\s*(?:sports?)?\s*4k\b", "beIN Sports 4K")
 _add_canon(r"\bs\s*spor[t]?\s*(?:plus|\+)\b", "S Sport Plus")
 for _i in range(1, 4):
     _add_canon(rf"\bs\s*spor[t]?\s*{_i}\b", f"S Sport {_i}")
@@ -689,17 +702,22 @@ for _i in range(1, 5):
     _add_canon(rf"\btivibu\s*spor\s*{_i}\b", f"Tivibu Spor {_i}")
 _add_canon(r"\btivibu\b", "Tivibu Spor 1")
 for _i in range(1, 3):
-    _add_canon(rf"\bsmart\s*spor[t]?\s*{_i}\b", f"Smart Spor {_i}")
-_add_canon(r"\b(?:smart|akilli)\s*spor[t]?\b", "Smart Spor 1")
+    _add_canon(rf"\bsmart\s*spor[t]?s?\s*{_i}\b", f"Smart Spor {_i}")
+_add_canon(r"\b(?:smart|akilli)\s*spor[t]?s?\b", "Smart Spor 1")
+for _i in range(1, 3):
+    _add_canon(rf"\bsaran\s*sports?\s*{_i}\b", f"Saran Sports {_i}")
+_add_canon(r"\bsaran\s*sports?\b", "Saran Sports 1")
 for _i in range(1, 3):
     _add_canon(rf"\beuro\s*sport\s*{_i}\b", f"Eurosport {_i}")
 _add_canon(r"\beuro\s*sport\b", "Eurosport 1")
 for _i in range(1, 8):
     _add_canon(rf"\btabii\s*(?:spor)?\s*{_i}\b", f"Tabii Spor {_i}")
+_add_canon(r"\btabii\s*spor\b", "Tabii Spor")
 _add_canon(r"\btabii\b", "Tabii Spor")
 _add_canon(r"\btrt\s*spor\s*(?:yildiz|2)\b", "TRT Spor Yıldız")
 _add_canon(r"\btrt\s*spor\b", "TRT Spor")
 _add_canon(r"\btrt\s*1\b", "TRT 1")
+_add_canon(r"\ba\s*spor\s*2\b", "A Spor 2")
 _add_canon(r"\ba\s*spor\b", "A Spor")
 _add_canon(r"\batv\b", "ATV")
 _add_canon(r"\btv\s*8[.,]?5\b", "TV 8.5")
@@ -716,12 +734,20 @@ _add_canon(r"\bht\s*spor\b", "HT Spor")
 _add_canon(r"\bfb\s*tv\b", "FB TV")
 _add_canon(r"\bgs\s*tv\b", "GS TV")
 _add_canon(r"\bsports?\s*tv\b", "Sports TV")
-_add_canon(r"\ba2\b", "A2")
 
 
 def strip_source_prefix(raw: str) -> str:
-    """Sadece kaynak onekini ('NET - ', 'ATOM - ') ve 'TR:' etiketini atar."""
-    name = _SOURCE_PREFIX.sub("", raw or "")
+    """Sadece kaynak onekini ('NET - ', 'ATOM - ') ve 'TR:' etiketini atar.
+
+    Turkce buyuk harfli onekler ("İNADINA - ...") de atilir: karsilastirma
+    katlanmis (sadelestirilmis) metin uzerinden yapilir.
+    """
+    raw = raw or ""
+    folded = _fold(raw)
+    match = _SOURCE_PREFIX.match(folded)
+    if match:
+        raw = raw[match.end():]
+    name = _SOURCE_PREFIX.sub("", raw)
     name = name.replace("TR:", " ")
     return re.sub(r"\s+", " ", name).strip()
 
@@ -783,7 +809,8 @@ def parse_event(raw: str) -> Optional[Dict[str, str]]:
         return None
 
     home, away = parts[0].strip(" -:|"), parts[1].strip(" -:|")
-    if not home or not away or len(home) < 2 or len(away) < 2:
+    # "TR - KUKILI TV" gibi etiketler mac sanilmasin: en az 3 karakter gerekir.
+    if not home or not away or len(home) < 3 or len(away) < 3:
         return None
 
     # "beIN Sports 1" gibi kanal adlari maç degildir
@@ -808,6 +835,9 @@ def canonical_channel(raw: str) -> Optional[Tuple[str, str, int]]:
     Kanal adini bilinen bir TV kanalina eslestirir.
 
     Returns: (anahtar, gorunen_ad, sira) veya None (maç/etkinlik yayini ise).
+
+    Ilk denemede eslesme cikmazsa "SITE - Kanal" bicimindeki generik on ek
+    atilip tekrar denenir (panellerin yeni onekleri icin).
     """
     name = normalize_name(raw)
     if not name:
@@ -816,7 +846,129 @@ def canonical_channel(raw: str) -> Optional[Tuple[str, str, int]]:
         if pattern.search(name):
             key = re.sub(r"[^a-z0-9]", "", display.lower())
             return key, display, order
+
+    stripped = _GENERIC_PREFIX.sub("", name).strip()
+    if stripped and stripped != name:
+        for pattern, display, order in _CANON:
+            if pattern.search(stripped):
+                key = re.sub(r"[^a-z0-9]", "", display.lower())
+                return key, display, order
     return None
+
+
+# =============================================================================
+# KATEGORILER (temiz + oncelikli siralama)
+# =============================================================================
+#
+# Kaynak sitelerin kendi grup adlari ("NETSPOR", "TR ULUSAL-UHD", "ATOM SPOR")
+# listede kirlilik yaratıyordu. Gruplar artik kanala gore atanir ve sabit bir
+# oncelik sirasiyla yazilir: beIN Sports her zaman ilk kategori.
+
+CATEGORY_ORDER: Tuple[str, ...] = (
+    "BEIN SPORTS",
+    "S SPORT",
+    "TİVİBU SPOR",
+    "TRT SPOR",
+    "TABİİ SPOR",
+    "DİĞER SPOR KANALLARI",
+    "CANLI MAÇLAR",
+)
+
+CATEGORY_FALLBACK = "DİĞER SPOR KANALLARI"
+EVENT_CATEGORY = "CANLI MAÇLAR"
+
+_CATEGORY_RULES: Tuple[Tuple[str, re.Pattern], ...] = (
+    ("BEIN SPORTS", re.compile(r"\bbein\b", re.I)),
+    ("S SPORT", re.compile(r"\bs\s*sport\b|\bssport\b", re.I)),
+    ("TİVİBU SPOR", re.compile(r"\btivibu\b", re.I)),
+    ("TRT SPOR", re.compile(r"\btrt\b", re.I)),
+    ("TABİİ SPOR", re.compile(r"\btabii\b", re.I)),
+)
+
+
+def categorize(name: str, is_event: bool = False) -> str:
+    """Kanal adindan duzenli kategori adı uretir."""
+    if is_event:
+        return EVENT_CATEGORY
+    for label, pattern in _CATEGORY_RULES:
+        if pattern.search(name or ""):
+            return label
+    return CATEGORY_FALLBACK
+
+
+def category_rank(group: str) -> int:
+    """Kategorinin listedeki sirasi (bilinmeyen kategori en sona)."""
+    try:
+        return CATEGORY_ORDER.index(group)
+    except ValueError:
+        return len(CATEGORY_ORDER)
+
+
+# --- Spor disi icerik temizligi ----------------------------------------------
+# Topluluk listeleri cocuk/haber/ulusal kanallari da tasir; spor listesinde
+# kirililik yaratirlar. Grup adi VE kanal adi birlikte degerlendirilir.
+
+_NON_SPORT_GROUP = re.compile(
+    r"(cocuk|çocuk|haber|ulusal|belgesel|m[uü]zik|sinema|dizi|eglence|eğlence|"
+    r"kad[iı]n|yemek|dini|diyanet|k[uü]lt[uü]r|sanat|magazin|yerel|tarih|"
+    r"al[iı][sş]veri[sş]|otomobil|tv\s*kanallar|genel|news|kids|documentary|"
+    r"music|movie|entertainment|religious|shopping)",
+    re.I,
+)
+# Bu kelimelerden biri kanal adinda geciyorsa spor icerigidir -> korunur.
+_SPORTS_KEEP = re.compile(
+    r"(bein|s\s*sport|ssport|spor|sport|tivibu|trt\s*spor|tabii|euro\s*sport|smart|"
+    r"saran|nba|tjk|red\s*bull|idman|cbc|fb\s*tv|gs\s*tv|ht\s*spor|a\s*spor|"
+    r"f1|exxen|trt\s*1|tv\s*8)",
+    re.I,
+)
+# Hicbir ise yaramayan panel/gurultu kayitlari
+# Kaynak grubu "spor" gecse bile liste disi kalan ulusal/eglence kanallari
+_NON_SPORT_NAME = re.compile(
+    r"(kanal\s*d\b|show\s*tv\b|star\s*tv\b|fox\s*tv\b|now\s*tv\b|teve\s*2\b|"
+    r"360\s*tv\b|beyaz\s*tv\b|kanal\s*7\b|tv\s*4\b|tvnet\b|ulusal\s*kanal\b|"
+    r"euro\s*d\b|tv\s*100\b|dizi\b|sinema\b)",
+    re.I,
+)
+_JUNK_NAME = re.compile(
+    r"(\+\+\+|\byayin\s*(inat|zirve)\b|\btest\b|\bdeneme\b|\byedek\s*link\b|"
+    r"\bkanal\s*test\b)",
+    re.I,
+)
+
+
+def is_sports_content(name: str, group: str = "") -> bool:
+    """Liste spor listesi oldugu icin spor disi kanallari eler."""
+    name = name or ""
+    if _JUNK_NAME.search(name):
+        return False
+    if _NON_SPORT_NAME.search(name):
+        return False
+    if _NON_SPORT_GROUP.search(group or "") and not _SPORTS_KEEP.search(name):
+        return False
+    if _NON_SPORT_GROUP.search(name) and not _SPORTS_KEEP.search(name):
+        return False
+    return True
+
+
+def filter_publishable(streams: List[StreamInfo]) -> Tuple[List[StreamInfo], Dict[str, int]]:
+    """Spor disi + gurultu kayitlarini ayiklar, dusen sayilari dondurur."""
+    kept: List[StreamInfo] = []
+    dropped: Dict[str, int] = {}
+    for stream in streams:
+        # Kaynak onekini atip bakiyoruz ("NET - KANAL D UHD" -> "KANAL D UHD")
+        name = clean_title(stream.name) or stream.name
+        # Maç/etkinlik yayinlari her zaman spor icerigidir.
+        if str(stream.key or "").startswith("evt:") or is_event_stream(name):
+            kept.append(stream)
+        elif is_sports_content(name, stream.group):
+            kept.append(stream)
+        else:
+            reason = "spor-disi" if _NON_SPORT_GROUP.search(
+                f"{stream.name} {stream.group}"
+            ) else "gurultu"
+            dropped[reason] = dropped.get(reason, 0) + 1
+    return kept, dropped
 
 
 def is_event_stream(raw: str) -> bool:
@@ -841,14 +993,14 @@ def assign_keys(streams: List[StreamInfo]) -> List[StreamInfo]:
             key, display, _order = canon
             stream.key = key
             stream.name = display
+            stream.group = categorize(display)
             continue
 
         event = parse_event(stream.name)
         if event:
             stream.key = event_key(event)
             stream.name = event["title"]
-            if event["competition"]:
-                stream.group = event["competition"]
+            stream.group = categorize(stream.name, is_event=True)
             continue
 
         cleaned = clean_title(stream.name) or stream.name
@@ -856,6 +1008,7 @@ def assign_keys(streams: List[StreamInfo]) -> List[StreamInfo]:
             r"[^a-z0-9]", "", cleaned.translate(_TR_MAP).lower()
         )
         stream.name = cleaned
+        stream.group = categorize(stream.name)
     return streams
 
 
@@ -893,15 +1046,26 @@ def dedupe_and_rank(streams: List[StreamInfo]) -> List[StreamInfo]:
         merged.append(primary)
 
     def sort_key(stream: StreamInfo) -> Tuple:
+        # 1) Kategori sirasi (beIN Sports en basta, maçlar en sonda)
+        rank = category_rank(stream.group or "")
+        # 2) Kanalin kendi sirasi (beIN Sports 1..5 -> Max -> Haber ...)
         canon = canonical_channel(stream.name)
         if canon:
-            return (0, canon[2], stream.name.lower())
-        if stream.key.startswith("evt:"):
-            return (1, 0, stream.name.lower())
-        return (2, 0, stream.name.lower())
+            return (rank, 0, canon[2], stream.name.lower())
+        if str(stream.key or "").startswith("evt:"):
+            return (rank, 1, 0, _event_sort_key(stream.name))
+        return (rank, 2, 0, stream.name.lower())
 
     merged.sort(key=sort_key)
     return merged
+
+
+def _event_sort_key(name: str) -> str:
+    """Maçlari saate gore siralamak icin '19:45 Takim A - Takim B' -> '19:45 ...'."""
+    match = re.match(r"\s*(\d{1,2})[:.](\d{2})\s*(.*)", name or "")
+    if match:
+        return f"{int(match.group(1)):02d}:{match.group(2)} {match.group(3).lower()}"
+    return f"99:99 {(name or '').lower()}"
 
 
 # =============================================================================
@@ -970,9 +1134,17 @@ def _backup_dict(backup, fallback_referrer: str = "") -> Dict[str, str]:
 
 def build_json(streams: List[StreamInfo], generated_at: str) -> str:
     """Web oynatici icin zengin JSON (yedek linkler + header bilgisi dahil)."""
+    # Kategoriler oncelik sirasina gore (beIN Sports en basta)
+    categories: List[str] = []
+    for stream in streams:
+        if stream.group and stream.group not in categories:
+            categories.append(stream.group)
+    categories.sort(key=category_rank)
+
     payload = {
         "generated_at": generated_at,
         "user_agent": USER_AGENT,
+        "categories": categories,
         # Oynatici proxy'yi CALISMA ZAMANINDA uygular. Boylece proxy adresi
         # degistiginde listeyi yeniden uretmek gerekmez; ham adresler korunur.
         "proxy": Settings.PLAYER_PROXY,
