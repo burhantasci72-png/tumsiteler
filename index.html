@@ -1,0 +1,2313 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Canlı TV Kanalları - INADINA TV (Iframe + HLS + Sinema Modu)</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== TEMA DEĞİŞKENLERİ ===== */
+        :root {
+            --hue: 345;
+            --primary: hsl(var(--hue), 90%, 55%);
+            --primary-dark: hsl(var(--hue), 90%, 42%);
+            --primary-light: hsl(var(--hue), 90%, 68%);
+            --primary-gradient: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            --bg: #0d0a18;
+            --surface: #1a1625;
+            --surface2: #221e32;
+            --card-bg: rgba(28, 24, 45, 0.85);
+            --card-border: rgba(255, 60, 100, 0.15);
+            --card-border-hover: rgba(255, 60, 100, 0.5);
+            --text: #f0eef8;
+            --text2: #a89ec0;
+            --link-color: #4CAF50;
+            --telegram-color: #2AABEE;
+            --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            --card-shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.45);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --player-accent: hsl(var(--hue), 90%, 55%);
+        }
+
+        body.light-theme {
+            --bg: #f0f4f8;
+            --surface: #ffffff;
+            --surface2: #e4e9f0;
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --card-border: rgba(80, 100, 210, 0.15);
+            --card-border-hover: rgba(80, 100, 210, 0.5);
+            --text: #1e1a30;
+            --text2: #6b6890;
+            --primary: hsl(220, 75%, 52%);
+            --primary-dark: hsl(220, 75%, 40%);
+            --primary-light: hsl(220, 75%, 65%);
+            --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            --card-shadow-hover: 0 10px 28px rgba(0, 0, 0, 0.15);
+            --player-accent: hsl(220, 75%, 52%);
+        }
+
+        body.dark-theme {
+            --hue: 345;
+            --bg: #0d0a18;
+            --surface: #1a1625;
+            --surface2: #221e32;
+            --card-bg: rgba(28, 24, 45, 0.85);
+            --card-border: rgba(255, 60, 100, 0.15);
+            --card-border-hover: rgba(255, 60, 100, 0.5);
+            --text: #f0eef8;
+            --text2: #a89ec0;
+            --primary: hsl(var(--hue), 90%, 55%);
+            --primary-dark: hsl(var(--hue), 90%, 42%);
+            --primary-light: hsl(var(--hue), 90%, 68%);
+            --player-accent: hsl(var(--hue), 90%, 55%);
+        }
+
+        body.blue-theme {
+            --bg: #09111e;
+            --surface: #101c2e;
+            --surface2: #162437;
+            --card-bg: rgba(12, 24, 48, 0.88);
+            --card-border: rgba(56, 140, 255, 0.18);
+            --card-border-hover: rgba(56, 140, 255, 0.55);
+            --text: #deeeff;
+            --text2: #7aaac8;
+            --primary: hsl(210, 85%, 58%);
+            --primary-dark: hsl(210, 85%, 46%);
+            --primary-light: hsl(210, 85%, 70%);
+            --player-accent: hsl(210, 85%, 58%);
+        }
+
+        body.green-theme {
+            --bg: #081a10;
+            --surface: #0f2218;
+            --surface2: #162d20;
+            --card-bg: rgba(10, 30, 18, 0.88);
+            --card-border: rgba(56, 200, 110, 0.18);
+            --card-border-hover: rgba(56, 200, 110, 0.55);
+            --text: #d8f0e0;
+            --text2: #6aaa88;
+            --primary: hsl(145, 65%, 50%);
+            --primary-dark: hsl(145, 65%, 38%);
+            --primary-light: hsl(145, 65%, 62%);
+            --player-accent: hsl(145, 65%, 50%);
+        }
+
+        body.purple-theme {
+            --bg: #120a1e;
+            --surface: #1a1028;
+            --surface2: #221534;
+            --card-bg: rgba(22, 12, 40, 0.88);
+            --card-border: rgba(160, 80, 255, 0.18);
+            --card-border-hover: rgba(160, 80, 255, 0.55);
+            --text: #ecdff8;
+            --text2: #9a7abb;
+            --primary: hsl(270, 75%, 65%);
+            --primary-dark: hsl(270, 75%, 52%);
+            --primary-light: hsl(270, 75%, 76%);
+            --player-accent: hsl(270, 75%, 65%);
+        }
+
+        body.orange-theme {
+            --bg: #1c0f06;
+            --surface: #271606;
+            --surface2: #31200e;
+            --card-bg: rgba(40, 18, 4, 0.88);
+            --card-border: rgba(255, 145, 30, 0.18);
+            --card-border-hover: rgba(255, 145, 30, 0.55);
+            --text: #f8ead8;
+            --text2: #bda077;
+            --primary: hsl(32, 95%, 55%);
+            --primary-dark: hsl(32, 95%, 43%);
+            --primary-light: hsl(32, 95%, 66%);
+            --player-accent: hsl(32, 95%, 55%);
+        }
+
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body,
+        button,
+        input,
+        select,
+        textarea {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: background 0.4s ease, color 0.4s ease;
+            line-height: 1.5;
+        }
+
+        body.player-modal-open {
+            overflow: hidden;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--surface);
+            box-shadow: 0 1px 0 var(--card-border), 0 4px 16px rgba(0, 0, 0, 0.2);
+            transition: background 0.4s ease;
+            height: 56px;
+        }
+
+        .app-logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            flex-shrink: 0;
+            transition: 0.3s;
+        }
+
+        /* Arama Kutusu */
+        .search-bar-area {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+            background-color: var(--surface2);
+            border-radius: 25px;
+            border: 1px solid transparent;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            max-width: 40px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .search-icon-toggle {
+            font-size: 1.15rem;
+            padding: 8px !important;
+            color: var(--text2) !important;
+            background: none !important;
+            border: none !important;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search-icon-toggle:hover {
+            color: var(--primary) !important;
+            transform: scale(1.1) !important;
+        }
+
+        .search-input-container {
+            display: flex;
+            flex-grow: 1;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            min-width: 0;
+            transition: 0.3s;
+        }
+
+        .search-bar-area.search-active {
+            max-width: 500px;
+            flex-grow: 1;
+            padding-right: 5px;
+            border-color: var(--card-border-hover);
+            background: var(--surface);
+        }
+
+        .search-bar-area.search-active .search-input-container {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .search-bar-area.search-active:focus-within {
+            border-color: var(--primary);
+        }
+
+        #searchInput {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            padding: 8px 5px;
+            font-size: 0.9rem;
+            outline: none;
+            width: 100%;
+        }
+
+        #searchInput::placeholder {
+            color: var(--text2);
+        }
+
+        .clear-search-button {
+            font-size: 1rem;
+            color: var(--text2);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ctrl-btn {
+            background: none;
+            border: none;
+            color: var(--text2);
+            font-size: 1.15rem;
+            cursor: pointer;
+            padding: 7px;
+            border-radius: var(--radius-sm);
+            transition: color 0.2s, background 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .ctrl-btn:hover {
+            color: var(--primary);
+            background: rgba(255, 255, 255, 0.06);
+            transform: scale(1.08);
+        }
+
+        .ctrl-btn.telegram-btn:hover {
+            color: var(--telegram-color);
+        }
+
+        /* ===== GÜNÜN MAÇLARI BUTONU ===== */
+        .mac-takvimi-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #e30a17, #ff4d6d);
+            color: #fff !important;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            margin-right: 5px;
+            box-shadow: 0 4px 10px rgba(227, 10, 23, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse-match 2s infinite;
+        }
+
+        .mac-takvimi-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 15px rgba(227, 10, 23, 0.6);
+        }
+
+        @keyframes pulse-match {
+            0% {
+                box-shadow: 0 0 0 0 rgba(227, 10, 23, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 6px rgba(227, 10, 23, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(227, 10, 23, 0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .mac-takvimi-btn span {
+                display: none;
+            }
+
+            .mac-takvimi-btn {
+                padding: 8px 10px;
+                border-radius: 50%;
+            }
+        }
+
+        /* ===== DROPDOWN ===== */
+        .dropdown-wrap {
+            position: relative;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--surface);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 8px;
+            z-index: 1001;
+            min-width: 200px;
+            display: none;
+            box-shadow: var(--card-shadow);
+            animation: dropFade 0.18s ease-out;
+        }
+
+        .dropdown.show {
+            display: block;
+        }
+
+        @keyframes dropFade {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .drop-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 12px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text);
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            text-decoration: none;
+            transition: 0.15s;
+        }
+
+        .drop-item:hover {
+            background: rgba(255, 255, 255, 0.07);
+            color: var(--primary);
+            transform: translateX(2px);
+        }
+
+        .drop-item i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .drop-sep {
+            border: none;
+            border-top: 1px solid var(--card-border);
+            margin: 6px 0;
+        }
+
+        .theme-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ===== M3U CHIPS KATEGORİSİ ===== */
+        .m3u-categories-container {
+            position: fixed;
+            top: 56px;
+            left: 0;
+            width: 100%;
+            background: var(--surface);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            padding: 10px 15px;
+            overflow-x: auto;
+            white-space: nowrap;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .m3u-categories-scroll {
+            display: flex;
+            gap: 10px;
+        }
+
+        .m3u-category-chip {
+            background: var(--surface2);
+            border: 1px solid var(--card-border);
+            color: var(--text);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .m3u-category-chip:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .m3u-category-chip.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            padding-right: 30px;
+            position: relative;
+        }
+
+        .m3u-category-chip.active::after {
+            content: '✓';
+            position: absolute;
+            right: 10px;
+            font-size: 0.8rem;
+        }
+
+        .m3u-category-chip.tr-category {
+            border-left: 3px solid #E30A17;
+            padding-left: 12px;
+        }
+
+        /* ===== APP CONTAINER ===== */
+        .app-container {
+            padding: 120px 14px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== LAYOUT TOGGLE BAR ===== */
+        .section-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            border-left: 3px solid var(--primary);
+            padding-left: 10px;
+        }
+
+        .item-count {
+            font-size: 0.8em;
+            color: var(--text2);
+            font-weight: normal;
+        }
+
+        .layout-btns {
+            display: flex;
+            gap: 4px;
+        }
+
+        .lt-btn {
+            background: var(--surface2);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            padding: 5px 10px;
+            cursor: pointer;
+            color: var(--text2);
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .lt-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .lt-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        /* ===== CARD GRID ===== */
+        .card-grid {
+            display: grid;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .card-grid.layout-auto {
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        }
+
+        .card-grid.layout-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .card-grid.layout-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .card-grid.layout-list {
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        /* ===== KANAL KARTLARI ===== */
+        .cat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: var(--text);
+            cursor: pointer;
+            transition: transform 0.2s cubic-bezier(.25, .8, .25, 1), box-shadow 0.2s, border-color 0.2s;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            animation: showCard 0.5s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        @keyframes showCard {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cat-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 15%;
+            bottom: 15%;
+            width: 3px;
+            border-radius: 0 3px 3px 0;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: 0.2s;
+        }
+
+        .cat-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, var(--primary) 0%, transparent 55%);
+            opacity: 0;
+            transition: 0.2s;
+        }
+
+        .cat-card:hover {
+            border-color: var(--card-border-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--card-border-hover);
+        }
+
+        .cat-card:hover::before {
+            opacity: 1;
+            top: 10%;
+            bottom: 10%;
+        }
+
+        .cat-card:hover::after {
+            opacity: 0.05;
+        }
+
+        .card-img-wrap {
+            position: relative;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .cat-card:hover .card-img {
+            transform: scale(1.08);
+        }
+
+        .card-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.55rem;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 3px;
+            z-index: 2;
+            background: rgba(255, 50, 80, 0.85);
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .badge-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #fff;
+            animation: blink 1.4s infinite;
+        }
+
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.25;
+            }
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .card-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-sub {
+            font-size: 0.65rem;
+            color: var(--text2);
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .play-action-btn {
+            background: var(--primary-gradient);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .cat-card:hover .play-action-btn {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* GRID MODLARI */
+        .layout-auto .cat-card,
+        .layout-2 .cat-card,
+        .layout-3 .cat-card {
+            flex-direction: column;
+            padding: 10px;
+            gap: 8px;
+        }
+
+        .layout-auto .card-img-wrap,
+        .layout-2 .card-img-wrap,
+        .layout-3 .card-img-wrap {
+            width: 100%;
+            height: 90px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .layout-auto .play-action-btn,
+        .layout-2 .play-action-btn,
+        .layout-3 .play-action-btn {
+            display: none;
+        }
+
+        /* LİSTE MODU */
+        .layout-list .cat-card {
+            flex-direction: row;
+            align-items: center;
+            padding: 10px 14px;
+            gap: 12px;
+        }
+
+        .layout-list .card-img-wrap {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .layout-list .card-badge {
+            display: none;
+        }
+
+        /* ===== LOAD MORE ===== */
+        .load-more-container {
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .load-more-button {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: var(--surface2);
+            color: var(--text);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .load-more-button:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .loading-placeholder {
+            text-align: center;
+            padding: 40px;
+            color: var(--text2);
+        }
+
+        /* ===== PLAYER OPTIONS MODAL ===== */
+        .player-options-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .player-options-container {
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            width: 90%;
+            max-width: 430px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--card-border);
+            animation: dropFade 0.2s;
+        }
+
+        .player-options-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 10px;
+        }
+
+        .player-options-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            padding-right: 10px;
+            word-break: break-word;
+        }
+
+        .player-options-close {
+            background: none;
+            border: none;
+            color: var(--text2);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .player-options-close:hover {
+            color: var(--primary);
+        }
+
+        .player-option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: var(--radius-sm);
+            background: var(--surface2);
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .player-option:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary);
+            transform: translateX(3px);
+        }
+
+        .player-option i {
+            font-size: 1.2rem;
+            margin-right: 12px;
+            color: var(--primary);
+            width: 20px;
+            text-align: center;
+        }
+
+        .player-option-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .player-option-desc {
+            font-size: 0.75rem;
+            color: var(--text2);
+        }
+
+        /* ===== IFRAME PLAYER MODAL - 16:9 SİNEMA ===== */
+        .iframe-player-modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+        }
+
+        .iframe-player-modal.show {
+            display: flex;
+        }
+
+        .iframe-player-box {
+            width: min(100%, 1100px);
+            height: auto;
+            max-height: 92vh;
+            background: var(--surface);
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--card-shadow-hover);
+            animation: dropFade 0.22s ease-out;
+        }
+
+        .iframe-player-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 12px 14px;
+            background: var(--surface2);
+            border-bottom: 1px solid var(--card-border);
+            flex-shrink: 0;
+        }
+
+        .iframe-player-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
+        }
+
+        .iframe-player-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .iframe-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .iframe-btn:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .iframe-btn.close:hover {
+            color: #ff5f6d;
+            border-color: #ff5f6d;
+        }
+
+        .iframe-player-body {
+            position: relative;
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            overflow: hidden;
+        }
+
+        /* 16:9 sinema alanı */
+        .iframe-cinema {
+            position: relative;
+            width: min(100%, calc((92vh - 115px) * 16 / 9));
+            aspect-ratio: 16 / 9;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .iframe-cinema iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            background: #000;
+        }
+
+        .iframe-loading {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.86);
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            pointer-events: none;
+        }
+
+        .iframe-loading.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .iframe-loading i {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .iframe-loading span {
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+
+        .iframe-player-footer {
+            padding: 8px 12px;
+            background: var(--surface2);
+            border-top: 1px solid var(--card-border);
+            flex-shrink: 0;
+        }
+
+        .iframe-url {
+            display: block;
+            font-size: 0.72rem;
+            color: var(--text2);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Gerçek tam ekran */
+        .iframe-player-box:fullscreen,
+        .iframe-player-box:-webkit-full-screen {
+            width: 100vw;
+            height: 100vh;
+            max-width: none;
+            max-height: none;
+            border-radius: 0;
+        }
+
+        .iframe-player-box:fullscreen .iframe-cinema,
+        .iframe-player-box:-webkit-full-screen .iframe-cinema,
+        .iframe-player-box.fake-fullscreen .iframe-cinema {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: auto;
+            max-width: none;
+        }
+
+        /* Sahte tam ekran */
+        .iframe-player-box.fake-fullscreen {
+            position: fixed;
+            inset: 0;
+            z-index: 3200;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            max-width: none;
+            max-height: none;
+            border-radius: 0;
+        }
+
+        /* ===== NOTIFICATION ===== */
+        .notification {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%) translateY(120%);
+            background: var(--surface);
+            color: var(--text);
+            padding: 10px 16px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--card-shadow);
+            max-width: 320px;
+            width: 90%;
+            z-index: 4000;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            border: 1px solid var(--card-border);
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .notification i {
+            color: var(--primary);
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+
+        .notification-text {
+            flex: 1;
+            font-size: 0.83rem;
+            font-weight: 500;
+        }
+
+        .notification-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            border-radius: 0 0 0 var(--radius-md);
+            animation: notifProgress 3s linear forwards;
+        }
+
+        @keyframes notifProgress {
+            from {
+                width: 100%;
+            }
+
+            to {
+                width: 0%;
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .app-logo {
+                font-size: 1.3rem;
+            }
+
+            .top-bar {
+                padding: 8px 12px;
+            }
+
+            .app-container {
+                padding-top: 110px;
+            }
+
+            .m3u-categories-container {
+                top: 52px;
+                padding: 8px 10px;
+            }
+
+            .card-grid.layout-auto {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+
+            .search-bar-area.search-active {
+                max-width: 250px;
+            }
+
+            .layout-auto .card-img-wrap {
+                height: 75px;
+            }
+
+            .iframe-player-box {
+                max-height: 94vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app-container {
+                padding: 100px 8px 15px;
+            }
+
+            .m3u-categories-container {
+                top: 48px;
+                padding: 6px 8px;
+            }
+
+            .top-bar {
+                height: 48px;
+                padding: 6px 10px;
+            }
+
+            .app-logo {
+                font-size: 1.15rem;
+            }
+
+            .search-bar-area {
+                margin: 0 5px;
+                max-width: 35px;
+            }
+
+            .search-icon-toggle {
+                font-size: 1rem;
+                padding: 6px !important;
+            }
+
+            .card-grid.layout-auto {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+
+            .card-grid.layout-2 {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+
+            .card-grid.layout-3 {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 5px;
+            }
+
+            .card-grid.layout-list {
+                gap: 5px;
+            }
+
+            .layout-auto .cat-card,
+            .layout-3 .cat-card {
+                padding: 6px;
+                gap: 4px;
+            }
+
+            .layout-auto .card-img-wrap,
+            .layout-3 .card-img-wrap {
+                height: 60px;
+                border-radius: 6px;
+            }
+
+            .card-name {
+                font-size: 0.75rem;
+            }
+
+            .card-sub {
+                font-size: 0.6rem;
+            }
+
+            .iframe-player-modal {
+                padding: 8px;
+            }
+
+            .iframe-player-box {
+                max-height: 95vh;
+                border-radius: 14px;
+            }
+
+            .iframe-player-title {
+                font-size: 0.86rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark-theme">
+
+    <div class="top-bar" id="topBar">
+        <div class="app-logo">INADINA TV</div>
+
+        <div class="search-bar-area" id="searchBarArea">
+            <button id="searchIconToggle" class="search-icon-toggle" title="Aramayı Aç/Kapat">
+                <i class="fas fa-search"></i>
+            </button>
+            <div class="search-input-container" id="searchInputContainer">
+                <input type="search" id="searchInput" placeholder="Kanal ara..." title="İçeriklerde ara">
+                <button id="clearSearchBtn" class="clear-search-button" title="Aramayı Temizle" style="display:none;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="top-bar-right">
+            <a href="https://macuzet.vercel.app/" target="_blank" class="mac-takvimi-btn" title="Günün Maç Takvimi">
+                <i class="fas fa-calendar-check"></i> <span>Günün Maçları</span>
+            </a>
+
+            <a href="https://t.me/inadinatv" target="_blank" class="ctrl-btn telegram-btn" title="Telegram Kanalı">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+
+            <div class="dropdown-wrap">
+                <button class="ctrl-btn" id="apkBtn" title="APK İndir">
+                    <i class="fas fa-download"></i>
+                </button>
+                <div class="dropdown" id="apkDropdown">
+                    <a href="https://devuploads.com/3v8tm7vfj5ha" target="_blank" class="drop-item">
+                        <i class="fas fa-rocket" style="color:var(--primary)"></i> Wuffy Player İndir
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.brouken.player" target="_blank" class="drop-item">
+                        <i class="fas fa-film" style="color:var(--primary)"></i> Just Player İndir
+                    </a>
+                </div>
+            </div>
+
+            <div class="dropdown-wrap">
+                <button class="ctrl-btn" id="themeBtn" title="Tema Seçimi">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                <div class="dropdown" id="themeDropdown">
+                    <button class="drop-item" data-theme="light"><span class="theme-dot" style="background:#5080d4"></span> Açık Tema</button>
+                    <button class="drop-item" data-theme="dark"><span class="theme-dot" style="background:hsl(345,90%,55%)"></span> Koyu Tema</button>
+                    <hr class="drop-sep">
+                    <button class="drop-item" data-theme="blue"><span class="theme-dot" style="background:hsl(210,85%,58%)"></span> Mavi</button>
+                    <button class="drop-item" data-theme="green"><span class="theme-dot" style="background:hsl(145,65%,50%)"></span> Yeşil</button>
+                    <button class="drop-item" data-theme="purple"><span class="theme-dot" style="background:hsl(270,75%,65%)"></span> Mor</button>
+                    <button class="drop-item" data-theme="orange"><span class="theme-dot" style="background:hsl(32,95%,55%)"></span> Turuncu</button>
+                    <hr class="drop-sep">
+                    <button class="drop-item" data-theme="system"><i class="fas fa-display" style="color:var(--text2)"></i> Sistem Tercihi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="m3u-categories-container" id="m3uCategoriesContainer">
+        <div class="m3u-categories-scroll" id="m3uCategoriesScroll"></div>
+    </div>
+
+    <div class="app-container" id="appContainer">
+
+        <div class="section-bar">
+            <div class="category-title" id="mainCategoryTitle">Tüm Kanallar <span class="item-count">(0)</span></div>
+            <div class="layout-btns">
+                <button class="lt-btn active" id="lt-auto" data-layout="auto" title="Otomatik">⊞</button>
+                <button class="lt-btn" id="lt-2" data-layout="2" title="2 Sütun">▦</button>
+                <button class="lt-btn" id="lt-3" data-layout="3" title="3 Sütun">⊟</button>
+                <button class="lt-btn" id="lt-list" data-layout="list" title="Liste">☰</button>
+            </div>
+        </div>
+
+        <div class="card-grid layout-auto" id="channelsContainer">
+            <div class="loading-placeholder"><i class="fas fa-spinner fa-spin"></i> Kanal listesi yükleniyor...</div>
+        </div>
+
+        <div id="loadMoreContainer" class="load-more-container">
+            <button id="loadMoreBtn" class="load-more-button"><i class="fas fa-sync-alt"></i> Daha Fazla Yükle</button>
+        </div>
+    </div>
+
+    <!-- OYNATMA SEÇENEKLERİ -->
+    <div class="player-options-modal" id="playerOptionsModal">
+        <div class="player-options-container">
+            <div class="player-options-header">
+                <div class="player-options-title" id="playerOptionsTitle">Oynatma Seçenekleri</div>
+                <button class="player-options-close" id="playerOptionsClose"><i class="fas fa-times"></i></button>
+            </div>
+
+            <div class="player-option" id="playWithExoplayer" tabindex="0">
+                <i class="fas fa-external-link-square-alt"></i>
+                <div>
+                    <div class="player-option-title">Exoplayer'da Aç</div>
+                    <div class="player-option-desc">Harici oynatıcı / yönlendirme</div>
+                </div>
+            </div>
+
+            <div class="player-option" id="playInIframePlayer" tabindex="0">
+                <i class="fas fa-code"></i>
+                <div>
+                    <div class="player-option-title">Iframe Player'da Aç</div>
+                    <div class="player-option-desc" id="iframePlayerDesc">16:9 sinema iframe oynatıcı</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- IFRAME PLAYER -->
+    <div class="iframe-player-modal" id="iframePlayerModal" aria-hidden="true">
+        <div class="iframe-player-box" id="iframePlayerBox">
+            <div class="iframe-player-header">
+                <div class="iframe-player-title" id="iframePlayerTitle">Iframe Oynatıcı</div>
+
+                <div class="iframe-player-actions">
+                    <button class="iframe-btn" id="iframeFullscreenBtn" title="Tam Ekran">
+                        <i class="fas fa-expand"></i>
+                    </button>
+
+                    <button class="iframe-btn" id="iframeOpenNewBtn" title="Yeni Sekmede Aç">
+                        <i class="fas fa-external-link-alt"></i>
+                    </button>
+
+                    <button class="iframe-btn close" id="iframePlayerClose" title="Kapat">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="iframe-player-body" id="iframePlayerBody">
+                <div class="iframe-cinema" id="iframeCinema">
+                    <div class="iframe-loading" id="iframeLoading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <span>Iframe yükleniyor...</span>
+                    </div>
+
+                    <iframe
+                        id="iframePlayerFrame"
+                        title="Iframe Oynatıcı"
+                        allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                        allowfullscreen
+                        frameborder="0"
+                        referrerpolicy="no-referrer">
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="iframe-player-footer">
+                <span class="iframe-url" id="iframePlayerUrl"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-info-circle" id="notifIcon"></i>
+        <div class="notification-text" id="notifText">Bildirim</div>
+        <div class="notification-progress" id="notifProgress"></div>
+    </div>
+
+    <script>
+        /* ===== BİLDİRİM ===== */
+        let notifTimer = null;
+
+        function showNotification(msg, icon = 'info-circle', duration = 3000) {
+            const el = document.getElementById('notification');
+            const ico = document.getElementById('notifIcon');
+            const txt = document.getElementById('notifText');
+            const prg = document.getElementById('notifProgress');
+
+            if (!el) return;
+
+            el.classList.remove('show');
+            void el.offsetWidth;
+
+            ico.className = 'fas fa-' + icon;
+            txt.textContent = msg;
+
+            prg.style.animation = 'none';
+            void prg.offsetWidth;
+            prg.style.animation = `notifProgress ${duration / 1000}s linear forwards`;
+
+            el.classList.add('show');
+
+            if (notifTimer) clearTimeout(notifTimer);
+            notifTimer = setTimeout(() => el.classList.remove('show'), duration);
+        }
+
+        /* ===== DROPDOWNS ===== */
+        function closeAllDropdowns() {
+            document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
+        }
+
+        function toggleDropdown(id) {
+            const target = document.getElementById(id);
+            const wasOpen = target.classList.contains('show');
+            closeAllDropdowns();
+            if (!wasOpen) target.classList.add('show');
+        }
+
+        document.getElementById('themeBtn')?.addEventListener('click', e => {
+            e.stopPropagation();
+            toggleDropdown('themeDropdown');
+        });
+
+        document.getElementById('apkBtn')?.addEventListener('click', e => {
+            e.stopPropagation();
+            toggleDropdown('apkDropdown');
+        });
+
+        document.addEventListener('click', () => closeAllDropdowns());
+
+        /* ===== TEMA SİSTEMİ ===== */
+        const THEMES = {
+            dark: { cls: 'dark-theme', icon: 'fa-moon', label: 'Koyu Tema' },
+            light: { cls: 'light-theme', icon: 'fa-sun', label: 'Açık Tema' },
+            blue: { cls: 'blue-theme', icon: 'fa-droplet', label: 'Mavi Tema' },
+            green: { cls: 'green-theme', icon: 'fa-leaf', label: 'Yeşil Tema' },
+            purple: { cls: 'purple-theme', icon: 'fa-gem', label: 'Mor Tema' },
+            orange: { cls: 'orange-theme', icon: 'fa-fire', label: 'Turuncu Tema' },
+            system: { cls: null, icon: 'fa-display', label: 'Sistem Tercihi' },
+        };
+
+        function applyTheme(key) {
+            localStorage.setItem('inadina-theme', key);
+
+            const body = document.body;
+            const ico = document.getElementById('themeIcon');
+
+            Object.values(THEMES).forEach(t => {
+                if (t.cls) body.classList.remove(t.cls);
+            });
+
+            let effectiveKey = key;
+            if (key === 'system') {
+                effectiveKey = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            const t = THEMES[effectiveKey] || THEMES.dark;
+
+            if (t.cls) body.classList.add(t.cls);
+            if (ico) ico.className = 'fas ' + t.icon;
+
+            closeAllDropdowns();
+            showNotification(THEMES[key].label + ' uygulandı', t.icon.replace('fa-', ''));
+        }
+
+        function loadTheme() {
+            const saved = localStorage.getItem('inadina-theme') || 'dark';
+            applyTheme(saved);
+        }
+
+        document.querySelectorAll('[data-theme]').forEach(btn => {
+            btn.addEventListener('click', () => applyTheme(btn.dataset.theme));
+        });
+
+        /* ===== LAYOUT SİSTEMİ ===== */
+        const LAYOUTS = ['auto', '2', '3', 'list'];
+
+        function applyLayout(l) {
+            localStorage.setItem('inadina-layout', l);
+
+            const grid = document.getElementById('channelsContainer');
+            if (grid) grid.className = 'card-grid layout-' + l;
+
+            LAYOUTS.forEach(x => {
+                const b = document.getElementById('lt-' + x);
+                if (b) b.classList.toggle('active', x === l);
+            });
+        }
+
+        function loadLayout() {
+            const saved = localStorage.getItem('inadina-layout') || 'auto';
+            applyLayout(saved);
+        }
+
+        document.querySelectorAll('[data-layout]').forEach(btn => {
+            btn.addEventListener('click', () => applyLayout(btn.dataset.layout));
+        });
+
+        /* ===== ARAMA SİSTEMİ ===== */
+        const searchBarArea = document.getElementById('searchBarArea');
+        const searchIconToggle = document.getElementById('searchIconToggle');
+        const searchInput = document.getElementById('searchInput');
+        const clearSearchBtn = document.getElementById('clearSearchBtn');
+
+        let currentSearchTerm = '';
+        let searchInputTimer;
+
+        searchIconToggle?.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+            const isActive = searchBarArea.classList.contains('search-active');
+
+            if (isActive) {
+                searchBarArea.classList.remove('search-active');
+                searchIconToggle.innerHTML = '<i class="fas fa-search"></i>';
+
+                if (searchInput.value.trim() !== '') {
+                    searchInput.value = '';
+                    currentSearchTerm = '';
+                    clearSearchBtn.style.display = 'none';
+                    triggerFilter();
+                }
+            } else {
+                searchBarArea.classList.add('search-active');
+                searchIconToggle.innerHTML = '<i class="fas fa-arrow-left"></i>';
+                closeAllDropdowns();
+                searchInput.focus();
+            }
+        });
+
+        searchInput?.addEventListener('input', function () {
+            currentSearchTerm = this.value.trim().toLowerCase();
+            clearSearchBtn.style.display = currentSearchTerm ? 'flex' : 'none';
+
+            clearTimeout(searchInputTimer);
+            searchInputTimer = setTimeout(triggerFilter, 300);
+        });
+
+        clearSearchBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+            searchInput.value = '';
+            currentSearchTerm = '';
+            clearSearchBtn.style.display = 'none';
+
+            triggerFilter();
+            searchInput.focus();
+        });
+
+        /* ===== M3U VE KANAL SİSTEMİ ===== */
+        const m3uConfig = {
+            proxyUrl: "https://script.google.com/macros/s/AKfycbzv4yjrPMkMTcZsnMA8dpi9b5mn0ju9OLhtmyR-Xau3k3lhEtfHhWXzCRqz9bxdVB4sUQ/dev",
+            m3uFileUrl: "https://raw.githubusercontent.com/burhantasci72-png/tumsiteler/refs/heads/main/Canli_Spor_Hepsi.m3u"
+        };
+
+        let allChannels = [];
+        let displayedItemsCount = 0;
+        let currentFilteredList = [];
+
+        const initialItemsToShow = 60;
+        const itemsPerLoadMore = 60;
+        const fallbackLogo = 'https://i.hizliresim.com/91rbev6.png';
+        const LONG_PRESS_DELAY = 600;
+
+        function safeHttpUrl(url, fallback = null) {
+            if (!url) return fallback;
+
+            try {
+                const u = new URL(url, window.location.href);
+                if (u.protocol === 'http:' || u.protocol === 'https:') {
+                    return u.href;
+                }
+            } catch (e) {
+                return fallback;
+            }
+
+            return fallback;
+        }
+
+        function isHlsUrl(url) {
+            if (!url) return false;
+            return url.toLowerCase().includes('.m3u8');
+        }
+
+        function triggerFilter() {
+            const activeChip = document.querySelector('.m3u-category-chip.active');
+            filterChannelsByCategory(activeChip ? activeChip.dataset.category : 'all');
+        }
+
+        function parseM3U(m3uText) {
+            const lines = m3uText.split('\n');
+            const items = [];
+            let currentItem = null;
+            const categories = new Set();
+
+            lines.forEach(line => {
+                line = line.trim();
+
+                if (line.startsWith('#EXTINF:')) {
+                    currentItem = {};
+
+                    const titleMatch = line.match(/,(.+)$/);
+                    const logoMatch = line.match(/tvg-logo="([^"]+)"/);
+                    const groupMatch = line.match(/group-title="([^"]+)"/);
+
+                    currentItem.title = titleMatch ? titleMatch[1].trim() : 'İsimsiz Kanal';
+                    currentItem.image = logoMatch ? logoMatch[1].trim() : fallbackLogo;
+                    currentItem.group = groupMatch ? groupMatch[1].trim() : 'Genel';
+
+                    if (currentItem.group) categories.add(currentItem.group);
+                } else if (line && !line.startsWith('#') && currentItem) {
+                    currentItem.url = line;
+                    items.push(currentItem);
+                    currentItem = null;
+                }
+            });
+
+            return {
+                items,
+                categories: Array.from(categories).sort()
+            };
+        }
+
+        function renderM3UCategories(categories) {
+            const container = document.getElementById('m3uCategoriesScroll');
+            container.innerHTML = '';
+
+            const createChip = (text, type, extraClass = '') => {
+                const chip = document.createElement('div');
+                chip.className = `m3u-category-chip ${extraClass}`;
+                chip.textContent = text;
+                chip.dataset.category = type;
+
+                if (type === 'all') chip.classList.add('active');
+
+                chip.addEventListener('click', () => {
+                    document.querySelectorAll('.m3u-category-chip').forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+                    filterChannelsByCategory(type);
+                });
+
+                return chip;
+            };
+
+            container.appendChild(createChip('Tüm Kanallar', 'all'));
+            container.appendChild(createChip('TR Kanallar', 'tr', 'tr-category'));
+
+            categories.forEach(cat => {
+                const isTr = cat.toLowerCase().match(/türk|turkey|tr|turkiye/);
+                container.appendChild(createChip(cat, cat, isTr ? 'tr-category' : ''));
+            });
+        }
+
+        function filterChannelsByCategory(categoryName) {
+            let filtered = [];
+
+            if (categoryName === 'all') {
+                filtered = allChannels;
+            } else if (categoryName === 'tr') {
+                filtered = allChannels.filter(i => {
+                    const str = (i.title + ' ' + i.group).toLowerCase();
+                    return str.match(/tr|türk|turkey|turkiye/);
+                });
+            } else {
+                filtered = allChannels.filter(i => i.group === categoryName);
+            }
+
+            if (currentSearchTerm) {
+                filtered = filtered.filter(i => {
+                    return (i.title + ' ' + i.group).toLowerCase().includes(currentSearchTerm);
+                });
+            }
+
+            const titleEl = document.getElementById('mainCategoryTitle');
+            const tText = categoryName === 'all' ? 'Tüm Kanallar' : categoryName === 'tr' ? 'TR Kanallar' : categoryName;
+            titleEl.innerHTML = `${tText} <span class="item-count">(${filtered.length})</span>`;
+
+            renderChannelList(filtered, false);
+        }
+
+        function renderChannelList(items, isLoadMore = false) {
+            const container = document.getElementById('channelsContainer');
+
+            if (!isLoadMore) {
+                container.innerHTML = '';
+                displayedItemsCount = 0;
+                currentFilteredList = Array.isArray(items) ? items : [];
+            }
+
+            const batchSize = isLoadMore ? itemsPerLoadMore : initialItemsToShow;
+            const toShow = currentFilteredList.slice(displayedItemsCount, displayedItemsCount + batchSize);
+
+            if (toShow.length === 0 && !isLoadMore) {
+                container.innerHTML = `<div class="loading-placeholder">Kanal bulunamadı.</div>`;
+            } else {
+                toShow.forEach((item) => {
+                    const card = document.createElement('div');
+                    card.className = 'cat-card';
+                    card.tabIndex = 0;
+
+                    const imgWrap = document.createElement('div');
+                    imgWrap.className = 'card-img-wrap';
+
+                    const img = document.createElement('img');
+                    img.className = 'card-img';
+                    img.loading = 'lazy';
+
+                    const imgSrc = safeHttpUrl(item.image, fallbackLogo) || fallbackLogo;
+                    img.src = imgSrc;
+
+                    img.onerror = () => {
+                        img.onerror = null;
+                        img.src = fallbackLogo;
+                    };
+
+                    const badge = document.createElement('span');
+                    badge.className = 'card-badge';
+                    badge.innerHTML = '<span class="badge-dot"></span>CANLI';
+
+                    imgWrap.appendChild(img);
+                    imgWrap.appendChild(badge);
+
+                    const body = document.createElement('div');
+                    body.className = 'card-body';
+
+                    const name = document.createElement('div');
+                    name.className = 'card-name';
+                    name.textContent = item.title || 'İsimsiz Kanal';
+
+                    const sub = document.createElement('div');
+                    sub.className = 'card-sub';
+                    sub.textContent = item.group || 'Genel';
+
+                    body.appendChild(name);
+                    body.appendChild(sub);
+
+                    const playBtn = document.createElement('button');
+                    playBtn.className = 'play-action-btn';
+                    playBtn.type = 'button';
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+
+                    card.appendChild(imgWrap);
+                    card.appendChild(body);
+                    card.appendChild(playBtn);
+
+                    // Normal tık: seçenekler penceresi
+                    card.addEventListener('click', () => {
+                        if (card.dataset.longPressTriggered === '1') {
+                            card.dataset.longPressTriggered = '';
+                            return;
+                        }
+                        showPlayerOptions(item.url, item.title);
+                    });
+
+                    card.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            showPlayerOptions(item.url, item.title);
+                        }
+                    });
+
+                    // Uzun bas: doğrudan iframe player
+                    attachLongPress(card, () => {
+                        openIframePlayer(item.url, item.title, true);
+                    });
+
+                    container.appendChild(card);
+                });
+            }
+
+            displayedItemsCount += toShow.length;
+
+            document.getElementById('loadMoreContainer').style.display =
+                displayedItemsCount < currentFilteredList.length ? 'block' : 'none';
+        }
+
+        async function initM3U() {
+            try {
+                const res = await fetch(`${m3uConfig.proxyUrl}?url=${encodeURIComponent(m3uConfig.m3uFileUrl)}`);
+                const text = await res.text();
+
+                const { items, categories } = parseM3U(text);
+
+                allChannels = items;
+
+                renderM3UCategories(categories);
+                filterChannelsByCategory('all');
+
+                showNotification(`${items.length} kanal yüklendi`, 'tv');
+            } catch (e) {
+                document.getElementById('channelsContainer').innerHTML = `
+                    <div class="loading-placeholder">
+                        Hata: Kanal listesi yüklenemedi.
+                    </div>
+                `;
+            }
+        }
+
+        document.getElementById('loadMoreBtn')?.addEventListener('click', () => {
+            renderChannelList(null, true);
+        });
+
+        /* ===== UZUN BASMA ===== */
+        function attachLongPress(element, callback, delay = LONG_PRESS_DELAY) {
+            let timer = null;
+            let startX = 0;
+            let startY = 0;
+            let triggered = false;
+
+            const clearTimer = () => {
+                if (timer) {
+                    clearTimeout(timer);
+                    timer = null;
+                }
+            };
+
+            element.addEventListener('pointerdown', (e) => {
+                if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+                triggered = false;
+                delete element.dataset.longPressTriggered;
+
+                startX = e.clientX;
+                startY = e.clientY;
+
+                clearTimer();
+
+                timer = setTimeout(() => {
+                    triggered = true;
+                    element.dataset.longPressTriggered = '1';
+
+                    if (navigator.vibrate) navigator.vibrate(20);
+
+                    callback();
+                }, delay);
+            });
+
+            element.addEventListener('pointerup', clearTimer);
+            element.addEventListener('pointercancel', clearTimer);
+            element.addEventListener('pointerleave', clearTimer);
+
+            element.addEventListener('pointermove', (e) => {
+                if (!timer) return;
+
+                const dx = Math.abs(e.clientX - startX);
+                const dy = Math.abs(e.clientY - startY);
+
+                if (dx > 12 || dy > 12) {
+                    clearTimer();
+                }
+            });
+
+            element.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+            });
+        }
+
+        /* ===== OYNATMA SEÇENEKLERİ ===== */
+        let currentUrl = '';
+        let currentName = '';
+
+        const pModal = document.getElementById('playerOptionsModal');
+        const iframeModal = document.getElementById('iframePlayerModal');
+        const iframeBox = document.getElementById('iframePlayerBox');
+        const iframeFrame = document.getElementById('iframePlayerFrame');
+        const iframeLoading = document.getElementById('iframeLoading');
+
+        let iframeLoadTimer = null;
+        let iframeHideTimer = null;
+
+        function showPlayerOptions(url, name) {
+            currentUrl = safeHttpUrl(url, '') || '';
+            currentName = name || 'Kanal';
+
+            document.getElementById('playerOptionsTitle').textContent = currentName;
+
+            const iframeDesc = document.getElementById('iframePlayerDesc');
+            if (iframeDesc) {
+                iframeDesc.textContent = isHlsUrl(currentUrl)
+                    ? '16:9 sinema + HLS (.m3u8) iframe oynatıcı'
+                    : '16:9 sinema iframe oynatıcı';
+            }
+
+            pModal.style.display = 'flex';
+            document.body.classList.add('player-modal-open');
+
+            if (!currentUrl) {
+                showNotification('Geçerli bir HTTP/HTTPS yayın linki bulunamadı!', 'exclamation-circle');
+            }
+        }
+
+        function closePlayerOptions() {
+            pModal.style.display = 'none';
+
+            if (!iframeModal.classList.contains('show')) {
+                document.body.classList.remove('player-modal-open');
+            }
+        }
+
+        document.getElementById('playerOptionsClose')?.addEventListener('click', closePlayerOptions);
+
+        pModal?.addEventListener('click', e => {
+            if (e.target === pModal) closePlayerOptions();
+        });
+
+        /* Exoplayer / harici yönlendirme */
+        document.getElementById('playWithExoplayer')?.addEventListener('click', () => {
+            if (!currentUrl) {
+                showNotification('Geçerli bir yayın linki bulunamadı!', 'exclamation-circle');
+                return;
+            }
+
+            showNotification('Harici oynatıcı yönlendirmesi açılıyor...', 'external-link-square-alt');
+
+            closePlayerOptions();
+
+            window.location.href = currentUrl;
+        });
+
+        /* Iframe Player */
+        document.getElementById('playInIframePlayer')?.addEventListener('click', () => {
+            if (!currentUrl) {
+                showNotification('Geçerli bir yayın linki bulunamadı!', 'exclamation-circle');
+                return;
+            }
+
+            closePlayerOptions();
+            openIframePlayer(currentUrl, currentName, true);
+        });
+
+        /* ===== HLS IFRAME SRCDOC ===== */
+        function buildHlsSrcdoc(url) {
+            const jsonUrl = JSON.stringify(url).replace(/</g, '\\u003c');
+
+            return `<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+        }
+
+        #status {
+            position: fixed;
+            inset: 0;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.82);
+            pointer-events: none;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            text-align: center;
+            padding: 16px;
+        }
+
+        .spin {
+            width: 36px;
+            height: 36px;
+            border: 3px solid rgba(255, 255, 255, 0.18);
+            border-top-color: #ff3c64;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    <\/style>
+</head>
+<body>
+    <video id="video" controls playsinline muted autoplay><\/video>
+    <div id="status">
+        <div class="spin"><\/div>
+        <span>HLS yayını yükleniyor...<\/span>
+    <\/div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.8/dist/hls.min.js"><\/script>
+    <script>
+        const url = ${jsonUrl};
+        const video = document.getElementById('video');
+        const status = document.getElementById('status');
+
+        function showStatus(html) {
+            if (!status) return;
+            status.style.display = 'flex';
+            status.innerHTML = html;
+        }
+
+        function hideStatus() {
+            if (status) status.style.display = 'none';
+        }
+
+        function showError(message) {
+            showStatus('<div style="font-size:24px;">⚠️<\/div><span>' + message + '<\/span>');
+        }
+
+        video.addEventListener('playing', hideStatus);
+
+        video.addEventListener('waiting', () => {
+            showStatus('<div class="spin"><\/div><span>Arabelleğe alınıyor...<\/span>');
+        });
+
+        video.addEventListener('error', () => {
+            showError('Video oynatılamadı.');
+        });
+
+        if (window.Hls && Hls.isSupported()) {
+            const hls = new Hls({
+                enableWorker: true,
+                lowLatencyMode: true,
+                backBufferLength: 90
+            });
+
+            hls.loadSource(url);
+            hls.attachMedia(video);
+
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                video.play().catch(() => {});
+            });
+
+            hls.on(Hls.Events.ERROR, (event, data) => {
+                if (data && data.fatal) {
+                    showError('Yayın hatası oluştu.');
+                    hls.destroy();
+                }
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = url;
+            video.play().catch(() => {});
+        } else {
+            showError('Bu cihaz HLS oynatmayı desteklemiyor.');
+        }
+    <\/script>
+</body>
+</html>`;
+        }
+
+        /* ===== IFRAME PLAYER AÇMA ===== */
+        function openIframePlayer(url, name, autoFullscreen = true) {
+            const safeUrl = safeHttpUrl(url);
+
+            if (!safeUrl) {
+                showNotification('Iframe oynatıcı için geçerli bir HTTP/HTTPS link yok.', 'exclamation-circle');
+                return;
+            }
+
+            currentUrl = safeUrl;
+            currentName = name || 'Iframe Oynatıcı';
+
+            document.getElementById('iframePlayerTitle').textContent = currentName;
+            document.getElementById('iframePlayerUrl').textContent = safeUrl;
+
+            iframeModal.classList.add('show');
+            iframeModal.setAttribute('aria-hidden', 'false');
+
+            document.body.classList.add('player-modal-open');
+
+            iframeLoading.classList.remove('hidden');
+
+            const hlsMode = isHlsUrl(safeUrl);
+            const loadingText = iframeLoading.querySelector('span');
+            if (loadingText) {
+                loadingText.textContent = hlsMode ? 'HLS yayını hazırlanıyor...' : 'Iframe yükleniyor...';
+            }
+
+            clearTimeout(iframeLoadTimer);
+            clearTimeout(iframeHideTimer);
+
+            iframeFrame.onload = null;
+            iframeFrame.removeAttribute('srcdoc');
+            iframeFrame.removeAttribute('src');
+            iframeFrame.src = 'about:blank';
+
+            iframeLoadTimer = setTimeout(() => {
+                iframeFrame.onload = () => {
+                    clearTimeout(iframeHideTimer);
+                    iframeLoading.classList.add('hidden');
+                };
+
+                if (hlsMode) {
+                    iframeFrame.srcdoc = buildHlsSrcdoc(safeUrl);
+                    showNotification('HLS iframe oynatıcı açıldı', 'film');
+                } else {
+                    iframeFrame.src = safeUrl;
+                    showNotification('Iframe oynatıcı açıldı', 'code');
+                }
+
+                iframeHideTimer = setTimeout(() => {
+                    iframeLoading.classList.add('hidden');
+                }, 8000);
+            }, 60);
+
+            if (autoFullscreen) {
+                requestIframeFullscreen();
+            }
+        }
+
+        function closeIframePlayer() {
+            iframeModal.classList.remove('show');
+            iframeModal.setAttribute('aria-hidden', 'true');
+
+            clearTimeout(iframeLoadTimer);
+            clearTimeout(iframeHideTimer);
+
+            iframeFrame.onload = null;
+            iframeFrame.removeAttribute('srcdoc');
+            iframeFrame.removeAttribute('src');
+            iframeFrame.src = 'about:blank';
+
+            iframeBox.classList.remove('fake-fullscreen');
+
+            exitNativeFullscreen();
+
+            if (pModal.style.display !== 'flex') {
+                document.body.classList.remove('player-modal-open');
+            }
+        }
+
+        document.getElementById('iframePlayerClose')?.addEventListener('click', closeIframePlayer);
+
+        iframeModal?.addEventListener('click', e => {
+            if (e.target === iframeModal) closeIframePlayer();
+        });
+
+        document.getElementById('iframeFullscreenBtn')?.addEventListener('click', () => {
+            toggleIframeFullscreen();
+        });
+
+        document.getElementById('iframeOpenNewBtn')?.addEventListener('click', () => {
+            const safeUrl = safeHttpUrl(currentUrl);
+
+            if (safeUrl) {
+                window.open(safeUrl, '_blank', 'noopener');
+            } else {
+                showNotification('Geçerli bir link bulunamadı.', 'exclamation-circle');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (iframeModal.classList.contains('show')) {
+                    closeIframePlayer();
+                } else if (pModal.style.display === 'flex') {
+                    closePlayerOptions();
+                }
+            }
+        });
+
+        /* ===== TAM EKRAN SİSTEMİ ===== */
+        function isNativeFullscreen() {
+            return !!(document.fullscreenElement || document.webkitFullscreenElement);
+        }
+
+        function enableFakeFullscreen() {
+            iframeBox.classList.add('fake-fullscreen');
+        }
+
+        function exitNativeFullscreen() {
+            try {
+                if (document.fullscreenElement || document.webkitFullscreenElement) {
+                    if (document.exitFullscreen) {
+                        const p = document.exitFullscreen();
+                        if (p && p.catch) p.catch(() => {});
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    }
+                }
+            } catch (e) {}
+        }
+
+        function requestIframeFullscreen() {
+            if (isNativeFullscreen() || iframeBox.classList.contains('fake-fullscreen')) return;
+
+            let requested = false;
+
+            try {
+                if (iframeBox.requestFullscreen) {
+                    const p = iframeBox.requestFullscreen();
+                    requested = true;
+
+                    if (p && p.catch) {
+                        p.catch(() => {
+                            enableFakeFullscreen();
+                        });
+                    }
+                } else if (iframeBox.webkitRequestFullscreen) {
+                    iframeBox.webkitRequestFullscreen();
+                    requested = true;
+
+                    setTimeout(() => {
+                        if (!isNativeFullscreen()) {
+                            enableFakeFullscreen();
+                        }
+                    }, 350);
+                }
+            } catch (e) {
+                enableFakeFullscreen();
+                return;
+            }
+
+            if (!requested) {
+                enableFakeFullscreen();
+            }
+        }
+
+        function toggleIframeFullscreen() {
+            if (isNativeFullscreen()) {
+                exitNativeFullscreen();
+                return;
+            }
+
+            if (iframeBox.classList.contains('fake-fullscreen')) {
+                iframeBox.classList.remove('fake-fullscreen');
+                return;
+            }
+
+            requestIframeFullscreen();
+        }
+
+        document.addEventListener('fullscreenchange', () => {
+            if (isNativeFullscreen()) {
+                iframeBox.classList.remove('fake-fullscreen');
+            }
+        });
+
+        /* ===== INIT ===== */
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTheme();
+            loadLayout();
+            initM3U();
+        });
+    </script>
+</body>
+</html>
