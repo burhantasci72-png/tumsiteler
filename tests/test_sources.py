@@ -216,10 +216,22 @@ https://andro.seedhost.example/checklist/androstreamlivebsm2.m3u8
         streams = sources.fetch_seeds()
         self.assertEqual(len(streams), 2)
         first = streams[0]
-        self.assertEqual(first.source, "seeds")
         self.assertEqual(first.group, "ATOM SPOR")
         self.assertEqual(first.referrer, "https://atomsportv501.top")
         self.assertIn("workers.dev/?ID=bein-sports-1", first.url)
+        # Atom grubundaki tohumlar "atom" kaynagiyla etiketlenir
+        self.assertEqual(first.source, "atom")
+
+    def test_seed_source_labels(self):
+        self.assertEqual(
+            sources._seed_source({"attr_group-title": "ATOM SPOR"}), "atom"
+        )
+        self.assertEqual(
+            sources._seed_source({"attr_group-title": "SELÇUKSPOR"}), "selcukspor"
+        )
+        self.assertEqual(
+            sources._seed_source({"attr_group-title": "NETSPOR"}), "seeds"
+        )
 
     def test_missing_file_is_harmless(self):
         sources.SEEDS_FILE = os.path.join(tempfile.mkdtemp(), "yok.m3u")
