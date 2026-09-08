@@ -107,6 +107,36 @@ jobs:
         if: steps.build.outputs.status != '0'
         run: |
           echo "::error::Liste uretilemedi; mevcut dosyalar korundu."
-          echo "::error::Kaynaklara Actions'tan erisilemedi. Ayrinti icin 'Listeyi olustur' adiminin ciktisina bakin."
-          # Onceki davranis is akisini 'success' gosteriyordu; bozulma fark edilmiyordu.
+          # Aile bazli taniyi ek aciklamalarla raporla (run view'dan okunur)
+          python - <<'EOF'
+          import json
+          try:
+              rapor = json.load(open("health_report.json", encoding="utf-8"))
+          except Exception:
+              rapor = {}
+          aileler = rapor.get("families") or {}
+          for aile, durum in sorted(aileler.items()):
+              print(f"::error::KAYNAK[{aile}] = {durum}")
+          if not aileler:
+              print("::error::Hicbir aile durumu yazilamadi (ag tamamen kapali olabilir).")
+          nedenler = rapor.get("failure_reasons") or {}
+          for neden, adet in list(sorted(nedenler.items(), key=lambda kv: -kv[1]))[:5]:
+              print(f"::error::DOGRULAMA[{neden}] = {adet} yayin")
+          EOF
           exit 1
+
+      - name: Ag tanilama (ozet)
+        if: steps.build.outputs.status != '0'
+        run: |
+          {
+            echo "### Ag tanilama"
+            echo '```'
+            echo "Cikis IP: $(curl -4 -s --max-time 10 https://api.ipify.org || echo alinamadi)"
+            for h in mahsunsports.xyz patronmutlusonistiyor.com taraftariumizle.org; do
+              KOD=$(curl -4 -s -o /dev/null -w '%{http_code}' --max-time 12 \
+                    -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
+                    "https://$h/" || echo hata)
+              echo "$h -> HTTP $KOD"
+            done
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
