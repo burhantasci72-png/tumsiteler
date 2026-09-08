@@ -83,13 +83,50 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Action"
-          git add Canli_Spor_Hepsi.m3u channels.json health_report.json
+          # NOT: health_report.json .gitignore'da oldugu icin eklenMEZ;
+          # git add'in tamamini kirdigi icin liste uzun sure commit edilemedi.
+          if ! git add Canli_Spor_Hepsi.m3u channels.json 2>/tmp/add.err; then
+            echo "::error::git add basarisiz: $(tail -2 /tmp/add.err)"
+            exit 1
+          fi
           if git diff --staged --quiet; then
             echo "Degisiklik yok."
             exit 0
           fi
-          git commit -m "Liste guncellendi: $(date -u '+%Y-%m-%d %H:%M UTC')"
-          git push
+          git commit -m "Liste guncellendi: $(date -u '+%Y-%m-%d %H:%M UTC')" \
+            || { echo "::error::git commit basarisiz"; exit 1; }
+          # Paralel kosulara karsi rebase et, sonra retry'li push
+          git pull --rebase origin main 2>/tmp/rebase.err \
+            || { echo "::error::rebase basarisiz: $(tail -2 /tmp/rebase.err)"; exit 1; }
+          for i in 1 2 3; do
+            if git push origin main 2>/tmp/push.err; then
+              echo "Push tamam."
+              exit 0
+            fi
+            echo "::warning::Push deneme $i basarisiz: $(tail -2 /tmp/push.err)"
+            sleep 6
+          done
+          echo "::error::Push 3 denemede basarisiz: $(tail -3 /tmp/push.err)"
+          exit 1
+
+      - name: Ozet bildirimi
+        if: steps.build.outputs.status == '0'
+        run: |
+          python - <<'PYEOF2'
+          import json
+          try:
+              data = json.load(open("channels.json", encoding="utf-8-sig"))
+          except Exception as exc:
+              print(f"::error::channels.json okunamadi: {exc}")
+              raise SystemExit(1)
+          groups = {}
+          for ch in data.get("channels", []):
+              g = ch.get("group") or "?"
+              groups[g] = groups.get(g, 0) + 1
+          ozet = ", ".join(f"{g}: {n}" for g, n in sorted(groups.items()))
+          print(f"::notice::KANALLAR toplam={data.get('count')} "
+                f"dogrulanmis={data.get('verified')} | {ozet}")
+          PYEOF2
 
       - name: Saglik ozeti
         if: always()
