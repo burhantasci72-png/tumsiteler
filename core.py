@@ -560,43 +560,89 @@ def validate_stream(stream: StreamInfo) -> StreamInfo:
     # gercekten HLS icerigi donenler kabul edilir.
     started = time.time()
     extra = {"User-Agent": stream.user_agent} if stream.user_agent else None
-    response = http_get(
-        url,
-        referrer=stream.referrer or None,
-        timeout=(Settings.CONNECT_TIMEOUT, Settings.VALIDATE_TIMEOUT),
-        stream=True,
-        extra_headers=extra,
-    )
-    if response is None:
-        stream.status = "network-error"
-        return stream
-
+    # Manifest icin de Referer denemeleri (Selcukspor 403): bazi CDN/paneller
+    # manifesti yalnizca belirli bir Referer ile (ya da Referer OLMADAN) veriyor.
+    # Daha once yalnizca segment icin denenen coklu Referer mantigi manifesta
+    # da uygulaniyor; aksi halde manifest 403 alip liste bos kaliyordu.
     try:
-        if response.status_code != 200:
-            stream.status = f"http-{response.status_code}"
-            return stream
-
+        _parsed_u = urllib.parse.urlparse(url)
+        _url_origin = f"{_parsed_u.scheme}://{_parsed_u.netloc}/" if _parsed_u.scheme and _parsed_u.netloc else ""
+    except Exception:
+        _url_origin = ""
+    _referrer_variants: List[str] = []
+    for _cand in (stream.referrer or "", "", _url_origin):
+        if _cand not in _referrer_variants:
+            _referrer_variants.append(_cand)
+    _last_manifest_status = "network-error"
+    response = None
+    body: Optional[bytes] = None
+    base_url = url
+    text = ""
+    lines: List[str] = []
+    _successful_referrer: Optional[str] = None
+    for _ref_try in _referrer_variants:
+        _try_resp = http_get(
+            url,
+            referrer=_ref_try or None,
+            timeout=(Settings.CONNECT_TIMEOUT, Settings.VALIDATE_TIMEOUT),
+            stream=True,
+            extra_headers=extra,
+        )
+        if _try_resp is None:
+            _last_manifest_status = "network-error"
+            continue
+        _is_success = False
+        _candidate_body: Optional[bytes] = None
+        _candidate_status: Optional[str] = None
         try:
-            body = read_chunk(response, 65536)
-        except Exception:
-            stream.status = "read-error"
-            return stream
-
-        if not _looks_like_playlist(body):
-            stream.status = "not-hls" if is_direct else "not-a-stream"
-            return stream
-
-        # Yonlendirme sonrasi gercek adres: varyant/segment birlestirmede
-        # BU kullanilmali (cozucu adresine gore birlestirmek 404 uretir).
-        base_url = getattr(response, "url", None) or url
-        if not str(base_url).lower().startswith(("http://", "https://")):
-            base_url = url
-
-        stream.latency_ms = int((time.time() - started) * 1000)
+            if _try_resp.status_code != 200:
+                _candidate_status = f"http-{_try_resp.status_code}"
+            else:
+                try:
+                    _candidate_body = read_chunk(_try_resp, 65536)
+                except Exception:
+                    _candidate_status = "read-error"
+                    _candidate_body = None
+                else:
+                    if not _looks_like_playlist(_candidate_body):
+                        _candidate_status = "not-hls" if is_direct else "not-a-stream"
+                    else:
+                        _is_success = True
+        finally:
+            if not _is_success:
+                if _candidate_status:
+                    _last_manifest_status = _candidate_status
+                try:
+                    _try_resp.close()
+                except Exception:
+                    pass
+                continue
+        # Basarili manifest
+        body = _candidate_body
+        assert body is not None
+        candidate_base = getattr(_try_resp, "url", None) or url
+        if not str(candidate_base).lower().startswith(("http://", "https://")):
+            candidate_base = url
+        base_url = candidate_base
         text = body.decode("utf-8", "ignore")
         lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
-    finally:
-        response.close()
+        _successful_referrer = _ref_try
+        _last_manifest_status = "ok"
+        # Manifest basarili -> referrer varyanti kapatmadan once response'u kapat
+        # (govde zaten okundu, yonlendirme adresi alindi)
+        try:
+            _try_resp.close()
+        except Exception:
+            pass
+        response = _try_resp  # sadece isaret icin sakla, artik kapali
+        break
+    if body is None:
+        stream.status = _last_manifest_status
+        return stream
+    if _successful_referrer is not None and _successful_referrer != (stream.referrer or ""):
+        stream.referrer = _successful_referrer
+    stream.latency_ms = int((time.time() - started) * 1000)
+    # response zaten kapali; acik birakmaya gerek yok
 
     # Master playlist -> ilk varyanti dogrula
     if "#EXT-X-STREAM-INF" in text:

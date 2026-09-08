@@ -96,6 +96,23 @@ class TestValidation(unittest.TestCase):
         # Calisan varyant kaynak olarak kullanilir
         self.assertEqual(result.referrer, "")
 
+    def test_manifest_referrer_fallback(self):
+        """Manifest 403 veriyorsa Referer denemeleri yapilmali (Selcukspor).
+
+        Panel Referer'i ile manifest 403 aliniyor ama Referer bosken 200
+        donuyorsa, dogrulama Referer'siz varyanti deneyip yayini kurtarmali.
+        """
+        stream = StreamInfo(
+            name="t",
+            url=f"{self.base}/manifest-noref.m3u8",
+            group="G",
+            referrer="https://panel.example/",
+        )
+        result = core.validate_stream(stream)
+        self.assertTrue(result.verified, result.status)
+        self.assertEqual(result.status, "ok")
+        self.assertEqual(result.referrer, "")
+
     def test_page_url_is_not_a_stream(self):
         """Sayfa linkleri yayin sayilmaz (eski surumun ana hatasi)."""
         result = self.check("/page.html")
