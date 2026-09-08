@@ -1,36 +1,108 @@
-name: Super Spor Botu Guncelle
+name: Spor Listesi Guncelle
 
 on:
   schedule:
     - cron: '*/30 * * * *'
   workflow_dispatch:
+    inputs:
+      validate:
+        description: 'Yayinlari dogrula (0 = kapat)'
+        default: '1'
+      keep_unverified:
+        description: 'Dogrulanamayanlari da yaz (1 = evet)'
+        default: '0'
   push:
+    branches: [main]
+    paths:
+      - 'main.py'
+      - 'core.py'
+      - 'sources.py'
+      - '.github/workflows/update.yml'
 
 permissions:
   contents: write
 
+concurrency:
+  group: playlist-update
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
+
     steps:
       - name: Depoyu cek
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Python Kur
-        uses: actions/setup-python@v4
+      - name: Python kur
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
-      - name: Kutuphaneleri Yukle
-        run: pip install requests beautifulsoup4
+      - name: Bagimliliklari yukle
+        run: pip install --quiet requests beautifulsoup4 urllib3
 
-      - name: Botu Calistir
-        run: python main.py
+      - name: Sozdizimi kontrolu
+        run: python -m compileall -q core.py sources.py main.py
 
-      - name: Kaydet ve Yukle
+      - name: Birim testleri
+        run: python -m unittest discover -s tests -v
+
+      - name: Listeyi olustur
+        id: build
+        env:
+          VALIDATE: ${{ github.event.inputs.validate || '1' }}
+          KEEP_UNVERIFIED: ${{ github.event.inputs.keep_unverified || '0' }}
+          PLAYER_PROXY: ${{ vars.PLAYER_PROXY }}
+          VALIDATE_WORKERS: '48'
+          SCRAPE_WORKERS: '24'
+        # main.py kaynaklara ulasamazsa 1 doner; bu durumda mevcut liste
+        # KORUNUR (bozuk/bos liste asla commit edilmez).
+        run: |
+          set +e
+          python main.py | tee build.log
+          echo "status=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      - name: Sonucu dogrula
+        if: steps.build.outputs.status == '0'
+        run: |
+          python - <<'EOF'
+          import json, sys
+          data = json.load(open('channels.json', encoding='utf-8-sig'))
+          count = data.get('count', 0)
+          print(f"Kanal sayisi: {count}")
+          if count < 5:
+              print("::error::Cok az kanal uretildi, commit iptal.")
+              sys.exit(1)
+          EOF
+
+      - name: Kaydet ve yukle
+        if: steps.build.outputs.status == '0'
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Action"
-          git add Canli_Spor_Hepsi.m3u
-          git commit -m "Tum Siteler Guncellendi: $(date)" || exit 0
+          git add Canli_Spor_Hepsi.m3u channels.json health_report.json
+          if git diff --staged --quiet; then
+            echo "Degisiklik yok."
+            exit 0
+          fi
+          git commit -m "Liste guncellendi: $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
+
+      - name: Saglik ozeti
+        if: always()
+        run: |
+          if [ -f health_report.json ]; then
+            {
+              echo '### Saglik Raporu'
+              echo '```json'
+              cat health_report.json
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Kaynaklar erisilemezse uyar
+        if: steps.build.outputs.status != '0'
+        run: |
+          echo "::warning::Liste uretilemedi; mevcut dosyalar korundu."

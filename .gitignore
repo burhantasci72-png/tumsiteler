@@ -1,4 +1,3 @@
-```gitignore
 # Compiled and binary files
 *.pyc
 __pycache__/
@@ -25,4 +24,7 @@ node_modules/
 dist/
 build/
 target/
-```
+
+# Uretilen raporlar
+health_report.json
+build.log
