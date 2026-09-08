@@ -107,6 +107,21 @@ Domain tamamen değişirse `FAMILIES["atom"]` / `FAMILIES["selcuk"]` içindeki
 `seeds` listesine yeni adresi ekleyin; **tohum adresler numara taramasından
 önce** denendiği için tek satırlık güncelleme yeterli olur.
 
+### Panel adresi hafızası (`panel_cache.json`)
+
+Bazı panellerin gerçek adresi rastgele ekli (`www.sporcafe-0c2608ad69.xyz`
+gibi) — ne numara taraması ne de "GÜNCEL ADRESİMİZ" duyurusu bunu bulabilir.
+Bu yüzden bot, **yayın veren** panel adresini `panel_cache.json` dosyasına
+yazar ve sonraki koşuda ilk olarak orayı dener:
+
+```json
+{ "selcuk": { "domain": "https://www.sporcafe-0c2608ad69.xyz", "updated": "..." } }
+```
+
+Adres ölürse hafıza başarısız olur ve normal keşfe (tohum → tarama) düşülür;
+yeni adres bulunduğunda dosya güncellenir. Dosya liste dosyalarıyla aynı
+adımda commit edilir, elle düzenlemeye gerek yoktur.
+
 ## Domain bakımı (domainler değişince ne yapmalı?)
 
 Bot çoğu değişimi kendi halleder: seed adresler panellerin "GÜNCEL ADRESİMİZ"

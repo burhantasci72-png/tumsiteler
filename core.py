@@ -335,17 +335,24 @@ def run_parallel(fn: Callable, items: Sequence, workers: int) -> List:
     return results
 
 
-def first_match(
+def first_matches(
     fn: Callable,
     items: Sequence,
     workers: int,
+    count: int = 1,
     budget_seconds: Optional[int] = None,
-):
-    """Ilk truthy sonucu doner, kalan isleri iptal eder (domain taramasi icin)."""
-    if not items:
-        return None
+) -> List:
+    """
+    `fn`'in urettigi ilk `count` truthy sonucu dondurur (bulabildigi kadar).
+
+    Bir sonuc bulundugunda kalan isler iptal edilir; `budget_seconds` dolarsa
+    o ana kadar bulunanlar dondurulur.
+    """
+    if not items or count <= 0:
+        return []
 
     deadline = time.time() + budget_seconds if budget_seconds else None
+    results: List = []
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
         futures = {pool.submit(fn, item): item for item in items}
@@ -357,10 +364,10 @@ def first_match(
                     value = future.result()
                 except Exception:
                     value = None
-                if value:
-                    for pending in futures:
-                        pending.cancel()
-                    return value
+                if value and value not in results:
+                    results.append(value)
+                if len(results) >= count:
+                    break
                 if deadline and time.time() > deadline:
                     break
         except concurrent.futures.TimeoutError:
@@ -368,7 +375,18 @@ def first_match(
         finally:
             for pending in futures:
                 pending.cancel()
-    return None
+    return results
+
+
+def first_match(
+    fn: Callable,
+    items: Sequence,
+    workers: int,
+    budget_seconds: Optional[int] = None,
+):
+    """Ilk truthy sonucu doner, kalan isleri iptal eder (domain taramasi icin)."""
+    matches = first_matches(fn, items, workers, 1, budget_seconds)
+    return matches[0] if matches else None
 
 
 # =============================================================================
