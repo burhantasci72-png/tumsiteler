@@ -440,26 +440,32 @@ def _load_panel_cache() -> Dict[str, Dict[str, str]]:
     return data
 
 
-def cached_panel(family: str) -> str:
-    """Hatirlanan panel adresi (yoksa '')."""
+def cached_panel(family: str, field: str = "domain") -> str:
+    """Hatirlanan panel bilgisi (yoksa '')."""
     if not PANEL_CACHE_FILE:
         return ""
-    return str(_load_panel_cache().get(family, {}).get("domain", "") or "").rstrip("/")
+    return str(_load_panel_cache().get(family, {}).get(field, "") or "").strip("/")
 
 
-def remember_panel(family: str, domain: str) -> None:
-    """Yayin veren panel adresini hatirla (sonraki kosu ilk burayi dener)."""
+def remember_panel(family: str, domain: str, **extra: str) -> None:
+    """Yayin veren paneli hatirla (sonraki kosu ilk burayi dener).
+
+    `extra` ile oynatici sunucusu gibi ek bilgiler de saklanabilir.
+    """
     domain = (domain or "").rstrip("/")
     if not domain or not PANEL_CACHE_FILE:
         return
     cache = _load_panel_cache()
     with _PANEL_CACHE_LOCK:
-        if cache.get(family, {}).get("domain") == domain:
+        entry = dict(cache.get(family, {}))
+        if entry.get("domain") == domain and all(
+            entry.get(key) == value for key, value in extra.items()
+        ):
             return
-        cache[family] = {
-            "domain": domain,
-            "updated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        }
+        entry["domain"] = domain
+        entry["updated"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        entry.update(extra)
+        cache[family] = entry
         try:
             tmp = f"{PANEL_CACHE_FILE}.tmp"
             with open(tmp, "w", encoding="utf-8") as handle:
@@ -873,7 +879,9 @@ def fetch_selcukspor() -> List[StreamInfo]:
                 results.append(item)
 
     for domain in _selcuk_domain_candidates():
-        html = get_text(domain)
+        # Paneller bos Referer ile gelen isteklere reklam/yonlendirme sayfasi
+        # donebiliyor; kendi adresini Referer olarak gonderiyoruz.
+        html = get_text(domain, referrer=f"{domain}/") or get_text(domain)
         if not html:
             continue
 
@@ -924,7 +932,7 @@ def fetch_selcukspor() -> List[StreamInfo]:
             ])
 
         # --- 3) Eski nesil uxsyplayer --------------------------------------
-        server = _selcuk_player_server(html)
+        server = cached_panel("selcuk", "player") or _selcuk_player_server(html)
         if not server:
             # Seed adresler cogunlukla "giris" sayfasidir: asil site, sayfadaki
             # ilk selcuk/sporcafe/xyzsports linkinin arkasindadir.
@@ -939,14 +947,20 @@ def fetch_selcukspor() -> List[StreamInfo]:
                     break
         if server:
             legacy = _selcuk_legacy_streams(domain, server)
+            if not legacy:
+                # Hatirlanan oynatici sunucusu olmussa sayfadan yeniden kesfet
+                alt = _selcuk_player_server(html)
+                if alt and alt != server:
+                    server = alt
+                    legacy = _selcuk_legacy_streams(domain, server)
             if legacy:
                 _log(f"-> Selçukspor: {len(legacy)} kanal (uxsyplayer)")
             add(legacy)
 
         if results:
-            # Yayin veren adresi hatirla: panel adresi rastgele ekli oldugu
-            # icin sonraki kosuda dogrudan buradan baslanir.
-            remember_panel("selcuk", domain)
+            # Yayin veren adresi + oynatici sunucusunu hatirla: panel adresi
+            # rastgele ekli oldugu icin sonraki kosuda dogrudan buradan baslar.
+            remember_panel("selcuk", domain, player=server or "")
             FAMILY_STATUS["selcuk"] = f"{domain} | {len(results)} kanal"
             break
 
@@ -1636,6 +1650,21 @@ def fetch_community_m3u() -> List[StreamInfo]:
 SEEDS_FILE = os.environ.get("SEEDS_FILE", "seeds.m3u")
 
 
+def _seed_source(entry: Dict[str, str]) -> str:
+    """Tohum girdisini ait oldugu kaynakla etiketler (rapor/aidiyet icin).
+
+    Boylece AtomSpor cozucusunden gelen adresler listede "seeds" degil
+    "atom" olarak gorunur; ayni adres toplayicidan da gelirse tekillestirme
+    bunlari zaten birlestirir.
+    """
+    group = (entry.get("attr_group-title") or "").upper()
+    if "ATOM" in group:
+        return "atom"
+    if "SELCUK" in group or "SELÇUK" in group or "SPORCAFE" in group:
+        return "selcukspor"
+    return "seeds"
+
+
 def _seeds_text() -> str:
     path = SEEDS_FILE
     if not path or not os.path.exists(path):
@@ -1666,7 +1695,7 @@ def fetch_seeds() -> List[StreamInfo]:
                 group=entry.get("attr_group-title") or "SABIT",
                 logo=entry.get("attr_tvg-logo", ""),
                 referrer=entry.get("referrer", ""),
-                source="seeds",
+                source=_seed_source(entry),
                 user_agent=entry.get("user_agent", ""),
             )
         )
