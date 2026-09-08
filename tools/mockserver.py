@@ -56,6 +56,16 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 return self._send(200, MEDIA)
             return self._send(403, b"forbidden", "text/plain")
 
+        # Manifest de Referer'a gore 403 veren CDN (Selcukspor manifest 403)
+        if path == "/manifest-noref.m3u8":
+            if self.headers.get("Referer"):
+                return self._send(403, b"forbidden", "text/plain")
+            return self._send(200, MEDIA)
+        if path == "/manifest-protected.m3u8":
+            if self.headers.get("Referer") == "https://allowed.example/":
+                return self._send(200, MEDIA)
+            return self._send(403, b"forbidden", "text/plain")
+
         # Playlist 200 ama segment 403 (en sinsi hata)
         if path == "/badseg.m3u8":
             return self._send(
