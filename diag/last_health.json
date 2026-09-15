@@ -1,19 +1,19 @@
 {
- "generated_at": "15.09.2026 00:43:14",
- "scraped": 1308,
- "verified": 249,
+ "generated_at": "15.09.2026 05:31:10",
+ "scraped": 1371,
+ "verified": 252,
  "published": 54,
  "families": {
   "seeds": "74 girdi",
   "topluluk": "913 girdi",
   "netspor": "3/7 sunucu aktif",
+  "atom": "guncel-adres: https://atomsportv514.top | aday: 19/19",
   "andro": "3/6 sunucu aktif",
-  "netspor-kayit": "399",
+  "netspor-kayit": "462",
   "taraftarium24": "https://taraftarium24-off12.com",
   "taraftarium24-mac": "0 mac",
-  "xsport": "https://www.xsportv-de596bbe2f.xyz",
   "mahsun": "m3u8 0/18 (https://mahsunsports.com)",
-  "atom": "guncel-adres: https://atomsportv514.top | aday: 19/19",
+  "xsport": "https://www.xsportv-de596bbe2f.xyz",
   "selcuk": "https://www.sporcafe-0c2608ad69.xyz | 16 kanal",
   "kulisbet": "m3u8 23/28 (https://kulistvnew12.com)",
   "inadina": "m3u8 28/28 (https://royaltv38.com)",
@@ -37,8 +37,8 @@
    "ok": 0
   },
   "netspor": {
-   "total": 399,
-   "ok": 178
+   "total": 462,
+   "ok": 177
   },
   "pasizle": {
    "total": 28,
@@ -58,23 +58,23 @@
   },
   "topluluk": {
    "total": 634,
-   "ok": 13
+   "ok": 17
   }
  },
  "failure_reasons": {
-  "not-a-stream": 230,
-  "network-error": 210,
-  "http-404": 175,
-  "http-403": 161,
+  "http-404": 221,
+  "network-error": 214,
+  "not-a-stream": 205,
+  "http-403": 170,
   "not-hls": 106,
-  "http-401": 52,
-  "http-503": 34,
+  "http-401": 60,
+  "http-503": 45,
+  "http-502": 36,
   "segment-error": 31,
-  "http-502": 22,
   "http-500": 14,
-  "segment-http-403": 9,
   "http-521": 8,
   "segment-http-500": 6,
+  "segment-http-403": 2,
   "http-302": 1
  },
  "by_source_status": {
@@ -93,11 +93,10 @@
    "not-hls": 23
   },
   "netspor": {
-   "http-404": 134,
-   "http-403": 67,
+   "http-404": 180,
+   "http-403": 90,
    "segment-error": 9,
-   "segment-http-500": 6,
-   "segment-http-403": 5
+   "segment-http-500": 6
   },
   "pasizle": {
    "not-hls": 28
@@ -112,15 +111,14 @@
    "not-hls": 27
   },
   "topluluk": {
-   "not-a-stream": 230,
-   "network-error": 155,
-   "http-403": 94,
-   "http-401": 52,
-   "http-503": 34,
-   "http-502": 22,
+   "not-a-stream": 205,
+   "network-error": 159,
+   "http-403": 80,
+   "http-401": 60,
+   "http-503": 45,
+   "http-502": 36,
    "http-404": 22,
    "http-521": 8,
-   "segment-http-403": 2,
    "segment-error": 1,
    "http-302": 1
   }
