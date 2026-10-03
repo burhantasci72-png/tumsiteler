@@ -1,8 +1,8 @@
 {
- "generated_at": "02.10.2026 20:11:47",
- "scraped": 2448,
- "verified": 312,
- "published": 94,
+ "generated_at": "02.10.2026 23:52:19",
+ "scraped": 2462,
+ "verified": 385,
+ "published": 130,
  "families": {
   "seeds": "74 girdi",
   "topluluk": "2065 girdi",
@@ -12,7 +12,7 @@
   "netspor": "2/7 sunucu aktif",
   "atom": "guncel-adres: https://atomsportv516.top | aday: 19/19",
   "andro": "2/6 sunucu aktif",
-  "netspor-kayit": "436",
+  "netspor-kayit": "450",
   "xsport": "https://www.xsportv-de596bbe2f.xyz",
   "selcuk": "https://www.sporcafe-0c2608ad69.xyz | 16 kanal",
   "kulisbet": "m3u8 22/28 (https://kulistvnew12.com)",
@@ -37,8 +37,8 @@
    "ok": 0
   },
   "netspor": {
-   "total": 436,
-   "ok": 190
+   "total": 450,
+   "ok": 258
   },
   "pasizle": {
    "total": 28,
@@ -54,7 +54,7 @@
   },
   "taraftarium": {
    "total": 27,
-   "ok": 16
+   "ok": 21
   },
   "topluluk": {
    "total": 1758,
@@ -62,17 +62,17 @@
   }
  },
  "failure_reasons": {
-  "not-a-stream": 505,
-  "http-403": 379,
-  "network-error": 338,
-  "http-404": 271,
-  "http-502": 226,
-  "http-401": 159,
-  "http-503": 137,
-  "not-hls": 89,
+  "not-a-stream": 625,
+  "network-error": 335,
+  "http-502": 300,
+  "http-403": 280,
+  "http-404": 215,
+  "http-401": 162,
+  "not-hls": 84,
+  "http-503": 41,
   "http-500": 14,
   "segment-http-503": 9,
-  "segment-http-403": 5,
+  "segment-http-403": 8,
   "segment-http-500": 2,
   "segment-error": 2
  },
@@ -90,10 +90,10 @@
    "not-hls": 22
   },
   "netspor": {
-   "http-404": 234,
+   "http-404": 178,
    "segment-http-503": 6,
+   "segment-http-403": 4,
    "segment-http-500": 2,
-   "segment-http-403": 2,
    "segment-error": 2
   },
   "pasizle": {
@@ -106,18 +106,18 @@
    "http-404": 16
   },
   "taraftarium": {
-   "not-hls": 11
+   "not-hls": 6
   },
   "topluluk": {
-   "not-a-stream": 505,
-   "http-403": 379,
-   "network-error": 283,
-   "http-502": 226,
-   "http-401": 159,
-   "http-503": 137,
+   "not-a-stream": 625,
+   "http-502": 300,
+   "http-403": 280,
+   "network-error": 280,
+   "http-401": 162,
+   "http-503": 41,
    "http-404": 21,
    "segment-http-503": 3,
-   "segment-http-403": 1
+   "segment-http-403": 2
   }
  }
 }
