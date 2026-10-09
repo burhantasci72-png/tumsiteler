@@ -1,22 +1,22 @@
 {
- "generated_at": "09.10.2026 06:52:07",
- "scraped": 2448,
- "verified": 380,
- "published": 128,
+ "generated_at": "09.10.2026 13:54:57",
+ "scraped": 2536,
+ "verified": 387,
+ "published": 130,
  "families": {
   "seeds": "74 girdi",
   "topluluk": "2065 girdi",
   "taraftarium24": "https://taraftarium24-off12.com",
   "taraftarium24-mac": "0 mac",
+  "mahsun": "m3u8 0/18 (https://mahsunsports.com)",
   "netspor": "2/7 sunucu aktif",
   "atom": "guncel-adres: https://atomsportv516.top | aday: 19/19",
   "xsport": "https://www.xsportv-de596bbe2f.xyz",
-  "mahsun": "m3u8 0/18 (https://mahsunsports.com)",
+  "netspor-kayit": "518",
   "andro": "2/6 sunucu aktif",
-  "netspor-kayit": "430",
   "selcuk": "https://www.sporcafe-0c2608ad69.xyz | 16 kanal",
-  "inadina": "m3u8 28/28 (https://royaltv38.com)",
   "kulisbet": "m3u8 28/28 (https://kulistvnew13.com)",
+  "inadina": "m3u8 28/28 (https://royaltv38.com)",
   "pasizle": "m3u8 28/28 (https://pasizle863.com)"
  },
  "by_source": {
@@ -37,8 +37,8 @@
    "ok": 0
   },
   "netspor": {
-   "total": 430,
-   "ok": 258
+   "total": 518,
+   "ok": 263
   },
   "pasizle": {
    "total": 28,
@@ -54,7 +54,7 @@
   },
   "taraftarium": {
    "total": 27,
-   "ok": 21
+   "ok": 23
   },
   "topluluk": {
    "total": 1758,
@@ -62,18 +62,18 @@
   }
  },
  "failure_reasons": {
-  "http-403": 633,
-  "http-503": 626,
-  "network-error": 252,
-  "http-404": 199,
-  "http-401": 147,
-  "not-hls": 90,
-  "not-a-stream": 79,
+  "not-a-stream": 664,
+  "network-error": 415,
+  "http-404": 281,
+  "http-403": 270,
+  "http-502": 198,
+  "http-401": 149,
+  "not-hls": 88,
+  "http-503": 47,
   "http-500": 14,
   "segment-http-503": 9,
   "segment-http-500": 7,
-  "http-502": 6,
-  "segment-http-403": 4,
+  "segment-http-403": 5,
   "http-451": 2
  },
  "by_source_status": {
@@ -91,9 +91,9 @@
    "not-hls": 28
   },
   "netspor": {
-   "http-404": 158,
+   "http-404": 240,
    "segment-http-503": 6,
-   "segment-http-403": 4,
+   "segment-http-403": 5,
    "segment-http-500": 4
   },
   "pasizle": {
@@ -106,16 +106,16 @@
    "http-404": 16
   },
   "taraftarium": {
-   "not-hls": 6
+   "not-hls": 4
   },
   "topluluk": {
-   "http-403": 633,
-   "http-503": 626,
-   "network-error": 197,
-   "http-401": 147,
-   "not-a-stream": 79,
+   "not-a-stream": 664,
+   "network-error": 360,
+   "http-403": 270,
+   "http-502": 198,
+   "http-401": 149,
+   "http-503": 47,
    "http-404": 21,
-   "http-502": 6,
    "segment-http-503": 3,
    "http-451": 2,
    "segment-http-500": 1
