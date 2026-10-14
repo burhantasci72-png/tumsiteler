@@ -1,5 +1,5 @@
 ﻿{
- "generated_at": "14.10.2026 15:15:30",
+ "generated_at": "14.10.2026 19:30:37",
  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
  "categories": [
   "BEIN SPORTS",
@@ -11,8 +11,8 @@
   "CANLI MAÇLAR"
  ],
  "proxy": "",
- "count": 113,
- "verified": 113,
+ "count": 95,
+ "verified": 95,
  "channels": [
   {
    "key": "beinsports1",
@@ -23,18 +23,12 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 458,
+   "latency_ms": 448,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebs1.m3u8",
    "user_agent": "",
    "backups": [
     {
      "url": "https://andro.3749206.xyz/checklist/androstreamlivebs1.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "topluluk",
-     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
-    },
-    {
-     "url": "https://rok.raalbatros.workers.dev/?ID=2671058892459103de77a",
      "referrer": "https://taraftariumizle.org/",
      "source": "topluluk",
      "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
@@ -50,7 +44,7 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 438,
+   "latency_ms": 381,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebs2.m3u8",
    "user_agent": "",
    "backups": [
@@ -59,6 +53,12 @@
      "referrer": "https://taraftariumizle.org/",
      "source": "topluluk",
      "user_agent": ""
+    },
+    {
+     "url": "https://deathless.pantonum1.workers.dev/b2.m3u8",
+     "referrer": "https://deathless.pantonum1.workers.dev",
+     "source": "taraftarium",
+     "user_agent": ""
     }
    ]
   },
@@ -66,19 +66,19 @@
    "key": "beinsports3",
    "name": "beIN Sports 3",
    "group": "BEIN SPORTS",
-   "logo": "https://bit.ly/30Rtjua",
-   "referrer": "",
-   "source": "topluluk",
+   "logo": "",
+   "referrer": "https://taraftariumizle.org/",
+   "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 436,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivebs3.m3u8",
+   "latency_ms": 383,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebs3.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebs3.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivebs3.m3u8",
      "referrer": "https://taraftariumizle.org/",
-     "source": "andro",
+     "source": "topluluk",
      "user_agent": ""
     },
     {
@@ -98,7 +98,7 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 335,
+   "latency_ms": 385,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebs4.m3u8",
    "user_agent": "",
    "backups": [
@@ -125,7 +125,7 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 371,
+   "latency_ms": 399,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebs5.m3u8",
    "user_agent": "",
    "backups": [
@@ -152,14 +152,14 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 354,
+   "latency_ms": 360,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebsm1.m3u8",
    "user_agent": "",
    "backups": [
     {
      "url": "https://andro.3749206.xyz/checklist/androstreamlivebsm1.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "andro",
+     "referrer": "https://trgoals1537.xyz",
+     "source": "topluluk",
      "user_agent": ""
     },
     {
@@ -179,7 +179,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 286,
+   "latency_ms": 300,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivebsm2.m3u8",
    "user_agent": "",
    "backups": [
@@ -188,12 +188,6 @@
      "referrer": "https://taraftariumizle.org/",
      "source": "andro",
      "user_agent": ""
-    },
-    {
-     "url": "https://deathless.pantonum1.workers.dev/bm2.m3u8",
-     "referrer": "https://deathless.pantonum1.workers.dev",
-     "source": "taraftarium",
-     "user_agent": ""
     }
    ]
   },
@@ -201,25 +195,25 @@
    "key": "beinsportshaber",
    "name": "beIN Sports Haber",
    "group": "BEIN SPORTS",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
+   "logo": "https://bit.ly/302Lfmo",
+   "referrer": "",
+   "source": "topluluk",
    "verified": true,
-   "status": "ok",
-   "latency_ms": 397,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebsh.m3u8",
+   "status": "ok-master",
+   "latency_ms": 507,
+   "url": "https://tgn.bozztv.com/eshgtv-dvrfl05/gin-beinsportshaber/index.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivebsh.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebsh.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
     },
     {
-     "url": "https://tgn.bozztv.com/eshgtv-dvrfl05/gin-beinsportshaber/index.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivebsh.m3u8",
      "referrer": "https://taraftariumizle.org/",
-     "source": "topluluk",
+     "source": "netspor",
      "user_agent": ""
     }
    ]
@@ -233,7 +227,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 753,
+   "latency_ms": 578,
    "url": "https://ladyboy.ardastream2.cfd//beintv/tracks-v1a1/mono.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -247,7 +241,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 340,
+   "latency_ms": 482,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivebiraz1.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -261,12 +255,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 217,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivessplus1.m3u8",
+   "latency_ms": 453,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivessplus1.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -282,14 +276,20 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 364,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivess1.m3u8",
+   "latency_ms": 349,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivess1.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "andro",
+     "user_agent": ""
+    },
+    {
+     "url": "https://deathless.pantonum1.workers.dev/ss.m3u8",
+     "referrer": "https://deathless.pantonum1.workers.dev",
+     "source": "taraftarium",
      "user_agent": ""
     }
    ]
@@ -300,19 +300,13 @@
    "group": "S SPORT",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
+   "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 224,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivess2.m3u8",
+   "latency_ms": 380,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivess2.m3u8",
    "user_agent": "",
    "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivess2.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    },
     {
      "url": "https://ladyboy.yedektv.cfd//s-sport2/tracks-v1a1/mono.m3u8",
      "referrer": "https://taraftariumizle.org/",
@@ -324,6 +318,12 @@
      "referrer": "https://deathless.pantonum1.workers.dev",
      "source": "taraftarium",
      "user_agent": ""
+    },
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivess2.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "andro",
+     "user_agent": ""
     }
    ]
   },
@@ -331,39 +331,15 @@
    "key": "tivibuspor1",
    "name": "Tivibu Spor 1",
    "group": "TİVİBU SPOR",
-   "logo": "https://i0.wp.com/resim.yayins.com/ek1/tivibu4.png",
-   "referrer": "https://trgoals1537.xyz/",
-   "source": "topluluk",
+   "logo": "",
+   "referrer": "https://taraftariumizle.org/",
+   "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 135,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivets4.m3u8",
+   "latency_ms": 326,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivets.m3u8",
    "user_agent": "",
    "backups": [
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivets1.m3u8",
-     "referrer": "https://trgoals1537.xyz",
-     "source": "topluluk",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivets2.m3u8",
-     "referrer": "https://trgoals1537.xyz/",
-     "source": "topluluk",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivets.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivets.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    },
     {
      "url": "https://andro.3749206.xyz/checklist/androstreamlivets3.m3u8",
      "referrer": "https://trgoals1537.xyz/",
@@ -377,9 +353,27 @@
      "user_agent": ""
     },
     {
-     "url": "https://deathless.pantonum1.workers.dev/t1.m3u8",
-     "referrer": "https://deathless.pantonum1.workers.dev",
-     "source": "taraftarium",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivets.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "netspor",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivets4.m3u8",
+     "referrer": "https://trgoals1537.xyz/",
+     "source": "topluluk",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivets2.m3u8",
+     "referrer": "https://trgoals1537.xyz/",
+     "source": "topluluk",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivets1.m3u8",
+     "referrer": "https://trgoals1537.xyz",
+     "source": "topluluk",
      "user_agent": ""
     }
    ]
@@ -390,15 +384,15 @@
    "group": "TİVİBU SPOR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
-   "source": "andro",
+   "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 322,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivets2.m3u8",
+   "latency_ms": 346,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivets2.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivets2.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivets2.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "andro",
      "user_agent": ""
@@ -414,7 +408,7 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 262,
+   "latency_ms": 330,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivets3.m3u8",
    "user_agent": "",
    "backups": [
@@ -441,7 +435,7 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 338,
+   "latency_ms": 383,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivets4.m3u8",
    "user_agent": "",
    "backups": [
@@ -468,7 +462,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 146,
+   "latency_ms": 300,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrtsy.m3u8",
    "user_agent": "",
    "backups": [
@@ -495,7 +489,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 154,
+   "latency_ms": 344,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrts.m3u8",
    "user_agent": "",
    "backups": [
@@ -510,12 +504,6 @@
      "referrer": "https://taraftariumizle.org/",
      "source": "topluluk",
      "user_agent": ""
-    },
-    {
-     "url": "https://deathless.pantonum1.workers.dev/trtspor.m3u8",
-     "referrer": "https://deathless.pantonum1.workers.dev",
-     "source": "taraftarium",
-     "user_agent": ""
     }
    ]
   },
@@ -523,30 +511,30 @@
    "key": "trt1",
    "name": "TRT 1",
    "group": "TRT SPOR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
+   "logo": "https://www.lyngsat-logo.com/logo/tv/tt/trt1.png",
+   "referrer": "",
+   "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 168,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrt1.m3u8",
+   "latency_ms": 298,
+   "url": "http://89.187.191.41/TRT-1-HD-TR/tracks-v1a1/mono.ts.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "http://89.187.191.41/TRT-1-HD-TR/tracks-v1a1/mono.ts.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrt1.m3u8",
      "referrer": "https://taraftariumizle.org/",
+     "source": "netspor",
+     "user_agent": ""
+    },
+    {
+     "url": "https://ladyboy.yedektv.cfd//trt1/tracks-v1a1/mono.m3u8",
+     "referrer": "",
      "source": "topluluk",
      "user_agent": ""
     },
     {
      "url": "https://andro.3749206.xyz/checklist/androstreamlivetrt1.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "topluluk",
-     "user_agent": ""
-    },
-    {
-     "url": "https://ladyboy.yedektv.cfd//trt1/tracks-v1a1/mono.m3u8",
-     "referrer": "https://taraftariumizle.org/",
+     "referrer": "",
      "source": "topluluk",
      "user_agent": ""
     }
@@ -556,25 +544,25 @@
    "key": "tabiispor1",
    "name": "Tabii Spor 1",
    "group": "TABİİ SPOR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "andro",
+   "logo": "https://i0.wp.com/resim.yayins.com/spor/tabii1.png",
+   "referrer": "",
+   "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 331,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb1.m3u8",
-   "user_agent": "",
+   "latency_ms": 400,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb1.m3u8",
+   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": [
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb1.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "topluluk",
-     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
-    },
     {
      "url": "https://deathless.pantonum1.workers.dev/ex1.m3u8",
      "referrer": "https://deathless.pantonum1.workers.dev",
      "source": "taraftarium",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb1.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "andro",
      "user_agent": ""
     }
    ]
@@ -583,20 +571,20 @@
    "key": "tabiispor2",
    "name": "Tabii Spor 2",
    "group": "TABİİ SPOR",
-   "logo": "https://i0.wp.com/resim.yayins.com/spor/tabii2.png",
-   "referrer": "",
-   "source": "topluluk",
+   "logo": "",
+   "referrer": "https://taraftariumizle.org/",
+   "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 173,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb2.m3u8",
-   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
+   "latency_ms": 383,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb2.m3u8",
+   "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb2.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb2.m3u8",
      "referrer": "https://taraftariumizle.org/",
-     "source": "andro",
-     "user_agent": ""
+     "source": "topluluk",
+     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
     },
     {
      "url": "https://deathless.pantonum1.workers.dev/ex2.m3u8",
@@ -615,7 +603,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 185,
+   "latency_ms": 320,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb3.m3u8",
    "user_agent": "",
    "backups": [
@@ -624,12 +612,6 @@
      "referrer": "https://taraftariumizle.org/",
      "source": "topluluk",
      "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
-    },
-    {
-     "url": "https://deathless.pantonum1.workers.dev/ex3.m3u8",
-     "referrer": "https://deathless.pantonum1.workers.dev",
-     "source": "taraftarium",
-     "user_agent": ""
     }
    ]
   },
@@ -642,7 +624,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 131,
+   "latency_ms": 317,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb4.m3u8",
    "user_agent": "",
    "backups": [
@@ -651,12 +633,6 @@
      "referrer": "https://taraftariumizle.org/",
      "source": "topluluk",
      "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
-    },
-    {
-     "url": "https://deathless.pantonum1.workers.dev/ex4.m3u8",
-     "referrer": "https://deathless.pantonum1.workers.dev",
-     "source": "taraftarium",
-     "user_agent": ""
     }
    ]
   },
@@ -664,20 +640,20 @@
    "key": "tabiispor5",
    "name": "Tabii Spor 5",
    "group": "TABİİ SPOR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
+   "logo": "https://i0.wp.com/resim.yayins.com/spor/tabii5.png",
+   "referrer": "",
+   "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 132,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb5.m3u8",
-   "user_agent": "",
+   "latency_ms": 297,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb5.m3u8",
+   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb5.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb5.m3u8",
      "referrer": "https://taraftariumizle.org/",
-     "source": "topluluk",
-     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
+     "source": "netspor",
+     "user_agent": ""
     }
    ]
   },
@@ -690,7 +666,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 142,
+   "latency_ms": 303,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb6.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": [
@@ -711,12 +687,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 267,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb7.m3u8",
+   "latency_ms": 314,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb7.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb7.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb7.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -727,27 +703,15 @@
    "key": "tabiispor",
    "name": "Tabii Spor",
    "group": "TABİİ SPOR",
-   "logo": "https://i0.wp.com/resim.yayins.com/spor/tabii1.png",
-   "referrer": "",
-   "source": "topluluk",
+   "logo": "",
+   "referrer": "https://taraftariumizle.org/",
+   "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 141,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
-   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
+   "latency_ms": 288,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb8.m3u8",
+   "user_agent": "",
    "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb8.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    },
     {
      "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb8.m3u8",
      "referrer": "https://taraftariumizle.org/",
@@ -755,8 +719,20 @@
      "user_agent": ""
     },
     {
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "netspor",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "topluluk",
+     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
+    },
+    {
      "url": "https://ceokzokgtd.erbvr.com/tabiitv/tabiitv_1080p.m3u8",
-     "referrer": "",
+     "referrer": "https://taraftariumizle.org/",
      "source": "topluluk",
      "user_agent": ""
     }
@@ -771,20 +747,20 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 421,
+   "latency_ms": 630,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm1.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivesm1.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "andro",
-     "user_agent": ""
-    },
-    {
      "url": "https://deathless.pantonum1.workers.dev/smarts.m3u8",
      "referrer": "https://deathless.pantonum1.workers.dev",
      "source": "taraftarium",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivesm1.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "andro",
      "user_agent": ""
     }
    ]
@@ -798,20 +774,20 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 423,
+   "latency_ms": 586,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm2.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivesm2.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "andro",
-     "user_agent": ""
-    },
-    {
      "url": "https://deathless.pantonum1.workers.dev/sms2.m3u8",
      "referrer": "https://deathless.pantonum1.workers.dev",
      "source": "taraftarium",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivesm2.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "andro",
      "user_agent": ""
     }
    ]
@@ -825,7 +801,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 323,
+   "latency_ms": 367,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
    "user_agent": "",
    "backups": []
@@ -839,7 +815,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 403,
+   "latency_ms": 397,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivess2.m3u8",
    "user_agent": "",
    "backups": []
@@ -850,23 +826,23 @@
    "group": "DİĞER SPOR KANALLARI",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
-   "source": "andro",
+   "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 281,
+   "latency_ms": 379,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivees1.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivees1.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "andro",
-     "user_agent": ""
-    },
-    {
      "url": "https://deathless.pantonum1.workers.dev/eu1.m3u8",
      "referrer": "https://deathless.pantonum1.workers.dev",
      "source": "taraftarium",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivees1.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "andro",
      "user_agent": ""
     }
    ]
@@ -880,20 +856,14 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 260,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivees2.m3u8",
+   "latency_ms": 373,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivees2.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivees2.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivees2.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "andro",
-     "user_agent": ""
-    },
-    {
-     "url": "https://deathless.pantonum1.workers.dev/eu2.m3u8",
-     "referrer": "https://deathless.pantonum1.workers.dev",
-     "source": "taraftarium",
      "user_agent": ""
     }
    ]
@@ -907,12 +877,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 297,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamliveas.m3u8",
+   "latency_ms": 231,
+   "url": "https://andro.3749206.xyz/checklist/androstreamliveas.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamliveas.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamliveas.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -946,7 +916,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 305,
+   "latency_ms": 371,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamliveatv.m3u8",
    "user_agent": "",
    "backups": [
@@ -973,7 +943,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 153,
+   "latency_ms": 367,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetv85.m3u8",
    "user_agent": "",
    "backups": [
@@ -988,12 +958,6 @@
      "referrer": "https://taraftariumizle.org/",
      "source": "topluluk",
      "user_agent": ""
-    },
-    {
-     "url": "https://deathless.pantonum1.workers.dev/tv85.m3u8",
-     "referrer": "https://deathless.pantonum1.workers.dev",
-     "source": "taraftarium",
-     "user_agent": ""
     }
    ]
   },
@@ -1006,20 +970,20 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 247,
+   "latency_ms": 286,
    "url": "http://89.187.191.41/TV8-HD-TR/tracks-v1a1/mono.ts.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://deathless.pantonum1.workers.dev/tv8.m3u8",
-     "referrer": "https://deathless.pantonum1.workers.dev",
-     "source": "taraftarium",
-     "user_agent": ""
-    },
-    {
      "url": "https://tv8.daioncdn.net/tv8/tv8_1080p.m3u8?app=tv8_web",
      "referrer": "",
      "source": "topluluk",
+     "user_agent": ""
+    },
+    {
+     "url": "https://deathless.pantonum1.workers.dev/tv8.m3u8",
+     "referrer": "https://deathless.pantonum1.workers.dev",
+     "source": "taraftarium",
      "user_agent": ""
     },
     {
@@ -1039,8 +1003,8 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 140,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamliveexn2.m3u8",
+   "latency_ms": 292,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamliveexn8.m3u8",
    "user_agent": "",
    "backups": [
     {
@@ -1050,25 +1014,7 @@
      "user_agent": ""
     },
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamliveexn3.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamliveexn8.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamliveexn3.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamliveexn.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamliveexn2.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -1080,9 +1026,27 @@
      "user_agent": ""
     },
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamliveexn1.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamliveexn.m3u8",
      "referrer": "https://taraftariumizle.org/",
-     "source": "andro",
+     "source": "netspor",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamliveexn3.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "netspor",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamliveexn7.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "netspor",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamliveexn5.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "netspor",
      "user_agent": ""
     }
    ]
@@ -1096,7 +1060,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 323,
+   "latency_ms": 388,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamliveidm.m3u8",
    "user_agent": "",
    "backups": [
@@ -1117,7 +1081,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 144,
+   "latency_ms": 311,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivecbcs.m3u8",
    "user_agent": "",
    "backups": [
@@ -1138,7 +1102,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 130,
+   "latency_ms": 301,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivenba.m3u8",
    "user_agent": "",
    "backups": [
@@ -1159,7 +1123,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 365,
+   "latency_ms": 295,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetjk.m3u8",
    "user_agent": "",
    "backups": [
@@ -1180,7 +1144,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 310,
+   "latency_ms": 364,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamliveredb.m3u8",
    "user_agent": "",
    "backups": [
@@ -1201,24 +1165,24 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 149,
-   "url": "https://andro.3749206.xyz/checklist/androstreamliveht.m3u8",
+   "latency_ms": 177,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamliveht.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamliveht.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamliveht.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
     },
     {
-     "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_720p.m3u8?ex=0&sid=7vcjas3k9dur&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2",
+     "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_1080p.m3u8?ex=0&sid=7vcjas3k9dur&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2",
      "referrer": "https://taraftariumizle.org/",
      "source": "topluluk",
      "user_agent": ""
     },
     {
-     "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_1080p.m3u8?ex=0&sid=7vcjas3k9dur&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2",
+     "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_720p.m3u8?ex=0&sid=7vcjas3k9dur&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2",
      "referrer": "https://taraftariumizle.org/",
      "source": "topluluk",
      "user_agent": ""
@@ -1234,12 +1198,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 279,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivefb.m3u8",
+   "latency_ms": 305,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivefb.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivefb.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivefb.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -1261,12 +1225,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 290,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivegs.m3u8",
+   "latency_ms": 326,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivegs.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivegs.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivegs.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -1282,7 +1246,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 269,
+   "latency_ms": 317,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesptstv.m3u8",
    "user_agent": "",
    "backups": [
@@ -1303,12 +1267,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 353,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivea2.m3u8",
+   "latency_ms": 311,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivea2.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivea2.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivea2.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -1324,7 +1288,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 426,
+   "latency_ms": 275,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivebs1.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -1338,7 +1302,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 167,
+   "latency_ms": 278,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivebiraz1.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -1352,7 +1316,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 268,
+   "latency_ms": 247,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8",
    "user_agent": "",
    "backups": [
@@ -1373,12 +1337,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 221,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivessplus1.m3u8",
+   "latency_ms": 203,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivessplus1.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -1394,7 +1358,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 146,
+   "latency_ms": 121,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivesm1.m3u8",
    "user_agent": "",
    "backups": [
@@ -1415,12 +1379,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 176,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivesm2.m3u8",
+   "latency_ms": 136,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm2.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm2.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivesm2.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -1436,12 +1400,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 41,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivesm2.m3u8",
+   "latency_ms": 126,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm2.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm2.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivesm2.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -1457,33 +1421,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 20,
+   "latency_ms": 54,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm1.m3u8",
    "user_agent": "",
    "backups": [
     {
      "url": "https://andro.3749206.xyz/checklist/androstreamlivesm1.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:alwahdacanli|nasafqarshi",
-   "name": "16:45 Nasaf Qarshi - Al Wahda CANLI",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 144,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivesm1.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm1.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -1499,222 +1442,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 149,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivetrts.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrts.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:bolusporyedekcanli|umraniyespor",
-   "name": "17:00 Ümraniyespor - Boluspor (Yedek) CANLI",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 273,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivetrts.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrts.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:bolusporcanli|umraniyespor",
-   "name": "17:00 Ümraniyespor - Boluspor CANLI",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 304,
+   "latency_ms": 311,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrts.m3u8",
    "user_agent": "",
    "backups": [
     {
      "url": "https://andro.3749206.xyz/checklist/androstreamlivetrts.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:aljazira|arkadag",
-   "name": "19:00 Al Jazira - Arkadag",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 58,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivesm1.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm1.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:alrayyan|altaawon",
-   "name": "19:00 Al Taawon - Al Rayyan",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 102,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm2.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivesm2.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:fenerbahcemedicana|goztepe",
-   "name": "19:00 Fenerbahçe Medicana - Göztepe",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 279,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivefb.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivefb.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:besiktas|hapoeltelaviv",
-   "name": "19:00 Hapoel Tel Aviv - Beşiktaş",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 35,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivess1.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:eczacibasi|ilbank",
-   "name": "19:00 İlbank - Eczacibasi",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 243,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrtsy.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivetrtsy.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:neftchiik|vefriga",
-   "name": "19:00 Neftchi IK - VEF Riga",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 344,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamliveidm.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamliveidm.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:sabahbaku|trabzonspor",
-   "name": "19:00 Trabzonspor - Sabah Bakü",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 307,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb7.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb7.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:chalonsusaone|korfezbasket",
-   "name": "19:30 Körfez Basket - Chalon Su Saone",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 266,
-   "url": "https://andro.3749206.xyz/checklist/androstreamliveht.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamliveht.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -1730,33 +1463,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 43,
+   "latency_ms": 37,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb5.m3u8",
    "user_agent": "",
    "backups": [
     {
      "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb5.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:como|feyenoord",
-   "name": "19:45 Feyenoord - Como",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 38,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb1.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb1.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -1772,33 +1484,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 144,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivetrt1.m3u8",
+   "latency_ms": 153,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrt1.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrt1.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:lasklinz|liverpool",
-   "name": "19:45 LASK Linz - Liverpool",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 294,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivetrt1.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -1814,12 +1505,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 21,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb2.m3u8",
+   "latency_ms": 20,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb2.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb2.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb2.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -1835,7 +1526,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 142,
+   "latency_ms": 19,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": [
@@ -1856,12 +1547,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 34,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivecbcs.m3u8",
+   "latency_ms": 171,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivecbcs.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivecbcs.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivecbcs.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -1877,12 +1568,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 32,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb3.m3u8",
+   "latency_ms": 39,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb3.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb3.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb3.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -1898,96 +1589,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 24,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb4.m3u8",
+   "latency_ms": 27,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb4.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb4.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:antalyaspor|kayserispor",
-   "name": "20:00 Antalyaspor - Kayserispor",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 138,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebs2.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivebs2.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:antalyaspor|kayserisporyedek",
-   "name": "20:00 Antalyaspor - Kayserispor (Yedek)",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 240,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivenba.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivenba.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:igdirspor|keciorengucu",
-   "name": "20:00 Keçiörengücü - Iğdirspor",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 163,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb6.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb6.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:igdirsporyedek|keciorengucu",
-   "name": "20:00 Keçiörengücü - Iğdirspor (Yedek)",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 136,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebsm1.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivebsm1.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb4.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2003,7 +1610,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 130,
+   "latency_ms": 197,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebsm1.m3u8",
    "user_agent": "",
    "backups": [
@@ -2024,7 +1631,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 141,
+   "latency_ms": 177,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivebs2.m3u8",
    "user_agent": "",
    "backups": [
@@ -2037,20 +1644,20 @@
    ]
   },
   {
-   "key": "evt:buducnost|tofas",
-   "name": "20:00 Tofaş - Buducnost",
+   "key": "evt:anadoluefes|bayernmunihazericecanli",
+   "name": "20:30 Anadolu Efes - Bayern Münih (Azerice) CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 113,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrtsy.m3u8",
+   "latency_ms": 322,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamliveidm.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivetrtsy.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamliveidm.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2058,41 +1665,20 @@
    ]
   },
   {
-   "key": "evt:anadoluefes|bayernmunih",
-   "name": "20:30 Anadolu Efes - Bayern Münih",
+   "key": "evt:anadoluefes|bayernmunihcanli",
+   "name": "20:30 Anadolu Efes - Bayern Münih CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 172,
+   "latency_ms": 38,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivess2.m3u8",
    "user_agent": "",
    "backups": [
     {
      "url": "https://andro.3749206.xyz/checklist/androstreamlivess2.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:anadoluefes|bayernmunihazerice",
-   "name": "20:30 Anadolu Efes - Bayern Münih (Azerice)",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 42,
-   "url": "https://andro.3749206.xyz/checklist/androstreamliveidm.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamliveidm.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2108,7 +1694,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 158,
+   "latency_ms": 179,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
    "user_agent": "",
    "backups": [
@@ -2129,7 +1715,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 176,
+   "latency_ms": 165,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamliveht.m3u8",
    "user_agent": "",
    "backups": [
@@ -2142,20 +1728,20 @@
    ]
   },
   {
-   "key": "evt:alfaisalyamman|alnahda",
-   "name": "21:15 Al Faisaly Amman - Al Nahda",
+   "key": "evt:alfaisalyamman|alnahdacanli",
+   "name": "21:15 Al Faisaly Amman - Al Nahda CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 39,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivesm1.m3u8",
+   "latency_ms": 83,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm1.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivesm1.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivesm1.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2171,12 +1757,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 22,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivessplus1.m3u8",
+   "latency_ms": 19,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivessplus1.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2192,7 +1778,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 20,
+   "latency_ms": 38,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8",
    "user_agent": "",
    "backups": [
@@ -2205,20 +1791,20 @@
    ]
   },
   {
-   "key": "evt:paris|virtusbologna",
-   "name": "21:45 Paris - Virtus Bologna",
+   "key": "evt:paris|virtusbolognacanli",
+   "name": "21:45 Paris - Virtus Bologna CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 66,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
+   "latency_ms": 43,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivess1.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivess1.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2226,36 +1812,15 @@
    ]
   },
   {
-   "key": "evt:astonvilla|fenerbahce",
-   "name": "22:00 Aston Villa - Fenerbahçe",
+   "key": "evt:astonvilla|fenerbahceazericecanli",
+   "name": "22:00 Aston Villa - Fenerbahçe (Azerice) CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 257,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivetrt1.m3u8",
-   "user_agent": "",
-   "backups": [
-    {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrt1.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    }
-   ]
-  },
-  {
-   "key": "evt:astonvilla|fenerbahceazerice",
-   "name": "22:00 Aston Villa - Fenerbahçe (Azerice)",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 273,
+   "latency_ms": 373,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivecbcs.m3u8",
    "user_agent": "",
    "backups": [
@@ -2268,20 +1833,20 @@
    ]
   },
   {
-   "key": "evt:astonvilla|fenerbahcedeutsch",
-   "name": "22:00 Aston Villa - Fenerbahçe (Deutsch)",
+   "key": "evt:astonvilla|fenerbahcedeutschcanli",
+   "name": "22:00 Aston Villa - Fenerbahçe (Deutsch) CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 149,
-   "url": "https://andro.3749206.xyz/checklist/androstreamliveexn1.m3u8",
+   "latency_ms": 171,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamliveexn1.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamliveexn1.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamliveexn1.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2289,20 +1854,41 @@
    ]
   },
   {
-   "key": "evt:astonvilla|fenerbahceenglish",
-   "name": "22:00 Aston Villa - Fenerbahçe (English)",
+   "key": "evt:astonvilla|fenerbahceenglishcanli",
+   "name": "22:00 Aston Villa - Fenerbahçe (English) CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 276,
+   "latency_ms": 338,
    "url": "https://andro.3749206.xyz/checklist/androstreamliveexn2.m3u8",
    "user_agent": "",
    "backups": [
     {
      "url": "https://andro.mangeinde4.lat/checklist/androstreamliveexn2.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "netspor",
+     "user_agent": ""
+    }
+   ]
+  },
+  {
+   "key": "evt:astonvilla|fenerbahcecanli",
+   "name": "22:00 Aston Villa - Fenerbahçe CANLI",
+   "group": "CANLI MAÇLAR",
+   "logo": "",
+   "referrer": "https://taraftariumizle.org/",
+   "source": "netspor",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 375,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrt1.m3u8",
+   "user_agent": "",
+   "backups": [
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivetrt1.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2318,7 +1904,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 137,
+   "latency_ms": 171,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb1.m3u8",
    "user_agent": "",
    "backups": [
@@ -2331,20 +1917,20 @@
    ]
   },
   {
-   "key": "evt:bodoglimt|borussiadortmund",
-   "name": "22:00 Bodo Glimt - Borussia Dortmund",
+   "key": "evt:bodoglimt|borussiadortmundcanli",
+   "name": "22:00 Bodo Glimt - Borussia Dortmund CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 149,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb3.m3u8",
+   "latency_ms": 306,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb3.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb3.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb3.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2360,12 +1946,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 34,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb3.m3u8",
+   "latency_ms": 161,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb3.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb3.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb3.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2381,7 +1967,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 40,
+   "latency_ms": 176,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": [
@@ -2402,12 +1988,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 137,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb4.m3u8",
+   "latency_ms": 156,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb4.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb4.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb4.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2423,7 +2009,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 133,
+   "latency_ms": 35,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivecbcs.m3u8",
    "user_agent": "",
    "backups": [
@@ -2444,7 +2030,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 29,
+   "latency_ms": 162,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb5.m3u8",
    "user_agent": "",
    "backups": [
@@ -2457,15 +2043,15 @@
    ]
   },
   {
-   "key": "evt:lincolncity|westham",
-   "name": "22:00 Lincoln City - West Ham",
+   "key": "evt:lincolncity|westhamcanli",
+   "name": "22:00 Lincoln City - West Ham CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 270,
+   "latency_ms": 320,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8",
    "user_agent": "",
    "backups": [
@@ -2478,26 +2064,26 @@
    ]
   },
   {
-   "key": "evt:manchestercity|psg",
-   "name": "22:00 Manchester City - PSG",
+   "key": "evt:manchestercity|psgcanli",
+   "name": "22:00 Manchester City - PSG CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 26,
+   "latency_ms": 321,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamliveexn8.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
     },
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamliveexn8.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2519,7 +2105,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 141,
+   "latency_ms": 178,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb2.m3u8",
    "user_agent": "",
    "backups": [
@@ -2532,15 +2118,15 @@
    ]
   },
   {
-   "key": "evt:porto|realbetis",
-   "name": "22:00 Real Betis - Porto",
+   "key": "evt:portocanli|realbetis",
+   "name": "22:00 Real Betis - Porto CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 145,
+   "latency_ms": 309,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb4.m3u8",
    "user_agent": "",
    "backups": [
@@ -2561,12 +2147,12 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 162,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivess2.m3u8",
+   "latency_ms": 151,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivess2.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivess2.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivess2.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2574,20 +2160,20 @@
    ]
   },
   {
-   "key": "evt:realmadrid|roma",
-   "name": "22:00 Roma - Real Madrid",
+   "key": "evt:realmadridcanli|roma",
+   "name": "22:00 Roma - Real Madrid CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 49,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb1.m3u8",
+   "latency_ms": 172,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb1.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb1.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb1.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2595,20 +2181,20 @@
    ]
   },
   {
-   "key": "evt:aek|shakhtardonetsk",
-   "name": "22:00 Shakhtar Donetsk - AEK",
+   "key": "evt:aekcanli|shakhtardonetsk",
+   "name": "22:00 Shakhtar Donetsk - AEK CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 127,
-   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb2.m3u8",
+   "latency_ms": 177,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb2.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb2.m3u8",
+     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb2.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2616,20 +2202,20 @@
    ]
   },
   {
-   "key": "evt:slovanbratislava|stuttgart",
-   "name": "22:00 Slovan Bratislava - Stuttgart",
+   "key": "evt:slovanbratislava|stuttgartcanli",
+   "name": "22:00 Slovan Bratislava - Stuttgart CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 291,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb5.m3u8",
+   "latency_ms": 194,
+   "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb5.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetb5.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivetb5.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -2637,15 +2223,15 @@
    ]
   },
   {
-   "key": "evt:turktelekom|venezia",
-   "name": "22:00 Venezia - Türk Telekom",
+   "key": "evt:turktelekomcanli|venezia",
+   "name": "22:00 Venezia - Türk Telekom CANLI",
    "group": "CANLI MAÇLAR",
    "logo": "",
    "referrer": "https://taraftariumizle.org/",
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 147,
+   "latency_ms": 284,
    "url": "https://andro.mangeinde4.lat/checklist/androstreamlivetrtsy.m3u8",
    "user_agent": "",
    "backups": [

@@ -1,28 +1,28 @@
 {
- "generated_at": "14.10.2026 15:15:30",
- "scraped": 2500,
- "verified": 332,
- "published": 113,
+ "generated_at": "14.10.2026 19:30:37",
+ "scraped": 2544,
+ "verified": 299,
+ "published": 95,
  "families": {
   "seeds": "74 girdi",
   "topluluk": "2065 girdi",
+  "mahsun": "m3u8 0/18 (https://mahsunsports.com)",
   "taraftarium24": "https://taraftarium24-off12.com",
   "taraftarium24-mac": "0 mac",
-  "mahsun": "m3u8 0/18 (https://mahsunsports.com)",
-  "netspor": "2/7 sunucu aktif",
   "xsport": "https://www.xsportv-de596bbe2f.xyz",
-  "atom": "guncel-adres: https://atomsportv518.top | aday: 19/19",
+  "netspor": "2/7 sunucu aktif",
   "andro": "2/6 sunucu aktif",
-  "netspor-kayit": "482",
+  "netspor-kayit": "526",
+  "atom": "guncel-adres: https://atomsportv518.top | aday: 19/19",
   "selcuk": "https://www.sporcafe-0c2608ad69.xyz | 16 kanal",
   "kulisbet": "m3u8 28/28 (https://kulistvnew13.com)",
-  "inadina": "m3u8 28/28 (https://royaltv38.com)",
-  "pasizle": "m3u8 28/28 (https://pasizle864.com)"
+  "pasizle": "m3u8 28/28 (https://pasizle864.com)",
+  "inadina": "m3u8 28/28 (https://royaltv38.com)"
  },
  "by_source": {
   "andro": {
    "total": 40,
-   "ok": 37
+   "ok": 38
   },
   "atom": {
    "total": 38,
@@ -37,8 +37,8 @@
    "ok": 0
   },
   "netspor": {
-   "total": 482,
-   "ok": 225
+   "total": 526,
+   "ok": 196
   },
   "pasizle": {
    "total": 28,
@@ -54,7 +54,7 @@
   },
   "taraftarium": {
    "total": 27,
-   "ok": 23
+   "ok": 18
   },
   "topluluk": {
    "total": 1758,
@@ -62,21 +62,21 @@
   }
  },
  "failure_reasons": {
-  "not-a-stream": 631,
-  "http-403": 452,
-  "network-error": 373,
-  "http-404": 283,
-  "http-503": 167,
-  "http-502": 117,
-  "not-hls": 88,
-  "http-401": 41,
-  "segment-http-500": 8,
-  "segment-http-403": 7,
+  "not-a-stream": 672,
+  "network-error": 421,
+  "http-403": 371,
+  "http-404": 364,
+  "http-502": 159,
+  "http-503": 109,
+  "not-hls": 93,
+  "http-401": 49,
+  "segment-http-500": 4,
+  "segment-http-403": 2,
   "http-451": 1
  },
  "by_source_status": {
   "andro": {
-   "segment-http-403": 3
+   "segment-http-403": 2
   },
   "atom": {
    "network-error": 38
@@ -88,9 +88,8 @@
    "not-hls": 28
   },
   "netspor": {
-   "http-404": 246,
-   "segment-http-500": 8,
-   "segment-http-403": 3
+   "http-404": 326,
+   "segment-http-500": 4
   },
   "pasizle": {
    "not-hls": 28
@@ -102,18 +101,17 @@
    "http-404": 16
   },
   "taraftarium": {
-   "not-hls": 4
+   "not-hls": 9
   },
   "topluluk": {
-   "not-a-stream": 631,
-   "http-403": 452,
-   "network-error": 280,
-   "http-503": 167,
-   "http-502": 117,
-   "http-401": 41,
-   "http-404": 21,
-   "http-451": 1,
-   "segment-http-403": 1
+   "not-a-stream": 672,
+   "http-403": 371,
+   "network-error": 328,
+   "http-502": 159,
+   "http-503": 109,
+   "http-401": 49,
+   "http-404": 22,
+   "http-451": 1
   }
  }
 }
