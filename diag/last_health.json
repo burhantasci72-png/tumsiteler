@@ -1,8 +1,8 @@
 {
- "generated_at": "17.10.2026 06:18:11",
- "scraped": 2638,
- "verified": 456,
- "published": 160,
+ "generated_at": "17.10.2026 10:59:08",
+ "scraped": 2684,
+ "verified": 480,
+ "published": 169,
  "families": {
   "seeds": "74 girdi",
   "topluluk": "2065 girdi",
@@ -12,7 +12,7 @@
   "netspor": "2/7 sunucu aktif",
   "atom": "guncel-adres: https://atomsportv518.top | aday: 19/19",
   "andro": "2/6 sunucu aktif",
-  "netspor-kayit": "620",
+  "netspor-kayit": "666",
   "xsport": "https://www.xsportv-de596bbe2f.xyz",
   "selcuk": "https://www.sporcafe-0c2608ad69.xyz | 16 kanal",
   "kulisbet": "m3u8 28/28 (https://kulistvnew13.com)",
@@ -22,7 +22,7 @@
  "by_source": {
   "andro": {
    "total": 40,
-   "ok": 39
+   "ok": 40
   },
   "atom": {
    "total": 38,
@@ -37,8 +37,8 @@
    "ok": 0
   },
   "netspor": {
-   "total": 620,
-   "ok": 324
+   "total": 666,
+   "ok": 348
   },
   "pasizle": {
    "total": 28,
@@ -54,7 +54,7 @@
   },
   "taraftarium": {
    "total": 27,
-   "ok": 23
+   "ok": 22
   },
   "topluluk": {
    "total": 1758,
@@ -62,24 +62,20 @@
   }
  },
  "failure_reasons": {
-  "not-a-stream": 664,
-  "http-403": 358,
-  "http-404": 319,
-  "network-error": 317,
-  "http-503": 180,
-  "http-502": 179,
-  "not-hls": 87,
-  "http-401": 44,
-  "segment-http-403": 16,
+  "not-a-stream": 661,
+  "http-404": 355,
+  "http-403": 328,
+  "network-error": 324,
+  "http-502": 255,
+  "http-503": 131,
+  "not-hls": 89,
+  "http-401": 43,
   "http-500": 14,
   "segment-http-500": 2,
-  "segment-empty": 1,
-  "http-451": 1
+  "http-451": 1,
+  "no-segments": 1
  },
  "by_source_status": {
-  "andro": {
-   "segment-http-403": 1
-  },
   "atom": {
    "http-500": 14,
    "http-404": 2
@@ -91,8 +87,7 @@
    "not-hls": 28
   },
   "netspor": {
-   "http-404": 280,
-   "segment-http-403": 14,
+   "http-404": 316,
    "segment-http-500": 2
   },
   "pasizle": {
@@ -105,19 +100,18 @@
    "http-404": 16
   },
   "taraftarium": {
-   "not-hls": 3,
-   "segment-empty": 1
+   "not-hls": 5
   },
   "topluluk": {
-   "not-a-stream": 664,
-   "http-403": 358,
-   "network-error": 262,
-   "http-503": 180,
-   "http-502": 179,
-   "http-401": 44,
+   "not-a-stream": 661,
+   "http-403": 328,
+   "network-error": 269,
+   "http-502": 255,
+   "http-503": 131,
+   "http-401": 43,
    "http-404": 21,
    "http-451": 1,
-   "segment-http-403": 1
+   "no-segments": 1
   }
  }
 }
