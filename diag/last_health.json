@@ -1,20 +1,20 @@
 {
- "generated_at": "20.10.2026 13:54:27",
- "scraped": 2400,
- "verified": 284,
- "published": 84,
+ "generated_at": "20.10.2026 18:09:03",
+ "scraped": 2500,
+ "verified": 174,
+ "published": 54,
  "families": {
   "seeds": "74 girdi",
   "topluluk": "2065 girdi",
   "taraftarium24": "https://taraftarium24-off12.com",
   "taraftarium24-mac": "0 mac",
   "netspor": "2/7 sunucu aktif",
-  "andro": "2/6 sunucu aktif",
-  "netspor-kayit": "382",
   "mahsun": "m3u8 0/18 (https://mahsunsports.com)",
+  "andro": "2/6 sunucu aktif",
+  "netspor-kayit": "482",
   "xsport": "https://www.xsportv-de596bbe2f.xyz",
-  "selcuk": "https://www.sporcafe-0c2608ad69.xyz | 16 kanal",
   "atom": "guncel-adres: https://atomsportv519.top | aday: 19/19",
+  "selcuk": "https://www.sporcafe-0c2608ad69.xyz | 16 kanal",
   "kulisbet": "m3u8 28/28 (https://kulistvnew13.com)",
   "inadina": "m3u8 28/28 (https://royaltv38.com)",
   "pasizle": "m3u8 28/28 (https://pasizle864.com)"
@@ -22,7 +22,7 @@
  "by_source": {
   "andro": {
    "total": 40,
-   "ok": 40
+   "ok": 0
   },
   "atom": {
    "total": 38,
@@ -37,8 +37,8 @@
    "ok": 0
   },
   "netspor": {
-   "total": 382,
-   "ok": 172
+   "total": 482,
+   "ok": 109
   },
   "pasizle": {
    "total": 28,
@@ -58,24 +58,29 @@
   },
   "topluluk": {
    "total": 1758,
-   "ok": 48
+   "ok": 41
   }
  },
  "failure_reasons": {
-  "not-a-stream": 697,
-  "network-error": 371,
-  "http-403": 293,
-  "http-404": 243,
-  "http-502": 207,
-  "http-503": 132,
+  "not-a-stream": 660,
+  "network-error": 471,
+  "http-404": 334,
+  "http-403": 333,
+  "http-503": 164,
+  "http-502": 146,
   "not-hls": 111,
-  "http-401": 43,
+  "http-401": 46,
+  "http-521": 34,
   "http-500": 14,
-  "segment-http-403": 2,
+  "segment-http-503": 9,
   "segment-http-500": 2,
+  "segment-http-403": 1,
   "http-451": 1
  },
  "by_source_status": {
+  "andro": {
+   "network-error": 40
+  },
   "atom": {
    "http-500": 14
   },
@@ -86,8 +91,10 @@
    "not-hls": 28
   },
   "netspor": {
-   "http-404": 206,
-   "segment-http-403": 2,
+   "http-404": 297,
+   "network-error": 36,
+   "http-521": 34,
+   "segment-http-503": 4,
    "segment-http-500": 2
   },
   "pasizle": {
@@ -103,13 +110,15 @@
    "not-hls": 27
   },
   "topluluk": {
-   "not-a-stream": 697,
-   "network-error": 316,
-   "http-403": 293,
-   "http-502": 207,
-   "http-503": 132,
-   "http-401": 43,
+   "not-a-stream": 660,
+   "network-error": 340,
+   "http-403": 333,
+   "http-503": 164,
+   "http-502": 146,
+   "http-401": 46,
    "http-404": 21,
+   "segment-http-503": 5,
+   "segment-http-403": 1,
    "http-451": 1
   }
  }
