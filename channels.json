@@ -1,5 +1,5 @@
 ﻿{
- "generated_at": "21.10.2026 00:12:05",
+ "generated_at": "21.10.2026 05:02:57",
  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
  "categories": [
   "BEIN SPORTS",
@@ -11,8 +11,8 @@
   "CANLI MAÇLAR"
  ],
  "proxy": "",
- "count": 94,
- "verified": 94,
+ "count": 93,
+ "verified": 93,
  "channels": [
   {
    "key": "beinsports1",
@@ -23,10 +23,16 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 242,
+   "latency_ms": 254,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivebs1.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": [
+    {
+     "url": "https://rok.raalbatros.workers.dev/?ID=2671058892459103de77a",
+     "referrer": "",
+     "source": "topluluk",
+     "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"
+    },
     {
      "url": "https://tv.atomspor.workers.dev/?ID=bein-sports-1",
      "referrer": "https://www.atomsportv514.top",
@@ -44,7 +50,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 234,
+   "latency_ms": 432,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivebs2.m3u8",
    "user_agent": "",
    "backups": [
@@ -65,7 +71,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 267,
+   "latency_ms": 467,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivebs3.m3u8",
    "user_agent": "",
    "backups": [
@@ -86,7 +92,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 263,
+   "latency_ms": 495,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivebs4.m3u8",
    "user_agent": "",
    "backups": [
@@ -107,7 +113,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 319,
+   "latency_ms": 447,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivebs5.m3u8",
    "user_agent": "",
    "backups": [
@@ -128,29 +134,22 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 283,
+   "latency_ms": 370,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivebsm1.m3u8",
    "user_agent": "",
-   "backups": [
-    {
-     "url": "https://tv.atomspor.workers.dev/?ID=bein-sports-max-1",
-     "referrer": "https://www.atomsportv514.top",
-     "source": "atom",
-     "user_agent": ""
-    }
-   ]
+   "backups": []
   },
   {
    "key": "beinsportsmax2",
    "name": "beIN Sports Max 2",
    "group": "BEIN SPORTS",
-   "logo": "",
-   "referrer": "https://www.atomsportv514.top",
-   "source": "atom",
+   "logo": "https://bit.ly/3175vmj",
+   "referrer": "https://trgoals1537.xyz",
+   "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 2694,
-   "url": "https://tv.atomspor.workers.dev/?ID=bein-sports-max-2",
+   "latency_ms": 411,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivebsm2.m3u8",
    "user_agent": "",
    "backups": []
   },
@@ -163,7 +162,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok-master",
-   "latency_ms": 192,
+   "latency_ms": 466,
    "url": "https://tgn.bozztv.com/eshgtv-dvrfl05/gin-beinsportshaber/index.m3u8",
    "user_agent": "",
    "backups": [
@@ -184,7 +183,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 300,
+   "latency_ms": 473,
    "url": "https://ladyboy.ardastream2.cfd//beintv/tracks-v1a1/mono.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -198,7 +197,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 255,
+   "latency_ms": 452,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivebiraz1.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -212,7 +211,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 423,
+   "latency_ms": 289,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8",
    "user_agent": "",
    "backups": []
@@ -226,7 +225,7 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 289,
+   "latency_ms": 359,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
    "user_agent": "",
    "backups": [
@@ -247,7 +246,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 259,
+   "latency_ms": 457,
    "url": "https://ladyboy.yedektv.cfd//s-sport2/tracks-v1a1/mono.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": [
@@ -269,29 +268,29 @@
    "key": "tivibuspor1",
    "name": "Tivibu Spor 1",
    "group": "TİVİBU SPOR",
-   "logo": "https://i0.wp.com/resim.yayins.com/spor/tivibusp1.png",
-   "referrer": "https://trgoals1537.xyz",
+   "logo": "https://i0.wp.com/resim.yayins.com/spor/tivibu3.png",
+   "referrer": "https://trgoals1537.xyz/",
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 206,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivets1.m3u8",
+   "latency_ms": 324,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivets3.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivets3.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivets1.m3u8",
+     "referrer": "https://trgoals1537.xyz",
+     "source": "topluluk",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivets4.m3u8",
      "referrer": "https://trgoals1537.xyz/",
      "source": "topluluk",
      "user_agent": ""
     },
     {
      "url": "https://andro.3749206.xyz/checklist/androstreamlivets2.m3u8",
-     "referrer": "https://trgoals1537.xyz/",
-     "source": "topluluk",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamlivets4.m3u8",
      "referrer": "https://trgoals1537.xyz/",
      "source": "topluluk",
      "user_agent": ""
@@ -313,7 +312,7 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 422,
+   "latency_ms": 9225,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivets2.m3u8",
    "user_agent": "",
    "backups": []
@@ -327,7 +326,7 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 423,
+   "latency_ms": 369,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivets3.m3u8",
    "user_agent": "",
    "backups": []
@@ -341,7 +340,7 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 384,
+   "latency_ms": 378,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivets4.m3u8",
    "user_agent": "",
    "backups": []
@@ -355,7 +354,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 437,
+   "latency_ms": 340,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetrtsy.m3u8",
    "user_agent": "",
    "backups": []
@@ -369,7 +368,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 200,
+   "latency_ms": 312,
    "url": "https://ladyboy.yedektv.cfd//trt-spor/tracks-v1a1/mono.m3u8",
    "user_agent": "",
    "backups": [
@@ -396,10 +395,16 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 249,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivetrt1.m3u8",
+   "latency_ms": 321,
+   "url": "http://89.187.191.41/TRT-1-HD-TR/tracks-v1a1/mono.ts.m3u8",
    "user_agent": "",
    "backups": [
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamlivetrt1.m3u8",
+     "referrer": "",
+     "source": "topluluk",
+     "user_agent": ""
+    },
     {
      "url": "http://80.82.64.16:8080/live/iptv.kosiptv.comNEW/gJUP3KsM2ENEW/172cb6d9-ed1a-4038-abb6-e3a26dcb0bb6.m3u",
      "referrer": "",
@@ -423,7 +428,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 361,
+   "latency_ms": 377,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb1.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -437,7 +442,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 186,
+   "latency_ms": 397,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb2.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -446,14 +451,14 @@
    "key": "tabiispor3",
    "name": "Tabii Spor 3",
    "group": "TABİİ SPOR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
+   "logo": "https://i0.wp.com/resim.yayins.com/spor/tabii3.png",
+   "referrer": "",
+   "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 433,
+   "latency_ms": 368,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb3.m3u8",
-   "user_agent": "",
+   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
   },
   {
@@ -465,7 +470,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 218,
+   "latency_ms": 364,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb4.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -479,7 +484,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 181,
+   "latency_ms": 320,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb5.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -493,7 +498,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 276,
+   "latency_ms": 342,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb6.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -507,7 +512,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 157,
+   "latency_ms": 194,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb7.m3u8",
    "user_agent": "",
    "backups": []
@@ -521,7 +526,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 218,
+   "latency_ms": 326,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": [
@@ -548,7 +553,7 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 368,
+   "latency_ms": 366,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivesm1.m3u8",
    "user_agent": "",
    "backups": []
@@ -562,7 +567,7 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 376,
+   "latency_ms": 367,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivesm2.m3u8",
    "user_agent": "",
    "backups": []
@@ -576,7 +581,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 301,
+   "latency_ms": 407,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
    "user_agent": "",
    "backups": []
@@ -590,7 +595,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 276,
+   "latency_ms": 374,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivess2.m3u8",
    "user_agent": "",
    "backups": []
@@ -604,7 +609,7 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 9161,
+   "latency_ms": 9284,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivees1.m3u8",
    "user_agent": "",
    "backups": []
@@ -618,7 +623,7 @@
    "source": "andro",
    "verified": true,
    "status": "ok",
-   "latency_ms": 380,
+   "latency_ms": 402,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivees2.m3u8",
    "user_agent": "",
    "backups": []
@@ -632,18 +637,18 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 553,
+   "latency_ms": 371,
    "url": "https://andro.3749206.xyz/checklist/androstreamliveas.m3u8",
    "user_agent": "",
    "backups": [
     {
-     "url": "http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
+     "url": "http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor_1080p.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "topluluk",
      "user_agent": ""
     },
     {
-     "url": "http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor_1080p.m3u8",
+     "url": "http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "topluluk",
      "user_agent": ""
@@ -665,7 +670,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 228,
+   "latency_ms": 397,
    "url": "https://andro.3749206.xyz/checklist/androstreamliveatv.m3u8",
    "user_agent": "",
    "backups": []
@@ -679,7 +684,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 513,
+   "latency_ms": 326,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetv85.m3u8",
    "user_agent": "",
    "backups": [
@@ -700,7 +705,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 199,
+   "latency_ms": 321,
    "url": "http://89.187.191.41/TV8-HD-TR/tracks-v1a1/mono.ts.m3u8",
    "user_agent": "",
    "backups": [
@@ -727,10 +732,28 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 181,
-   "url": "https://andro.3749206.xyz/checklist/androstreamliveexn6.m3u8",
+   "latency_ms": 154,
+   "url": "https://andro.3749206.xyz/checklist/androstreamliveexn2.m3u8",
    "user_agent": "",
    "backups": [
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamliveexn.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "netspor",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamliveexn6.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "netspor",
+     "user_agent": ""
+    },
+    {
+     "url": "https://andro.3749206.xyz/checklist/androstreamliveexn4.m3u8",
+     "referrer": "https://taraftariumizle.org/",
+     "source": "netspor",
+     "user_agent": ""
+    },
     {
      "url": "https://andro.3749206.xyz/checklist/androstreamliveexn5.m3u8",
      "referrer": "https://taraftariumizle.org/",
@@ -744,31 +767,13 @@
      "user_agent": ""
     },
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamliveexn4.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamliveexn8.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    },
-    {
      "url": "https://andro.3749206.xyz/checklist/androstreamliveexn3.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
     },
     {
-     "url": "https://andro.3749206.xyz/checklist/androstreamliveexn.m3u8",
-     "referrer": "https://taraftariumizle.org/",
-     "source": "netspor",
-     "user_agent": ""
-    },
-    {
-     "url": "https://andro.3749206.xyz/checklist/androstreamliveexn2.m3u8",
+     "url": "https://andro.3749206.xyz/checklist/androstreamliveexn8.m3u8",
      "referrer": "https://taraftariumizle.org/",
      "source": "netspor",
      "user_agent": ""
@@ -784,7 +789,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 515,
+   "latency_ms": 421,
    "url": "https://andro.3749206.xyz/checklist/androstreamliveidm.m3u8",
    "user_agent": "",
    "backups": []
@@ -798,7 +803,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 249,
+   "latency_ms": 183,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivecbcs.m3u8",
    "user_agent": "",
    "backups": []
@@ -812,7 +817,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 547,
+   "latency_ms": 182,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivenba.m3u8",
    "user_agent": "",
    "backups": []
@@ -826,7 +831,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 454,
+   "latency_ms": 330,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetjk.m3u8",
    "user_agent": "",
    "backups": []
@@ -840,7 +845,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 534,
+   "latency_ms": 210,
    "url": "https://andro.3749206.xyz/checklist/androstreamliveredb.m3u8",
    "user_agent": "",
    "backups": []
@@ -854,7 +859,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 448,
+   "latency_ms": 166,
    "url": "https://andro.3749206.xyz/checklist/androstreamliveht.m3u8",
    "user_agent": "",
    "backups": [
@@ -881,7 +886,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 231,
+   "latency_ms": 338,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivefb.m3u8",
    "user_agent": "",
    "backups": [
@@ -902,7 +907,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 217,
+   "latency_ms": 312,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivegs.m3u8",
    "user_agent": "",
    "backups": []
@@ -916,7 +921,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 356,
+   "latency_ms": 377,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivesptstv.m3u8",
    "user_agent": "",
    "backups": []
@@ -930,7 +935,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 515,
+   "latency_ms": 195,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivea2.m3u8",
    "user_agent": "",
    "backups": []
@@ -944,7 +949,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 243,
+   "latency_ms": 218,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivebs1.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -958,23 +963,9 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 156,
+   "latency_ms": 166,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivebiraz1.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
-   "backups": []
-  },
-  {
-   "key": "evt:newyorkknicks|philadelphia76erscanli",
-   "name": "02:00 New York Knicks - Philadelphia 76ers CANLI",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 503,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
-   "user_agent": "",
    "backups": []
   },
   {
@@ -986,21 +977,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 254,
-   "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
-   "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "evt:okcthunder|saspurs",
-   "name": "04:30 SA Spurs - OKC Thunder",
-   "group": "CANLI MAÇLAR",
-   "logo": "",
-   "referrer": "https://taraftariumizle.org/",
-   "source": "netspor",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 312,
+   "latency_ms": 285,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
    "user_agent": "",
    "backups": []
@@ -1014,7 +991,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 443,
+   "latency_ms": 278,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
    "user_agent": "",
    "backups": []
@@ -1028,7 +1005,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 526,
+   "latency_ms": 347,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetrtsy.m3u8",
    "user_agent": "",
    "backups": []
@@ -1042,7 +1019,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 452,
+   "latency_ms": 417,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivess2.m3u8",
    "user_agent": "",
    "backups": []
@@ -1056,7 +1033,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 447,
+   "latency_ms": 113,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1070,7 +1047,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 397,
+   "latency_ms": 323,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1084,7 +1061,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 461,
+   "latency_ms": 9,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1098,7 +1075,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 189,
+   "latency_ms": 54,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1112,7 +1089,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 46,
+   "latency_ms": 123,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1126,7 +1103,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 9062,
+   "latency_ms": 48,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1140,7 +1117,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 123,
+   "latency_ms": 70,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1154,7 +1131,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 9167,
+   "latency_ms": 9261,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivecbcs.m3u8",
    "user_agent": "",
    "backups": []
@@ -1168,7 +1145,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 127,
+   "latency_ms": 226,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1182,7 +1159,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 167,
+   "latency_ms": 85,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1196,7 +1173,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 65,
+   "latency_ms": 255,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1210,7 +1187,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 212,
+   "latency_ms": 325,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetrt1.m3u8",
    "user_agent": "",
    "backups": []
@@ -1224,7 +1201,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 15,
+   "latency_ms": 9238,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
    "user_agent": "",
    "backups": []
@@ -1238,7 +1215,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 219,
+   "latency_ms": 341,
    "url": "https://andro.3749206.xyz/checklist/androstreamliveht.m3u8",
    "user_agent": "",
    "backups": []
@@ -1252,7 +1229,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 484,
+   "latency_ms": 133,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetrtsy.m3u8",
    "user_agent": "",
    "backups": []
@@ -1266,7 +1243,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 209,
+   "latency_ms": 309,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8",
    "user_agent": "",
    "backups": []
@@ -1280,7 +1257,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 318,
+   "latency_ms": 60,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8",
    "user_agent": "",
    "backups": []
@@ -1294,7 +1271,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 209,
+   "latency_ms": 296,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8",
    "user_agent": "",
    "backups": []
@@ -1308,7 +1285,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 171,
+   "latency_ms": 284,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8",
    "user_agent": "",
    "backups": []
@@ -1322,7 +1299,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 113,
+   "latency_ms": 9196,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8",
    "user_agent": "",
    "backups": []
@@ -1336,7 +1313,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 27,
+   "latency_ms": 26,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivess2.m3u8",
    "user_agent": "",
    "backups": []
@@ -1350,7 +1327,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 412,
+   "latency_ms": 336,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb3.m3u8",
    "user_agent": "",
    "backups": []
@@ -1364,7 +1341,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 9204,
+   "latency_ms": 117,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1378,7 +1355,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 23,
+   "latency_ms": 34,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivecbcs.m3u8",
    "user_agent": "",
    "backups": []
@@ -1392,7 +1369,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 28,
+   "latency_ms": 26,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1406,7 +1383,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 49,
+   "latency_ms": 25,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1420,7 +1397,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 489,
+   "latency_ms": 388,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb6.m3u8",
    "user_agent": "",
    "backups": []
@@ -1434,8 +1411,22 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 44,
+   "latency_ms": 180,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
+   "user_agent": "",
+   "backups": []
+  },
+  {
+   "key": "evt:inter|shakhtardonetsk",
+   "name": "22:00 Inter - Shakhtar Donetsk",
+   "group": "CANLI MAÇLAR",
+   "logo": "",
+   "referrer": "https://taraftariumizle.org/",
+   "source": "netspor",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 127,
+   "url": "https://andro.3749206.xyz/checklist/androstreamlivetb2.m3u8",
    "user_agent": "",
    "backups": []
   },
@@ -1448,7 +1439,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 52,
+   "latency_ms": 34,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1462,7 +1453,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 43,
+   "latency_ms": 28,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1476,7 +1467,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 49,
+   "latency_ms": 23,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1490,7 +1481,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 36,
+   "latency_ms": 12,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1504,7 +1495,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 56,
+   "latency_ms": 31,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
@@ -1518,7 +1509,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 535,
+   "latency_ms": 398,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb4.m3u8",
    "user_agent": "",
    "backups": []
@@ -1532,7 +1523,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 488,
+   "latency_ms": 464,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivecbcs.m3u8",
    "user_agent": "",
    "backups": []
@@ -1546,7 +1537,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 9141,
+   "latency_ms": 9212,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb5.m3u8",
    "user_agent": "",
    "backups": []
@@ -1560,7 +1551,7 @@
    "source": "netspor",
    "verified": true,
    "status": "ok",
-   "latency_ms": 26,
+   "latency_ms": 59,
    "url": "https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8",
    "user_agent": "",
    "backups": []
