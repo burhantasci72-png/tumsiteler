@@ -1,28 +1,28 @@
 {
- "generated_at": "21.10.2026 22:31:05",
- "scraped": 2191,
- "verified": 202,
+ "generated_at": "22.10.2026 01:01:52",
+ "scraped": 2213,
+ "verified": 201,
  "published": 115,
  "families": {
   "seeds": "74 girdi",
   "topluluk": "2065 girdi",
-  "mahsun": "m3u8 0/18 (https://mahsunsports.com)",
-  "netspor": "1/7 sunucu aktif",
-  "atom": "guncel-adres: https://atomsportv519.top | aday: 19/19",
-  "andro": "1/6 sunucu aktif",
-  "netspor-kayit": "193",
   "taraftarium24": "https://taraftarium24-off12.com",
-  "xsport": "https://www.xsportv-de596bbe2f.xyz",
   "taraftarium24-mac": "0 mac",
+  "netspor": "1/7 sunucu aktif",
+  "mahsun": "m3u8 0/18 (https://mahsunsports.com)",
+  "andro": "1/6 sunucu aktif",
+  "netspor-kayit": "215",
+  "xsport": "https://www.xsportv-de596bbe2f.xyz",
+  "atom": "guncel-adres: https://atomsportv519.top | aday: 19/19",
   "selcuk": "https://www.sporcafe-0c2608ad69.xyz | 16 kanal",
-  "inadina": "m3u8 28/28 (https://royaltv38.com)",
   "kulisbet": "m3u8 28/28 (https://kulistvnew13.com)",
+  "inadina": "m3u8 28/28 (https://royaltv38.com)",
   "pasizle": "m3u8 28/28 (https://pasizle864.com)"
  },
  "by_source": {
   "andro": {
    "total": 20,
-   "ok": 20
+   "ok": 19
   },
   "atom": {
    "total": 38,
@@ -37,7 +37,7 @@
    "ok": 0
   },
   "netspor": {
-   "total": 193,
+   "total": 215,
    "ok": 117
   },
   "pasizle": {
@@ -62,20 +62,23 @@
   }
  },
  "failure_reasons": {
-  "not-a-stream": 654,
-  "http-403": 367,
-  "network-error": 356,
-  "http-502": 207,
-  "http-404": 115,
-  "http-503": 112,
+  "not-a-stream": 657,
+  "network-error": 371,
+  "http-403": 302,
+  "http-502": 221,
+  "http-503": 147,
+  "http-404": 137,
   "not-hls": 111,
-  "http-401": 49,
+  "http-401": 47,
   "http-500": 14,
-  "segment-http-403": 2,
+  "segment-http-403": 3,
   "http-451": 1,
   "segment-http-500": 1
  },
  "by_source_status": {
+  "andro": {
+   "segment-http-403": 1
+  },
   "atom": {
    "http-500": 14,
    "http-404": 4
@@ -87,7 +90,7 @@
    "not-hls": 28
   },
   "netspor": {
-   "http-404": 74,
+   "http-404": 96,
    "segment-http-403": 1,
    "segment-http-500": 1
   },
@@ -104,15 +107,15 @@
    "not-hls": 27
   },
   "topluluk": {
-   "not-a-stream": 654,
-   "http-403": 367,
-   "network-error": 301,
-   "http-502": 207,
-   "http-503": 112,
-   "http-401": 49,
+   "not-a-stream": 657,
+   "network-error": 316,
+   "http-403": 302,
+   "http-502": 221,
+   "http-503": 147,
+   "http-401": 47,
    "http-404": 21,
-   "segment-http-403": 1,
-   "http-451": 1
+   "http-451": 1,
+   "segment-http-403": 1
   }
  }
 }
