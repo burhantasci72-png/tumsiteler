@@ -1,18 +1,18 @@
 {
- "generated_at": "27.10.2026 14:42:08",
- "scraped": 2161,
- "verified": 162,
- "published": 96,
+ "generated_at": "27.10.2026 19:42:34",
+ "scraped": 2251,
+ "verified": 144,
+ "published": 82,
  "families": {
   "seeds": "74 girdi",
   "topluluk": "2065 girdi",
   "netspor": "1/7 sunucu aktif",
+  "xsport": "https://www.xsportv-de596bbe2f.xyz",
   "mahsun": "m3u8 0/18 (https://mahsunsports.com)",
   "andro": "1/6 sunucu aktif",
-  "netspor-kayit": "207",
+  "netspor-kayit": "297",
   "atom": "guncel-adres: https://atomsportv519.top | aday: 19/19",
   "pasizle": "m3u8 0/28 (https://golvar559.sbs)",
-  "xsport": "https://www.xsportv-de596bbe2f.xyz",
   "taraftarium24": "https://taraftarium24-off12.com",
   "taraftarium24-mac": "0 mac",
   "kulisbet": "m3u8 28/28 (https://kulistvnew13.com)",
@@ -37,8 +37,8 @@
    "ok": 0
   },
   "netspor": {
-   "total": 207,
-   "ok": 100
+   "total": 297,
+   "ok": 85
   },
   "seeds": {
    "total": 55,
@@ -50,23 +50,23 @@
   },
   "topluluk": {
    "total": 1758,
-   "ok": 43
+   "ok": 40
   }
  },
  "failure_reasons": {
-  "not-a-stream": 724,
-  "network-error": 368,
-  "http-403": 324,
-  "http-502": 149,
-  "http-404": 121,
-  "http-503": 117,
+  "http-503": 620,
+  "http-403": 583,
+  "http-404": 226,
+  "network-error": 178,
+  "not-a-stream": 155,
+  "http-429": 100,
   "not-hls": 83,
-  "http-401": 45,
+  "http-502": 66,
+  "http-401": 44,
   "http-500": 38,
-  "http-429": 17,
   "segment-http-500": 11,
-  "http-451": 1,
-  "segment-http-403": 1
+  "segment-http-401": 2,
+  "http-451": 1
  },
  "by_source_status": {
   "andro": {
@@ -82,7 +82,7 @@
    "not-hls": 28
   },
   "netspor": {
-   "http-404": 100,
+   "http-404": 205,
    "segment-http-500": 7
   },
   "seeds": {
@@ -92,17 +92,17 @@
    "not-hls": 27
   },
   "topluluk": {
-   "not-a-stream": 724,
-   "http-403": 324,
-   "network-error": 313,
-   "http-502": 149,
-   "http-503": 117,
-   "http-401": 45,
+   "http-503": 620,
+   "http-403": 583,
+   "not-a-stream": 155,
+   "network-error": 123,
+   "http-429": 100,
+   "http-502": 66,
+   "http-401": 44,
    "http-404": 21,
-   "http-429": 17,
    "segment-http-500": 3,
-   "http-451": 1,
-   "segment-http-403": 1
+   "segment-http-401": 2,
+   "http-451": 1
   }
  }
 }
