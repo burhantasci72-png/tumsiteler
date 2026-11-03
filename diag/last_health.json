@@ -1,8 +1,8 @@
 {
- "generated_at": "03.11.2026 03:15:17",
- "scraped": 2168,
- "verified": 127,
- "published": 68,
+ "generated_at": "03.11.2026 11:05:46",
+ "scraped": 2217,
+ "verified": 144,
+ "published": 85,
  "families": {
   "seeds": "74 girdi",
   "topluluk": "2065 girdi",
@@ -13,7 +13,7 @@
   "xsport": "https://www.xsportv-de596bbe2f.xyz",
   "atom": "guncel-adres: https://atomsportv519.top | aday: 19/19",
   "andro": "1/6 sunucu aktif",
-  "netspor-kayit": "214",
+  "netspor-kayit": "263",
   "pasizle": "m3u8 0/28 (https://golvar559.sbs)",
   "kulisbet": "m3u8 28/28 (https://kulistvnew13.com)",
   "inadina": "m3u8 28/28 (https://royaltv39.com)",
@@ -22,7 +22,7 @@
  "by_source": {
   "andro": {
    "total": 20,
-   "ok": 17
+   "ok": 18
   },
   "atom": {
    "total": 38,
@@ -37,8 +37,8 @@
    "ok": 0
   },
   "netspor": {
-   "total": 214,
-   "ok": 74
+   "total": 263,
+   "ok": 89
   },
   "seeds": {
    "total": 55,
@@ -50,28 +50,26 @@
   },
   "topluluk": {
    "total": 1758,
-   "ok": 36
+   "ok": 37
   }
  },
  "failure_reasons": {
-  "http-403": 469,
-  "not-a-stream": 442,
-  "network-error": 333,
-  "http-503": 253,
-  "http-404": 149,
-  "http-502": 146,
-  "http-429": 96,
+  "http-403": 471,
+  "http-503": 430,
+  "network-error": 341,
+  "not-a-stream": 316,
+  "http-404": 186,
+  "http-502": 107,
   "not-hls": 83,
+  "http-429": 73,
   "http-401": 46,
-  "segment-http-500": 20,
-  "segment-http-403": 2,
+  "segment-http-500": 18,
   "http-451": 1,
   "segment-http-401": 1
  },
  "by_source_status": {
   "andro": {
-   "segment-http-500": 2,
-   "segment-http-403": 1
+   "segment-http-500": 2
   },
   "atom": {
    "network-error": 38
@@ -83,9 +81,8 @@
    "not-hls": 28
   },
   "netspor": {
-   "http-404": 125,
-   "segment-http-500": 14,
-   "segment-http-403": 1
+   "http-404": 162,
+   "segment-http-500": 12
   },
   "seeds": {
    "network-error": 55
@@ -94,12 +91,12 @@
    "not-hls": 27
   },
   "topluluk": {
-   "http-403": 469,
-   "not-a-stream": 442,
-   "http-503": 253,
-   "network-error": 240,
-   "http-502": 146,
-   "http-429": 96,
+   "http-403": 471,
+   "http-503": 430,
+   "not-a-stream": 316,
+   "network-error": 248,
+   "http-502": 107,
+   "http-429": 73,
    "http-401": 46,
    "http-404": 24,
    "segment-http-500": 4,
