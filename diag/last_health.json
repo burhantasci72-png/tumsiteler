@@ -1,8 +1,8 @@
 {
- "generated_at": "05.11.2026 00:01:26",
- "scraped": 2174,
- "verified": 171,
- "published": 107,
+ "generated_at": "05.11.2026 07:03:16",
+ "scraped": 2163,
+ "verified": 169,
+ "published": 104,
  "families": {
   "seeds": "74 girdi",
   "topluluk": "2065 girdi",
@@ -12,7 +12,7 @@
   "netspor": "1/7 sunucu aktif",
   "atom": "guncel-adres: https://atomsportv519.top | aday: 19/19",
   "xsport": "https://www.xsportv-de596bbe2f.xyz",
-  "netspor-kayit": "220",
+  "netspor-kayit": "209",
   "andro": "1/6 sunucu aktif",
   "pasizle": "m3u8 0/28 (https://golvar559.sbs)",
   "kulisbet": "m3u8 28/28 (https://kulistvnew13.com)",
@@ -37,8 +37,8 @@
    "ok": 0
   },
   "netspor": {
-   "total": 220,
-   "ok": 112
+   "total": 209,
+   "ok": 109
   },
   "seeds": {
    "total": 55,
@@ -50,21 +50,21 @@
   },
   "topluluk": {
    "total": 1758,
-   "ok": 39
+   "ok": 40
   }
  },
  "failure_reasons": {
-  "not-a-stream": 752,
-  "http-403": 312,
-  "network-error": 306,
-  "http-502": 128,
-  "http-404": 125,
-  "http-503": 123,
+  "not-a-stream": 638,
+  "http-403": 420,
+  "network-error": 325,
+  "http-502": 170,
+  "http-404": 117,
+  "http-503": 107,
   "not-hls": 83,
-  "http-429": 82,
-  "http-401": 43,
+  "http-401": 51,
   "http-500": 38,
-  "segment-http-404": 5,
+  "http-429": 35,
+  "segment-http-404": 4,
   "segment-http-500": 4,
   "http-451": 1,
   "segment-http-401": 1
@@ -80,7 +80,7 @@
    "not-hls": 28
   },
   "netspor": {
-   "http-404": 104,
+   "http-404": 96,
    "segment-http-500": 4
   },
   "seeds": {
@@ -90,15 +90,15 @@
    "not-hls": 27
   },
   "topluluk": {
-   "not-a-stream": 752,
-   "http-403": 312,
-   "network-error": 251,
-   "http-502": 128,
-   "http-503": 123,
-   "http-429": 82,
-   "http-401": 43,
+   "not-a-stream": 638,
+   "http-403": 420,
+   "network-error": 270,
+   "http-502": 170,
+   "http-503": 107,
+   "http-401": 51,
+   "http-429": 35,
    "http-404": 21,
-   "segment-http-404": 5,
+   "segment-http-404": 4,
    "http-451": 1,
    "segment-http-401": 1
   }
