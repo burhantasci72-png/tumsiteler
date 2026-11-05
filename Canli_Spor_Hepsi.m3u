@@ -1,6 +1,6 @@
 ﻿#EXTM3U
-# Son Guncelleme: 04.11.2026 18:56:07
-# Kanal: 86 | Dogrulanan: 86
+# Son Guncelleme: 05.11.2026 00:01:26
+# Kanal: 107 | Dogrulanan: 107
 #EXTINF:-1 tvg-id="beinsports1" tvg-name="beIN Sports 1" group-title="BEIN SPORTS" tvg-logo="https://bit.ly/3f86zet",beIN Sports 1
 #EXTVLCOPT:http-user-agent=Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)
 #EXTHTTP:{"User-Agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"}
@@ -33,12 +33,10 @@ https://andro.3749206.xyz/checklist/androstreamlivebsm1.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://trgoals1537.xyz"}
 https://andro.3749206.xyz/checklist/androstreamlivebsm2.m3u8
-#EXTINF:-1 tvg-id="beinsportshaber" tvg-name="beIN Sports Haber" group-title="BEIN SPORTS",beIN Sports Haber
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTINF:-1 tvg-id="beinsportshaber" tvg-name="beIN Sports Haber" group-title="BEIN SPORTS" tvg-logo="https://bit.ly/302Lfmo",beIN Sports Haber
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivebsh.m3u8
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
+https://tgn.bozztv.com/eshgtv-dvrfl05/gin-beinsportshaber/index.m3u8
 #EXTINF:-1 tvg-id="raw:webbeinsports" tvg-name="WeB BeIN Sports++" group-title="BEIN SPORTS" tvg-logo="https://bit.ly/3f86zet",WeB BeIN Sports++
 #EXTVLCOPT:http-user-agent=Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)
 #EXTHTTP:{"User-Agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"}
@@ -100,16 +98,14 @@ https://andro.3749206.xyz/checklist/androstreamlivetrts.m3u8
 #EXTINF:-1 tvg-id="trt1" tvg-name="TRT 1" group-title="TRT SPOR" tvg-logo="https://www.lyngsat-logo.com/logo/tv/tt/trt1.png",TRT 1
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
-http://89.187.191.41/TRT-1-HD-TR/tracks-v1a1/mono.ts.m3u8
+https://andro.3749206.xyz/checklist/androstreamlivetrt1.m3u8
 #EXTINF:-1 tvg-id="tabiispor1" tvg-name="Tabii Spor 1" group-title="TABİİ SPOR" tvg-logo="https://i0.wp.com/resim.yayins.com/spor/tabii1.png",Tabii Spor 1
 #EXTVLCOPT:http-user-agent=Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)
 #EXTHTTP:{"User-Agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"}
 https://andro.3749206.xyz/checklist/androstreamlivetb1.m3u8
-#EXTINF:-1 tvg-id="tabiispor2" tvg-name="Tabii Spor 2" group-title="TABİİ SPOR",Tabii Spor 2
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+#EXTINF:-1 tvg-id="tabiispor2" tvg-name="Tabii Spor 2" group-title="TABİİ SPOR" tvg-logo="https://i0.wp.com/resim.yayins.com/spor/tabii2.png",Tabii Spor 2
+#EXTVLCOPT:http-user-agent=Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)
+#EXTHTTP:{"User-Agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"}
 https://andro.3749206.xyz/checklist/androstreamlivetb2.m3u8
 #EXTINF:-1 tvg-id="tabiispor3" tvg-name="Tabii Spor 3" group-title="TABİİ SPOR" tvg-logo="https://i0.wp.com/resim.yayins.com/spor/tabii3.png",Tabii Spor 3
 #EXTVLCOPT:http-user-agent=Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)
@@ -175,10 +171,12 @@ https://andro.3749206.xyz/checklist/androstreamlivees1.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivees2.m3u8
-#EXTINF:-1 tvg-id="aspor" tvg-name="A Spor" group-title="DİĞER SPOR KANALLARI" tvg-logo="https://i.imgur.com/NYeAXXj.png",A Spor
+#EXTINF:-1 tvg-id="aspor" tvg-name="A Spor" group-title="DİĞER SPOR KANALLARI",A Spor
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
-http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamliveas.m3u8
 #EXTINF:-1 tvg-id="atv" tvg-name="ATV" group-title="DİĞER SPOR KANALLARI" tvg-logo="https://www.lyngsat-logo.com/logo/tv/aa/atv_tr.png",ATV
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
@@ -198,7 +196,7 @@ http://89.187.191.41/TV8-HD-TR/tracks-v1a1/mono.ts.m3u8
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamliveexn2.m3u8
+https://andro.3749206.xyz/checklist/androstreamliveexn.m3u8
 #EXTINF:-1 tvg-id="idmantv" tvg-name="İdman TV" group-title="DİĞER SPOR KANALLARI",İdman TV
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
@@ -241,13 +239,73 @@ https://andro.3749206.xyz/checklist/androstreamlivegs.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivesptstv.m3u8
+#EXTINF:-1 tvg-id="raw:antrenman1900katargp" tvg-name="Antrenman 19:00 | Katar GP" group-title="DİĞER SPOR KANALLARI",Antrenman 19:00 | Katar GP
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivess2.m3u8
+#EXTINF:-1 tvg-id="raw:antrenmanturlari11830saopaulogp" tvg-name="Antrenman Turlari-1 18:30 | Sao Paulo GP" group-title="DİĞER SPOR KANALLARI",Antrenman Turlari-1 18:30 | Sao Paulo GP
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivebs4.m3u8
+#EXTINF:-1 tvg-id="raw:antrenmanturlari22200saopaulogp" tvg-name="Antrenman Turlari-2 22:00 | Sao Paulo GP" group-title="DİĞER SPOR KANALLARI",Antrenman Turlari-2 22:00 | Sao Paulo GP
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivebs4.m3u8
+#EXTINF:-1 tvg-id="raw:serbestantrenman11445katargp" tvg-name="Serbest Antrenman 1 14:45 | Katar GP" group-title="DİĞER SPOR KANALLARI",Serbest Antrenman 1 14:45 | Katar GP
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivess2.m3u8
 #EXTINF:-1 tvg-id="raw:webtrgoals" tvg-name="Web TRGOALS" group-title="DİĞER SPOR KANALLARI" tvg-logo="https://i.hizliresim.com/h8idt8o.jpg",Web TRGOALS
 #EXTVLCOPT:http-referrer=https://trgoals1537.xyz
 #EXTVLCOPT:http-origin=https://trgoals1537.xyz
 #EXTVLCOPT:http-user-agent=Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)
 #EXTHTTP:{"User-Agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)", "Referer": "https://trgoals1537.xyz"}
 https://andro.3749206.xyz/checklist/androstreamlivebiraz1.m3u8
+#EXTINF:-1 tvg-id="raw:ceyrekfinalmac11600ceyrekfinal" tvg-name="Çeyrek Final Maç 1 16:00 | Çeyrek Final" group-title="DİĞER SPOR KANALLARI",Çeyrek Final Maç 1 16:00 | Çeyrek Final
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
+#EXTINF:-1 tvg-id="raw:ceyrekfinalmac21800ceyrekfinal" tvg-name="Çeyrek Final Maç 2 18:00 | Çeyrek Final" group-title="DİĞER SPOR KANALLARI",Çeyrek Final Maç 2 18:00 | Çeyrek Final
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
+#EXTINF:-1 tvg-id="raw:ceyrekfinalmac32100ceyrekfinal" tvg-name="Çeyrek Final Maç 3 21:00 | Çeyrek Final" group-title="DİĞER SPOR KANALLARI",Çeyrek Final Maç 3 21:00 | Çeyrek Final
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
+#EXTINF:-1 tvg-id="raw:ceyrekfinalmac42300ceyrekfinal" tvg-name="Çeyrek Final Maç 4 23:00 | Çeyrek Final" group-title="DİĞER SPOR KANALLARI",Çeyrek Final Maç 4 23:00 | Çeyrek Final
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
 #EXTINF:-1 tvg-id="evt:detroitpistons|philadelphia76ers" tvg-name="03:00 Detroit Pistons - Philadelphia 76ers" group-title="CANLI MAÇLAR",03:00 Detroit Pistons - Philadelphia 76ers
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8
+#EXTINF:-1 tvg-id="evt:corinthians|saopaulo" tvg-name="03:30 Sao Paulo - Corinthians" group-title="CANLI MAÇLAR",03:30 Sao Paulo - Corinthians
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivesm1.m3u8
+#EXTINF:-1 tvg-id="evt:orlandomagic|phoenixsuns" tvg-name="05:00 Phoenix Suns - Orlando Magic" group-title="CANLI MAÇLAR",05:00 Phoenix Suns - Orlando Magic
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
@@ -259,72 +317,144 @@ https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8
+#EXTINF:-1 tvg-id="evt:mstojsavljevic|zeynepsonmez" tvg-name="10:00 M.Stojsavljevic - Zeynep Sönmez" group-title="CANLI MAÇLAR",10:00 M.Stojsavljevic - Zeynep Sönmez
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivebsm1.m3u8
+#EXTINF:-1 tvg-id="evt:adelaideunited|lioncity" tvg-name="13:00 Lion City - Adelaide United" group-title="CANLI MAÇLAR",13:00 Lion City - Adelaide United
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivesm2.m3u8
+#EXTINF:-1 tvg-id="evt:machida|shanghaishenhua" tvg-name="13:00 Machida - Shanghai Shenhua" group-title="CANLI MAÇLAR",13:00 Machida - Shanghai Shenhua
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivesm1.m3u8
+#EXTINF:-1 tvg-id="evt:qhalys|tpaul" tvg-name="13:00 T.Paul - Q.Halys" group-title="CANLI MAÇLAR",13:00 T.Paul - Q.Halys
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
+#EXTINF:-1 tvg-id="evt:arinderknech|bshelton" tvg-name="14:30 B.Shelton - A.Rinderknech" group-title="CANLI MAÇLAR",14:30 B.Shelton - A.Rinderknech
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
 #EXTINF:-1 tvg-id="evt:azerbaycan|cekya" tvg-name="15:00 Azerbaycan - Çekya" group-title="CANLI MAÇLAR",15:00 Azerbaycan - Çekya
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivecbcs.m3u8
-#EXTINF:-1 tvg-id="evt:olympiakosazericecanli|rennes" tvg-name="18:30 Rennes - Olympiakos (Azerice) CANLI" group-title="CANLI MAÇLAR",18:30 Rennes - Olympiakos (Azerice) CANLI
+#EXTINF:-1 tvg-id="evt:gangwon|kuchingcity" tvg-name="15:15 Kuching City - Gangwon" group-title="CANLI MAÇLAR",15:15 Kuching City - Gangwon
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivesm2.m3u8
+#EXTINF:-1 tvg-id="evt:pathumunited|taipo" tvg-name="15:15 Pathum United - Tai Po" group-title="CANLI MAÇLAR",15:15 Pathum United - Tai Po
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivesm1.m3u8
+#EXTINF:-1 tvg-id="evt:lmusetti|lvanassche" tvg-name="16:00 L.Musetti - L.Van Assche" group-title="CANLI MAÇLAR",16:00 L.Musetti - L.Van Assche
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
+#EXTINF:-1 tvg-id="evt:karabag|turan" tvg-name="17:00 Karabağ - Turan" group-title="CANLI MAÇLAR",17:00 Karabağ - Turan
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivecbcs.m3u8
+#EXTINF:-1 tvg-id="evt:alhazem|alnassr" tvg-name="17:55 Al Hazem - Al Nassr" group-title="CANLI MAÇLAR",17:55 Al Hazem - Al Nassr
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamliveht.m3u8
 #EXTINF:-1 tvg-id="evt:ilbank|niluferbld" tvg-name="19:00 İlbank - Nilüfer Bld." group-title="CANLI MAÇLAR",19:00 İlbank - Nilüfer Bld.
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivetrtsy.m3u8
-#EXTINF:-1 tvg-id="evt:avusturya|turkiyecanli" tvg-name="20:00 Avusturya - Türkiye CANLI" group-title="CANLI MAÇLAR",20:00 Avusturya - Türkiye CANLI
+#EXTINF:-1 tvg-id="evt:kapaz|neftcibaku" tvg-name="19:00 Neftçi Bakü - Kapaz" group-title="CANLI MAÇLAR",19:00 Neftçi Bakü - Kapaz
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivecbcs.m3u8
+#EXTINF:-1 tvg-id="evt:antalyaspor|bursaspor" tvg-name="20:00 Antalyaspor - Bursaspor" group-title="CANLI MAÇLAR",20:00 Antalyaspor - Bursaspor
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivetrts.m3u8
-#EXTINF:-1 tvg-id="evt:galatasaraymcttechniccanli|legiavarsova" tvg-name="20:00 Legia Varşova - Galatasaray MCT Technic CANLI" group-title="CANLI MAÇLAR",20:00 Legia Varşova - Galatasaray MCT Technic CANLI
+#EXTINF:-1 tvg-id="evt:besiktas|zalgiriskaunas" tvg-name="20:00 Beşiktaş - Zalgiris Kaunas" group-title="CANLI MAÇLAR",20:00 Beşiktaş - Zalgiris Kaunas
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivetb7.m3u8
+https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
+#EXTINF:-1 tvg-id="evt:gaziantepfk|kasimpasa" tvg-name="20:00 Gaziantep FK - Kasimpaşa" group-title="CANLI MAÇLAR",20:00 Gaziantep FK - Kasimpaşa
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivebs1.m3u8
+#EXTINF:-1 tvg-id="evt:igdirspor|sariyer" tvg-name="20:00 Sariyer - Iğdirspor" group-title="CANLI MAÇLAR",20:00 Sariyer - Iğdirspor
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivebsm1.m3u8
 #EXTINF:-1 tvg-id="evt:anadoluefes|paris" tvg-name="20:15 Anadolu Efes - Paris" group-title="CANLI MAÇLAR",20:15 Anadolu Efes - Paris
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivess2.m3u8
-#EXTINF:-1 tvg-id="evt:aek|realmadridcanli" tvg-name="20:45 AEK - Real Madrid CANLI" group-title="CANLI MAÇLAR",20:45 AEK - Real Madrid CANLI
+#EXTINF:-1 tvg-id="evt:alittihad|neom" tvg-name="20:30 Al Ittihad - Neom" group-title="CANLI MAÇLAR",20:30 Al Ittihad - Neom
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8
+https://andro.3749206.xyz/checklist/androstreamliveht.m3u8
+#EXTINF:-1 tvg-id="evt:braunschweig|energiecottbus" tvg-name="20:30 Braunschweig - Energie Cottbus" group-title="CANLI MAÇLAR",20:30 Braunschweig - Energie Cottbus
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
 #EXTINF:-1 tvg-id="evt:anderlecht|salzburg" tvg-name="20:45 Anderlecht - Salzburg" group-title="CANLI MAÇLAR",20:45 Anderlecht - Salzburg
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivetb5.m3u8
+#EXTINF:-1 tvg-id="evt:atalanta|kairatalmaty" tvg-name="20:45 Atalanta - Kairat Almaty" group-title="CANLI MAÇLAR",20:45 Atalanta - Kairat Almaty
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivetb6.m3u8
 #EXTINF:-1 tvg-id="evt:crystalpalace|hoffenheim" tvg-name="20:45 Crystal Palace - Hoffenheim" group-title="CANLI MAÇLAR",20:45 Crystal Palace - Hoffenheim
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8
-#EXTINF:-1 tvg-id="evt:fenerbahce|liverpoolazericecanli" tvg-name="20:45 Fenerbahçe - Liverpool (Azerice) CANLI" group-title="CANLI MAÇLAR",20:45 Fenerbahçe - Liverpool (Azerice) CANLI
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivecbcs.m3u8
-#EXTINF:-1 tvg-id="evt:fenerbahce|liverpoolcanli" tvg-name="20:45 Fenerbahçe - Liverpool CANLI" group-title="CANLI MAÇLAR",20:45 Fenerbahçe - Liverpool CANLI
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivetrt1.m3u8
 #EXTINF:-1 tvg-id="evt:ferencvaros|milan" tvg-name="20:45 Milan - Ferencvaros" group-title="CANLI MAÇLAR",20:45 Milan - Ferencvaros
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
@@ -349,43 +479,43 @@ https://andro.3749206.xyz/checklist/androstreamlivetb3.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivetrt1.m3u8
-#EXTINF:-1 tvg-id="evt:amichelsen|calcarazcanli" tvg-name="21:00 A.Michelsen - C.Alcaraz CANLI" group-title="CANLI MAÇLAR",21:00 A.Michelsen - C.Alcaraz CANLI
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
 #EXTINF:-1 tvg-id="evt:baskonia|fenerbahcetarfin" tvg-name="21:00 Fenerbahçe Tarfin - Baskonia" group-title="CANLI MAÇLAR",21:00 Fenerbahçe Tarfin - Baskonia
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8
-#EXTINF:-1 tvg-id="evt:barcelona|hapoeltelaviv" tvg-name="21:00 Hapoel Tel Aviv - Barcelona" group-title="CANLI MAÇLAR",21:00 Hapoel Tel Aviv - Barcelona
+#EXTINF:-1 tvg-id="evt:calcaraz|mberrettini" tvg-name="21:00 M.Berrettini - C.Alcaraz" group-title="CANLI MAÇLAR",21:00 M.Berrettini - C.Alcaraz
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
-#EXTINF:-1 tvg-id="evt:aljaziracanli|almuharraq" tvg-name="21:15 Al Muharraq - Al Jazira CANLI" group-title="CANLI MAÇLAR",21:15 Al Muharraq - Al Jazira CANLI
+#EXTINF:-1 tvg-id="evt:barcelona|hapoeltelaviv" tvg-name="21:45 Hapoel Tel Aviv - Barcelona" group-title="CANLI MAÇLAR",21:45 Hapoel Tel Aviv - Barcelona
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivesm1.m3u8
-#EXTINF:-1 tvg-id="evt:alfaisalyammancanli|altaawon" tvg-name="21:15 Al Taawon - Al Faisaly Amman CANLI" group-title="CANLI MAÇLAR",21:15 Al Taawon - Al Faisaly Amman CANLI
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivesm2.m3u8
+https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
 #EXTINF:-1 tvg-id="evt:asvelvilleurbanne|bayernmunih" tvg-name="22:00 Asvel Villeurbanne - Bayern Münih" group-title="CANLI MAÇLAR",22:00 Asvel Villeurbanne - Bayern Münih
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
-#EXTINF:-1 tvg-id="evt:afils|tmachac" tvg-name="22:30 A.Fils - T.Machac" group-title="CANLI MAÇLAR",22:30 A.Fils - T.Machac
+#EXTINF:-1 tvg-id="evt:metz|montpellier" tvg-name="22:00 Montpellier - Metz" group-title="CANLI MAÇLAR",22:00 Montpellier - Metz
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivebs5.m3u8
+#EXTINF:-1 tvg-id="evt:kizilyildiz|olympiakos" tvg-name="22:15 Olympiakos - Kizilyildiz" group-title="CANLI MAÇLAR",22:15 Olympiakos - Kizilyildiz
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivess2.m3u8
+#EXTINF:-1 tvg-id="evt:hamburg|monchengladbach" tvg-name="22:30 Hamburg - Monchengladbach" group-title="CANLI MAÇLAR",22:30 Hamburg - Monchengladbach
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
@@ -397,12 +527,30 @@ https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivess2.m3u8
-#EXTINF:-1 tvg-id="evt:panathinaikos|realmadrid" tvg-name="22:45 Real Madrid - Panathinaikos" group-title="CANLI MAÇLAR",22:45 Real Madrid - Panathinaikos
+#EXTINF:-1 tvg-id="evt:dubaibasket|virtusbologna" tvg-name="22:30 Virtus Bologna - Dubai Basket" group-title="CANLI MAÇLAR",22:30 Virtus Bologna - Dubai Basket
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivess1.m3u8
+https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
+#EXTINF:-1 tvg-id="evt:maccabifox|partizan" tvg-name="22:45 Partizan - Maccabi Fox" group-title="CANLI MAÇLAR",22:45 Partizan - Maccabi Fox
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
+#EXTINF:-1 tvg-id="evt:strasbourg|toulouse" tvg-name="22:45 Toulouse - Strasbourg" group-title="CANLI MAÇLAR",22:45 Toulouse - Strasbourg
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivebs2.m3u8
+#EXTINF:-1 tvg-id="evt:udinese|venezia" tvg-name="22:45 Venezia - Udinese" group-title="CANLI MAÇLAR",22:45 Venezia - Udinese
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
 #EXTINF:-1 tvg-id="evt:azalkmaar|juventus" tvg-name="23:00 AZ Alkmaar - Juventus" group-title="CANLI MAÇLAR",23:00 AZ Alkmaar - Juventus
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
@@ -421,18 +569,6 @@ https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivetb1.m3u8
-#EXTINF:-1 tvg-id="evt:borussiadortmund|realbetis" tvg-name="23:00 Borussia Dortmund - Real Betis" group-title="CANLI MAÇLAR",23:00 Borussia Dortmund - Real Betis
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivecbcs.m3u8
-#EXTINF:-1 tvg-id="evt:bristolcity|wolverhampton" tvg-name="23:00 Bristol City - Wolverhampton" group-title="CANLI MAÇLAR",23:00 Bristol City - Wolverhampton
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
 #EXTINF:-1 tvg-id="evt:celtavigo|stgilloise" tvg-name="23:00 Celta Vigo - St.Gilloise" group-title="CANLI MAÇLAR",23:00 Celta Vigo - St.Gilloise
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
@@ -445,45 +581,33 @@ https://andro.3749206.xyz/checklist/androstreamlivetb4.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivetrt1.m3u8
-#EXTINF:-1 tvg-id="evt:leipzig|manchestercity" tvg-name="23:00 Leipzig - Manchester City" group-title="CANLI MAÇLAR",23:00 Leipzig - Manchester City
+#EXTINF:-1 tvg-id="evt:coventry|everton" tvg-name="23:00 Everton - Coventry" group-title="CANLI MAÇLAR",23:00 Everton - Coventry
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivetb.m3u8
-#EXTINF:-1 tvg-id="evt:como|lens" tvg-name="23:00 Lens - Como" group-title="CANLI MAÇLAR",23:00 Lens - Como
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivetb4.m3u8
-#EXTINF:-1 tvg-id="evt:napoli|porto" tvg-name="23:00 Porto - Napoli" group-title="CANLI MAÇLAR",23:00 Porto - Napoli
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivetb3.m3u8
-#EXTINF:-1 tvg-id="evt:clubbrugge|psv" tvg-name="23:00 PSV - Club Brugge" group-title="CANLI MAÇLAR",23:00 PSV - Club Brugge
+https://andro.3749206.xyz/checklist/androstreamlivebs3.m3u8
+#EXTINF:-1 tvg-id="evt:brighton|getafe" tvg-name="23:00 Getafe - Brighton" group-title="CANLI MAÇLAR",23:00 Getafe - Brighton
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivetb5.m3u8
-#EXTINF:-1 tvg-id="evt:arsenal|slaviaprag" tvg-name="23:00 Slavia Prag - Arsenal" group-title="CANLI MAÇLAR",23:00 Slavia Prag - Arsenal
+#EXTINF:-1 tvg-id="evt:monaco|nordsjaelland" tvg-name="23:00 Monaco - Nordsjaelland" group-title="CANLI MAÇLAR",23:00 Monaco - Nordsjaelland
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivetb1.m3u8
+https://andro.3749206.xyz/checklist/androstreamlivetb6.m3u8
+#EXTINF:-1 tvg-id="evt:alaves|sevilla" tvg-name="23:00 Sevilla - Alaves" group-title="CANLI MAÇLAR",23:00 Sevilla - Alaves
+#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
+#EXTVLCOPT:http-origin=https://taraftariumizle.org/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
+https://andro.3749206.xyz/checklist/androstreamlivessplus1.m3u8
 #EXTINF:-1 tvg-id="evt:dinamozagreb|sunderland" tvg-name="23:00 Sunderland - Dinamo Zagreb" group-title="CANLI MAÇLAR",23:00 Sunderland - Dinamo Zagreb
 #EXTVLCOPT:http-referrer=https://taraftariumizle.org/
 #EXTVLCOPT:http-origin=https://taraftariumizle.org/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
 https://andro.3749206.xyz/checklist/androstreamlivetb3.m3u8
-#EXTINF:-1 tvg-id="evt:sabahbaku|viking" tvg-name="23:00 Viking - Sabah Bakü" group-title="CANLI MAÇLAR",23:00 Viking - Sabah Bakü
-#EXTVLCOPT:http-referrer=https://taraftariumizle.org/
-#EXTVLCOPT:http-origin=https://taraftariumizle.org/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-#EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36", "Referer": "https://taraftariumizle.org/"}
-https://andro.3749206.xyz/checklist/androstreamlivetb6.m3u8
