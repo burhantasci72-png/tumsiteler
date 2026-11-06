@@ -1,5 +1,5 @@
 ﻿{
- "generated_at": "06.11.2026 16:22:42",
+ "generated_at": "06.11.2026 21:39:22",
  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
  "categories": [
   "BEIN SPORTS",
@@ -8,8 +8,8 @@
   "DİĞER SPOR KANALLARI"
  ],
  "proxy": "",
- "count": 12,
- "verified": 12,
+ "count": 13,
+ "verified": 13,
  "channels": [
   {
    "key": "beinsports1",
@@ -20,7 +20,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 1341,
+   "latency_ms": 1055,
    "url": "http://92.5.166.217/beinsportskutu1",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -34,9 +34,23 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok-master",
-   "latency_ms": 377,
+   "latency_ms": 776,
    "url": "https://tgn.bozztv.com/eshgtv-dvrfl05/gin-beinsportshaber/index.m3u8",
    "user_agent": "",
+   "backups": []
+  },
+  {
+   "key": "raw:beinsports4k",
+   "name": "BeIN Sports 4K",
+   "group": "BEIN SPORTS",
+   "logo": "https://bit.ly/3f86zet",
+   "referrer": "https://www.atomsportv520.top",
+   "source": "topluluk",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 401,
+   "url": "https://css.d6e3eds5e065t5.help//b1/tracks-v1a1/mono.m3u8",
+   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
   },
   {
@@ -48,7 +62,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 253,
+   "latency_ms": 315,
    "url": "http://89.187.191.41/TRT-1-HD-TR/tracks-v1a1/mono.ts.m3u8",
    "user_agent": "",
    "backups": [
@@ -69,7 +83,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 935,
+   "latency_ms": 1285,
    "url": "https://ceokzokgtd.erbvr.com/tabiitv/tabiitv_1080p.m3u8",
    "user_agent": "",
    "backups": []
@@ -83,7 +97,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok-master",
-   "latency_ms": 615,
+   "latency_ms": 634,
    "url": "http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
    "user_agent": "",
    "backups": [
@@ -104,7 +118,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 936,
+   "latency_ms": 3509,
    "url": "https://rkhubpaomb.turknet.ercdn.net/fwjkgpasof/tv8bucuk/tv8bucuk_1080p.m3u8",
    "user_agent": "",
    "backups": []
@@ -118,7 +132,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 246,
+   "latency_ms": 321,
    "url": "http://89.187.191.41/TV8-HD-TR/tracks-v1a1/mono.ts.m3u8",
    "user_agent": "",
    "backups": [
@@ -139,12 +153,12 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 1140,
-   "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_720p.m3u8?ex=0&sid=7vcjas3k9dur&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2",
+   "latency_ms": 1277,
+   "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_1080p.m3u8?ex=0&sid=7vcjas3k9dur&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2",
    "user_agent": "",
    "backups": [
     {
-     "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_1080p.m3u8?ex=0&sid=7vcjas3k9dur&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2",
+     "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_720p.m3u8?ex=0&sid=7vcjas3k9dur&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2",
      "referrer": "",
      "source": "topluluk",
      "user_agent": ""
@@ -160,7 +174,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok-master",
-   "latency_ms": 956,
+   "latency_ms": 1050,
    "url": "https://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8",
    "user_agent": "",
    "backups": []
@@ -174,7 +188,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 714,
+   "latency_ms": 1440,
    "url": "http://92.5.166.217/beinsportskutu1",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -188,7 +202,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 1070,
+   "latency_ms": 1244,
    "url": "http://92.5.166.217/bein1sd",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -202,7 +216,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 1328,
+   "latency_ms": 1358,
    "url": "http://92.5.166.217/beinsports1",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
