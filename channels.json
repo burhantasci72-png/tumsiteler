@@ -1,5 +1,5 @@
 ﻿{
- "generated_at": "07.11.2026 01:21:03",
+ "generated_at": "07.11.2026 07:22:43",
  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
  "categories": [
   "BEIN SPORTS",
@@ -8,8 +8,8 @@
   "DİĞER SPOR KANALLARI"
  ],
  "proxy": "",
- "count": 13,
- "verified": 13,
+ "count": 12,
+ "verified": 12,
  "channels": [
   {
    "key": "beinsports1",
@@ -20,7 +20,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 1051,
+   "latency_ms": 1319,
    "url": "http://92.5.166.217/beinsportskutu1",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -34,7 +34,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok-master",
-   "latency_ms": 254,
+   "latency_ms": 669,
    "url": "https://tgn.bozztv.com/eshgtv-dvrfl05/gin-beinsportshaber/index.m3u8",
    "user_agent": "",
    "backups": []
@@ -48,7 +48,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 514,
+   "latency_ms": 588,
    "url": "https://css.d6e3eds5e065t5.help//b1/tracks-v1a1/mono.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -62,7 +62,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 228,
+   "latency_ms": 306,
    "url": "http://89.187.191.41/TRT-1-HD-TR/tracks-v1a1/mono.ts.m3u8",
    "user_agent": "",
    "backups": [
@@ -83,7 +83,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 825,
+   "latency_ms": 1107,
    "url": "https://ceokzokgtd.erbvr.com/tabiitv/tabiitv_1080p.m3u8",
    "user_agent": "",
    "backups": []
@@ -97,7 +97,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok-master",
-   "latency_ms": 477,
+   "latency_ms": 896,
    "url": "http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
    "user_agent": "",
    "backups": [
@@ -118,7 +118,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 930,
+   "latency_ms": 5109,
    "url": "https://rkhubpaomb.turknet.ercdn.net/fwjkgpasof/tv8bucuk/tv8bucuk_1080p.m3u8",
    "user_agent": "",
    "backups": []
@@ -132,7 +132,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 227,
+   "latency_ms": 312,
    "url": "http://89.187.191.41/TV8-HD-TR/tracks-v1a1/mono.ts.m3u8",
    "user_agent": "",
    "backups": [
@@ -153,7 +153,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 629,
+   "latency_ms": 1275,
    "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_720p.m3u8?ex=0&sid=7vcjas3k9dur&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2",
    "user_agent": "",
    "backups": [
@@ -174,7 +174,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok-master",
-   "latency_ms": 766,
+   "latency_ms": 931,
    "url": "https://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8",
    "user_agent": "",
    "backups": []
@@ -188,22 +188,8 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 648,
+   "latency_ms": 886,
    "url": "http://92.5.166.217/beinsportskutu1",
-   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
-   "backups": []
-  },
-  {
-   "key": "raw:webjustinsports",
-   "name": "Web JUSTINSPORTS",
-   "group": "DİĞER SPOR KANALLARI",
-   "logo": "https://i.hizliresim.com/95fovn8.png",
-   "referrer": "",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 984,
-   "url": "http://92.5.166.217/bein1sd",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
   },
@@ -216,7 +202,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 1054,
+   "latency_ms": 1154,
    "url": "http://92.5.166.217/beinsports1",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
