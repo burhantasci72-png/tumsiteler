@@ -1,5 +1,5 @@
 ﻿{
- "generated_at": "08.11.2026 08:09:08",
+ "generated_at": "08.11.2026 15:24:31",
  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
  "categories": [
   "BEIN SPORTS",
@@ -8,9 +8,23 @@
   "DİĞER SPOR KANALLARI"
  ],
  "proxy": "",
- "count": 9,
- "verified": 9,
+ "count": 12,
+ "verified": 12,
  "channels": [
+  {
+   "key": "beinsports1",
+   "name": "beIN Sports 1",
+   "group": "BEIN SPORTS",
+   "logo": "https://bit.ly/3f86zet",
+   "referrer": "",
+   "source": "topluluk",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 778,
+   "url": "http://92.5.166.217/beinsportskutu1",
+   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
+   "backups": []
+  },
   {
    "key": "beinsportshaber",
    "name": "beIN Sports Haber",
@@ -20,23 +34,9 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok-master",
-   "latency_ms": 337,
+   "latency_ms": 342,
    "url": "https://tgn.bozztv.com/eshgtv-dvrfl05/gin-beinsportshaber/index.m3u8",
    "user_agent": "",
-   "backups": []
-  },
-  {
-   "key": "raw:beinsports4k",
-   "name": "BeIN Sports 4K",
-   "group": "BEIN SPORTS",
-   "logo": "https://bit.ly/3f86zet",
-   "referrer": "https://www.atomsportv520.top",
-   "source": "topluluk",
-   "verified": true,
-   "status": "ok",
-   "latency_ms": 473,
-   "url": "https://css.d6e3eds5e065t5.help//b1/tracks-v1a1/mono.m3u8",
-   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
   },
   {
@@ -48,7 +48,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 261,
+   "latency_ms": 237,
    "url": "http://89.187.191.41/TRT-1-HD-TR/tracks-v1a1/mono.ts.m3u8",
    "user_agent": "",
    "backups": [
@@ -69,7 +69,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 964,
+   "latency_ms": 961,
    "url": "https://ceokzokgtd.erbvr.com/tabiitv/tabiitv_1080p.m3u8",
    "user_agent": "",
    "backups": []
@@ -83,7 +83,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok-master",
-   "latency_ms": 649,
+   "latency_ms": 1614,
    "url": "http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
    "user_agent": "",
    "backups": [
@@ -104,7 +104,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 11455,
+   "latency_ms": 959,
    "url": "https://rkhubpaomb.turknet.ercdn.net/fwjkgpasof/tv8bucuk/tv8bucuk_1080p.m3u8",
    "user_agent": "",
    "backups": []
@@ -118,10 +118,16 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 256,
+   "latency_ms": 242,
    "url": "http://89.187.191.41/TV8-HD-TR/tracks-v1a1/mono.ts.m3u8",
    "user_agent": "",
    "backups": [
+    {
+     "url": "https://tv8.daioncdn.net/tv8/tv8_1080p.m3u8?app=tv8_web",
+     "referrer": "",
+     "source": "topluluk",
+     "user_agent": ""
+    },
     {
      "url": "https://rkhubpaomb.turknet.ercdn.net/fwjkgpasof/tv8/tv8_1080p.m3u8",
      "referrer": "",
@@ -139,7 +145,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 1059,
+   "latency_ms": 1032,
    "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_720p.m3u8?ex=0&sid=7vcjas3k9dur&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2",
    "user_agent": "",
    "backups": [
@@ -160,9 +166,51 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok-master",
-   "latency_ms": 923,
+   "latency_ms": 876,
    "url": "https://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8",
    "user_agent": "",
+   "backups": []
+  },
+  {
+   "key": "raw:sports1hd",
+   "name": "Sports1 HD",
+   "group": "DİĞER SPOR KANALLARI",
+   "logo": "https://i.hizliresim.com/5zu8a0z.jpeg",
+   "referrer": "https://main.uxsyplayer425b9907af.click",
+   "source": "topluluk",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 710,
+   "url": "http://92.5.166.217/beinsportskutu1",
+   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
+   "backups": []
+  },
+  {
+   "key": "raw:webjustinsports",
+   "name": "Web JUSTINSPORTS",
+   "group": "DİĞER SPOR KANALLARI",
+   "logo": "https://i.hizliresim.com/95fovn8.png",
+   "referrer": "",
+   "source": "topluluk",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 764,
+   "url": "http://92.5.166.217/bein1sd",
+   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
+   "backups": []
+  },
+  {
+   "key": "raw:webvarsports",
+   "name": "Web VARSPORTS",
+   "group": "DİĞER SPOR KANALLARI",
+   "logo": "https://i.hizliresim.com/3apwt19.jpeg",
+   "referrer": "",
+   "source": "topluluk",
+   "verified": true,
+   "status": "ok",
+   "latency_ms": 965,
+   "url": "http://92.5.166.217/beinsports1",
+   "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
   }
  ]
