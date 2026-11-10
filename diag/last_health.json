@@ -1,6 +1,6 @@
 {
- "generated_at": "09.11.2026 20:55:46",
- "scraped": 2119,
+ "generated_at": "10.11.2026 03:01:22",
+ "scraped": 2132,
  "verified": 16,
  "published": 12,
  "families": {
@@ -12,11 +12,11 @@
   "netspor": "1/7 sunucu aktif",
   "xsport": "https://www.xsportv-de596bbe2f.xyz",
   "atom": "guncel-adres: https://atomsportv520.top | aday: 19/19",
-  "andro": "1/6 sunucu aktif",
-  "netspor-kayit": "165",
   "pasizle": "m3u8 0/28 (https://golvar559.sbs)",
-  "kulisbet": "m3u8 28/28 (https://kulistvnew13.com)",
+  "andro": "1/6 sunucu aktif",
+  "netspor-kayit": "178",
   "inadina": "m3u8 28/28 (https://royaltv40.com)",
+  "kulisbet": "m3u8 28/28 (https://kulistvnew13.com)",
   "selcuk": "yayin-yok"
  },
  "by_source": {
@@ -37,7 +37,7 @@
    "ok": 0
   },
   "netspor": {
-   "total": 165,
+   "total": 178,
    "ok": 0
   },
   "seeds": {
@@ -54,15 +54,15 @@
   }
  },
  "failure_reasons": {
-  "not-a-stream": 665,
-  "network-error": 443,
-  "http-403": 282,
-  "http-502": 194,
-  "http-404": 125,
-  "http-503": 113,
-  "segment-http-503": 107,
+  "not-a-stream": 643,
+  "network-error": 463,
+  "http-403": 277,
+  "http-502": 180,
+  "http-503": 137,
+  "segment-http-503": 125,
+  "http-404": 120,
   "not-hls": 83,
-  "http-401": 47,
+  "http-401": 44,
   "http-500": 38,
   "segment-http-500": 4,
   "http-451": 1,
@@ -82,8 +82,8 @@
    "not-hls": 28
   },
   "netspor": {
-   "http-404": 102,
-   "segment-http-503": 59,
+   "http-404": 97,
+   "segment-http-503": 77,
    "segment-http-500": 4
   },
   "seeds": {
@@ -93,12 +93,12 @@
    "not-hls": 27
   },
   "topluluk": {
-   "not-a-stream": 665,
-   "network-error": 388,
-   "http-403": 282,
-   "http-502": 194,
-   "http-503": 113,
-   "http-401": 47,
+   "not-a-stream": 643,
+   "network-error": 408,
+   "http-403": 277,
+   "http-502": 180,
+   "http-503": 137,
+   "http-401": 44,
    "segment-http-503": 28,
    "http-404": 23,
    "http-451": 1,
