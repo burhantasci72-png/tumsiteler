@@ -1,6 +1,10 @@
 ﻿#EXTM3U
-# Son Guncelleme: 12.11.2026 16:57:22
-# Kanal: 9 | Dogrulanan: 9
+# Son Guncelleme: 12.11.2026 22:30:33
+# Kanal: 13 | Dogrulanan: 13
+#EXTINF:-1 tvg-id="beinsports1" tvg-name="beIN Sports 1" group-title="BEIN SPORTS" tvg-logo="https://bit.ly/3f86zet",beIN Sports 1
+#EXTVLCOPT:http-user-agent=Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)
+#EXTHTTP:{"User-Agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"}
+http://92.5.166.217/beinsportskutu1
 #EXTINF:-1 tvg-id="beinsportshaber" tvg-name="beIN Sports Haber" group-title="BEIN SPORTS" tvg-logo="https://bit.ly/302Lfmo",beIN Sports Haber
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
@@ -39,3 +43,17 @@ https://ciner.daioncdn.net/ht-spor/ht-spor_720p.m3u8?ex=0&sid=7vcjas3k9dur&app=d
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTHTTP:{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 https://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="raw:sports1hd" tvg-name="Sports1 HD" group-title="DİĞER SPOR KANALLARI" tvg-logo="https://i.hizliresim.com/5zu8a0z.jpeg",Sports1 HD
+#EXTVLCOPT:http-referrer=https://main.uxsyplayer425b9907af.click
+#EXTVLCOPT:http-origin=https://main.uxsyplayer425b9907af.click
+#EXTVLCOPT:http-user-agent=Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)
+#EXTHTTP:{"User-Agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)", "Referer": "https://main.uxsyplayer425b9907af.click"}
+http://92.5.166.217/beinsportskutu1
+#EXTINF:-1 tvg-id="raw:webjustinsports" tvg-name="Web JUSTINSPORTS" group-title="DİĞER SPOR KANALLARI" tvg-logo="https://i.hizliresim.com/95fovn8.png",Web JUSTINSPORTS
+#EXTVLCOPT:http-user-agent=Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)
+#EXTHTTP:{"User-Agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"}
+http://92.5.166.217/bein1sd
+#EXTINF:-1 tvg-id="raw:webvarsports" tvg-name="Web VARSPORTS" group-title="DİĞER SPOR KANALLARI" tvg-logo="https://i.hizliresim.com/3apwt19.jpeg",Web VARSPORTS
+#EXTVLCOPT:http-user-agent=Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)
+#EXTHTTP:{"User-Agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)"}
+http://92.5.166.217/beinsports1
