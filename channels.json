@@ -1,5 +1,5 @@
 ﻿{
- "generated_at": "13.11.2026 18:11:17",
+ "generated_at": "13.11.2026 23:43:45",
  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
  "categories": [
   "BEIN SPORTS",
@@ -20,7 +20,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok-master",
-   "latency_ms": 334,
+   "latency_ms": 776,
    "url": "https://tgn.bozztv.com/eshgtv-dvrfl05/gin-beinsportshaber/index.m3u8",
    "user_agent": "",
    "backups": []
@@ -34,7 +34,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 360,
+   "latency_ms": 261,
    "url": "https://css.d6e3eds5e065t5.help//b1/tracks-v1a1/mono.m3u8",
    "user_agent": "Dalvik/2.1.0 (Linux; U; Android 13; Samsung F1833B Build/TP1A.280629.015)",
    "backups": []
@@ -48,7 +48,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 277,
+   "latency_ms": 195,
    "url": "http://89.187.191.41/TRT-1-HD-TR/tracks-v1a1/mono.ts.m3u8",
    "user_agent": "",
    "backups": [
@@ -69,7 +69,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 1056,
+   "latency_ms": 683,
    "url": "https://ceokzokgtd.erbvr.com/tabiitv/tabiitv_1080p.m3u8",
    "user_agent": "",
    "backups": []
@@ -79,14 +79,21 @@
    "name": "A Spor",
    "group": "DİĞER SPOR KANALLARI",
    "logo": "https://i.imgur.com/NYeAXXj.png",
-   "referrer": "http://rnttwmjcin.turknet.ercdn.net/",
+   "referrer": "",
    "source": "topluluk",
    "verified": true,
-   "status": "ok",
-   "latency_ms": 2791,
-   "url": "http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor_1080p.m3u8",
+   "status": "ok-master",
+   "latency_ms": 534,
+   "url": "http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
    "user_agent": "",
-   "backups": []
+   "backups": [
+    {
+     "url": "http://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor_1080p.m3u8",
+     "referrer": "",
+     "source": "topluluk",
+     "user_agent": ""
+    }
+   ]
   },
   {
    "key": "tv85",
@@ -97,7 +104,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 1426,
+   "latency_ms": 946,
    "url": "https://rkhubpaomb.turknet.ercdn.net/fwjkgpasof/tv8bucuk/tv8bucuk_1080p.m3u8",
    "user_agent": "",
    "backups": []
@@ -111,13 +118,13 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 288,
+   "latency_ms": 197,
    "url": "http://89.187.191.41/TV8-HD-TR/tracks-v1a1/mono.ts.m3u8",
    "user_agent": "",
    "backups": [
     {
      "url": "https://rkhubpaomb.turknet.ercdn.net/fwjkgpasof/tv8/tv8_1080p.m3u8",
-     "referrer": "https://rkhubpaomb.turknet.ercdn.net/",
+     "referrer": "",
      "source": "topluluk",
      "user_agent": ""
     }
@@ -132,17 +139,10 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok",
-   "latency_ms": 1082,
-   "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_1080p.m3u8?ex=0&sid=7vcjas3k9dur&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2",
+   "latency_ms": 634,
+   "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_720p.m3u8?ex=0&sid=7vcjas3k9dur&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2",
    "user_agent": "",
-   "backups": [
-    {
-     "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_720p.m3u8?ex=0&sid=7vcjas3k9dur&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2",
-     "referrer": "",
-     "source": "topluluk",
-     "user_agent": ""
-    }
-   ]
+   "backups": []
   },
   {
    "key": "fbtv",
@@ -153,7 +153,7 @@
    "source": "topluluk",
    "verified": true,
    "status": "ok-master",
-   "latency_ms": 1050,
+   "latency_ms": 730,
    "url": "https://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8",
    "user_agent": "",
    "backups": []
