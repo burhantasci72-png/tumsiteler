@@ -1,6 +1,6 @@
 {
- "generated_at": "14.11.2026 11:00:38",
- "scraped": 2218,
+ "generated_at": "14.11.2026 17:13:27",
+ "scraped": 2406,
  "verified": 12,
  "published": 9,
  "families": {
@@ -10,10 +10,10 @@
   "taraftarium24-mac": "0 mac",
   "mahsun": "m3u8 0/18 (https://mahsunsports.com)",
   "netspor": "1/7 sunucu aktif",
-  "atom": "guncel-adres: https://atomsportv520.top | aday: 19/19",
   "xsport": "https://www.xsportv-de596bbe2f.xyz",
+  "atom": "guncel-adres: https://atomsportv520.top | aday: 19/19",
   "andro": "1/6 sunucu aktif",
-  "netspor-kayit": "264",
+  "netspor-kayit": "452",
   "pasizle": "m3u8 0/28 (https://golvar559.sbs)",
   "selcuk": "yayin-yok",
   "kulisbet": "m3u8 28/28 (https://kulistvnew13.com)",
@@ -37,7 +37,7 @@
    "ok": 0
   },
   "netspor": {
-   "total": 264,
+   "total": 452,
    "ok": 0
   },
   "seeds": {
@@ -54,16 +54,16 @@
   }
  },
  "failure_reasons": {
-  "not-a-stream": 718,
-  "http-403": 340,
-  "network-error": 334,
-  "http-502": 218,
-  "segment-http-503": 182,
-  "http-404": 158,
-  "http-429": 108,
+  "not-a-stream": 739,
+  "http-404": 376,
+  "network-error": 349,
+  "http-502": 313,
+  "http-403": 220,
+  "segment-http-503": 156,
+  "http-429": 88,
   "not-hls": 83,
-  "http-401": 48,
-  "http-503": 11,
+  "http-401": 44,
+  "http-503": 20,
   "segment-http-500": 4,
   "http-451": 1,
   "segment-http-401": 1
@@ -82,8 +82,8 @@
    "not-hls": 28
   },
   "netspor": {
-   "segment-http-503": 134,
-   "http-404": 126,
+   "http-404": 340,
+   "segment-http-503": 108,
    "segment-http-500": 4
   },
   "seeds": {
@@ -93,15 +93,15 @@
    "not-hls": 27
   },
   "topluluk": {
-   "not-a-stream": 718,
-   "http-403": 340,
-   "network-error": 241,
-   "http-502": 218,
-   "http-429": 108,
-   "http-401": 48,
-   "http-404": 32,
+   "not-a-stream": 739,
+   "http-502": 313,
+   "network-error": 256,
+   "http-403": 220,
+   "http-429": 88,
+   "http-401": 44,
+   "http-404": 36,
    "segment-http-503": 28,
-   "http-503": 11,
+   "http-503": 20,
    "http-451": 1,
    "segment-http-401": 1
   }
