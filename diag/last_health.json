@@ -1,19 +1,19 @@
 {
- "generated_at": "14.11.2026 21:35:53",
- "scraped": 2281,
+ "generated_at": "15.11.2026 01:22:54",
+ "scraped": 2216,
  "verified": 16,
  "published": 13,
  "families": {
   "seeds": "74 girdi",
   "topluluk": "2065 girdi",
-  "netspor": "1/7 sunucu aktif",
   "taraftarium24": "https://taraftarium24-off12.com",
   "taraftarium24-mac": "0 mac",
+  "netspor": "1/7 sunucu aktif",
   "mahsun": "m3u8 0/18 (https://mahsunsports.com)",
   "atom": "guncel-adres: https://atomsportv520.top | aday: 19/19",
   "andro": "1/6 sunucu aktif",
-  "netspor-kayit": "327",
   "xsport": "https://www.xsportv-de596bbe2f.xyz",
+  "netspor-kayit": "262",
   "pasizle": "m3u8 0/28 (https://golvar559.sbs)",
   "selcuk": "yayin-yok",
   "kulisbet": "m3u8 28/28 (https://kulistvnew13.com)",
@@ -37,7 +37,7 @@
    "ok": 0
   },
   "netspor": {
-   "total": 327,
+   "total": 262,
    "ok": 0
   },
   "seeds": {
@@ -54,16 +54,16 @@
   }
  },
  "failure_reasons": {
-  "not-a-stream": 733,
-  "http-403": 365,
-  "network-error": 346,
-  "http-404": 250,
-  "segment-http-503": 154,
-  "http-502": 119,
-  "http-429": 111,
+  "http-403": 538,
+  "not-a-stream": 451,
+  "network-error": 247,
+  "http-503": 219,
+  "http-404": 192,
+  "http-502": 176,
+  "segment-http-503": 147,
+  "http-429": 97,
   "not-hls": 83,
-  "http-503": 51,
-  "http-401": 47,
+  "http-401": 44,
   "segment-http-500": 4,
   "http-451": 1,
   "segment-http-401": 1
@@ -82,8 +82,8 @@
    "not-hls": 28
   },
   "netspor": {
-   "http-404": 217,
-   "segment-http-503": 106,
+   "http-404": 159,
+   "segment-http-503": 99,
    "segment-http-500": 4
   },
   "seeds": {
@@ -93,13 +93,13 @@
    "not-hls": 27
   },
   "topluluk": {
-   "not-a-stream": 733,
-   "http-403": 365,
-   "network-error": 253,
-   "http-502": 119,
-   "http-429": 111,
-   "http-503": 51,
-   "http-401": 47,
+   "http-403": 538,
+   "not-a-stream": 451,
+   "http-503": 219,
+   "http-502": 176,
+   "network-error": 154,
+   "http-429": 97,
+   "http-401": 44,
    "http-404": 33,
    "segment-http-503": 28,
    "http-451": 1,
