@@ -1,23 +1,23 @@
 {
- "generated_at": "15.11.2026 20:26:41",
- "scraped": 2184,
- "verified": 15,
- "published": 12,
+ "generated_at": "16.11.2026 00:05:01",
+ "scraped": 2121,
+ "verified": 16,
+ "published": 13,
  "families": {
   "seeds": "74 girdi",
   "topluluk": "2065 girdi",
   "taraftarium24": "https://taraftarium24-off12.com",
   "taraftarium24-mac": "0 mac",
-  "mahsun": "m3u8 0/18 (https://mahsunsports.com)",
   "netspor": "1/7 sunucu aktif",
   "andro": "1/6 sunucu aktif",
-  "netspor-kayit": "230",
+  "netspor-kayit": "167",
   "xsport": "https://www.xsportv-de596bbe2f.xyz",
+  "mahsun": "m3u8 0/18 (https://mahsunsports.com)",
   "atom": "guncel-adres: https://atomsportv520.top | aday: 19/19",
-  "pasizle": "m3u8 0/28 (https://golvar559.sbs)",
   "kulisbet": "m3u8 28/28 (https://kulistvnew13.com)",
   "inadina": "m3u8 28/28 (https://royaltv40.com)",
-  "selcuk": "yayin-yok"
+  "selcuk": "yayin-yok",
+  "pasizle": "m3u8 0/28 (https://golvar559.sbs)"
  },
  "by_source": {
   "andro": {
@@ -37,7 +37,7 @@
    "ok": 0
   },
   "netspor": {
-   "total": 230,
+   "total": 167,
    "ok": 0
   },
   "seeds": {
@@ -50,24 +50,23 @@
   },
   "topluluk": {
    "total": 1758,
-   "ok": 15
+   "ok": 16
   }
  },
  "failure_reasons": {
-  "not-a-stream": 797,
-  "http-403": 372,
+  "not-a-stream": 678,
+  "http-403": 352,
   "network-error": 339,
-  "http-404": 195,
-  "http-502": 130,
-  "segment-http-503": 113,
+  "http-502": 225,
+  "http-404": 131,
+  "segment-http-503": 122,
+  "http-429": 90,
   "not-hls": 83,
-  "http-429": 82,
-  "http-401": 48,
+  "http-401": 44,
+  "http-503": 35,
   "segment-http-500": 4,
-  "http-503": 3,
-  "segment-http-403": 1,
   "http-451": 1,
-  "segment-error": 1
+  "segment-http-401": 1
  },
  "by_source_status": {
   "andro": {
@@ -83,8 +82,8 @@
    "not-hls": 28
   },
   "netspor": {
-   "http-404": 161,
-   "segment-http-503": 65,
+   "http-404": 89,
+   "segment-http-503": 74,
    "segment-http-500": 4
   },
   "seeds": {
@@ -94,18 +93,17 @@
    "not-hls": 27
   },
   "topluluk": {
-   "not-a-stream": 797,
-   "http-403": 372,
+   "not-a-stream": 678,
+   "http-403": 352,
    "network-error": 246,
-   "http-502": 130,
-   "http-429": 82,
-   "http-401": 48,
-   "http-404": 34,
+   "http-502": 225,
+   "http-429": 90,
+   "http-401": 44,
+   "http-404": 42,
+   "http-503": 35,
    "segment-http-503": 28,
-   "http-503": 3,
-   "segment-http-403": 1,
    "http-451": 1,
-   "segment-error": 1
+   "segment-http-401": 1
   }
  }
 }
