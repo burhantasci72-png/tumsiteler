@@ -1,6 +1,6 @@
 {
- "generated_at": "21.11.2026 20:58:41",
- "scraped": 2405,
+ "generated_at": "22.11.2026 00:53:53",
+ "scraped": 2188,
  "verified": 20,
  "published": 13,
  "families": {
@@ -10,13 +10,13 @@
   "taraftarium24-mac": "0 mac",
   "mahsun": "m3u8 0/18 (https://mahsunsports.com)",
   "netspor": "1/7 sunucu aktif",
-  "atom": "guncel-adres: https://atomsportv520.top | aday: 19/19",
   "xsport": "https://www.xsportv-de596bbe2f.xyz",
+  "atom": "guncel-adres: https://atomsportv520.top | aday: 19/19",
   "andro": "1/6 sunucu aktif",
-  "netspor-kayit": "451",
+  "netspor-kayit": "234",
+  "pasizle": "m3u8 0/28 (https://golvar559.sbs)",
   "kulisbet": "m3u8 28/28 (https://kulistvnew13.com)",
   "inadina": "m3u8 28/28 (https://royaltv40.com)",
-  "pasizle": "m3u8 0/28 (https://golvar559.sbs)",
   "selcuk": "yayin-yok"
  },
  "by_source": {
@@ -37,7 +37,7 @@
    "ok": 0
   },
   "netspor": {
-   "total": 451,
+   "total": 234,
    "ok": 0
   },
   "seeds": {
@@ -54,17 +54,17 @@
   }
  },
  "failure_reasons": {
-  "not-a-stream": 772,
-  "http-404": 351,
-  "network-error": 280,
-  "http-403": 274,
-  "http-502": 260,
-  "segment-http-503": 174,
-  "http-429": 92,
+  "not-a-stream": 785,
+  "network-error": 289,
+  "http-403": 284,
+  "http-502": 202,
+  "segment-http-503": 168,
+  "http-404": 140,
+  "http-429": 103,
   "not-hls": 83,
-  "http-401": 45,
+  "http-401": 46,
   "http-500": 38,
-  "http-503": 9,
+  "http-503": 23,
   "segment-http-500": 4,
   "http-451": 1,
   "segment-http-401": 1,
@@ -84,8 +84,8 @@
    "not-hls": 28
   },
   "netspor": {
-   "http-404": 318,
-   "segment-http-503": 129,
+   "segment-http-503": 123,
+   "http-404": 107,
    "segment-http-500": 4
   },
   "seeds": {
@@ -95,15 +95,15 @@
    "not-hls": 27
   },
   "topluluk": {
-   "not-a-stream": 772,
-   "http-403": 274,
-   "http-502": 260,
-   "network-error": 225,
-   "http-429": 92,
-   "http-401": 45,
+   "not-a-stream": 785,
+   "http-403": 284,
+   "network-error": 234,
+   "http-502": 202,
+   "http-429": 103,
+   "http-401": 46,
    "http-404": 33,
    "segment-http-503": 25,
-   "http-503": 9,
+   "http-503": 23,
    "http-451": 1,
    "segment-http-401": 1,
    "http-406": 1
